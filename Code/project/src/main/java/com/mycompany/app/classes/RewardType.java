@@ -1,5 +1,9 @@
 package com.mycompany.app.classes;
 
-public enum RewardType {
+public enum RewardType 
+{
+
+    RegularReward, 
+    BonusReward
 
 }
