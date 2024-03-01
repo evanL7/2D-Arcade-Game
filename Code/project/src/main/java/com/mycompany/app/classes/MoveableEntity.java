@@ -3,11 +3,12 @@ package com.mycompany.app.classes;
 import java.awt.*;
 
 abstract class MoveableEntity {
-
-    private Image sprite;
-    private int speed;
+    // ATTRIBUTES
+    protected Image sprite;
+    protected int speed;
     Position position;
 
+    // METHODS
     public void draw(Graphics2D g) {
 
     }
