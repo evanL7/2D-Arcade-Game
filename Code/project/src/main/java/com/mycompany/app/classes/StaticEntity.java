@@ -1,6 +1,6 @@
 package com.mycompany.app.classes;
 import java.awt.*;
-
+import java.util.Timer;
 
 abstract class StaticEntity 
 {
