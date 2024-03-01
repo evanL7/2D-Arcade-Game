@@ -1,5 +1,8 @@
 package com.mycompany.app.classes;
 
-public enum Difficulty {
-
+public enum Difficulty 
+{
+    Easy,
+    Medium,
+    Hard
 }
