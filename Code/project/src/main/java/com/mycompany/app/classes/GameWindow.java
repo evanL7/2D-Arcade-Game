@@ -7,8 +7,12 @@ public class GameWindow {
 
     public GameWindow() {
         jframe = new JFrame();
+
         jframe.setSize(400, 400);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jframe.setResizable(false);
+        jframe.setLocationRelativeTo(null);
         jframe.setVisible(true);
+        jframe.setTitle("2D Game");
     }
 }
