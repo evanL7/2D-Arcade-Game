@@ -2,7 +2,7 @@ package com.mycompany.app.classes.MoveableEntity;
 
 import java.util.Vector;
 
-import com.mycompany.app.classes.Position;
+import com.mycompany.app.classes.Helpers.Position;
 
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES

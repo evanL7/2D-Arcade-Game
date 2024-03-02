@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import com.mycompany.app.classes.KeyboardInputs;
+import com.mycompany.app.classes.Helpers.KeyboardInputs;
 
 public class GamePanel extends JPanel {
 

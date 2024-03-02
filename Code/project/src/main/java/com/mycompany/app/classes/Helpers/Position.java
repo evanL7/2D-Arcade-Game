@@ -1,4 +1,4 @@
-package com.mycompany.app.classes;
+package com.mycompany.app.classes.Helpers;
 
 /**
  * The Position class represents a coordinate position in a two-dimensional
