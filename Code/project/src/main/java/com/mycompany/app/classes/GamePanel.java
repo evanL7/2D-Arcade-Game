@@ -42,12 +42,10 @@ public class GamePanel extends JPanel {
 
     public void changeXDelta(int value) {
         this.xDelta += value;
-        repaint();
     }
 
     public void changeYDelta(int value) {
         this.yDelta += value;
-        repaint();
     }
 
     public int getTileSize() {
