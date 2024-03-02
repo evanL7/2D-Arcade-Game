@@ -2,6 +2,8 @@ package com.mycompany.app.classes;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
@@ -19,12 +21,37 @@ public class GamePanel extends JPanel {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
+    private int xDelta = 0, yDelta = 0;
+
+
     public GamePanel() {
         this.setBackground(Color.BLACK);
+        addKeyListener(new KeyboardInputs(this));
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.setColor(Color.white);
+        g2.fillRect(100 + xDelta, 100 + yDelta, tileSize, tileSize);
+
+        g2.dispose();
+    }
+
+    public void changeXDelta(int value) {
+        this.xDelta += value;
+        repaint();
+    }
+
+    public void changeYDelta(int value) {
+        this.yDelta += value;
+        repaint();
+    }
+
+    public int getTileSize() {
+        return tileSize;
     }
 
     public int getScreenWidth() {
