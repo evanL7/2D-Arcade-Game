@@ -11,6 +11,6 @@ public class App
     public static void main( String[] args )
     {
         // Displays game window
-        // new Game();
+        new Game();
     }
 }
