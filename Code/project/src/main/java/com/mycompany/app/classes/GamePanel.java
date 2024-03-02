@@ -1,5 +1,9 @@
 package com.mycompany.app.classes;
 
-public class GamePanel {
-    
+import javax.swing.JPanel;
+
+public class GamePanel extends JPanel {
+    public GamePanel() {
+
+    }
 }
