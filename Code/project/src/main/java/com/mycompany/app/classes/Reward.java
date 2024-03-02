@@ -3,20 +3,18 @@ package com.mycompany.app.classes;
 public class Reward extends StaticEntity 
 {
 
-    //I changed the type for rewardAmount from float to double
-    private double rewardAmount;
+    private float rewardAmount;
     private int rewardsToCollect;
     public RewardType rewardType;
 
-
-    public double getRewardAmount()
+    public float getRewardAmount()
     {
         return rewardAmount;
     }
 
     public void setRewardAmount()
     {
-        this.rewardAmount = 0.5;
+        this.rewardAmount = 0.5f;
     }
 
     public int getRewardsToCollect()
