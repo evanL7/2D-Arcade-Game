@@ -1,4 +1,4 @@
-package com.mycompany.app.classes;
+package com.mycompany.app.classes.Display;
 
 public class Game implements Runnable {
 
@@ -39,9 +39,9 @@ public class Game implements Runnable {
 
             // Check frames of the game
             // if (System.currentTimeMillis() - lastCheck >= 1_000) {
-            //     lastCheck = System.currentTimeMillis();
-            //     System.out.println("FPS: " + frames);
-            //     frames = 0;
+            // lastCheck = System.currentTimeMillis();
+            // System.out.println("FPS: " + frames);
+            // frames = 0;
             // }
         }
     }

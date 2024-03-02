@@ -1,9 +1,9 @@
-package com.mycompany.app.classes;
+package com.mycompany.app.classes.StaticEntity;
+
 import java.awt.*;
 import java.util.Timer;
 
-abstract class StaticEntity 
-{
+abstract class StaticEntity {
 
     protected int x;
     protected int y;
@@ -11,13 +11,11 @@ abstract class StaticEntity
     protected Timer despawnTimer;
     public Image sprite;
 
-    public void onCollide()
-    {
+    public void onCollide() {
 
     }
 
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 

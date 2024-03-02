@@ -1,10 +1,12 @@
-package com.mycompany.app.classes;
+package com.mycompany.app.classes.Display;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
+
+import com.mycompany.app.classes.KeyboardInputs;
 
 public class GamePanel extends JPanel {
 
@@ -16,13 +18,12 @@ public class GamePanel extends JPanel {
     // Maze size
     final int maxScreenCol = 16;
     final int maxScreenRow = 12;
-    
+
     // Scaled screen size
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
     private int xDelta = 0, yDelta = 0;
-
 
     public GamePanel() {
         this.setBackground(Color.BLACK);

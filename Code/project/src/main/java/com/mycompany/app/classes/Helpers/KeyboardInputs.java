@@ -1,7 +1,9 @@
-package com.mycompany.app.classes;
+package com.mycompany.app.classes.Helpers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import com.mycompany.app.classes.Display.GamePanel;
 
 public class KeyboardInputs implements KeyListener {
 
@@ -36,5 +38,5 @@ public class KeyboardInputs implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
     }
-    
+
 }
