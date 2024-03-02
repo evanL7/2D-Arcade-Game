@@ -1,4 +1,4 @@
-package com.mycompany.app.classes;
+package com.mycompany.app.classes.MoveableEntity;
 
 public class Player extends MoveableEntity {
     // ATTRIBUTES

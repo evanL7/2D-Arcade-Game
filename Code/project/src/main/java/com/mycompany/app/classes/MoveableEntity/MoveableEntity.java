@@ -1,6 +1,8 @@
-package com.mycompany.app.classes;
+package com.mycompany.app.classes.MoveableEntity;
 
 import java.awt.*;
+
+import com.mycompany.app.classes.Helpers.Position;
 
 abstract class MoveableEntity {
     // ATTRIBUTES
