@@ -8,7 +8,7 @@ public class GameWindow {
     public GameWindow(GamePanel gamePanel) {
         jframe = new JFrame();
 
-        jframe.setSize(400, 400);
+        jframe.setSize(gamePanel.getScreenWidth(), gamePanel.getScreenHeight());
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
