@@ -9,6 +9,13 @@ public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
 
+    // public static final int UP = 0;
+    // public static final int LEFT = 1;
+    // public static final int DOWN = 2;
+    // public static final int RIGHT = 3;
+
+    public static boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed;
+
     public KeyboardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
@@ -21,22 +28,43 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gamePanel.changeYDelta(-gamePanel.getTileSize());
+                isUpPressed = true;
+                gamePanel.setMoving(true);
                 break;
             case KeyEvent.VK_A:
-                gamePanel.changeXDelta(-gamePanel.getTileSize());
+                isLeftPressed = true;
+                gamePanel.setMoving(true);
                 break;
             case KeyEvent.VK_S:
-                gamePanel.changeYDelta(gamePanel.getTileSize());
+                isDownPressed = true;
+                gamePanel.setMoving(true);
                 break;
             case KeyEvent.VK_D:
-                gamePanel.changeXDelta(gamePanel.getTileSize());
+                isRightPressed = true;
+                gamePanel.setMoving(true);
                 break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                isUpPressed = false;
+                gamePanel.setMoving(false);
+                break;
+            case KeyEvent.VK_A:
+                isLeftPressed = false;
+                gamePanel.setMoving(false);
+                break;
+            case KeyEvent.VK_S:
+                isDownPressed = false;
+                gamePanel.setMoving(false);
+                break;
+            case KeyEvent.VK_D:
+                isRightPressed = false;
+                gamePanel.setMoving(false);
+                break;
+        }
     }
-
 }
