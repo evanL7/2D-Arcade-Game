@@ -8,11 +8,11 @@ public class GameWindow {
     public GameWindow(GamePanel gamePanel) {
         jframe = new JFrame();
 
-        jframe.setSize(gamePanel.getScreenWidth(), gamePanel.getScreenHeight());
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setResizable(false);
-        jframe.setLocationRelativeTo(null);
         jframe.add(gamePanel);
+        jframe.pack();
+        jframe.setLocationRelativeTo(null);
+        jframe.setResizable(false);
         jframe.setVisible(true);
         jframe.setTitle("2D Game");
     }
