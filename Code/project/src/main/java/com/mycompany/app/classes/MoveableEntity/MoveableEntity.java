@@ -15,9 +15,7 @@ public abstract class MoveableEntity {
     private BufferedImage[][] animations;
     protected int speed;
     protected Position position;
-    protected int aniTick, aniIndex, aniSpeed = 25;
-    // protected int playerAction = IDLE;
-    protected int playerDir = -1;
+    protected int animationTick, animationIndex, animationSpeed = 35;
     protected boolean moving = false;
 
     /**

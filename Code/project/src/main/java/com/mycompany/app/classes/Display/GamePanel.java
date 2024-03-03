@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.mycompany.app.classes.Helpers.KeyboardInputs;
+import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 
 public class GamePanel extends JPanel {
 
@@ -31,6 +32,8 @@ public class GamePanel extends JPanel {
     private BufferedImage img;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int animationTick, animationIndex, animationSpeed = 35;
+    private int playerAction = PlayerConstants.UP;
+    private int playerDirection = -1;
 
     private int xDelta = 0, yDelta = 0;
     private int playerSpeed = 2;
@@ -52,7 +55,8 @@ public class GamePanel extends JPanel {
         // g2.drawImage(img.getSubimage(16 * 4, 24, 16, 24), xDelta, yDelta, tileSize,
         // 72, null);
         updateAnimationTick();
-        g2.drawImage(animations[0][animationIndex], xDelta, yDelta, tileSize, 72, null);
+
+        g2.drawImage(animations[playerAction][animationIndex], xDelta, yDelta, tileSize, 72, null);
         g2.dispose();
     }
 
@@ -110,6 +114,12 @@ public class GamePanel extends JPanel {
         this.moving = moving;
     }
 
+    public void setDirection(int direction) {
+        this.playerDirection = direction;
+        moving = true;
+
+    }
+
     /**
      * Updates the player's position based on the currently pressed keys.
      * If the player is moving, it adjusts the position according to the keys being
@@ -139,12 +149,4 @@ public class GamePanel extends JPanel {
                     yDelta += playerSpeed; // Move down
                 }
                 if (KeyboardInputs.isLeftPressed) {
-                    xDelta -= playerSpeed; // Move left
-                }
-                if (KeyboardInputs.isRightPressed) {
-                    xDelta += playerSpeed; // Move right
-                }
-            }
-        }
-    }
-}
+                    xDelta -= playerSpeed; // Move l

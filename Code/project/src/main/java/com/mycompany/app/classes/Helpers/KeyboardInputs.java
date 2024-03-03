@@ -5,6 +5,8 @@ import java.awt.event.KeyListener;
 
 import com.mycompany.app.classes.Display.GamePanel;
 
+import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
+
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
@@ -24,18 +26,22 @@ public class KeyboardInputs implements KeyListener {
             case KeyEvent.VK_W:
                 isUpPressed = true;
                 gamePanel.setMoving(true);
+                gamePanel.setDirection(PlayerConstants.UP);
                 break;
             case KeyEvent.VK_A:
                 isLeftPressed = true;
                 gamePanel.setMoving(true);
+                gamePanel.setDirection(PlayerConstants.LEFT);
                 break;
             case KeyEvent.VK_S:
                 isDownPressed = true;
                 gamePanel.setMoving(true);
+                gamePanel.setDirection(PlayerConstants.DOWN);
                 break;
             case KeyEvent.VK_D:
                 isRightPressed = true;
                 gamePanel.setMoving(true);
+                gamePanel.setDirection(PlayerConstants.RIGHT);
                 break;
         }
     }
