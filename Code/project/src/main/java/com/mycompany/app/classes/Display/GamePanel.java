@@ -149,4 +149,12 @@ public class GamePanel extends JPanel {
                     yDelta += playerSpeed; // Move down
                 }
                 if (KeyboardInputs.isLeftPressed) {
-                    xDelta -= playerSpeed; // Move l
+                    xDelta -= playerSpeed; // Move left
+                }
+                if (KeyboardInputs.isRightPressed) {
+                    xDelta += playerSpeed; // Move right
+                }
+            }
+        }
+    }
+}
