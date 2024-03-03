@@ -5,8 +5,10 @@ import java.awt.*;
 
 //import java.util.Timer;
 
-abstract class StaticEntity {
+public abstract class StaticEntity 
+{
 
+    // Attributes
     protected int x;
     protected int y;
     protected boolean objectDespawns;
@@ -15,7 +17,6 @@ abstract class StaticEntity {
     public Image sprite;
 
     // Constructor
-
     public StaticEntity(int x, int y, boolean objectDespawns, int despawnTimer, Image sprite)
     {
         this.x = x;
@@ -25,12 +26,27 @@ abstract class StaticEntity {
         this.sprite = sprite;
     }
 
+    //Methods
 
-    public void onCollide() {
+    public void onCollide() 
+    {
 
     }
 
-    public void destroy() {
+    // destroys the object
+    public void destroy() 
+    {
+
+    }
+
+    public void update()
+    {
+
+    }
+
+
+    public void render()
+    {
 
     }
 
