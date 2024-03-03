@@ -1,17 +1,20 @@
 package com.mycompany.app.classes.StaticEntity;
+import java.awt.*;
 
-public class Trap extends StaticEntity {
+public class Trap extends StaticEntity 
+{
 
     private float damage;
 
     // constructor
-    public Trap()
+    public Trap(int x, int y, boolean objectDespawns, int despawnTimer, Image sprite, float damage)
     {
-        // Collision with a trap should always reduce the player's score by 1.0
-        damage = 1.0f;
+        super(x, y, objectDespawns, despawnTimer, sprite);
+        this.damage = damage;
     }
 
-    public float getDamage() {
+    public float getDamage() 
+    {
         return damage;
     }
 
