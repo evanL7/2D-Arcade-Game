@@ -16,7 +16,7 @@ import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 
 public class GamePanel extends JPanel {
 
-    // Screen settings
+    // Tile settings
     final int originalTileSize = 16;
     final int scale = 3;
     final int tileSize = originalTileSize * scale;
