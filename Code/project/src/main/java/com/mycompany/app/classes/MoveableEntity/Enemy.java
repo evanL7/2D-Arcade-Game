@@ -9,8 +9,9 @@ public class Enemy extends MoveableEntity {
     private Vector<Position> pathToPlayer;
 
     // CONSTRUCTOR
-    public Enemy() {
+    public Enemy(Position position) {
         // need to determine the players start position and specific sprite
+        super(position);
         speed = 1;
     }
 

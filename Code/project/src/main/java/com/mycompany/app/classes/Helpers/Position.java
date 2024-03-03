@@ -9,6 +9,11 @@ public class Position {
     private int x; // The x-coordinate of the position
     private int y; // The y-coordinate of the position
 
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     /**
      * Gets the x-coordinate of the position.
      * 
@@ -28,13 +33,21 @@ public class Position {
     }
 
     /**
-     * Sets the coordinates of the position.
+     * Sets the x-coordinate of the position.
      * 
      * @param x The new x-coordinate.
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * Sets the y-coordinate of the position.
+     * 
      * @param y The new y-coordinate.
      */
-    public void setCoordinates(int x, int y) {
-        this.x = x;
+    public void setY(int y) {
         this.y = y;
     }
+
 }
