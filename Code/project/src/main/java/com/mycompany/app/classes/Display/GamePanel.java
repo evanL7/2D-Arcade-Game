@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.mycompany.app.classes.Helpers.KeyboardInputs;
@@ -25,9 +29,13 @@ public class GamePanel extends JPanel {
     final int screenHeight = tileSize * maxScreenRow;
 
     private int xDelta = 0, yDelta = 0;
+    private BufferedImage img;
 
     public GamePanel() {
         this.setBackground(Color.BLACK);
+
+        importImg();
+
         setPanelSize();
         addKeyListener(new KeyboardInputs(this));
     }
@@ -36,11 +44,18 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        g2.drawImage(img.getSubimage(16 * 4, 24, 16, 24), xDelta, yDelta, tileSize, 72, null);
+    }
 
-        g2.setColor(Color.white);
-        g2.fillRect(100 + xDelta, 100 + yDelta, tileSize, tileSize);
+    private void importImg() {
+        // Source of player sprites: https://axulart.itch.io/small-8-direction-characters
+        InputStream is = getClass().getResourceAsStream("player_sprites.png");
 
-        g2.dispose();
+        try {
+            img = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setPanelSize() {
