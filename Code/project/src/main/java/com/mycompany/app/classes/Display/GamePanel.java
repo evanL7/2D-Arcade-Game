@@ -1,6 +1,7 @@
 package com.mycompany.app.classes.Display;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -27,6 +28,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel() {
         this.setBackground(Color.BLACK);
+        setPanelSize();
         addKeyListener(new KeyboardInputs(this));
     }
 
@@ -41,6 +43,13 @@ public class GamePanel extends JPanel {
         g2.dispose();
     }
 
+    private void setPanelSize() {
+        Dimension size = new Dimension(screenWidth, screenHeight);
+        setMinimumSize(size);
+        setPreferredSize(size);
+        setMaximumSize(size);
+    }
+
     public void changeXDelta(int value) {
         this.xDelta += value;
     }
@@ -51,13 +60,5 @@ public class GamePanel extends JPanel {
 
     public int getTileSize() {
         return tileSize;
-    }
-
-    public int getScreenWidth() {
-        return screenWidth;
-    }
-
-    public int getScreenHeight() {
-        return screenHeight;
     }
 }
