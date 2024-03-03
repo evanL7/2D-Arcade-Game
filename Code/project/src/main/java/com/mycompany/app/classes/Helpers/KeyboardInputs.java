@@ -8,12 +8,6 @@ import com.mycompany.app.classes.Display.GamePanel;
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
-
-    // public static final int UP = 0;
-    // public static final int LEFT = 1;
-    // public static final int DOWN = 2;
-    // public static final int RIGHT = 3;
-
     public static boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed;
 
     public KeyboardInputs(GamePanel gamePanel) {
