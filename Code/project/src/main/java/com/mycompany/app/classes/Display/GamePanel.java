@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
     final int scale = 3;
     final int tileSize = originalTileSize * scale;
 
-    // Maze size
+    // Grid size
     final int maxScreenCol = 16;
     final int maxScreenRow = 12;
 
@@ -28,29 +28,32 @@ public class GamePanel extends JPanel {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
-    private int xDelta = 0, yDelta = 0;
     private BufferedImage img;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int animationTick, animationIndex, animationSpeed = 35;
 
+    private int xDelta = 0, yDelta = 0;
+    private int playerSpeed = 2;
+    private boolean moving = false;
+
     public GamePanel() {
         this.setBackground(Color.BLACK);
-
-        importImg();
+        this.importImg();
         loadAnimations();
-
-        setPanelSize();
-        addKeyListener(new KeyboardInputs(this));
+        this.setPanelSize();
+        this.addKeyListener(new KeyboardInputs(this));
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        updatePos();
         // g2.drawImage(img.getSubimage(16 * 4, 24, 16, 24), xDelta, yDelta, tileSize,
         // 72, null);
         updateAnimationTick();
-        g2.drawImage(animations[3][animationIndex], xDelta, yDelta, tileSize, 72, null);
+        g2.drawImage(animations[0][animationIndex], xDelta, yDelta, tileSize, 72, null);
+        g2.dispose();
     }
 
     private void importImg() {
@@ -69,25 +72,6 @@ public class GamePanel extends JPanel {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void setPanelSize() {
-        Dimension size = new Dimension(screenWidth, screenHeight);
-        setMinimumSize(size);
-        setPreferredSize(size);
-        setMaximumSize(size);
-    }
-
-    public void changeXDelta(int value) {
-        this.xDelta += value;
-    }
-
-    public void changeYDelta(int value) {
-        this.yDelta += value;
-    }
-
-    public int getTileSize() {
-        return tileSize;
     }
 
     // creates the Image array for the movement animations
@@ -113,5 +97,54 @@ public class GamePanel extends JPanel {
             }
         }
 
+    }
+
+    private void setPanelSize() {
+        Dimension size = new Dimension(screenWidth, screenHeight);
+        setMinimumSize(size);
+        setPreferredSize(size);
+        setMaximumSize(size);
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
+    /**
+     * Updates the player's position based on the currently pressed keys.
+     * If the player is moving, it adjusts the position according to the keys being
+     * pressed.
+     * If diagonal movement is detected, it normalizes the speed to maintain
+     * consistent movement.
+     */
+    private void updatePos() {
+        if (moving) {
+            if (KeyboardInputs.isUpPressed && KeyboardInputs.isRightPressed) {
+                xDelta += playerSpeed / Math.sqrt(2); // Move diagonally up-right
+                yDelta -= playerSpeed / Math.sqrt(2);
+            } else if (KeyboardInputs.isUpPressed && KeyboardInputs.isLeftPressed) {
+                xDelta -= playerSpeed / Math.sqrt(2); // Move diagonally up-left
+                yDelta -= playerSpeed / Math.sqrt(2);
+            } else if (KeyboardInputs.isDownPressed && KeyboardInputs.isRightPressed) {
+                xDelta += playerSpeed / Math.sqrt(2); // Move diagonally down-right
+                yDelta += playerSpeed / Math.sqrt(2);
+            } else if (KeyboardInputs.isDownPressed && KeyboardInputs.isLeftPressed) {
+                xDelta -= playerSpeed / Math.sqrt(2); // Move diagonally down-left
+                yDelta += playerSpeed / Math.sqrt(2);
+            } else {
+                if (KeyboardInputs.isUpPressed) {
+                    yDelta -= playerSpeed; // Move up
+                }
+                if (KeyboardInputs.isDownPressed) {
+                    yDelta += playerSpeed; // Move down
+                }
+                if (KeyboardInputs.isLeftPressed) {
+                    xDelta -= playerSpeed; // Move left
+                }
+                if (KeyboardInputs.isRightPressed) {
+                    xDelta += playerSpeed; // Move right
+                }
+            }
+        }
     }
 }
