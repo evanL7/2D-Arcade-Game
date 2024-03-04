@@ -33,7 +33,7 @@ public class GamePanel extends JPanel {
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int animationTick, animationIndex, animationSpeed = 35;
     private int playerAction = PlayerConstants.UP;
-    private int playerDirection = -1;
+    private int playerDirection = 0;
 
     private int xDelta = 0, yDelta = 0;
     private int playerSpeed = 2;
