@@ -52,10 +52,12 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        updatePos();
-        // g2.drawImage(img.getSubimage(16 * 4, 24, 16, 24), xDelta, yDelta, tileSize,
-        // 72, null);
+
         updateAnimationTick();
+
+        setAnimationAction();
+
+        updatePos();
 
         g2.drawImage(animations[playerAction][animationIndex], xDelta, yDelta, tileSize, 72, null);
         g2.dispose();
@@ -76,6 +78,14 @@ public class GamePanel extends JPanel {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void setAnimationAction() {
+        if (moving) {
+            playerAction = PlayerConstants.RIGHT;
+        } else {
+            playerAction = PlayerConstants.UP;
         }
     }
 
