@@ -26,22 +26,22 @@ public class KeyboardInputs implements KeyListener {
             case KeyEvent.VK_W:
                 isUpPressed = true;
                 gamePanel.setMoving(true);
-                gamePanel.setDirection(PlayerConstants.UP);
+                gamePanel.setAction(PlayerConstants.UP);
                 break;
             case KeyEvent.VK_A:
                 isLeftPressed = true;
                 gamePanel.setMoving(true);
-                gamePanel.setDirection(PlayerConstants.LEFT);
+                gamePanel.setAction(PlayerConstants.LEFT);
                 break;
             case KeyEvent.VK_S:
                 isDownPressed = true;
                 gamePanel.setMoving(true);
-                gamePanel.setDirection(PlayerConstants.DOWN);
+                gamePanel.setAction(PlayerConstants.DOWN);
                 break;
             case KeyEvent.VK_D:
                 isRightPressed = true;
                 gamePanel.setMoving(true);
-                gamePanel.setDirection(PlayerConstants.RIGHT);
+                gamePanel.setAction(PlayerConstants.RIGHT);
                 break;
         }
     }

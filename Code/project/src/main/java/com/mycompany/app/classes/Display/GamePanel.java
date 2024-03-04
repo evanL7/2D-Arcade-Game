@@ -55,8 +55,6 @@ public class GamePanel extends JPanel {
 
         updateAnimationTick();
 
-        setAnimationAction();
-
         updatePos();
 
         g2.drawImage(animations[playerAction][animationIndex], xDelta, yDelta, tileSize, 72, null);
@@ -78,15 +76,6 @@ public class GamePanel extends JPanel {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    // changes the animation based on whether the player is moving or not
-    public void setAnimationAction() {
-        if (moving) {
-            playerAction = PlayerConstants.RIGHT;
-        } else {
-            playerAction = PlayerConstants.UP;
         }
     }
 
@@ -126,8 +115,8 @@ public class GamePanel extends JPanel {
         this.moving = moving;
     }
 
-    public void setDirection(int direction) {
-        this.playerDirection = direction;
+    public void setAction(int action) {
+        this.playerAction = action;
         moving = true;
 
     }
