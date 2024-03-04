@@ -81,6 +81,7 @@ public class GamePanel extends JPanel {
         }
     }
 
+    // changes the animation based on whether the player is moving or not
     public void setAnimationAction() {
         if (moving) {
             playerAction = PlayerConstants.RIGHT;
