@@ -11,8 +11,9 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import com.mycompany.app.classes.Helpers.AnimationConstants;
 import com.mycompany.app.classes.Helpers.KeyboardInputs;
-import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
+import com.mycompany.app.classes.Helpers.AnimationConstants.*;
 
 public class GamePanel extends JPanel {
 
@@ -96,7 +97,7 @@ public class GamePanel extends JPanel {
         if (animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= 3) {
+            if (animationIndex >= AnimationConstants.SpriteAmount(playerAction)) {
                 animationIndex = 0;
             }
         }
