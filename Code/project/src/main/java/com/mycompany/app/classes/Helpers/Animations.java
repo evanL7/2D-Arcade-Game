@@ -1,7 +1,5 @@
 package com.mycompany.app.classes.Helpers;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -11,11 +9,10 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import com.mycompany.app.classes.Helpers.KeyboardInputs;
 import com.mycompany.app.classes.Helpers.AnimationConstants.*;
 
 // adds animations for enities
-public class Animations {
+public class Animations extends JPanel {
     // ATTRIBUTES
     private BufferedImage img;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
@@ -24,14 +21,6 @@ public class Animations {
     final int originalTileSize = 16;
     final int scale = 3;
     final int tileSize = originalTileSize * scale;
-
-    // Grid size
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
-
-    // Scaled screen size
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
 
     private int animationTick, animationIndex, animationSpeed = 35;
     private int playerAction = PlayerConstants.UP;
@@ -47,7 +36,7 @@ public class Animations {
     }
 
     public void paintComponent(Graphics g) {
-        // super.paintComponent(g);
+        super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
 
@@ -59,10 +48,10 @@ public class Animations {
         g2.dispose();
     }
 
-    private void importImg() {
+    private void importImg(String imageName) {
         // Source of player sprites:
         // https://axulart.itch.io/small-8-direction-characters
-        InputStream is = getClass().getResourceAsStream("player_sprites.png");
+        InputStream is = getClass().getResourceAsStream(imageName);
 
         try {
             img = ImageIO.read(is);
