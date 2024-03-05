@@ -1,5 +1,11 @@
 package com.mycompany.app.classes.Display;
 
+import java.awt.Graphics;
+import java.awt.font.GraphicAttribute;
+
+import com.mycompany.app.classes.Helpers.Position;
+import com.mycompany.app.classes.MoveableEntity.Player;
+
 public class Game implements Runnable {
 
     private GameWindow gameWindow;
@@ -8,12 +14,20 @@ public class Game implements Runnable {
     private final int FPS_SET = 120;
     private final int UPS_SET = 200; // Updates per second to prevent the game from running too fast
 
+    private Player player;
+
     public Game() {
-        gamePanel = new GamePanel();
+        initClasses();
+
+        gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);  
         gamePanel.requestFocus();
 
         startGameLoop();
+    }
+
+    private void initClasses() {
+        player = new Player(new Position(0, 0));
     }
 
     public void startGameLoop() {
@@ -22,7 +36,11 @@ public class Game implements Runnable {
     }
 
     private void update() {
-        gamePanel.updateGame();
+        player.update();
+    }
+
+    public void render(Graphics g) {
+        player.render(g);
     }
 
     @Override
@@ -66,5 +84,9 @@ public class Game implements Runnable {
                 updates = 0;
             }
         }
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
