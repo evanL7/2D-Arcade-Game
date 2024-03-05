@@ -10,7 +10,6 @@ import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
-    public static boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed;
 
     public KeyboardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -24,23 +23,15 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                isUpPressed = true;
-                gamePanel.setMoving(true);
                 gamePanel.setAction(PlayerConstants.UP);
                 break;
             case KeyEvent.VK_A:
-                isLeftPressed = true;
-                gamePanel.setMoving(true);
                 gamePanel.setAction(PlayerConstants.LEFT);
                 break;
             case KeyEvent.VK_S:
-                isDownPressed = true;
-                gamePanel.setMoving(true);
                 gamePanel.setAction(PlayerConstants.DOWN);
                 break;
             case KeyEvent.VK_D:
-                isRightPressed = true;
-                gamePanel.setMoving(true);
                 gamePanel.setAction(PlayerConstants.RIGHT);
                 break;
         }
@@ -50,19 +41,9 @@ public class KeyboardInputs implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                isUpPressed = false;
-                gamePanel.setMoving(false);
-                break;
             case KeyEvent.VK_A:
-                isLeftPressed = false;
-                gamePanel.setMoving(false);
-                break;
             case KeyEvent.VK_S:
-                isDownPressed = false;
-                gamePanel.setMoving(false);
-                break;
             case KeyEvent.VK_D:
-                isRightPressed = false;
                 gamePanel.setMoving(false);
                 break;
         }

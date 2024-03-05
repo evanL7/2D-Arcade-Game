@@ -105,36 +105,22 @@ public class Animations extends JPanel {
      * Updates the player's position based on the currently pressed keys.
      * If the player is moving, it adjusts the position according to the keys being
      * pressed.
-     * If diagonal movement is detected, it normalizes the speed to maintain
-     * consistent movement.
      */
     private void updatePos() {
         if (moving) {
-            if (KeyboardInputs.isUpPressed && KeyboardInputs.isRightPressed) {
-                xDelta += playerSpeed / Math.sqrt(2); // Move diagonally up-right
-                yDelta -= playerSpeed / Math.sqrt(2);
-            } else if (KeyboardInputs.isUpPressed && KeyboardInputs.isLeftPressed) {
-                xDelta -= playerSpeed / Math.sqrt(2); // Move diagonally up-left
-                yDelta -= playerSpeed / Math.sqrt(2);
-            } else if (KeyboardInputs.isDownPressed && KeyboardInputs.isRightPressed) {
-                xDelta += playerSpeed / Math.sqrt(2); // Move diagonally down-right
-                yDelta += playerSpeed / Math.sqrt(2);
-            } else if (KeyboardInputs.isDownPressed && KeyboardInputs.isLeftPressed) {
-                xDelta -= playerSpeed / Math.sqrt(2); // Move diagonally down-left
-                yDelta += playerSpeed / Math.sqrt(2);
-            } else {
-                if (KeyboardInputs.isUpPressed) {
+            switch (playerAction) {
+                case PlayerConstants.UP:
                     yDelta -= playerSpeed; // Move up
-                }
-                if (KeyboardInputs.isDownPressed) {
-                    yDelta += playerSpeed; // Move down
-                }
-                if (KeyboardInputs.isLeftPressed) {
+                    break;
+                case PlayerConstants.LEFT:
                     xDelta -= playerSpeed; // Move left
-                }
-                if (KeyboardInputs.isRightPressed) {
+                    break;
+                case PlayerConstants.DOWN:
+                    yDelta += playerSpeed; // Move down
+                    break;
+                case PlayerConstants.RIGHT:
                     xDelta += playerSpeed; // Move right
-                }
+                    break;
             }
         }
     }
