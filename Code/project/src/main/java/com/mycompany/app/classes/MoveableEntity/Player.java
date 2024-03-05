@@ -13,6 +13,7 @@ import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 import com.mycompany.app.classes.Helpers.Position;
 
 public class Player extends MoveableEntity {
+
     // ATTRIBUTES
     private BufferedImage[][] animations; // 2d image array of the images for player movements
 
@@ -21,7 +22,6 @@ public class Player extends MoveableEntity {
     private boolean moving = false;
 
     private int regularRewardsCollected;
-
 
     // CONSTRUCTOR
     public Player(Position position) {
@@ -96,7 +96,6 @@ public class Player extends MoveableEntity {
 
     // updates the animation array during the game loop thread
     private void updateAnimationTick() {
-
         animationTick++;
         if (animationTick >= animationSpeed) {
             animationTick = 0;
@@ -124,5 +123,4 @@ public class Player extends MoveableEntity {
     public void setRegularRewardsCollected(int regularRewardsCollected) {
         this.regularRewardsCollected = regularRewardsCollected;
     }
-
 }
