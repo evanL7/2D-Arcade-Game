@@ -20,6 +20,7 @@ public class Player extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 35;
     private int playerAction = PlayerConstants.UP;
     private boolean moving = false;
+    private boolean up, left, down, right;
 
     private int regularRewardsCollected;
 
@@ -32,8 +33,8 @@ public class Player extends MoveableEntity {
     }
 
     public void update() {
-        updateAnimationTick();
         updatePos();
+        updateAnimationTick();
     }
 
     public void render(Graphics g) {
@@ -49,21 +50,22 @@ public class Player extends MoveableEntity {
      * pressed.
      */
     private void updatePos() {
-        if (moving) {
-            switch (playerAction) {
-                case PlayerConstants.UP:
-                    position.setY(position.getY() - speed); // Move up
-                    break;
-                case PlayerConstants.LEFT:
-                    position.setX(position.getX() - speed); // Move left
-                    break;
-                case PlayerConstants.DOWN:
-                    position.setY(position.getY() + speed); // Move down
-                    break;
-                case PlayerConstants.RIGHT:
-                    position.setX(position.getX() + speed); // Move right
-                    break;
-            }
+        moving = false;
+
+        if (left && !right && !up && !down) {
+            position.setX(position.getX() - speed); // Move left
+            moving = true;
+        } else if (right && !left && !up && !down) {
+            position.setX(position.getX() + speed); // Move right
+            moving = true;
+        }
+
+        if (up && !down && !left && !right) {
+            position.setY(position.getY() - speed); // Move up
+            moving = true;
+        } else if (down && !up && !left && !right) {
+            position.setY(position.getY() + speed); // Move down
+            moving = true;
         }
     }
 
@@ -107,6 +109,10 @@ public class Player extends MoveableEntity {
     }
 
     // GETTERS AND SETTERS
+	public void resetDirBooleans() {
+		left = false; right = false; up = false; down = false;		
+	}
+
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
@@ -123,4 +129,36 @@ public class Player extends MoveableEntity {
     public void setRegularRewardsCollected(int regularRewardsCollected) {
         this.regularRewardsCollected = regularRewardsCollected;
     }
+
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
 }
