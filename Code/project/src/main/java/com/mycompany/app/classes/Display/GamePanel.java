@@ -30,19 +30,12 @@ public class GamePanel extends JPanel {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
-    private BufferedImage img;
-    private BufferedImage[][] animations; // 2d image array of the images for player movements
-    private int animationTick, animationIndex, animationSpeed = 35;
-    private int playerAction = PlayerConstants.UP;
+    private Game game;
 
-    private int xDelta = 0, yDelta = 0;
-    private int playerSpeed = 2;
-    private boolean moving = false;
+    public GamePanel(Game game) {
+        this.game = game;
 
-    public GamePanel() {
         this.setBackground(Color.BLACK);
-        this.importImg();
-        loadAnimations();
         this.setPanelSize();
         this.addKeyListener(new KeyboardInputs(this));
     }
@@ -51,60 +44,13 @@ public class GamePanel extends JPanel {
      * Updates the game state.
      */
     public void updateGame() {
-        updateAnimationTick();
-        updatePos();
+
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.drawImage(animations[playerAction][animationIndex], xDelta, yDelta, tileSize, 72, null);
-        g2.dispose();
-    }
-
-    private void importImg() {
-        // Source of player sprites:
-        // https://axulart.itch.io/small-8-direction-characters
-        InputStream is = getClass().getResourceAsStream("player_sprites.png");
-
-        try {
-            img = ImageIO.read(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    // creates the Image array for the movement animations
-    private void loadAnimations() {
-        animations = new BufferedImage[4][3];
-        for (int j = 0; j < animations.length; j++) {
-            for (int i = 0; i < animations[j].length; i++) {
-                animations[j][i] = img.getSubimage(j * 32, 24 + (i * 24), 16, 24);
-            }
-        }
-
-    }
-
-    // updates the animation array during the game loop thread
-    private void updateAnimationTick() {
-
-        animationTick++;
-        if (animationTick >= animationSpeed) {
-            animationTick = 0;
-            animationIndex++;
-            if (animationIndex >= AnimationConstants.SpriteAmount(playerAction)) {
-                animationIndex = 0;
-            }
-        }
-
+        game.render(g);
     }
 
     private void setPanelSize() {
@@ -114,37 +60,7 @@ public class GamePanel extends JPanel {
         setMaximumSize(size);
     }
 
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    public void setAction(int action) {
-        this.playerAction = action;
-        this.moving = true;
-
-    }
-
-    /**
-     * Updates the player's position based on the currently pressed keys.
-     * If the player is moving, it adjusts the position according to the keys being
-     * pressed.
-     */
-    private void updatePos() {
-        if (moving) {
-            switch (playerAction) {
-                case PlayerConstants.UP:
-                    yDelta -= playerSpeed; // Move up
-                    break;
-                case PlayerConstants.LEFT:
-                    xDelta -= playerSpeed; // Move left
-                    break;
-                case PlayerConstants.DOWN:
-                    yDelta += playerSpeed; // Move down
-                    break;
-                case PlayerConstants.RIGHT:
-                    xDelta += playerSpeed; // Move right
-                    break;
-            }
-        }
+    public Game getGame() {
+        return game;
     }
 }
