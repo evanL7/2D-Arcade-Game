@@ -52,19 +52,15 @@ public class Player extends MoveableEntity {
         if (moving) {
             switch (playerAction) {
                 case PlayerConstants.UP:
-                    // yDelta -= speed; // Move up
                     position.setY(position.getY() - speed); // Move up
                     break;
                 case PlayerConstants.LEFT:
-                    // xDelta -= speed; // Move left
                     position.setX(position.getX() - speed); // Move left
                     break;
                 case PlayerConstants.DOWN:
-                    // yDelta += speed; // Move down
                     position.setY(position.getY() + speed); // Move down
                     break;
                 case PlayerConstants.RIGHT:
-                    // xDelta += speed; // Move right
                     position.setX(position.getX() + speed); // Move right
                     break;
             }
