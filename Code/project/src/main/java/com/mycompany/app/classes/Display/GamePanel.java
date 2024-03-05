@@ -47,14 +47,15 @@ public class GamePanel extends JPanel {
         this.addKeyListener(new KeyboardInputs(this));
     }
 
+    public void updateGame() {
+        updateAnimationTick();
+        updatePos();
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-
-        updateAnimationTick();
-
-        updatePos();
 
         g2.drawImage(animations[playerAction][animationIndex], xDelta, yDelta, tileSize, 72, null);
         g2.dispose();
