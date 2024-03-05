@@ -97,7 +97,7 @@ public class Player extends MoveableEntity {
     // updates the animation array during the game loop thread
     private void updateAnimationTick() {
         animationTick++;
-        if (animationTick >= animationSpeed) {
+        if (moving && animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
             if (animationIndex >= AnimationConstants.SpriteAmount(playerAction)) {
