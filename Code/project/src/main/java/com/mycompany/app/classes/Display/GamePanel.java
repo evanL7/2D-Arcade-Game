@@ -47,6 +47,9 @@ public class GamePanel extends JPanel {
         this.addKeyListener(new KeyboardInputs(this));
     }
 
+    /*
+     * Updates the game state.
+     */
     public void updateGame() {
         updateAnimationTick();
         updatePos();
