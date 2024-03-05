@@ -48,6 +48,7 @@ public class Animations extends JPanel {
         g2.dispose();
     }
 
+    // param: String imageName - the png file name of the Sprite image
     private void importImg(String imageName) {
         // Source of player sprites:
         // https://axulart.itch.io/small-8-direction-characters
