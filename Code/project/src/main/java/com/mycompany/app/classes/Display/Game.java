@@ -6,6 +6,7 @@ public class Game implements Runnable {
     private GamePanel gamePanel;
     private Thread gameThread;
     private final int FPS_SET = 120;
+    private final int UPS_SET = 200; // Updates per second to prevent the game from running too fast
 
     public Game() {
         gamePanel = new GamePanel();
@@ -20,30 +21,50 @@ public class Game implements Runnable {
         gameThread.start();
     }
 
+    private void update() {
+        gamePanel.updateGame();
+    }
+
     @Override
     public void run() {
         double timePerFrame = 1_000_000_000.0 / FPS_SET;
-        long lastFrame = System.nanoTime();
-        long now = System.nanoTime();
+        double timePerUpdate = 1_000_000_000.0 / UPS_SET;
 
-        // int frames = 0;
-        // long lastCheck = System.currentTimeMillis();
+        long previousTime = System.nanoTime();
+        long lastCheck = System.currentTimeMillis();
+
+        int frames = 0;
+        int updates = 0;
+
+        double deltaU = 0;
+        double deltaF = 0;
 
         while (true) {
-            now = System.nanoTime();
+            long currentTime = System.nanoTime();
 
-            if (now - lastFrame >= timePerFrame) {
+            deltaU += (currentTime - previousTime) / timePerUpdate;
+            deltaF += (currentTime - previousTime) / timePerFrame;
+            previousTime = currentTime;
+
+            if (deltaU >= 1) {
+                update();
+                updates++;
+                deltaU--;
+            }
+
+            if (deltaF >= 1) {
                 gamePanel.repaint();
-                lastFrame = System.nanoTime();
-                // frames++;
+                frames++;
+                deltaF--;
             }
 
             // Check frames of the game
-            // if (System.currentTimeMillis() - lastCheck >= 1_000) {
-            // lastCheck = System.currentTimeMillis();
-            // System.out.println("FPS: " + frames);
-            // frames = 0;
-            // }
+            if (System.currentTimeMillis() - lastCheck >= 1_000) {
+                lastCheck = System.currentTimeMillis();
+                System.out.println("FPS: " + frames + " | UPS: " + updates);
+                frames = 0;
+                updates = 0;
+            }
         }
     }
 }
