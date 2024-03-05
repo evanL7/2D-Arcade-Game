@@ -8,6 +8,7 @@ public abstract class MoveableEntity {
     // ATTRIBUTES
     protected Image sprite;
     protected Position position;
+    protected int speed;
 
     /**
      * Constructs a MoveableEntity with the given position.
