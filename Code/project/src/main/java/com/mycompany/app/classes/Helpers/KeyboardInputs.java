@@ -16,10 +16,6 @@ public class KeyboardInputs implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
@@ -47,5 +43,9 @@ public class KeyboardInputs implements KeyListener {
                 gamePanel.setMoving(false);
                 break;
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
     }
 }
