@@ -6,29 +6,58 @@ import com.mycompany.app.classes.Helpers.Position;
 
 //import java.util.Timer;
 
+/**
+ * An abstract class representing static entities in the game.
+ *
+ * <p>A static entity is an object that does not move and has defined behavior when interacting with other entities.
+ * This class serves as a base for various static entities, defining common attributes and methods.
+ */
 public abstract class StaticEntity 
 {
 
     // Attributes
 
+    /** The position of the static entity in the game world. */
     protected Position position;
+
+    /** Determines whether the static entity despawns or not. */
     protected boolean objectDespawns;
+    
+    /** The despawn timer for the entity, measured in milliseconds. A value of -1 indicates despawning only on collision. */
     protected int despawnTimer;
+
+    /** The sprite representing the static entity. */
     public Image sprite;
+    
     //protected Timer despawnTimer;
 
-    // Constructor for StaticEntities that rely on time like bonus rewards
+    /**
+     * Constructs a new static entity with a despawn timer.
+     *
+     * @param position        The position of the static entity.
+     * @param objectDespawns  Whether the static entity despawns or not.
+     * @param despawnTimer    The time, in milliseconds, after which the entity will despawn. Use -1 for despawning only on collision.
+     * @param sprite          The sprite representing the static entity.
+     */
     public StaticEntity(Position position, boolean objectDespawns, int despawnTimer, Image sprite)
     {
+        // Constructor for StaticEntities that rely on time like bonus rewards
         this.position = position;
         this.objectDespawns = objectDespawns;
         this.despawnTimer = despawnTimer;
         this.sprite = sprite;
     }
 
-    // constructor for StaticEntities that don't despawn on a timer like traps and Regular Rewards
+    /**
+     * Constructs a new static entity without a despawn timer.
+     *
+     * @param position        The position of the static entity.
+     * @param objectDespawns  Whether the static entity despawns or not.
+     * @param sprite          The sprite representing the static entity.
+     */
     public StaticEntity(Position position, boolean objectDespawns, Image sprite)
     {
+        // constructor for StaticEntities that don't despawn on a timer like traps and Regular Rewards
         this.position = position;
         this.objectDespawns = objectDespawns;
         this.sprite = sprite;
