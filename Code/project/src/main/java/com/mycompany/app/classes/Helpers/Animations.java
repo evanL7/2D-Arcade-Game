@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import com.mycompany.app.classes.Helpers.AnimationConstants.*;
 
 // adds animations for enities
-public class Animations extends JPanel {
+public abstract class Animations {
     // ATTRIBUTES
     private BufferedImage img;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
@@ -25,37 +25,50 @@ public class Animations extends JPanel {
     private int animationTick, animationIndex, animationSpeed = 35;
     private int playerAction = PlayerConstants.UP;
 
-    private int xDelta = 0, yDelta = 0;
-    private int playerSpeed = 2;
-    private boolean moving = false;
-
     // CONSTRUCTOR
-    // param: takes the image of the sprites
-    public Animations(BufferedImage img) {
+    // param:
+    // imageName: the image file path of the sprite
+    // posX and posY: the starting x and y position of the entity
+    // width: the width of the sprite
+    // height: the height of the sprite
+    // animationArrayWidth: the number of elements in the width of the 2d array
+    // animationArrayHeight: the number of elements in the height of the 2d array
+    public Animations(String imageName, int posX, int posY, int width, int height, int animationArrayWidth,
+            int animationArrayHeight) {
+        loadAnimations(imageName, animationArrayWidth, animationArrayHeight);
 
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
+    // params:
+    // posX and posY: the starting x and y position of the entity
+    // width: the width of the sprite
+    // height: the height of the sprite
+    public void render(Graphics g, int posX, int posY, int width, int height) {
         Graphics2D g2 = (Graphics2D) g;
 
-        updateAnimationTick();
-
-        updatePos();
-
-        g2.drawImage(animations[playerAction][animationIndex], xDelta, yDelta, tileSize, 72, null);
+        g2.drawImage(animations[playerAction][animationIndex], posX, posY, width, height, null);
         g2.dispose();
+
     }
 
-    // param: String imageName - the png file name of the Sprite image
-    private void importImg(String imageName) {
-        // Source of player sprites:
-        // https://axulart.itch.io/small-8-direction-characters
+    // creates the Image array for the movement animations
+    // param:
+    // imageName: the image file path name
+    // animationArrayWidth: the number of elements in the width of the 2d array
+    // animationArrayHeight: the number of elements in the height of the 2d array
+    private void loadAnimations(String imageName, int animationArrayWidth, int animationArrayHeight) {
         InputStream is = getClass().getResourceAsStream(imageName);
 
         try {
-            img = ImageIO.read(is);
+            BufferedImage img = ImageIO.read(is);
+
+            animations = new BufferedImage[animationArrayWidth][animationArrayHeight];
+            for (int j = 0; j < animations.length; j++) {
+                for (int i = 0; i < animations[j].length; i++) {
+                    animations[j][i] = img.getSubimage(j * 32, 24 + (i * 24), 16, 24);
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -65,17 +78,6 @@ public class Animations extends JPanel {
                 e.printStackTrace();
             }
         }
-    }
-
-    // creates the Image array for the movement animations
-    private void loadAnimations() {
-        animations = new BufferedImage[4][3];
-        for (int j = 0; j < animations.length; j++) {
-            for (int i = 0; i < animations[j].length; i++) {
-                animations[j][i] = img.getSubimage(j * 32, 24 + (i * 24), 16, 24);
-            }
-        }
-
     }
 
     // updates the animation array during the game loop thread
@@ -90,40 +92,6 @@ public class Animations extends JPanel {
             }
         }
 
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    public void setAction(int action) {
-        this.playerAction = action;
-        moving = true;
-
-    }
-
-    /**
-     * Updates the player's position based on the currently pressed keys.
-     * If the player is moving, it adjusts the position according to the keys being
-     * pressed.
-     */
-    private void updatePos() {
-        if (moving) {
-            switch (playerAction) {
-                case PlayerConstants.UP:
-                    yDelta -= playerSpeed; // Move up
-                    break;
-                case PlayerConstants.LEFT:
-                    xDelta -= playerSpeed; // Move left
-                    break;
-                case PlayerConstants.DOWN:
-                    yDelta += playerSpeed; // Move down
-                    break;
-                case PlayerConstants.RIGHT:
-                    xDelta += playerSpeed; // Move right
-                    break;
-            }
-        }
     }
 
 }
