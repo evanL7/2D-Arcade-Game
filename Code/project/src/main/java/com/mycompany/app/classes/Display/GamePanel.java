@@ -11,9 +11,9 @@ import com.mycompany.app.classes.Helpers.KeyboardInputs;
 public class GamePanel extends JPanel {
 
     // Tile settings
-    final int originalTileSize = 16;
-    final int scale = 3;
-    final int tileSize = originalTileSize * scale;
+    final static int originalTileSize = 16;
+    final static int scale = 3;
+    public final static int tileSize = originalTileSize * scale;
 
     // Grid size
     final int maxScreenCol = 16;
