@@ -8,6 +8,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import com.mycompany.app.classes.Display.GamePanel;
 import com.mycompany.app.classes.Helpers.AnimationConstants;
 import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 import com.mycompany.app.classes.Helpers.Position;
@@ -40,7 +41,7 @@ public class Player extends MoveableEntity {
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), 48, 72, null);
+        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), GamePanel.tileSize, 72, null);
         g2.dispose();
     }
 
