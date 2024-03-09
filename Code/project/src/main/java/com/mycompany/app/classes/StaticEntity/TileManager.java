@@ -1,6 +1,9 @@
 package com.mycompany.app.classes.StaticEntity;
 
 import java.awt.Graphics;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
@@ -12,13 +15,16 @@ public class TileManager {
     
     GamePanel gamePanel;
     Tile[] tile; // Stores the tile sprites
-
-    BoardData boardData;
+    int mapTileNum[][]; // Stores the map data that indicates which tile to use    
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+
         tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
+        mapTileNum = new int[GamePanel.maxScreenRow][GamePanel.maxScreenCol];
+
         getTileImage();
+        loadMap("mapTest.txt");
     }
 
     private void getTileImage() {
@@ -61,7 +67,8 @@ public class TileManager {
         int col = 0, row = 0, x = 0, y = 0;
         
         while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
-            g.drawImage(tile[0].image, x, y, GamePanel.tileSize, GamePanel.tileSize, null);
+            int tileNum = mapTileNum[row][col];
+            g.drawImage(tile[tileNum].image, x, y, GamePanel.tileSize, GamePanel.tileSize, null);
             
             col++;
             x += GamePanel.tileSize;
@@ -72,6 +79,34 @@ public class TileManager {
                 row++;
                 y += GamePanel.tileSize;
             }
+        }
+    }
+
+    public void loadMap(String filePath) {
+
+        try {
+            InputStream is = getClass().getResourceAsStream(filePath);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            int col = 0, row = 0;
+            while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
+                String line = br.readLine();
+                String numbers[] = line.split(" ");
+                while (col < GamePanel.maxScreenCol) {
+                    int num = Integer.parseInt(numbers[col]);
+
+                    mapTileNum[row][col] = num;
+                    col++;
+                }
+                if (col == GamePanel.maxScreenCol) {
+                    col = 0;
+                    row++;
+                }
+            }
+            br.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
