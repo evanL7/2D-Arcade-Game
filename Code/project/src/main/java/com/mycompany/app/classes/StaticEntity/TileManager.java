@@ -11,12 +11,21 @@ import com.mycompany.app.classes.BoardData;
 import com.mycompany.app.classes.Display.Game;
 import com.mycompany.app.classes.Display.GamePanel;
 
+/**
+ * The TileManager class manages the tiles used in the game.
+ * It loads tile sprites and map data, and provides methods to draw the tiles on the game panel.
+ */
 public class TileManager {
     
     GamePanel gamePanel;
     Tile[] tile; // Stores the tile sprites
     int mapTileNum[][]; // Stores the map data that indicates which tile to use    
 
+    /**
+     * Constructs a TileManager object with the specified GamePanel.
+     * 
+     * @param gamePanel the GamePanel object to associate with the TileManager
+     */
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
@@ -27,6 +36,10 @@ public class TileManager {
         loadMap("mapTest.txt");
     }
 
+    /**
+     * Loads the tile sprites from the resource files.
+     * The tile sprites are sourced from https://limezu.itch.io/moderninteriors
+     */
     private void getTileImage() {
         try {
             // Load the tile sprites
@@ -62,6 +75,11 @@ public class TileManager {
         }
     }
 
+    /**
+     * Draws the tiles to the game screen.
+     * 
+     * @param g the Graphics object to draw the tiles on
+     */
     public void draw(Graphics g) {
         
         int col = 0, row = 0, x = 0, y = 0;
@@ -82,6 +100,11 @@ public class TileManager {
         }
     }
 
+    /**
+     * Loads the map data from the specified file.
+     * 
+     * @param filePath the path of the file containing the map data
+     */
     public void loadMap(String filePath) {
 
         try {
@@ -110,4 +133,3 @@ public class TileManager {
         }
     }
 }
-
