@@ -10,19 +10,6 @@ import com.mycompany.app.classes.Helpers.KeyboardInputs;
 
 public class GamePanel extends JPanel {
 
-    // Tile settings
-    final static int originalTileSize = 16;
-    final static int scale = 3;
-    public final static int tileSize = originalTileSize * scale;
-
-    // Grid size
-    public final static int maxScreenCol = 16;
-    public final static int maxScreenRow = 12;
-
-    // Scaled screen size
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
-
     private Game game;
 
     public GamePanel(Game game) {
@@ -47,7 +34,7 @@ public class GamePanel extends JPanel {
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(screenWidth, screenHeight);
+        Dimension size = new Dimension(Game.screenWidth, Game.screenHeight);
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);

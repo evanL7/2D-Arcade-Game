@@ -15,6 +15,20 @@ public class Game implements Runnable {
     private final int FPS_SET = 120;
     private final int UPS_SET = 200; // Updates per second to prevent the game from running too fast
 
+    // Tile settings
+    final static int originalTileSize = 16;
+    final static int scale = 3;
+    public final static int tileSize = originalTileSize * scale;
+
+    // Grid size
+    public final static int maxScreenCol = 16;
+    public final static int maxScreenRow = 12;
+
+    // Scaled screen size
+    public final static int screenWidth = tileSize * maxScreenCol;
+    public final static int screenHeight = tileSize * maxScreenRow;
+
+
     private TileManager tileManager;
     private Player player;
 
