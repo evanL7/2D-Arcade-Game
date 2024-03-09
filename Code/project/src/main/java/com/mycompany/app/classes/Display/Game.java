@@ -28,7 +28,6 @@ public class Game implements Runnable {
     public final static int screenWidth = tileSize * maxScreenCol;
     public final static int screenHeight = tileSize * maxScreenRow;
 
-
     private TileManager tileManager;
     private Player player;
 
@@ -44,7 +43,7 @@ public class Game implements Runnable {
 
     private void initClasses() {
         tileManager = new TileManager(gamePanel);
-        player = new Player(new Position(0, 0));
+        player = new Player(new Position(Game.screenWidth/2 - Game.tileSize/2, Game.screenHeight/2 - Game.tileSize/2));
     }
 
     public void startGameLoop() {
