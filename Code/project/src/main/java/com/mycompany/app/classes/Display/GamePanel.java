@@ -16,8 +16,8 @@ public class GamePanel extends JPanel {
     public final static int tileSize = originalTileSize * scale;
 
     // Grid size
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
+    public final static int maxScreenCol = 16;
+    public final static int maxScreenRow = 12;
 
     // Scaled screen size
     final int screenWidth = tileSize * maxScreenCol;
