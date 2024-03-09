@@ -30,7 +30,7 @@ public class TileManager {
         this.gamePanel = gamePanel;
 
         tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
-        mapTileNum = new int[GamePanel.maxScreenRow][GamePanel.maxScreenCol];
+        mapTileNum = new int[Game.maxScreenRow][Game.maxScreenCol];
 
         getTileImage();
         loadMap("mapTest.txt");
@@ -99,18 +99,18 @@ public class TileManager {
         
         int col = 0, row = 0, x = 0, y = 0;
         
-        while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
+        while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
             int tileNum = mapTileNum[row][col];
-            g.drawImage(tile[tileNum].image, x, y, GamePanel.tileSize, GamePanel.tileSize, null);
+            g.drawImage(tile[tileNum].image, x, y, Game.tileSize, Game.tileSize, null);
             
             col++;
-            x += GamePanel.tileSize;
+            x += Game.tileSize;
 
-            if (col == GamePanel.maxScreenCol) {
+            if (col == Game.maxScreenCol) {
                 col = 0;
                 x = 0;
                 row++;
-                y += GamePanel.tileSize;
+                y += Game.tileSize;
             }
         }
     }
@@ -127,16 +127,16 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0, row = 0;
-            while (col < GamePanel.maxScreenCol && row < GamePanel.maxScreenRow) {
+            while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
                 String line = br.readLine();
                 String numbers[] = line.split(" ");
-                while (col < GamePanel.maxScreenCol) {
+                while (col < Game.maxScreenCol) {
                     int num = Integer.parseInt(numbers[col]);
 
                     mapTileNum[row][col] = num;
                     col++;
                 }
-                if (col == GamePanel.maxScreenCol) {
+                if (col == Game.maxScreenCol) {
                     col = 0;
                     row++;
                 }
