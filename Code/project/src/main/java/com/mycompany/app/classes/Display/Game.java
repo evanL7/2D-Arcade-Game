@@ -5,6 +5,7 @@ import java.awt.font.GraphicAttribute;
 
 import com.mycompany.app.classes.Helpers.Position;
 import com.mycompany.app.classes.MoveableEntity.Player;
+import com.mycompany.app.classes.StaticEntity.TileManager;
 
 public class Game implements Runnable {
 
@@ -14,6 +15,7 @@ public class Game implements Runnable {
     private final int FPS_SET = 120;
     private final int UPS_SET = 200; // Updates per second to prevent the game from running too fast
 
+    private TileManager tileManager;
     private Player player;
 
     public Game() {
@@ -27,6 +29,7 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
+        tileManager = new TileManager(gamePanel);
         player = new Player(new Position(0, 0));
     }
 
@@ -40,6 +43,7 @@ public class Game implements Runnable {
     }
 
     public void render(Graphics g) {
+        tileManager.draw(g);
         player.render(g);
     }
 
