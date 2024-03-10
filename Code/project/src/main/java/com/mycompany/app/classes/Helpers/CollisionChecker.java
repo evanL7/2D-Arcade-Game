@@ -5,14 +5,30 @@ import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 import com.mycompany.app.classes.MoveableEntity.MoveableEntity;
 import com.mycompany.app.classes.StaticEntity.TileManager;
 
+/**
+ * The CollisionChecker class is responsible for checking collisions between
+ * a MoveableEntity and the game tiles.
+ */
 public class CollisionChecker {
     
     TileManager tileManager;
 
+    /**
+     * Constructs a CollisionChecker object with the specified TileManager.
+     * 
+     * @param tileManager the TileManager object used for collision checking
+     */
     public CollisionChecker(TileManager tileManager) {
         this.tileManager = tileManager;
     }
 
+    /**
+     * Checks for collisions between the specified MoveableEntity and the game tiles
+     * in the given direction.
+     * 
+     * @param entity the MoveableEntity to check for collisions
+     * @param direction the direction in which the entity is moving
+     */
     public void checkTile(MoveableEntity entity, int direction) {
         int entityLeft = entity.position.getX() + entity.solidArea.x;
         int entityRight = entity.position.getX() + entity.solidArea.x + entity.solidArea.width;
@@ -63,8 +79,7 @@ public class CollisionChecker {
                 if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
                 }
-                break;
-                
+                break;                
         }
     }
 }
