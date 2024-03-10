@@ -48,7 +48,7 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        tileManager = new TileManager(gamePanel);
+        tileManager = new TileManager();
         collisionChecker = new CollisionChecker(tileManager);
         player = new Player(new Position(playerX, playerY), collisionChecker);
     }

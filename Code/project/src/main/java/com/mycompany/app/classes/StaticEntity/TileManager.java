@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 
 import com.mycompany.app.classes.BoardData;
 import com.mycompany.app.classes.Display.Game;
-import com.mycompany.app.classes.Display.GamePanel;
 
 /**
  * The TileManager class manages the tiles used in the game.
@@ -17,18 +16,13 @@ import com.mycompany.app.classes.Display.GamePanel;
  */
 public class TileManager {
     
-    GamePanel gamePanel;
     public Tile[] tile; // Stores the tile sprites
     public int mapTileNum[][]; // Stores the map data that indicates which tile to use    
 
     /**
-     * Constructs a TileManager object with the specified GamePanel.
-     * 
-     * @param gamePanel the GamePanel object to associate with the TileManager
+     * Constructs a TileManager object.
      */
-    public TileManager(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-
+    public TileManager() {
         tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
         mapTileNum = new int[Game.maxScreenRow][Game.maxScreenCol];
 
