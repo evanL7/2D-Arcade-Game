@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import com.mycompany.app.classes.Helpers.AnimationConstants.*;
 
@@ -44,10 +43,6 @@ public abstract class Animations {
     // width: the width of the sprite
     // height: the height of the sprite
     public void render(Graphics g, int posX, int posY, int width, int height) {
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.drawImage(animations[playerAction][animationIndex], posX, posY, width, height, null);
-        g2.dispose();
 
     }
 
