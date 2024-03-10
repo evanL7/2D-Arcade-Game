@@ -3,7 +3,9 @@ package com.mycompany.app.classes.Display;
 import java.awt.Graphics;
 import java.awt.font.GraphicAttribute;
 
+import com.mycompany.app.classes.Helpers.CollisionChecker;
 import com.mycompany.app.classes.Helpers.Position;
+import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 import com.mycompany.app.classes.MoveableEntity.Player;
 import com.mycompany.app.classes.StaticEntity.TileManager;
 
@@ -29,7 +31,11 @@ public class Game implements Runnable {
     public final static int screenHeight = tileSize * maxScreenRow;
 
     private TileManager tileManager;
+    public CollisionChecker collisionChecker;
     private Player player;
+
+    int playerX = Game.screenWidth/2 - Game.tileSize/2;
+    int playerY = Game.screenHeight/2 - Game.tileSize/2;
 
     public Game() {
         initClasses();
@@ -43,7 +49,8 @@ public class Game implements Runnable {
 
     private void initClasses() {
         tileManager = new TileManager(gamePanel);
-        player = new Player(new Position(Game.screenWidth/2 - Game.tileSize/2, Game.screenHeight/2 - Game.tileSize/2));
+        collisionChecker = new CollisionChecker(tileManager);
+        player = new Player(new Position(playerX, playerY), collisionChecker);
     }
 
     public void startGameLoop() {
