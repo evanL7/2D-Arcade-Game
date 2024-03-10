@@ -2,6 +2,7 @@ package com.mycompany.app.classes.MoveableEntity;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import com.mycompany.app.classes.Display.Game;
 import com.mycompany.app.classes.Helpers.AnimationConstants;
+import com.mycompany.app.classes.Helpers.CollisionChecker;
 import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 import com.mycompany.app.classes.Helpers.Position;
 
@@ -25,12 +27,17 @@ public class Player extends MoveableEntity {
 
     private int regularRewardsCollected;
 
+    private CollisionChecker collisionChecker;
+
     // CONSTRUCTOR
-    public Player(Position position) {
+    public Player(Position position, CollisionChecker collisionChecker) {
         // need to determine the players start position and specific sprite
         super(position);
+        this.collisionChecker = collisionChecker;
         loadAnimations();
         speed = 1;
+
+        solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
     }
 
     public void update() {
@@ -53,20 +60,25 @@ public class Player extends MoveableEntity {
     private void updatePos() {
         moving = false;
 
-        if (left && !right && !up && !down) {
-            position.setX(position.getX() - speed); // Move left
-            moving = true;
-        } else if (right && !left && !up && !down) {
-            position.setX(position.getX() + speed); // Move right
-            moving = true;
-        }
+        collisionOn = false;
+        collisionChecker.checkTile(this, playerAction);
 
-        if (up && !down && !left && !right) {
-            position.setY(position.getY() - speed); // Move up
-            moving = true;
-        } else if (down && !up && !left && !right) {
-            position.setY(position.getY() + speed); // Move down
-            moving = true;
+        if (collisionOn == false) {
+            if (left && !right && !up && !down) {
+                position.setX(position.getX() - speed); // Move left
+                moving = true;
+            } else if (right && !left && !up && !down) {
+                position.setX(position.getX() + speed); // Move right
+                moving = true;
+            }
+
+            if (up && !down && !left && !right) {
+                position.setY(position.getY() - speed); // Move up
+                moving = true;
+            } else if (down && !up && !left && !right) {
+                position.setY(position.getY() + speed); // Move down
+                moving = true;
+            }
         }
     }
 
