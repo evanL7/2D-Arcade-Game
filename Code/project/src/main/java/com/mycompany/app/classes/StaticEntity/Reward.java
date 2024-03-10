@@ -4,6 +4,17 @@ import com.mycompany.app.classes.Helpers.RewardType;
 import java.awt.*;
 import com.mycompany.app.classes.Helpers.Position;
 
+
+// Regular Reward sprite is 16x16
+// I couldn't find any free sprites so I recreated 1
+
+
+// Bonus Reward sprite for the scroll/cheatsheet is 16x16
+// the gold and bombs are 32x32 but we won't use them
+// sprite taken from https://elthen.itch.io/2d-pixel-art-dungeon-collectables
+
+
+
 /**
  * Represents a reward entity in the game.
  * 
