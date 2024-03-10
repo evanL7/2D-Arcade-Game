@@ -7,8 +7,11 @@ import com.mycompany.app.classes.Helpers.Position;
 public abstract class MoveableEntity {
     // ATTRIBUTES
     protected Image sprite;
-    protected Position position;
-    protected int speed;
+    public Position position;
+    public int speed;
+
+    public Rectangle solidArea;
+    public boolean collisionOn = false;
 
     /**
      * Constructs a MoveableEntity with the given position.
