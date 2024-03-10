@@ -6,8 +6,8 @@ package com.mycompany.app.classes.Helpers;
  */
 public class Position {
 
-    private int x; // The x-coordinate of the position
-    private int y; // The y-coordinate of the position
+    public int x; // The x-coordinate of the position
+    public int y; // The y-coordinate of the position
 
     public Position(int x, int y) {
         this.x = x;
