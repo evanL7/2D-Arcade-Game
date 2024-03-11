@@ -6,12 +6,13 @@ import java.awt.font.GraphicAttribute;
 import com.mycompany.app.classes.Helpers.CollisionChecker;
 import com.mycompany.app.classes.Helpers.Position;
 import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
+import com.mycompany.app.classes.MoveableEntity.Enemy;
 import com.mycompany.app.classes.MoveableEntity.Player;
 import com.mycompany.app.classes.StaticEntity.TileManager;
 
 public class Game implements Runnable {
 
-    private Camera camera; //add
+    private Camera camera; // add
 
     private GameWindow gameWindow;
     private GamePanel gamePanel;
@@ -35,15 +36,16 @@ public class Game implements Runnable {
     private TileManager tileManager;
     public CollisionChecker collisionChecker;
     private Player player;
+    private Enemy enemy;
 
-    int playerX = Game.screenWidth/2 - Game.tileSize/2;
-    int playerY = Game.screenHeight/2 - Game.tileSize/2;
+    int playerX = Game.screenWidth / 2 - Game.tileSize / 2;
+    int playerY = Game.screenHeight / 2 - Game.tileSize / 2;
 
     public Game() {
         initClasses();
 
         gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel);  
+        gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
 
         // Create the Camera object with the player
@@ -56,6 +58,7 @@ public class Game implements Runnable {
         tileManager = new TileManager();
         collisionChecker = new CollisionChecker(tileManager);
         player = new Player(new Position(playerX, playerY), collisionChecker);
+        enemy = new Enemy(new Position(playerX, playerY), collisionChecker);
     }
 
     public void startGameLoop() {
@@ -65,19 +68,21 @@ public class Game implements Runnable {
 
     private void update() {
         player.update();
+        enemy.update();
     }
 
     public void render(Graphics g) {
-       // Translate graphics object to adjust for camera position
-       camera.update();
+        // Translate graphics object to adjust for camera position
+        camera.update();
         camera.translate(g);
 
         // Render game objects with adjusted coordinates
         tileManager.draw(g);
         // Adjust player's position based on camera
-    int playerRenderX = player.getPosition().getX() - camera.getXOffset();
-    int playerRenderY = player.getPosition().getY() - camera.getYOffset();
+        int playerRenderX = player.getPosition().getX() - camera.getXOffset();
+        int playerRenderY = player.getPosition().getY() - camera.getYOffset();
         player.render(g);
+        enemy.render(g);
 
         // Reset graphics translation
         camera.reset(g);
@@ -126,9 +131,9 @@ public class Game implements Runnable {
         }
     }
 
-	public void windowFocusLost() {
-		player.resetDirBooleans();
-	}
+    public void windowFocusLost() {
+        player.resetDirBooleans();
+    }
 
     public Player getPlayer() {
         return player;
