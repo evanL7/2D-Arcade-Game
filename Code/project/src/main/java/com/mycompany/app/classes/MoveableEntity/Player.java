@@ -48,7 +48,8 @@ public class Player extends MoveableEntity {
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72, null);
+        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72,
+                null);
         g2.dispose();
     }
 
@@ -123,7 +124,10 @@ public class Player extends MoveableEntity {
 
     // GETTERS AND SETTERS
     public void resetDirBooleans() {
-        left = false; right = false; up = false; down = false;		
+        left = false;
+        right = false;
+        up = false;
+        down = false;
     }
 
     public void setMoving(boolean moving) {

@@ -22,4 +22,9 @@ public abstract class MoveableEntity {
         this.position = position;
     }
 
+    // gets and returns the entities position
+    public Position getPosition() {
+        return this.position;
+    }
+
 }
