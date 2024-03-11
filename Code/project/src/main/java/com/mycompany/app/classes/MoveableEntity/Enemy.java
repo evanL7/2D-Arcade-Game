@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import com.mycompany.app.classes.Display.Game;
 import com.mycompany.app.classes.Helpers.AnimationConstants;
 import com.mycompany.app.classes.Helpers.AnimationConstants.EnemyConstants;
-import com.mycompany.app.classes.Helpers.CollisionChecker;
 import com.mycompany.app.classes.Helpers.Position;
 
 // enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
@@ -21,17 +20,14 @@ import com.mycompany.app.classes.Helpers.Position;
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES
     private Vector<Position> pathToPlayer;
-    private CollisionChecker collisionChecker;
 
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int enemyAction = EnemyConstants.DOWN;
     private int animationTick, animationIndex, animationSpeed = 35;
 
     // CONSTRUCTOR
-    public Enemy(Position position, CollisionChecker collisionChecker) {
-        // need to determine the players start position and specific sprite
+    public Enemy(Position position) {
         super(position);
-        this.collisionChecker = collisionChecker;
         loadAnimations();
         speed = 1;
 
@@ -52,7 +48,7 @@ public class Enemy extends MoveableEntity {
 
     // METHODS
     public void updateShortestPath() { // THIS WILL CHANGE
-        moving = false;
+        moving = true;
 
     }
 
