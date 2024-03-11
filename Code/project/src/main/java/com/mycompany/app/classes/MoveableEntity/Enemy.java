@@ -55,7 +55,7 @@ public class Enemy extends MoveableEntity {
     private void loadAnimations() {
         // Source of player sprites:
         // https://axulart.itch.io/small-8-direction-characters
-        InputStream is = getClass().getResourceAsStream("player_sprites.png");
+        InputStream is = getClass().getResourceAsStream("racoons.png");
 
         try {
             BufferedImage img = ImageIO.read(is);
