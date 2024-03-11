@@ -41,6 +41,9 @@ public class Game implements Runnable {
     int playerX = Game.screenWidth / 2 - Game.tileSize / 2;
     int playerY = Game.screenHeight / 2 - Game.tileSize / 2;
 
+    int enemyX = Game.screenWidth / 3 - Game.tileSize / 2;
+    int enemyY = Game.screenHeight / 3 - Game.tileSize / 2;
+
     public Game() {
         initClasses();
 
@@ -58,7 +61,7 @@ public class Game implements Runnable {
         tileManager = new TileManager();
         collisionChecker = new CollisionChecker(tileManager);
         player = new Player(new Position(playerX, playerY), collisionChecker);
-        enemy = new Enemy(new Position(playerX, playerY), collisionChecker);
+        enemy = new Enemy(new Position(enemyX, enemyY), collisionChecker);
     }
 
     public void startGameLoop() {
