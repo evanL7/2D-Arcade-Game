@@ -15,6 +15,8 @@ import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
 import com.mycompany.app.classes.Helpers.CollisionChecker;
 import com.mycompany.app.classes.Helpers.Position;
 
+import javafx.scene.shape.Rectangle;
+
 // enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
 // 64x57
 
@@ -24,13 +26,16 @@ public class Enemy extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     private int playerAction = PlayerConstants.UP; // CHANGE THIS TO ENEMY CONSTANT
+    private int animationTick, animationIndex, animationSpeed = 35;
 
     // CONSTRUCTOR
     public Enemy(Position position, CollisionChecker collisionChecker) {
         // need to determine the players start position and specific sprite
         super(position);
         this.collisionChecker = collisionChecker;
+        loadAnimations();
         speed = 1;
+
     }
 
     public void update() {
@@ -47,23 +52,22 @@ public class Enemy extends MoveableEntity {
     }
 
     // METHOD
-    public void updateShortestPath() {
+    public void updateShortestPath() { // THIS WILL CHANGE
+        moving = false;
 
     }
 
     // creates the Image array for the movement animations
     private void loadAnimations() {
-        // Source of player sprites:
-        // https://axulart.itch.io/small-8-direction-characters
         InputStream is = getClass().getResourceAsStream("racoons.png");
 
         try {
             BufferedImage img = ImageIO.read(is);
 
-            animations = new BufferedImage[4][3];
+            animations = new BufferedImage[3][4];
             for (int j = 0; j < animations.length; j++) {
                 for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 32, 24 + (i * 24), 16, 24);
+                    animations[j][i] = img.getSubimage(j * 64, i * 57, 64, 57);
                 }
             }
 
