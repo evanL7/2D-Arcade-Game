@@ -12,12 +12,14 @@ import com.mycompany.app.classes.Helpers.KeyboardInputs;
 public class GamePanel extends JPanel {
 
     private Game game;
+    private Camera camera;
     
     // new
     private long startTime;
 
     public GamePanel(Game game) {
         this.game = game;
+        this.camera = new Camera(game.getPlayer());
 
         // new
         this.startTime = System.currentTimeMillis();
@@ -31,7 +33,7 @@ public class GamePanel extends JPanel {
      * Updates the game state.
      */
     public void updateGame() {
-
+        
     }
 
     public void paintComponent(Graphics g) {
@@ -39,8 +41,9 @@ public class GamePanel extends JPanel {
 
         // new
         displayElapsedTime(g);
-        
+        camera.translate(g); //add
         game.render(g);
+        camera.reset(g); //add
     }
 
     private void displayElapsedTime(Graphics g) {

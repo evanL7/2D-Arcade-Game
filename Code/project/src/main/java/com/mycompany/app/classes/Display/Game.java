@@ -11,6 +11,8 @@ import com.mycompany.app.classes.StaticEntity.TileManager;
 
 public class Game implements Runnable {
 
+    private Camera camera; //add
+
     private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
@@ -44,6 +46,9 @@ public class Game implements Runnable {
         gameWindow = new GameWindow(gamePanel);  
         gamePanel.requestFocus();
 
+        // Create the Camera object with the player
+        camera = new Camera(player);
+
         startGameLoop();
     }
 
@@ -63,8 +68,19 @@ public class Game implements Runnable {
     }
 
     public void render(Graphics g) {
+       // Translate graphics object to adjust for camera position
+       camera.update();
+        camera.translate(g);
+
+        // Render game objects with adjusted coordinates
         tileManager.draw(g);
+        // Adjust player's position based on camera
+    int playerRenderX = player.getPosition().getX() - camera.getXOffset();
+    int playerRenderY = player.getPosition().getY() - camera.getYOffset();
         player.render(g);
+
+        // Reset graphics translation
+        camera.reset(g);
     }
 
     @Override
