@@ -11,11 +11,9 @@ import javax.imageio.ImageIO;
 
 import com.mycompany.app.classes.Display.Game;
 import com.mycompany.app.classes.Helpers.AnimationConstants;
-import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
+import com.mycompany.app.classes.Helpers.AnimationConstants.EnemyConstants;
 import com.mycompany.app.classes.Helpers.CollisionChecker;
 import com.mycompany.app.classes.Helpers.Position;
-
-import javafx.scene.shape.Rectangle;
 
 // enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
 // 64x57
@@ -25,7 +23,8 @@ public class Enemy extends MoveableEntity {
     private Vector<Position> pathToPlayer;
     private CollisionChecker collisionChecker;
 
-    private int playerAction = PlayerConstants.UP; // CHANGE THIS TO ENEMY CONSTANT
+    private BufferedImage[][] animations; // 2d image array of the images for player movements
+    private int enemyAction = EnemyConstants.DOWN;
     private int animationTick, animationIndex, animationSpeed = 35;
 
     // CONSTRUCTOR
@@ -46,12 +45,12 @@ public class Enemy extends MoveableEntity {
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72,
+        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize, 72,
                 null);
         g2.dispose();
     }
 
-    // METHOD
+    // METHODS
     public void updateShortestPath() { // THIS WILL CHANGE
         moving = false;
 
@@ -67,12 +66,13 @@ public class Enemy extends MoveableEntity {
             animations = new BufferedImage[3][4];
             for (int j = 0; j < animations.length; j++) {
                 for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 64, i * 57, 64, 57);
+                    animations[j][i] = img.getSubimage(j * 48, i * 48, 48, 48);
                 }
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Enemy did not successfully grab the sprite");
         } finally {
             try {
                 is.close();
@@ -88,7 +88,7 @@ public class Enemy extends MoveableEntity {
         if (moving && animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= AnimationConstants.SpriteAmount(playerAction)) {
+            if (animationIndex >= AnimationConstants.SpriteEnemyAmount(enemyAction)) {
                 animationIndex = 0;
             }
         }
