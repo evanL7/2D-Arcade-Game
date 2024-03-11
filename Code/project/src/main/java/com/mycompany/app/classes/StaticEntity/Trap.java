@@ -21,13 +21,12 @@ public class Trap extends StaticEntity {
      * Constructs a new Trap.
      *
      * @param position        The position of the trap.
-     * @param objectDespawns  Whether the trap despawns upon collision.
      * @param sprite          The sprite representing the trap.
      * @param damage          The amount of damage the trap inflicts.
      */
-    public Trap(Position position, boolean objectDespawns, Image sprite, float damage) {
+    public Trap(Position position, Image sprite, float damage) {
         // doesn't need despawnTimer as it would only despawn if collided with
-        super(position, objectDespawns, sprite);
+        super(position, sprite);
         this.damage = damage;
     }
 
