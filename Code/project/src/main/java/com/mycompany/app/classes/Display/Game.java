@@ -61,7 +61,7 @@ public class Game implements Runnable {
         tileManager = new TileManager();
         collisionChecker = new CollisionChecker(tileManager);
         player = new Player(new Position(playerX, playerY), collisionChecker);
-        enemy = new Enemy(new Position(enemyX, enemyY), collisionChecker);
+        enemy = new Enemy(new Position(enemyX, enemyY));
     }
 
     public void startGameLoop() {
