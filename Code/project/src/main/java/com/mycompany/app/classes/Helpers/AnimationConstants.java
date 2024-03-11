@@ -1,5 +1,7 @@
 package com.mycompany.app.classes.Helpers;
 
+import com.mycompany.app.classes.MoveableEntity.Enemy;
+
 // AnimationConstants keeps all sprite image array constants together
 public class AnimationConstants {
     public static class PlayerConstants {
@@ -24,6 +26,22 @@ public class AnimationConstants {
     }
 
     public static class EnemyConstants {
+        public static final int DOWN = 0;
+        public static final int LEFT = 1;
+        public static final int RIGHT = 2;
+        public static final int UP = 3;
 
+    }
+
+    public static int SpriteEnemyAmount(int playerAction) {
+        switch (playerAction) {
+            case EnemyConstants.UP:
+            case EnemyConstants.DOWN:
+            case EnemyConstants.LEFT:
+            case EnemyConstants.RIGHT:
+                return 3;
+            default:
+                return 1;
+        }
     }
 }
