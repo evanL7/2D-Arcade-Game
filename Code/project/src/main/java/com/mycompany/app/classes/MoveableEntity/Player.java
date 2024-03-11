@@ -18,9 +18,9 @@ import com.mycompany.app.classes.Helpers.Position;
 public class Player extends MoveableEntity {
 
     // ATTRIBUTES
-
     private int playerAction = PlayerConstants.UP;
     private boolean up, left, down, right;
+    private int animationTick, animationIndex, animationSpeed = 35;
 
     private int regularRewardsCollected;
 
