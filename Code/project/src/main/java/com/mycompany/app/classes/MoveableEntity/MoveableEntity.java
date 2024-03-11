@@ -10,7 +10,6 @@ public abstract class MoveableEntity {
     protected Image sprite;
     public Position position;
     public int speed;
-    protected int animationTick, animationIndex, animationSpeed = 35;
     protected BufferedImage[][] animations; // 2d image array of the images for player movements
     protected boolean moving = false;
 
