@@ -82,7 +82,7 @@ public class Player extends MoveableEntity {
     private void loadAnimations() {
         // Source of player sprites:
         // https://axulart.itch.io/small-8-direction-characters
-        InputStream is = getClass().getResourceAsStream("player_sprites.png");
+        InputStream is = getClass().getResourceAsStream("/assets/player_sprites.png");
 
         try {
             BufferedImage img = ImageIO.read(is);

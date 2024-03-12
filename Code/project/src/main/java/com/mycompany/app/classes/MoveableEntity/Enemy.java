@@ -51,7 +51,7 @@ public class Enemy extends MoveableEntity {
 
     // creates the Image array for the movement animations
     private void loadAnimations() {
-        InputStream is = getClass().getResourceAsStream("racoons.png");
+        InputStream is = getClass().getResourceAsStream("/assets/racoons.png");
 
         try {
             BufferedImage img = ImageIO.read(is);
