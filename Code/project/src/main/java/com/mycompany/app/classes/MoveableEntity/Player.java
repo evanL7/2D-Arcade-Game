@@ -35,7 +35,7 @@ public class Player extends MoveableEntity {
         loadAnimations();
         speed = 1;
 
-        solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), (int) (Game.tileSize * 0.75));
+        solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
     }
 
     public void update() {
