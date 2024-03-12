@@ -38,13 +38,12 @@ public class Reward extends StaticEntity {
      * 
      * @param position        The position of the reward.
      * @param despawnTimer    The time, in milliseconds, after which the Bonus Reward will despawn.
-     * @param sprite          The sprite representing the reward.
      * @param rewardAmount    The amount of the reward.
      * @param rewardsToCollect The number of rewards to collect.
      */
-    public Reward(Position position, int despawnTimer, Image sprite, float rewardAmount, int rewardsToCollect)
+    public Reward(Position position, int despawnTimer, float rewardAmount, int rewardsToCollect)
     {
-        super(position, despawnTimer, sprite);
+        super(position, despawnTimer);
         this.rewardAmount = rewardAmount;
         this.rewardsToCollect = rewardsToCollect;
         
@@ -56,13 +55,12 @@ public class Reward extends StaticEntity {
      * Constructs a new Regular Reward.
      * 
      * @param position        The position of the reward.
-     * @param sprite          The sprite representing the reward.
      * @param rewardAmount    The amount of the reward.
      * @param rewardsToCollect The number of rewards to collect.
      */
-    public Reward(Position position, Image sprite, float rewardAmount, int rewardsToCollect)
+    public Reward(Position position, float rewardAmount, int rewardsToCollect)
     {
-        super(position, sprite);
+        super(position);
         this.rewardAmount = rewardAmount;
         this.rewardsToCollect = rewardsToCollect;
         
