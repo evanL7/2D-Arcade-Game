@@ -51,7 +51,7 @@ public class KeyboardInputs implements KeyListener {
         gamePanel.getGame().getPlayer().setRight(right);
 
         // Determine the primary direction based on the last key pressed
-        int action = PlayerConstants.DOWN; // Default action
+        int action = gamePanel.getGame().getPlayer().getAction(); // Default action
         if (up) {
             action = PlayerConstants.UP;
         } else if (left) {
