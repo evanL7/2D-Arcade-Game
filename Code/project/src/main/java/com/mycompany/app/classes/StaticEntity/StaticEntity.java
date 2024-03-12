@@ -19,15 +19,12 @@ public abstract class StaticEntity
 
     /** The position of the static entity in the game world. */
     protected Position position;
-
-    /** Determines whether the static entity despawns or not. */
-    protected boolean objectDespawns;
     
     /** The despawn timer for the entity, measured in milliseconds. A value of -1 indicates despawning only on collision. */
     protected int despawnTimer;
 
     /** The sprite representing the static entity. */
-    public Image sprite;
+    protected Image sprite;
     
     //protected Timer despawnTimer;
 
@@ -36,15 +33,12 @@ public abstract class StaticEntity
      *
      * @param position        The position of the static entity.
      * @param despawnTimer    The time, in milliseconds, after which the entity will despawn. Use -1 for despawning only on collision.
-     * @param sprite          The sprite representing the static entity.
      */
-    public StaticEntity(Position position, int despawnTimer, Image sprite)
+    public StaticEntity(Position position, int despawnTimer)
     {
         // Constructor for StaticEntities that rely on time like bonus rewards
         this.position = position;
-        objectDespawns = true;
         this.despawnTimer = despawnTimer;
-        this.sprite = sprite;
     }
 
     /**
@@ -53,12 +47,10 @@ public abstract class StaticEntity
      * @param position        The position of the static entity.
      * @param sprite          The sprite representing the static entity.
      */
-    public StaticEntity(Position position, Image sprite)
+    public StaticEntity(Position position)
     {
         // constructor for StaticEntities that don't despawn on a timer like traps and Regular Rewards
         this.position = position;
-        objectDespawns = true;
-        this.sprite = sprite;
         
         // a value of -1 represents how the entity will only despawn if collided with
         despawnTimer = -1;
