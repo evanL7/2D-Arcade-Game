@@ -21,12 +21,11 @@ public class Trap extends StaticEntity {
      * Constructs a new Trap.
      *
      * @param position        The position of the trap.
-     * @param sprite          The sprite representing the trap.
      * @param damage          The amount of damage the trap inflicts.
      */
-    public Trap(Position position, Image sprite, float damage) {
+    public Trap(Position position, float damage) {
         // doesn't need despawnTimer as it would only despawn if collided with
-        super(position, sprite);
+        super(position);
         this.damage = damage;
     }
 
