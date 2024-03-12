@@ -89,6 +89,7 @@ public class Game implements Runnable {
 
         // Reset graphics translation
         camera.reset(g);
+        g.dispose();
     }
 
     @Override
