@@ -137,6 +137,10 @@ public class Player extends MoveableEntity {
         this.moving = true;
     }
 
+    public int getAction() {
+        return playerAction;
+    }
+
     public int getRegularRewardsCollected() {
         return regularRewardsCollected;
     }
