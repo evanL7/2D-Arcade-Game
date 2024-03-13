@@ -92,6 +92,18 @@ public class TileManager {
             tile[13].image = ImageIO.read(getClass().getResourceAsStream("/assets/tileRoomWallTopRightCorner.png"));
             tile[13].collision = true;
 
+            tile[14] = new Tile();
+            tile[14].image = ImageIO.read(getClass().getResourceAsStream("/assets/tileWallVert.png"));
+            tile[14].collision = true;
+
+            tile[15] = new Tile();
+            tile[15].image = ImageIO.read(getClass().getResourceAsStream("/assets/tileWallVertFrontTop.png"));
+            tile[15].collision = true;
+
+            tile[16] = new Tile();
+            tile[16].image = ImageIO.read(getClass().getResourceAsStream("/assets/tileWallVertFrontBot.png"));
+            tile[16].collision = true;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
