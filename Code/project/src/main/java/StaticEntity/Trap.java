@@ -56,7 +56,7 @@ public class Trap extends StaticEntity {
     // ANIMATION METHODS FOR TRAP
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[animationIndex][0], position.getX(), position.getY(), Game.tileSize, 72,
+        g2.drawImage(animations[animationIndex][0], position.getX(), position.getY(), Game.tileSize + 2, 50,
                 null);
     }
 

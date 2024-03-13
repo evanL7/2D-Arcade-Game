@@ -35,6 +35,16 @@ public class Enemy extends MoveableEntity {
 
     }
 
+    public void updateShortestPath() { // THIS WILL CHANGE
+        moving = true;
+
+    }
+
+    public void AStar() { // using A* algorithm for enemy to player calculations
+
+    }
+
+    // ANIMATION METHODS
     public void update() {
         updateShortestPath();
         updateAnimationTick();
@@ -42,14 +52,8 @@ public class Enemy extends MoveableEntity {
 
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize, 72,
+        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize + 2, 72,
                 null);
-    }
-
-    // METHODS
-    public void updateShortestPath() { // THIS WILL CHANGE
-        moving = true;
-
     }
 
     // creates the Image array for the movement animations
