@@ -27,7 +27,7 @@ public class Trap extends StaticEntity {
     private float damage;
 
     private BufferedImage[][] animations; // 2d image array of the images for trap movements
-    private int animationTick, animationIndex, animationSpeed = 100;
+    private int animationTick, animationIndex, animationSpeed = 150;
 
     /**
      * Constructs a new Trap.

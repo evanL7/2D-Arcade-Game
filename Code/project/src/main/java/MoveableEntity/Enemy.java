@@ -25,7 +25,7 @@ public class Enemy extends MoveableEntity {
 
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int enemyAction = EnemyConstants.DOWN;
-    private int animationTick, animationIndex, animationSpeed = 45;
+    private int animationTick, animationIndex, animationSpeed = 60;
 
     // CONSTRUCTOR
     public Enemy(Position position) {
