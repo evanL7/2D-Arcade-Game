@@ -15,7 +15,9 @@ import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
 
 // enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
-// 64x57
+// 48x48
+
+//181x181
 
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES
@@ -23,7 +25,7 @@ public class Enemy extends MoveableEntity {
 
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int enemyAction = EnemyConstants.DOWN;
-    private int animationTick, animationIndex, animationSpeed = 35;
+    private int animationTick, animationIndex, animationSpeed = 45;
 
     // CONSTRUCTOR
     public Enemy(Position position) {
@@ -40,7 +42,8 @@ public class Enemy extends MoveableEntity {
 
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize, 72, null);
+        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize, 72,
+                null);
     }
 
     // METHODS
@@ -51,15 +54,15 @@ public class Enemy extends MoveableEntity {
 
     // creates the Image array for the movement animations
     private void loadAnimations() {
-        InputStream is = getClass().getResourceAsStream("/assets/racoons.png");
+        InputStream is = getClass().getResourceAsStream("/assets/raccoons.png");
 
         try {
             BufferedImage img = ImageIO.read(is);
 
-            animations = new BufferedImage[3][4];
+            animations = new BufferedImage[4][4];
             for (int j = 0; j < animations.length; j++) {
                 for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 48, i * 48, 48, 48);
+                    animations[j][i] = img.getSubimage(j * 181, i * 181, 181, 181);
                 }
             }
 
