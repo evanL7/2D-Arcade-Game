@@ -8,12 +8,10 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import Display.Game;
-import Helpers.AnimationConstants;
-import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.Position;
 
 // trap sprite from https://bdragon1727.itch.io/free-trap-platformer
-// unsure of dimensions
+// width:32, height: 22
 
 /**
  * Represents a trap in the game.
@@ -28,8 +26,8 @@ public class Trap extends StaticEntity {
     /** The amount of damage the trap inflicts. */
     private float damage;
 
-    private BufferedImage[][] animations; // 2d image array of the images for player movements
-    private int animationTick, animationIndex, animationSpeed = 35;
+    private BufferedImage[][] animations; // 2d image array of the images for trap movements
+    private int animationTick, animationIndex, animationSpeed = 100;
 
     /**
      * Constructs a new Trap.
@@ -58,8 +56,12 @@ public class Trap extends StaticEntity {
     // ANIMATION METHODS FOR TRAP
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[animationIndex][1], position.getX(), position.getY(), Game.tileSize, 72,
+        g2.drawImage(animations[animationIndex][0], position.getX(), position.getY(), Game.tileSize, 72,
                 null);
+    }
+
+    public void update() {
+        updateAnimationTick();
     }
 
     // creates the Image array for the movement animations
@@ -69,10 +71,10 @@ public class Trap extends StaticEntity {
         try {
             BufferedImage img = ImageIO.read(is);
 
-            animations = new BufferedImage[1][2];
+            animations = new BufferedImage[2][1];
             for (int j = 0; j < animations.length; j++) {
                 for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 48, i * 48, 48, 48);
+                    animations[j][i] = img.getSubimage(j * 32, i * 22, 32, 22);
                 }
             }
 
@@ -94,7 +96,7 @@ public class Trap extends StaticEntity {
         if (animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= 1) {
+            if (animationIndex >= 2) {
                 animationIndex = 0;
             }
         }
