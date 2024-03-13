@@ -47,7 +47,7 @@ public class Game implements Runnable {
     int enemyY = Game.screenHeight / 3 - Game.tileSize / 2;
 
     int trapX = Game.screenWidth / 2 - Game.tileSize / 2;
-    int trapY = Game.screenHeight / 2 - Game.tileSize / 2;
+    int trapY = Game.screenHeight / 3 - Game.tileSize / 2;
 
     public Game() {
         initClasses();
@@ -67,7 +67,7 @@ public class Game implements Runnable {
         collisionChecker = new CollisionChecker(tileManager);
         player = new Player(new Position(playerX, playerY), collisionChecker);
         enemy = new Enemy(new Position(enemyX, enemyY));
-        // trap = new Trap(new Position(trapX, trapY), 1);
+        trap = new Trap(new Position(trapX, trapY), 1);
     }
 
     public void startGameLoop() {
@@ -78,6 +78,7 @@ public class Game implements Runnable {
     private void update() {
         player.update();
         enemy.update();
+        trap.update();
     }
 
     public void render(Graphics g) {
@@ -92,7 +93,7 @@ public class Game implements Runnable {
         int playerRenderY = player.getPosition().getY() - camera.getYOffset();
         player.render(g);
         enemy.render(g);
-        // trap.render(g);
+        trap.render(g);
 
         // Reset graphics translation
         camera.reset(g);
