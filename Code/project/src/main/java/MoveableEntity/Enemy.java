@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.MoveableEntity;
+package MoveableEntity;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,10 +9,10 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
-import com.mycompany.app.classes.Display.Game;
-import com.mycompany.app.classes.Helpers.AnimationConstants;
-import com.mycompany.app.classes.Helpers.AnimationConstants.EnemyConstants;
-import com.mycompany.app.classes.Helpers.Position;
+import Display.Game;
+import Helpers.AnimationConstants;
+import Helpers.Position;
+import Helpers.AnimationConstants.EnemyConstants;
 
 // enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
 // 64x57

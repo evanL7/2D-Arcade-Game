@@ -11,12 +11,12 @@
 // }
 
 // Main.java
-package com.mycompany.app.classes;
 
-import com.mycompany.app.classes.Display.GameMenu;
-import com.mycompany.app.classes.Display.GameWindow;
 
 import javax.swing.*;
+
+import Display.GameMenu;
+import Display.GameWindow;
 
 public class Main {
     public static void main(String[] args) {

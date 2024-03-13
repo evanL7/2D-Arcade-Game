@@ -1,6 +1,6 @@
-package com.mycompany.app.classes.Helpers;
+package Helpers;
 
-import com.mycompany.app.classes.MoveableEntity.Enemy;
+import MoveableEntity.Enemy;
 
 // AnimationConstants keeps all sprite image array constants together
 public class AnimationConstants {

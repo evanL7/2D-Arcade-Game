@@ -1,7 +1,8 @@
-package com.mycompany.app.classes.StaticEntity;
+package StaticEntity;
 
 import java.awt.*;
-import com.mycompany.app.classes.Helpers.Position;
+
+import Helpers.Position;
 
 
 //import java.util.Timer;

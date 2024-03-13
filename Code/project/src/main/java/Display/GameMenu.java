@@ -1,5 +1,5 @@
 // GameMenu.java
-package com.mycompany.app.classes.Display;
+package Display;
 
 public class GameMenu {
 

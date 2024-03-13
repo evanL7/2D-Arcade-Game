@@ -1,8 +1,9 @@
-package com.mycompany.app.classes.StaticEntity;
+package StaticEntity;
 
-import com.mycompany.app.classes.Helpers.RewardType;
 import java.awt.*;
-import com.mycompany.app.classes.Helpers.Position;
+
+import Helpers.Position;
+import Helpers.RewardType;
 
 
 // Regular Reward sprite is 16x16

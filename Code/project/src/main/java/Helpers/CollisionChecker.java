@@ -1,9 +1,9 @@
-package com.mycompany.app.classes.Helpers;
+package Helpers;
 
-import com.mycompany.app.classes.Display.Game;
-import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
-import com.mycompany.app.classes.MoveableEntity.MoveableEntity;
-import com.mycompany.app.classes.StaticEntity.TileManager;
+import Display.Game;
+import Helpers.AnimationConstants.PlayerConstants;
+import MoveableEntity.MoveableEntity;
+import StaticEntity.TileManager;
 
 /**
  * The CollisionChecker class is responsible for checking collisions between

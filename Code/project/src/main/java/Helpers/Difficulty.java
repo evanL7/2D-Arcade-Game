@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.Helpers;
+package Helpers;
 
 public enum Difficulty {
     Easy,

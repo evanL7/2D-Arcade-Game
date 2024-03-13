@@ -1,4 +1,5 @@
-package com.mycompany.app.classes;
+package Helpers;
+
 
 public class BoardData {
     private int width;

@@ -1,7 +1,8 @@
-package com.mycompany.app.classes.StaticEntity;
+package StaticEntity;
 
 import java.awt.*;
-import com.mycompany.app.classes.Helpers.Position;
+
+import Helpers.Position;
 
 // trap sprite from https://bdragon1727.itch.io/free-trap-platformer
 // unsure of dimensions

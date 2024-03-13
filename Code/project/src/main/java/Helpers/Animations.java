@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.Helpers;
+package Helpers;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import com.mycompany.app.classes.Helpers.AnimationConstants.*;
+import Helpers.AnimationConstants.*;
 
 // adds animations for enities
 public abstract class Animations {

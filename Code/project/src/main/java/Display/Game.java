@@ -1,14 +1,14 @@
-package com.mycompany.app.classes.Display;
+package Display;
 
 import java.awt.Graphics;
 import java.awt.font.GraphicAttribute;
 
-import com.mycompany.app.classes.Helpers.CollisionChecker;
-import com.mycompany.app.classes.Helpers.Position;
-import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
-import com.mycompany.app.classes.MoveableEntity.Enemy;
-import com.mycompany.app.classes.MoveableEntity.Player;
-import com.mycompany.app.classes.StaticEntity.TileManager;
+import Helpers.CollisionChecker;
+import Helpers.Position;
+import Helpers.AnimationConstants.PlayerConstants;
+import MoveableEntity.Enemy;
+import MoveableEntity.Player;
+import StaticEntity.TileManager;
 
 public class Game implements Runnable {
 

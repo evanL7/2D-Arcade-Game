@@ -1,11 +1,11 @@
-package com.mycompany.app.classes.Helpers;
+package Helpers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 
-import com.mycompany.app.classes.Display.GamePanel;
-import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
+import Display.GamePanel;
+import Helpers.AnimationConstants.PlayerConstants;
 
 public class KeyboardInputs implements KeyListener {
 

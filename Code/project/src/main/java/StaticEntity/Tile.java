@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.StaticEntity;
+package StaticEntity;
 
 import java.awt.image.BufferedImage;
 

@@ -1,8 +1,8 @@
-package com.mycompany.app.classes.Display;
+package Display;
 
 import java.awt.Graphics;
 
-import com.mycompany.app.classes.MoveableEntity.Player;
+import MoveableEntity.Player;
 public class Camera {
     private int xOffset, yOffset;
     private Player player;

@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.Display;
+package Display;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;

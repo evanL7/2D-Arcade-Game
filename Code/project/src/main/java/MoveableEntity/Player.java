@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.MoveableEntity;
+package MoveableEntity;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,11 +9,11 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import com.mycompany.app.classes.Display.Game;
-import com.mycompany.app.classes.Helpers.AnimationConstants;
-import com.mycompany.app.classes.Helpers.CollisionChecker;
-import com.mycompany.app.classes.Helpers.AnimationConstants.PlayerConstants;
-import com.mycompany.app.classes.Helpers.Position;
+import Display.Game;
+import Helpers.AnimationConstants;
+import Helpers.CollisionChecker;
+import Helpers.Position;
+import Helpers.AnimationConstants.PlayerConstants;
 
 public class Player extends MoveableEntity {
 

@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.Display;
+package Display;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import java.awt.Font;
 
 import javax.swing.JPanel;
 
-import com.mycompany.app.classes.Helpers.KeyboardInputs;
+import Helpers.KeyboardInputs;
 
 public class GamePanel extends JPanel {
 

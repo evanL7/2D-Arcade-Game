@@ -1,4 +1,4 @@
-package com.mycompany.app.classes.StaticEntity;
+package StaticEntity;
 
 import java.awt.Graphics;
 import java.io.BufferedReader;
@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
-import com.mycompany.app.classes.BoardData;
-import com.mycompany.app.classes.Display.Game;
+import Display.Game;
+import Helpers.BoardData;
 
 /**
  * The TileManager class manages the tiles used in the game.
