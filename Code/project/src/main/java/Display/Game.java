@@ -9,6 +9,7 @@ import Helpers.AnimationConstants.PlayerConstants;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import StaticEntity.TileManager;
+import StaticEntity.Trap;
 
 public class Game implements Runnable {
 
@@ -37,12 +38,16 @@ public class Game implements Runnable {
     public CollisionChecker collisionChecker;
     private Player player;
     private Enemy enemy;
+    private Trap trap;
 
     int playerX = Game.screenWidth / 2 - Game.tileSize / 2;
     int playerY = Game.screenHeight / 2 - Game.tileSize / 2;
 
     int enemyX = Game.screenWidth / 3 - Game.tileSize / 2;
     int enemyY = Game.screenHeight / 3 - Game.tileSize / 2;
+
+    int trapX = Game.screenWidth / 2 - Game.tileSize / 2;
+    int trapY = Game.screenHeight / 2 - Game.tileSize / 2;
 
     public Game() {
         initClasses();
@@ -62,6 +67,7 @@ public class Game implements Runnable {
         collisionChecker = new CollisionChecker(tileManager);
         player = new Player(new Position(playerX, playerY), collisionChecker);
         enemy = new Enemy(new Position(enemyX, enemyY));
+        // trap = new Trap(new Position(trapX, trapY), 1);
     }
 
     public void startGameLoop() {
@@ -86,6 +92,7 @@ public class Game implements Runnable {
         int playerRenderY = player.getPosition().getY() - camera.getYOffset();
         player.render(g);
         enemy.render(g);
+        // trap.render(g);
 
         // Reset graphics translation
         camera.reset(g);
