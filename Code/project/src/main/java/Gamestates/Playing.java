@@ -19,8 +19,11 @@ import StaticEntity.Trap;
 public class Playing extends State implements Statemethods {
 
     private Camera camera; // add
+
     private TileManager tileManager;
     public CollisionChecker collisionChecker;
+    private HashSet<Integer> keysPressed;
+
     private Player player;
     private Enemy enemy;
     private Trap trap;
@@ -42,8 +45,6 @@ public class Playing extends State implements Statemethods {
     int bonusRX = Game.screenWidth / 2 - Game.tileSize / 3; // add
     int bonusRY = Game.screenHeight / 4 - Game.tileSize / 5; // add
 
-    private HashSet<Integer> keysPressed;
-
     public Playing(Game game) {
         super(game);
         initClasses();
@@ -53,6 +54,7 @@ public class Playing extends State implements Statemethods {
         keysPressed = new HashSet<>();
         tileManager = new TileManager();
         collisionChecker = new CollisionChecker(tileManager);
+
         player = new Player(new Position(playerX, playerY), collisionChecker);
         enemy = new Enemy(new Position(enemyX, enemyY));
         trap = new Trap(new Position(trapX, trapY), 1);
@@ -102,7 +104,6 @@ public class Playing extends State implements Statemethods {
         // Reset graphics translation
         camera.reset(g);
         g.dispose();
-
     }
 
     @Override
@@ -124,14 +125,17 @@ public class Playing extends State implements Statemethods {
     @Override
     public void keyPressed(KeyEvent e) {        
         int keyCode = e.getKeyCode();
-        if (!keysPressed.contains(keyCode)) {
-
-            keysPressed.add(keyCode);
-            handleKeys();
-        }
-        if (keyCode == KeyEvent.VK_ESCAPE) {
-            Gamestate.state = Gamestate.MENU;
-        }
+        switch (keyCode) {
+            case KeyEvent.VK_ESCAPE:
+                Gamestate.state = Gamestate.MENU;
+                break;
+            default:
+                if (!keysPressed.contains(keyCode)) {
+                    keysPressed.add(keyCode);
+                    handleKeys();
+                }
+                break;
+        }        
     }
 
     @Override
