@@ -10,22 +10,21 @@ import Display.Game;
 import Helpers.Position;
 import Helpers.RewardType;
 
-
 // Regular Reward sprite is 16x16
 // I couldn't find any free sprites so I recreated 1
-
 
 // Both bonus reward sprites have dimensions 16x16
 // Extra sprite just in case the first bonus reward sprite doesn't fit the game's art style
 // sprite taken from https://elthen.itch.io/2d-pixel-art-dungeon-collectables
 
-
-
 /**
  * Represents a reward entity in the game.
  * 
- * <p>Rewards are static entities that players can collect in the game. There are two types of rewards:
- * Bonus Rewards, which despawn after a certain time, and Regular Rewards, which do not have a timer-based despawn mechanism.
+ * <p>
+ * Rewards are static entities that players can collect in the game. There are
+ * two types of rewards:
+ * Bonus Rewards, which despawn after a certain time, and Regular Rewards, which
+ * do not have a timer-based despawn mechanism.
  * They will both despawn after a player collects them.
  */
 public class Reward extends StaticEntity {
@@ -44,18 +43,19 @@ public class Reward extends StaticEntity {
     /**
      * Constructs a new Bonus Reward.
      * 
-     * @param position        The position of the reward.
-     * @param despawnTimer    The time, in milliseconds, after which the Bonus Reward will despawn.
-     * @param rewardAmount    The amount of the reward.
+     * @param position         The position of the reward.
+     * @param despawnTimer     The time, in milliseconds, after which the Bonus
+     *                         Reward will despawn.
+     * @param rewardAmount     The amount of the reward.
      * @param rewardsToCollect The number of rewards to collect.
      */
-    public Reward(Position position, int despawnTimer, float rewardAmount, int rewardsToCollect)
-    {
+    public Reward(Position position, int despawnTimer, float rewardAmount, int rewardsToCollect) {
         super(position, despawnTimer);
         this.rewardAmount = rewardAmount;
         this.rewardsToCollect = rewardsToCollect;
-        
-        // since the only reward that also relies on despawnTimer to despawn are Bonus Rewards
+
+        // since the only reward that also relies on despawnTimer to despawn are Bonus
+        // Rewards
         rewardType = RewardType.BonusReward;
         loadRewardImage(); // add
     }
@@ -63,16 +63,15 @@ public class Reward extends StaticEntity {
     /**
      * Constructs a new Regular Reward.
      * 
-     * @param position        The position of the reward.
-     * @param rewardAmount    The amount of the reward.
+     * @param position         The position of the reward.
+     * @param rewardAmount     The amount of the reward.
      * @param rewardsToCollect The number of rewards to collect.
      */
-    public Reward(Position position, float rewardAmount, int rewardsToCollect)
-    {
+    public Reward(Position position, float rewardAmount, int rewardsToCollect) {
         super(position);
         this.rewardAmount = rewardAmount;
         this.rewardsToCollect = rewardsToCollect;
-        
+
         // since regular rewards don't rely on despawnTimer
         rewardType = RewardType.RegularReward;
         loadRewardImage(); // add
@@ -83,8 +82,7 @@ public class Reward extends StaticEntity {
      * 
      * @return The amount of the reward.
      */
-    public float getRewardAmount() 
-    {
+    public float getRewardAmount() {
         return rewardAmount;
     }
 
@@ -93,8 +91,7 @@ public class Reward extends StaticEntity {
      * 
      * @param rewardAmount The new amount of the reward.
      */
-    public void setRewardAmount(float rewardAmount) 
-    {
+    public void setRewardAmount(float rewardAmount) {
         this.rewardAmount = rewardAmount;
     }
 
@@ -103,8 +100,7 @@ public class Reward extends StaticEntity {
      * 
      * @return The number of rewards to collect.
      */
-    public int getRewardsToCollect() 
-    {
+    public int getRewardsToCollect() {
         return rewardsToCollect;
     }
 
@@ -113,20 +109,18 @@ public class Reward extends StaticEntity {
      * 
      * @param rewardsToCollect The new number of rewards to collect.
      */
-    public void setRewardsToCollect(int rewardsToCollect) 
-    {
+    public void setRewardsToCollect(int rewardsToCollect) {
         this.rewardsToCollect = rewardsToCollect;
     }
 
-    public void render(Graphics g)  // add
+    public void render(Graphics g) // add
     {
         g.drawImage(rewardImage, position.getX(), position.getY(), Game.tileSize + 2, 30, null);
     }
 
     private void loadRewardImage() // add
     {
-        if (rewardType == RewardType.RegularReward)
-        {
+        if (rewardType == RewardType.RegularReward) {
             try {
                 InputStream is = getClass().getResourceAsStream("/assets/Grad_Cap.png");
                 rewardImage = ImageIO.read(is);
@@ -136,8 +130,7 @@ public class Reward extends StaticEntity {
             }
         }
         // For Bonus Rewards
-        else
-        {
+        else {
             try {
                 InputStream is = getClass().getResourceAsStream("/assets/BonusA.png");
                 rewardImage = ImageIO.read(is);
@@ -155,8 +148,7 @@ public class Reward extends StaticEntity {
 
     public void update() // add
     {
-        if (rewardType == RewardType.BonusReward && despawnTimer > 0)
-        {
+        if (rewardType == RewardType.BonusReward && despawnTimer > 0) {
             despawnTimer--;
         }
     }
