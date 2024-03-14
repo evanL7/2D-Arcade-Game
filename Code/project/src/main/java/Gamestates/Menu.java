@@ -1,6 +1,8 @@
 package Gamestates;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -19,9 +21,19 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.black);
-        g.drawString("PRESS ENTER TO START", Game.screenWidth / 2 - 90, 200);
-        g.drawString("PRESS ESC TO RETURN BACK", Game.screenWidth / 2 - 105, 300);
+        Font boldFont = new Font("Arial", Font.BOLD, 20);
+        g.setFont(boldFont);
+    
+        FontMetrics fm = g.getFontMetrics();
+        int x = (Game.screenWidth - fm.stringWidth("PRESS ENTER TO START")) / 2;
+        int y = (Game.screenHeight - fm.getHeight()) / 2 + fm.getAscent() - 40;
+    
+        g.setColor(Color.BLACK);
+        g.drawString("PRESS ENTER TO START", x, y);
+    
+        y += fm.getHeight();  // Move down for the second line
+        x = (Game.screenWidth - fm.stringWidth("PRESS ESC TO RETURN BACK")) / 2;
+        g.drawString("PRESS ESC TO RETURN BACK", x, y);
     }
 
     @Override
