@@ -10,6 +10,7 @@ import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import StaticEntity.TileManager;
 import StaticEntity.Trap;
+import StaticEntity.Reward; // add
 
 public class Game implements Runnable {
 
@@ -39,6 +40,7 @@ public class Game implements Runnable {
     private Player player;
     private Enemy enemy;
     private Trap trap;
+    private Reward reward; // add
 
     int playerX = Game.screenWidth / 2 - Game.tileSize / 2;
     int playerY = Game.screenHeight / 2 - Game.tileSize / 2;
@@ -48,6 +50,9 @@ public class Game implements Runnable {
 
     int trapX = Game.screenWidth / 2 - Game.tileSize / 2;
     int trapY = Game.screenHeight / 3 - Game.tileSize / 2;
+
+    int rewardX = Game.screenWidth / 4 - Game.tileSize / 4; // add
+    int rewardY = Game.screenHeight / 4 - Game.tileSize / 4; // add
 
     public Game() {
         initClasses();
@@ -68,6 +73,7 @@ public class Game implements Runnable {
         player = new Player(new Position(playerX, playerY), collisionChecker);
         enemy = new Enemy(new Position(enemyX, enemyY));
         trap = new Trap(new Position(trapX, trapY), 1);
+        reward = new Reward(new Position(rewardX, rewardY), 10, 1); // add
     }
 
     public void startGameLoop() {
@@ -94,6 +100,7 @@ public class Game implements Runnable {
         player.render(g);
         enemy.render(g);
         trap.render(g);
+        reward.render(g); // add
 
         // Reset graphics translation
         camera.reset(g);
