@@ -78,7 +78,9 @@ public class Game implements Runnable {
         enemy = new Enemy(new Position(enemyX, enemyY));
         trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1); // add
-        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 30, 10, 1); // add
+        
+        // this takes approx 25 seconds to despawn from the screen
+        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 10000, 10, 1); // add
     }
 
     public void startGameLoop() {
@@ -90,6 +92,16 @@ public class Game implements Runnable {
         player.update();
         enemy.update();
         trap.update();
+        rewardReg.update();
+        if (rewardBonus != null)
+        {
+            rewardBonus.update();
+            if (rewardBonus.getDespawnTimer() <= 0)
+            {
+                rewardBonus = null;
+            }
+        }
+        
     }
 
     public void render(Graphics g) {
@@ -106,7 +118,10 @@ public class Game implements Runnable {
         enemy.render(g);
         trap.render(g);
         rewardReg.render(g); // add
-        rewardBonus.render(g); // add
+        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) // add
+        {
+            rewardBonus.render(g); // add
+        }
 
         // Reset graphics translation
         camera.reset(g);

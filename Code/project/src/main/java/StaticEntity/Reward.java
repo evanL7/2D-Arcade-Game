@@ -15,7 +15,8 @@ import Helpers.RewardType;
 // I couldn't find any free sprites so I recreated 1
 
 
-// Bonus Reward sprite for the scroll/cheatsheet is 16x16
+// Both bonus reward sprites have dimensions 16x16
+// Extra sprite just in case the first bonus reward sprite doesn't fit the game's art style
 // sprite taken from https://elthen.itch.io/2d-pixel-art-dungeon-collectables
 
 
@@ -124,7 +125,7 @@ public class Reward extends StaticEntity {
 
     private void loadRewardImage() // add
     {
-        if (this.rewardType == RewardType.RegularReward)
+        if (rewardType == RewardType.RegularReward)
         {
             try {
                 InputStream is = getClass().getResourceAsStream("/assets/Grad_Cap.png");
@@ -144,6 +145,19 @@ public class Reward extends StaticEntity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public int getDespawnTimer() // add
+    {
+        return despawnTimer;
+    }
+
+    public void update() // add
+    {
+        if (rewardType == RewardType.BonusReward && despawnTimer > 0)
+        {
+            despawnTimer--;
         }
     }
 
