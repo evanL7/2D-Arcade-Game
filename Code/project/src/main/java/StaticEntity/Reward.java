@@ -16,7 +16,6 @@ import Helpers.RewardType;
 
 
 // Bonus Reward sprite for the scroll/cheatsheet is 16x16
-// the gold and bombs are 32x32 but we won't use them
 // sprite taken from https://elthen.itch.io/2d-pixel-art-dungeon-collectables
 
 
@@ -57,6 +56,7 @@ public class Reward extends StaticEntity {
         
         // since the only reward that also relies on despawnTimer to despawn are Bonus Rewards
         rewardType = RewardType.BonusReward;
+        loadRewardImage(); // add
     }
 
     /**
@@ -124,12 +124,26 @@ public class Reward extends StaticEntity {
 
     private void loadRewardImage() // add
     {
-        try {
-            InputStream is = getClass().getResourceAsStream("/assets/Grad_Cap.png");
-            rewardImage = ImageIO.read(is);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (this.rewardType == RewardType.RegularReward)
+        {
+            try {
+                InputStream is = getClass().getResourceAsStream("/assets/Grad_Cap.png");
+                rewardImage = ImageIO.read(is);
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // For Bonus Rewards
+        else
+        {
+            try {
+                InputStream is = getClass().getResourceAsStream("/assets/BonusA.png");
+                rewardImage = ImageIO.read(is);
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
