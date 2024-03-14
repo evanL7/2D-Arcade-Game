@@ -80,7 +80,6 @@ public class Trap extends StaticEntity {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Enemy did not successfully grab the sprite");
         } finally {
             try {
                 is.close();

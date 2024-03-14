@@ -35,6 +35,11 @@ public class Enemy extends MoveableEntity {
 
     }
 
+    public void update() {
+        updateShortestPath();
+        updateAnimationTick();
+    }
+
     public void updateShortestPath() { // THIS WILL CHANGE
         moving = true;
 
@@ -45,11 +50,6 @@ public class Enemy extends MoveableEntity {
     }
 
     // ANIMATION METHODS
-    public void update() {
-        updateShortestPath();
-        updateAnimationTick();
-    }
-
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize + 2, 60,
@@ -72,7 +72,6 @@ public class Enemy extends MoveableEntity {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Enemy did not successfully grab the sprite");
         } finally {
             try {
                 is.close();
