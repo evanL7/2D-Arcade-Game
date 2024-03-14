@@ -1,7 +1,12 @@
 package StaticEntity;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 
+import Display.Game;
 import Helpers.Position;
 import Helpers.RewardType;
 
@@ -33,6 +38,8 @@ public class Reward extends StaticEntity {
 
     /** The type of reward, either Bonus Reward or Regular Reward. */
     public RewardType rewardType;
+
+    private BufferedImage rewardImage; // add
 
     /**
      * Constructs a new Bonus Reward.
@@ -67,6 +74,7 @@ public class Reward extends StaticEntity {
         
         // since regular rewards don't rely on despawnTimer
         rewardType = RewardType.RegularReward;
+        loadRewardImage(); // add
     }
 
     /**
@@ -107,6 +115,22 @@ public class Reward extends StaticEntity {
     public void setRewardsToCollect(int rewardsToCollect) 
     {
         this.rewardsToCollect = rewardsToCollect;
+    }
+
+    public void render(Graphics g)  // add
+    {
+        g.drawImage(rewardImage, position.getX(), position.getY(), Game.tileSize + 2, 30, null);
+    }
+
+    private void loadRewardImage() // add
+    {
+        try {
+            InputStream is = getClass().getResourceAsStream("/assets/Grad_Cap.png");
+            rewardImage = ImageIO.read(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
