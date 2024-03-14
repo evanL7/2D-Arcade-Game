@@ -19,12 +19,11 @@ public class GamePanel extends JPanel {
 
     public GamePanel(Game game) {
         this.game = game;
-        this.camera = new Camera(game.getPlayer());
+        this.camera = new Camera(game.getPlaying().getPlayer());
 
         // new
         this.startTime = System.currentTimeMillis();
 
-        this.setBackground(Color.BLACK);
         this.setPanelSize();
         this.addKeyListener(new KeyboardInputs(this));
     }
