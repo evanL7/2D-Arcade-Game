@@ -65,8 +65,6 @@ public class Playing extends State implements Statemethods {
         camera = new Camera(player);
     }
 
-
-
     @Override
     public void update() {
         player.update();
