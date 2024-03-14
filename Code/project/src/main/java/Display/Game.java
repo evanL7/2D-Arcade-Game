@@ -1,23 +1,12 @@
 package Display;
 
 import java.awt.Graphics;
-import java.awt.font.GraphicAttribute;
 
 import Gamestates.Gamestate;
 import Gamestates.Menu;
 import Gamestates.Playing;
-import Helpers.CollisionChecker;
-import Helpers.Position;
-import Helpers.AnimationConstants.PlayerConstants;
-import MoveableEntity.Enemy;
-import MoveableEntity.Player;
-import StaticEntity.TileManager;
-import StaticEntity.Trap;
-import StaticEntity.Reward; // add
 
 public class Game implements Runnable {
-
-    private Camera camera; // add
 
     private GameWindow gameWindow;
     private GamePanel gamePanel;
@@ -62,7 +51,6 @@ public class Game implements Runnable {
     }
 
     private void update() {
-
         switch (Gamestate.state) {
             case MENU:
                 menu.update();
@@ -78,7 +66,6 @@ public class Game implements Runnable {
     }
 
     public void render(Graphics g) {
-
         switch (Gamestate.state) {
             case MENU:
                 menu.draw(g);
@@ -92,8 +79,6 @@ public class Game implements Runnable {
             case QUIT:
                 break;
         }
-
-
     }
 
     @Override
