@@ -133,7 +133,6 @@ public class Playing extends State implements Statemethods {
         }
         if (keyCode == KeyEvent.VK_ESCAPE) {
             Gamestate.state = Gamestate.MENU;
-            keysPressed.clear();
         }
     }
 
@@ -171,7 +170,6 @@ public class Playing extends State implements Statemethods {
         player.setAction(action);
     }
 
-
     public void windowFocusLost() {
         player.resetDirBooleans();
     }
@@ -179,5 +177,4 @@ public class Playing extends State implements Statemethods {
     public Player getPlayer() {
         return player;
     }
-
 }
