@@ -35,18 +35,20 @@ public class Enemy extends MoveableEntity {
 
     }
 
-    public void update() {
-        updateShortestPath();
+    public void update(Position playerPosition) {
+        updateShortestPath(playerPosition);
         updateAnimationTick();
     }
 
-    public void updateShortestPath() { // THIS WILL CHANGE
+    public void updateShortestPath(Position playerPosition) { // THIS WILL CHANGE
         moving = true;
-
+        pathToPlayer = AStar(position, playerPosition);
     }
 
-    public void AStar() { // using A* algorithm for enemy to player calculations
+    public Vector<Position> AStar(Position start, Position goal) { // using A* algorithm for enemy to player
+                                                                   // calculations
 
+        return null;
     }
 
     // ANIMATION METHODS
