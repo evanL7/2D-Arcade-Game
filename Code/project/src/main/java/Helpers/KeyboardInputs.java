@@ -2,11 +2,9 @@ package Helpers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.HashSet;
 
 import Display.GamePanel;
 import Gamestates.Gamestate;
-import Helpers.AnimationConstants.PlayerConstants;
 
 public class KeyboardInputs implements KeyListener {
 
@@ -41,7 +39,6 @@ public class KeyboardInputs implements KeyListener {
                 break;
             default:
                 break;
-
         }
     }
 
