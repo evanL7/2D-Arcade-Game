@@ -54,7 +54,7 @@ public class Game implements Runnable {
 
     int regRewardX = Game.screenWidth / 4 - Game.tileSize / 4; // add
     int regRewardY = Game.screenHeight / 4 - Game.tileSize / 4; // add
-    
+
     int bonusRX = Game.screenWidth / 2 - Game.tileSize / 3; // add
     int bonusRY = Game.screenHeight / 4 - Game.tileSize / 5; // add
 
@@ -78,7 +78,7 @@ public class Game implements Runnable {
         enemy = new Enemy(new Position(enemyX, enemyY));
         trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1); // add
-        
+
         // this takes approx 25 seconds to despawn from the screen
         rewardBonus = new Reward(new Position(bonusRX, bonusRY), 10000, 10, 1); // add
     }
@@ -90,18 +90,16 @@ public class Game implements Runnable {
 
     private void update() {
         player.update();
-        enemy.update();
+        enemy.update(player.getPosition());
         trap.update();
         rewardReg.update();
-        if (rewardBonus != null)
-        {
+        if (rewardBonus != null) {
             rewardBonus.update();
-            if (rewardBonus.getDespawnTimer() <= 0)
-            {
+            if (rewardBonus.getDespawnTimer() <= 0) {
                 rewardBonus = null;
             }
         }
-        
+
     }
 
     public void render(Graphics g) {
