@@ -126,13 +126,10 @@ public class Playing extends State implements Statemethods {
     @Override
     public void keyPressed(KeyEvent e) {        
         int keyCode = e.getKeyCode();
+        if (!keysPressed.contains(keyCode)) {
 
-        if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_D) {            
-            if (!keysPressed.contains(keyCode)) {
-
-                keysPressed.add(keyCode);
-                handleKeys();
-            }
+            keysPressed.add(keyCode);
+            handleKeys();
         }
         if (keyCode == KeyEvent.VK_ESCAPE) {
             Gamestate.state = Gamestate.MENU;
@@ -143,11 +140,8 @@ public class Playing extends State implements Statemethods {
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
-
-        if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_D) {
-            keysPressed.remove(keyCode);
-            handleKeys();
-        }
+        keysPressed.remove(keyCode);
+        handleKeys();
     }
 
     private void handleKeys() {
