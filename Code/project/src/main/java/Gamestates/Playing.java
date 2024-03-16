@@ -38,7 +38,7 @@ public class Playing extends State implements Statemethods {
     public int worldY = Game.tileSize * 21;
 
     public int tempPlayerX = 100;
-    public int tempplayerY = 100;
+    public int tempplayerY = 200;
 
     int enemyX = Game.screenWidth / 3 - Game.tileSize / 2;
     int enemyY = Game.screenHeight / 3 - Game.tileSize / 2;
