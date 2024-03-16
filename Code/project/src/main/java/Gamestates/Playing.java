@@ -16,22 +16,24 @@ import MoveableEntity.Player;
 import StaticEntity.Reward;
 import StaticEntity.TileManager;
 import StaticEntity.Trap;
+import Display.Time;
 
 public class Playing extends State implements Statemethods {
 
     private Camera camera; // add
     private Score score; // Score object
 
-    private TileManager tileManager;
+    public TileManager tileManager;
     public CollisionChecker collisionChecker;
     private HashSet<Integer> keysPressed;
 
     private Player player;
     private Enemy enemy;
     private Trap trap;
-    private Reward rewardReg; // add
-    private Reward rewardBonus; // add
+    private Reward rewardReg;
+    private Reward rewardBonus;
 
+    private Time time;
     public int worldX = Game.tileSize * 23;
     public int worldY = Game.tileSize * 21;
 
@@ -44,11 +46,11 @@ public class Playing extends State implements Statemethods {
     int trapX = Game.screenWidth / 2 - Game.tileSize / 2;
     int trapY = Game.screenHeight / 3 - Game.tileSize / 2;
 
-    int regRewardX = Game.screenWidth / 4 - Game.tileSize / 4; // add
-    int regRewardY = Game.screenHeight / 4 - Game.tileSize / 4; // add
+    int regRewardX = Game.screenWidth / 4 - Game.tileSize / 4;
+    int regRewardY = Game.screenHeight / 4 - Game.tileSize / 4;
 
-    int bonusRX = Game.screenWidth / 2 - Game.tileSize / 3; // add
-    int bonusRY = Game.screenHeight / 4 - Game.tileSize / 5; // add
+    int bonusRX = Game.screenWidth / 2 - Game.tileSize / 3;
+    int bonusRY = Game.screenHeight / 4 - Game.tileSize / 5;
 
     public Playing(Game game) {
         super(game);
@@ -63,15 +65,16 @@ public class Playing extends State implements Statemethods {
         player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker);
         enemy = new Enemy(new Position(enemyX, enemyY));
         trap = new Trap(new Position(trapX, trapY), 1);
-        rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1); // add
+        rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1);
 
         // this takes approx 25 seconds to despawn from the screen
-        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 10000, 10, 1); // add
-        
+        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 10000, 10, 1);
+
         // Create the Camera object with the player
         camera = new Camera(player);
 
         score = new Score();
+        time = new Time();
     }
 
     @Override
@@ -102,20 +105,18 @@ public class Playing extends State implements Statemethods {
         player.render(g);
         enemy.render(g);
         trap.render(g);
-        rewardReg.render(g); // add
-        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) // add
-        {
-            rewardBonus.render(g); // add
+        rewardReg.render(g);
+        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
+            rewardBonus.render(g);
         }
-
-        
 
         // Reset graphics translation
         camera.reset(g);
 
         // Render score at the top-left corner
         score.draw(g);
-        
+        time.displayElapsedTime(g); // displays time at the bottom right corner
+
         g.dispose();
     }
 
@@ -136,7 +137,7 @@ public class Playing extends State implements Statemethods {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {        
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE:
@@ -148,7 +149,7 @@ public class Playing extends State implements Statemethods {
                     handleKeys();
                 }
                 break;
-        }        
+        }
     }
 
     @Override
@@ -164,7 +165,7 @@ public class Playing extends State implements Statemethods {
         boolean left = keysPressed.contains(KeyEvent.VK_A);
         boolean down = keysPressed.contains(KeyEvent.VK_S);
         boolean right = keysPressed.contains(KeyEvent.VK_D);
-        
+
         // Set player actions based on the keys pressed
         player.setUp(up);
         player.setLeft(left);
