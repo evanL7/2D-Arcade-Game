@@ -18,22 +18,21 @@ import StaticEntity.TileManager;
 import StaticEntity.Trap;
 import Display.Time;
 
-
 public class Playing extends State implements Statemethods {
 
     private Camera camera; // add
     private Score score; // Score object
 
-    private TileManager tileManager;
+    public TileManager tileManager;
     public CollisionChecker collisionChecker;
     private HashSet<Integer> keysPressed;
 
     private Player player;
     private Enemy enemy;
     private Trap trap;
-    private Reward rewardReg; 
-    private Reward rewardBonus; 
-    
+    private Reward rewardReg;
+    private Reward rewardBonus;
+
     private Time time;
 
     int playerX = Game.screenWidth / 2 - Game.tileSize / 2;
@@ -45,11 +44,12 @@ public class Playing extends State implements Statemethods {
     int trapX = Game.screenWidth / 2 - Game.tileSize / 2;
     int trapY = Game.screenHeight / 3 - Game.tileSize / 2;
 
-    int regRewardX = Game.screenWidth / 4 - Game.tileSize / 4; 
-    int regRewardY = Game.screenHeight / 4 - Game.tileSize / 4; 
+    int regRewardX = Game.screenWidth / 4 - Game.tileSize / 4;
+    int regRewardY = Game.screenHeight / 4 - Game.tileSize / 4;
 
-    int bonusRX = Game.screenWidth / 2 - Game.tileSize / 3; 
-    int bonusRY = Game.screenHeight / 4 - Game.tileSize / 5; 
+    int bonusRX = Game.screenWidth / 2 - Game.tileSize / 3;
+    int bonusRY = Game.screenHeight / 4 - Game.tileSize / 5;
+
     public Playing(Game game) {
         super(game);
         initClasses();
@@ -67,7 +67,7 @@ public class Playing extends State implements Statemethods {
 
         // this takes approx 25 seconds to despawn from the screen
         rewardBonus = new Reward(new Position(bonusRX, bonusRY), 10000, 10, 1);
-        
+
         // Create the Camera object with the player
         camera = new Camera(player);
 
@@ -103,7 +103,7 @@ public class Playing extends State implements Statemethods {
         player.render(g);
         enemy.render(g);
         trap.render(g);
-        rewardReg.render(g); 
+        rewardReg.render(g);
         if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             rewardBonus.render(g);
         }
@@ -114,7 +114,7 @@ public class Playing extends State implements Statemethods {
         // Render score at the top-left corner
         score.draw(g);
         time.displayElapsedTime(g); // displays time at the bottom right corner
-        
+
         g.dispose();
     }
 
@@ -135,7 +135,7 @@ public class Playing extends State implements Statemethods {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {        
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE:
@@ -147,7 +147,7 @@ public class Playing extends State implements Statemethods {
                     handleKeys();
                 }
                 break;
-        }        
+        }
     }
 
     @Override
@@ -163,7 +163,7 @@ public class Playing extends State implements Statemethods {
         boolean left = keysPressed.contains(KeyEvent.VK_A);
         boolean down = keysPressed.contains(KeyEvent.VK_S);
         boolean right = keysPressed.contains(KeyEvent.VK_D);
-        
+
         // Set player actions based on the keys pressed
         player.setUp(up);
         player.setLeft(left);
