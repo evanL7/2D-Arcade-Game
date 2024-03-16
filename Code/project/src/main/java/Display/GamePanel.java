@@ -13,13 +13,15 @@ public class GamePanel extends JPanel {
 
     private Game game;
     private Camera camera;
-    
+    //private Score score;
+
     // new
     private long startTime;
 
     public GamePanel(Game game) {
         this.game = game;
         this.camera = new Camera(game.getPlaying().getPlayer());
+        //this.score = new Score();
 
         // new
         this.startTime = System.currentTimeMillis();
@@ -40,9 +42,11 @@ public class GamePanel extends JPanel {
 
         // new
         displayElapsedTime(g);
-        camera.translate(g); //add
+        camera.translate(g); 
         game.render(g);
-        camera.reset(g); //add
+        camera.reset(g); 
+
+        
     }
 
     private void displayElapsedTime(Graphics g) {

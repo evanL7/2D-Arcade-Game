@@ -72,7 +72,7 @@ public class Game implements Runnable {
                 break;
             case PLAYING:
                 playing.draw(g);
-
+                
                 break;
             case OPTIONS:
                 break;

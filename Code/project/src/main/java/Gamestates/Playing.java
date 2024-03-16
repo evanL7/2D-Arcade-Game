@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import Display.Camera;
 import Display.Game;
+import Display.Score;
 import Helpers.AnimationConstants.PlayerConstants;
 import Helpers.CollisionChecker;
 import Helpers.Position;
@@ -19,6 +20,7 @@ import StaticEntity.Trap;
 public class Playing extends State implements Statemethods {
 
     private Camera camera; // add
+    private Score score; // Score object
 
     private TileManager tileManager;
     public CollisionChecker collisionChecker;
@@ -29,6 +31,7 @@ public class Playing extends State implements Statemethods {
     private Trap trap;
     private Reward rewardReg; // add
     private Reward rewardBonus; // add
+
 
     int playerX = Game.screenWidth / 2 - Game.tileSize / 2;
     int playerY = Game.screenHeight / 2 - Game.tileSize / 2;
@@ -65,6 +68,8 @@ public class Playing extends State implements Statemethods {
         
         // Create the Camera object with the player
         camera = new Camera(player);
+
+        score = new Score();
     }
 
     @Override
@@ -101,8 +106,14 @@ public class Playing extends State implements Statemethods {
             rewardBonus.render(g); // add
         }
 
+        
+
         // Reset graphics translation
         camera.reset(g);
+
+        // Render score at the top-left corner
+        score.draw(g);
+        
         g.dispose();
     }
 
