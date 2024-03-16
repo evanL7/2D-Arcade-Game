@@ -115,7 +115,7 @@ public class Playing extends State implements Statemethods {
 
         // Render score at the top-left corner
         score.draw(g);
-        time.displayElapsedTime(g); // displays time at the bottom right corner
+        time.displayElapsedTime(g); // displays time in the top right corner
 
         g.dispose();
     }
@@ -142,6 +142,7 @@ public class Playing extends State implements Statemethods {
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
+                time.pauseTimer(); // pauses the timer
                 break;
             default:
                 if (!keysPressed.contains(keyCode)) {
@@ -196,5 +197,9 @@ public class Playing extends State implements Statemethods {
 
     public Camera getCamera() {
         return camera;
+    }
+
+    public Time getTime() {
+        return time;
     }
 }
