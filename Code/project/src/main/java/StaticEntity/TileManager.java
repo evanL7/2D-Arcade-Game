@@ -7,10 +7,8 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
-import Display.Camera;
 import Display.Game;
 import Gamestates.Playing;
-import Helpers.BoardData;
 
 /**
  * The TileManager class manages the tiles used in the game.
@@ -100,7 +98,6 @@ public class TileManager {
             }
         }
     }
-    
 
     /**
      * Loads the map data from the specified file.
