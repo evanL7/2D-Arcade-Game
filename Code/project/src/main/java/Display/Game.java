@@ -27,6 +27,12 @@ public class Game implements Runnable {
     public final static int screenWidth = tileSize * maxScreenCol;
     public final static int screenHeight = tileSize * maxScreenRow;
 
+    // World size
+    public final static int maxWorldCol = 50;
+    public final static int maxWorldRow = 50;
+    public final static int worldWidth = tileSize * maxWorldCol;
+    public final static int worldHeight = tileSize * maxWorldRow;
+
     private Playing playing;
     private Menu menu;
 

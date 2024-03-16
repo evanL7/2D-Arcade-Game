@@ -21,8 +21,9 @@ public class Camera {
         // Ensure camera doesn't go out of bounds
         if (xOffset < 0) xOffset = 0;
         if (yOffset < 0) yOffset = 0;
-        if (xOffset > Game.screenWidth * (Game.maxScreenCol - 1)) xOffset = Game.screenWidth * (Game.maxScreenCol - 1);
-        if (yOffset > Game.screenHeight * (Game.maxScreenRow - 1)) yOffset = Game.screenHeight * (Game.maxScreenRow - 1);
+
+        if (xOffset > Game.worldWidth - Game.screenWidth) xOffset = Game.worldWidth - Game.screenWidth;
+        if (yOffset > Game.worldHeight - Game.screenHeight) yOffset = Game.worldHeight - Game.screenHeight;
     }
 
     public void translate(Graphics g) {
