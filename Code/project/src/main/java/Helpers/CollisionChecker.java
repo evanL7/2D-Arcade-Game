@@ -79,7 +79,7 @@ public class CollisionChecker {
                 if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
                 }
-                break;                
+                break;
         }
     }
 }

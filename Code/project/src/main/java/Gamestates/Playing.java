@@ -34,9 +34,11 @@ public class Playing extends State implements Statemethods {
     private Reward rewardBonus;
 
     private Time time;
+    public int worldX = Game.tileSize * 23;
+    public int worldY = Game.tileSize * 21;
 
-    int playerX = Game.screenWidth / 2 - Game.tileSize / 2;
-    int playerY = Game.screenHeight / 2 - Game.tileSize / 2;
+    public int tempPlayerX = 100;
+    public int tempplayerY = 100;
 
     int enemyX = Game.screenWidth / 3 - Game.tileSize / 2;
     int enemyY = Game.screenHeight / 3 - Game.tileSize / 2;
@@ -57,10 +59,10 @@ public class Playing extends State implements Statemethods {
 
     private void initClasses() {
         keysPressed = new HashSet<>();
-        tileManager = new TileManager();
+        tileManager = new TileManager(this);
         collisionChecker = new CollisionChecker(tileManager);
 
-        player = new Player(new Position(playerX, playerY), collisionChecker);
+        player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker);
         enemy = new Enemy(new Position(enemyX, enemyY));
         trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1);
@@ -98,8 +100,8 @@ public class Playing extends State implements Statemethods {
         // Render game objects with adjusted coordinates
         tileManager.draw(g);
         // Adjust player's position based on camera
-        int playerRenderX = player.getPosition().getX() - camera.getXOffset();
-        int playerRenderY = player.getPosition().getY() - camera.getYOffset();
+        // int playerRenderX = player.getPosition().getX() - camera.getXOffset();
+        // int playerRenderY = player.getPosition().getY() - camera.getYOffset();
         player.render(g);
         enemy.render(g);
         trap.render(g);
@@ -190,5 +192,9 @@ public class Playing extends State implements Statemethods {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Camera getCamera() {
+        return camera;
     }
 }

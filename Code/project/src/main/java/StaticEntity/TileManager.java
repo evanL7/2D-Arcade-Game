@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import Display.Game;
+import Gamestates.Playing;
 import Helpers.BoardData;
 
 /**
@@ -19,15 +20,19 @@ public class TileManager {
     public Tile[] tile; // Stores the tile sprites
     public int mapTileNum[][]; // Stores the map data that indicates which tile to use    
 
+    Playing playing;
+
     /**
      * Constructs a TileManager object.
      */
-    public TileManager() {
+    public TileManager(Playing playing) {
         tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
-        mapTileNum = new int[Game.maxScreenRow][Game.maxScreenCol];
+        mapTileNum = new int[Game.maxWorldRow][Game.maxWorldCol];
+
+        this.playing = playing;
 
         getTileImage();
-        loadMap("/maps/mapTest.txt");
+        loadMap("/maps/map1.txt");
     }
 
     /**
@@ -75,21 +80,21 @@ public class TileManager {
      * @param g the Graphics object to draw the tiles on
      */
     public void draw(Graphics g) {
+        int worldCol = 0, worldRow = 0;
         
-        int col = 0, row = 0, x = 0, y = 0;
-        
-        while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
-            int tileNum = mapTileNum[row][col];
-            g.drawImage(tile[tileNum].image, x, y, Game.tileSize, Game.tileSize, null);
-            
-            col++;
-            x += Game.tileSize;
+        while (worldCol < Game.maxWorldCol && worldRow < Game.maxWorldRow) {
+            int tileNum = mapTileNum[worldRow][worldCol];
 
-            if (col == Game.maxScreenCol) {
-                col = 0;
-                x = 0;
-                row++;
-                y += Game.tileSize;
+            int worldX = worldCol * Game.tileSize;
+            int worldY = worldRow * Game.tileSize;
+
+            g.drawImage(tile[tileNum].image, worldX, worldY, Game.tileSize, Game.tileSize, null);
+            
+            worldCol++;
+
+            if (worldCol == Game.maxWorldCol) {
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
@@ -106,16 +111,16 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0, row = 0;
-            while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
+            while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
                 String line = br.readLine();
                 String numbers[] = line.split(" ");
-                while (col < Game.maxScreenCol) {
+                while (col < Game.maxWorldCol) {
                     int num = Integer.parseInt(numbers[col]);
 
                     mapTileNum[row][col] = num;
                     col++;
                 }
-                if (col == Game.maxScreenCol) {
+                if (col == Game.maxWorldCol) {
                     col = 0;
                     row++;
                 }
