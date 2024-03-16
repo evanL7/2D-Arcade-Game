@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
+import Display.Camera;
 import Display.Game;
 import Gamestates.Playing;
 import Helpers.BoardData;
@@ -80,24 +81,26 @@ public class TileManager {
      * @param g the Graphics object to draw the tiles on
      */
     public void draw(Graphics g) {
-        int worldCol = 0, worldRow = 0;
-        
-        while (worldCol < Game.maxWorldCol && worldRow < Game.maxWorldRow) {
-            int tileNum = mapTileNum[worldRow][worldCol];
+        int startCol = Math.max(0, playing.getCamera().getXOffset() / Game.tileSize);
+        int startRow = Math.max(0, playing.getCamera().getYOffset() / Game.tileSize);
+        int endCol = Math.min(Game.maxWorldCol, (playing.getCamera().getXOffset() + Game.screenWidth) / Game.tileSize + 1);
+        int endRow = Math.min(Game.maxWorldRow, (playing.getCamera().getYOffset() + Game.screenHeight) / Game.tileSize + 1);
+    
+        for (int worldRow = startRow; worldRow < endRow; worldRow++) {
+            for (int worldCol = startCol; worldCol < endCol; worldCol++) {
+                int tileNum = mapTileNum[worldRow][worldCol];
+    
+                int worldX = worldCol * Game.tileSize;
+                int worldY = worldRow * Game.tileSize;
 
-            int worldX = worldCol * Game.tileSize;
-            int worldY = worldRow * Game.tileSize;
-
-            g.drawImage(tile[tileNum].image, worldX, worldY, Game.tileSize, Game.tileSize, null);
-            
-            worldCol++;
-
-            if (worldCol == Game.maxWorldCol) {
-                worldCol = 0;
-                worldRow++;
+                // Check that only the visible tiles are drawn
+                // System.out.println("startCol: " + startCol + " startRow: " + startRow + " endCol: " + endCol + " endRow: " + endRow);
+                
+                g.drawImage(tile[tileNum].image, worldX, worldY, Game.tileSize, Game.tileSize, null);
             }
         }
     }
+    
 
     /**
      * Loads the map data from the specified file.
