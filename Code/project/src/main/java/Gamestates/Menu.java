@@ -13,10 +13,20 @@ import java.io.InputStream;
 
 import Display.Game;
 
+/**
+ * The Menu class represents the main menu of the game.
+ * It currently displays options for starting the game or returning back.
+ * Font source: https://tinyworlds.itch.io/free-pixel-font-thaleah
+ */
 public class Menu extends State implements Statemethods {
 
     private static Font customFont;
 
+    /**
+     * Constructs a Menu object.
+     * 
+     * @param game the Game object
+     */
     public Menu(Game game) {
         super(game);
 
