@@ -10,8 +10,10 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 
 import Display.Game;
+import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.Position;
+import java.awt.Rectangle;
 import Helpers.AnimationConstants.EnemyConstants;
 
 // enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
@@ -21,6 +23,7 @@ import Helpers.AnimationConstants.EnemyConstants;
 
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES
+
     private Vector<Position> pathToPlayer;
 
     private BufferedImage[][] animations; // 2d image array of the images for player movements
@@ -28,24 +31,52 @@ public class Enemy extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 60;
 
     // CONSTRUCTOR
-    public Enemy(Position position) {
-        super(position);
+    public Enemy(Position position, Playing playing) {
+        super(position, playing);
         loadAnimations();
         onPath = true;
         speed = 1;
 
+        solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
+
     }
 
     public void update(Player player) {
-        // updateShortestPath(player);
+        updateShortestPath(player);
         updateAnimationTick();
+        checkCollision();
+
+        // moving the enemy
+        collisionOn = false;
+        playing.collisionChecker.checkTileEnemy(this, enemyAction);
+        if (collisionOn == false) {
+            switch (enemyAction) {
+                case EnemyConstants.UP:
+                    position.setY(position.getY() - animationSpeed);
+                    break;
+                case EnemyConstants.DOWN:
+                    position.setY(position.getY() + animationSpeed);
+                    break;
+                case EnemyConstants.LEFT:
+                    position.setX(position.getX() - animationSpeed);
+                    break;
+                case EnemyConstants.RIGHT:
+                    position.setX(position.getX() + animationSpeed);
+                    break;
+            }
+        }
+    }
+
+    public void checkCollision() {
+        playing.collisionChecker.checkTileEnemy(this, enemyAction);
+        // add objects and entity checks here
     }
 
     public void updateShortestPath(Player player) {
         moving = true;
         if (onPath == true) {
-            int goalCol = (player.getPosition().getX() + playing.getPlayer().solidArea.x) / Game.tileSize;
-            int goalRow = (player.getPosition().getY() + playing.getPlayer().solidArea.y) / Game.tileSize;
+            int goalCol = (player.getPosition().getX() + player.solidArea.x) / Game.tileSize;
+            int goalRow = (player.getPosition().getY() + player.solidArea.y) / Game.tileSize;
 
             searchPath(goalCol, goalRow);
         }
@@ -97,15 +128,15 @@ public class Enemy extends MoveableEntity {
     }
 
     public void searchPath(int goalCol, int goalRow) {
-        int startCol = (position.getX() + solidArea.x) / Game.tileSize;
-        int startRow = (position.getY() + solidArea.y) / Game.tileSize;
+        int startCol = (position.getY() + solidArea.y) / Game.tileSize;
+        int startRow = (position.getX() + solidArea.x) / Game.tileSize;
 
         playing.pathFinder.setNode(startCol, startRow, goalCol, goalRow);
 
         if (playing.pathFinder.search() == true) {
             // Next worldX and worldY
-            int nextX = playing.pathFinder.pathList.get(0).col * Game.tileSize;
-            int nextY = playing.pathFinder.pathList.get(0).row * Game.tileSize;
+            int nextY = playing.pathFinder.pathList.get(0).col * Game.tileSize;
+            int nextX = playing.pathFinder.pathList.get(0).row * Game.tileSize;
 
             // Entity's solidArea position
             int enLeftX = position.getX() + solidArea.x;
