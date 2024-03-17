@@ -37,17 +37,17 @@ public class Enemy extends MoveableEntity {
     }
 
     public void update(Position playerPosition) {
-        updateShortestPath(playerPosition);
+        // updateShortestPath(playerPosition);
         updateAnimationTick();
     }
 
-    public void updateShortestPath(Position playerPosition) { // THIS WILL CHANGE
+    public void updateShortestPath(Position playerPosition) {
         moving = true;
         if (onPath == true) {
-            int goalCol;
-            int goalRow;
+            int goalCol = (playing.getPlayer().worldY + playing.getPlayer().solidArea.y) / Game.tileSize;
+            int goalRow = (playing.getPlayer().worldX + playing.getPlayer().solidArea.x) / Game.tileSize;
 
-            // searchPath(goalCol, goalRow);
+            searchPath(goalCol, goalRow);
         }
 
     }
@@ -93,6 +93,68 @@ public class Enemy extends MoveableEntity {
             if (animationIndex >= AnimationConstants.SpriteEnemyAmount(enemyAction)) {
                 animationIndex = 0;
             }
+        }
+    }
+
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (worldX + solidArea.x) / Game.tileSize;
+        int startRow = (worldY + solidArea.y) / Game.tileSize;
+
+        playing.pathFinder.setNode(startCol, startRow, goalCol, goalRow);
+
+        if (playing.pathFinder.search() == true) {
+            // Next worldX and worldY
+            int nextX = playing.pathFinder.pathList.get(0).col * Game.tileSize;
+            int nextY = playing.pathFinder.pathList.get(0).row * Game.tileSize;
+
+            // Entity's solidArea position
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
+                enemyAction = EnemyConstants.UP;
+            } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
+                enemyAction = EnemyConstants.DOWN;
+            } else if (enTopY >= nextY && enBottomY < nextY + Game.tileSize) {
+                // left or right
+                if (enLeftX > nextX) {
+                    enemyAction = EnemyConstants.LEFT;
+                }
+                if (enLeftX < nextX) {
+                    enemyAction = EnemyConstants.RIGHT;
+                }
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                // up or left
+                enemyAction = EnemyConstants.UP;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.LEFT;
+                }
+            } else if (enTopY > nextY && enLeftX < nextX) {
+                // up or right
+                enemyAction = EnemyConstants.UP;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.RIGHT;
+                }
+            } else if (enTopY < nextY && enLeftX > nextX) {
+                // down or left
+                enemyAction = EnemyConstants.DOWN;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.LEFT;
+                }
+            } else if (enTopY < nextY && enLeftX < nextX) {
+                // down or right
+                enemyAction = EnemyConstants.DOWN;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.RIGHT;
+                }
+            }
+
         }
     }
 
