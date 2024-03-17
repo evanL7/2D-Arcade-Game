@@ -166,7 +166,6 @@ public class Playing extends State implements Statemethods {
     }
 
     private void handleKeys() {
-        System.out.println("keypressed" + keysPressed);
         // Handle keys based on the current state of keysPressed
         boolean up = keysPressed.contains(KeyEvent.VK_W);
         boolean left = keysPressed.contains(KeyEvent.VK_A);
