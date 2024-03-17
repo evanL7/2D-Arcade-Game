@@ -14,7 +14,6 @@ import Display.Game;
 import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.Position;
-import java.awt.Rectangle;
 import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.ImageUtils;
 
@@ -54,13 +53,13 @@ public class Enemy extends MoveableEntity {
         if (collisionOn == false) {
             switch (enemyAction) {
                 case EnemyConstants.UP:
-                    position.setY(position.getY() - animationSpeed);
+                    position.setY(position.getY() - speed);
                     break;
                 case EnemyConstants.DOWN:
-                    position.setY(position.getY() + animationSpeed);
+                    position.setY(position.getY() + speed);
                     break;
                 case EnemyConstants.LEFT:
-                    position.setX(position.getX() - animationSpeed);
+                    position.setX(position.getX() - speed);
                     break;
                 case EnemyConstants.RIGHT:
                     position.setX(position.getX() + animationSpeed);
@@ -138,7 +137,8 @@ public class Enemy extends MoveableEntity {
     @Override
     public Rectangle getBoundingBox() {
         // Return the bounding box of the player entity
-        // Implement this method based on how you define the bounding box for the player entity
+        // Implement this method based on how you define the bounding box for the player
+        // entity
         return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
     }
 
@@ -161,6 +161,7 @@ public class Enemy extends MoveableEntity {
             return 0; // Or any default height value you prefer
         }
     }
+
     public void searchPath(int goalCol, int goalRow) {
         int startCol = (position.getY() + solidArea.y) / Game.tileSize;
         int startRow = (position.getX() + solidArea.x) / Game.tileSize;
