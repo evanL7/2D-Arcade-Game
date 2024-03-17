@@ -207,4 +207,8 @@ public class Playing extends State implements Statemethods {
     public Time getTime() {
         return time;
     }
+
+    public Score getScoreObj(){
+        return score;
+    }
 }

@@ -10,8 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
-import Display.Score;
-import Display.Time;
 
 import Display.Game;
 
@@ -20,9 +18,11 @@ import Display.Game;
 public class GameOver extends State implements Statemethods { 
     
     private static Font customFont;
+    private Playing playingState;
 
     public GameOver(Game game) {
         super(game);
+        playingState = game.getPlaying();
 
         try {
             // Load the external font file
@@ -35,7 +35,6 @@ public class GameOver extends State implements Statemethods {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace(); // Handle font loading errors            
         }
-
     }
     
     @Override
@@ -54,6 +53,16 @@ public class GameOver extends State implements Statemethods {
             int y = (Game.screenHeight - fm.getHeight()) / 2 + fm.getAscent() - 40;
 
             g.drawString("GAME OVER!", x, y);
+            
+            // Draws score
+            y += fm.getHeight();
+            x = (Game.screenWidth - fm.stringWidth("SCORE: " + playingState.getScoreObj().getScore())) / 2;
+            g.drawString("SCORE: " + playingState.getScoreObj().getScore(), x, y);
+
+            y += fm.getHeight();
+            x = (Game.screenWidth - fm.stringWidth("TIME: " + playingState.getTime().getElapsedTime())) / 2;
+            g.drawString("TIME: " + playingState.getTime().getElapsedTime(), x, y);
+
 
             y += fm.getHeight();  // Move down for the second line
             x = (Game.screenWidth - fm.stringWidth("PRESS R TO RESTART THE GAME")) / 2;
@@ -62,7 +71,6 @@ public class GameOver extends State implements Statemethods {
             y += fm.getHeight(); // Move down for the third line
             x = (Game.screenWidth - fm.stringWidth("PRESS Q TO QUIT THE GAME")) / 2;
             g.drawString("PRESS Q TO QUIT THE GAME", x, y);
-
         }
     }
 
