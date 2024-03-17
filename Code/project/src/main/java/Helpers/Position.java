@@ -14,6 +14,11 @@ public class Position {
         this.y = y;
     }
 
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+    
     /**
      * Gets the x-coordinate of the position.
      * 

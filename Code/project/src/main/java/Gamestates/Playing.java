@@ -56,9 +56,11 @@ public class Playing extends State implements Statemethods {
     private void initClasses() {
         keysPressed = new HashSet<>();
         tileManager = new TileManager();
+        score = new Score();
         collisionChecker = new CollisionChecker(tileManager);
 
-        player = new Player(new Position(playerX, playerY), collisionChecker);
+        player = new Player(new Position(playerX, playerY), collisionChecker, score, tileManager);
+
         enemy = new Enemy(new Position(enemyX, enemyY));
         trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1); // add
@@ -74,6 +76,25 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void update() {
+        // Check collision between player and rewards
+    // if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
+    //     score.incrementScore(rewardReg.getRewardAmount());
+    //    // rewardReg.reset(); // Reset the reward's position
+    // }
+    // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
+    //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
+    //         score.incrementScore(rewardBonus.getRewardAmount());
+    //        // rewardBonus.reset(); // Reset the reward's position
+    //     }
+    // }
+
+    // Check collision between player and traps
+    if (collisionChecker.checkPlayerTrapCollision(player, trap)) {
+        // Decrease score (example: by 10 for hitting a trap)
+        score.incrementScore(-10); // Adjust the amount as per your game's logic
+        //trap.reset(); // Reset the trap's position
+    }
+
         player.update();
         enemy.update(player.getPosition());
         trap.update();

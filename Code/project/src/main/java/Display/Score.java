@@ -20,7 +20,13 @@ public class Score {
     }
 
     public void incrementScore(double incrementAmount) {
+        
         this.score += incrementAmount;
+    }
+
+    // Add method to decrease score
+    public void decreaseScore(double decrementAmount) {
+        this.score -= decrementAmount;
     }
 
     public void draw(Graphics g) {

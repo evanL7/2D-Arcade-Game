@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 
 import Display.Game;
 import Helpers.Position;
+import MoveableEntity.MoveableEntity;
+import MoveableEntity.Player;
 
 // trap sprite from https://bdragon1727.itch.io/free-trap-platformer
 // width:32, height: 22
@@ -29,6 +31,7 @@ public class Trap extends StaticEntity {
     private BufferedImage[][] animations; // 2d image array of the images for trap movements
     private int animationTick, animationIndex, animationSpeed = 150;
 
+    private BufferedImage trapImage; // add
     /**
      * Constructs a new Trap.
      *
@@ -39,6 +42,7 @@ public class Trap extends StaticEntity {
         // doesn't need despawnTimer as it would only despawn if collided with
         super(position);
         loadAnimations();
+        loadTrapImage(); // add
         this.damage = damage;
     }
 
@@ -51,6 +55,25 @@ public class Trap extends StaticEntity {
      */
     public float getDamage() {
         return damage;
+    }
+
+    @Override
+    public Position getPosition() {
+        // Return the position of the trap
+        return position;
+    }
+
+    @Override
+    public Image getSprite() {
+        // Return the sprite image associated with the trap entity
+        return trapImage; // Assuming you have a field named trapImage that holds the sprite image
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        // Return the bounding box of the reward entity
+        // Implement this method based on how you define the bounding box for the reward entity
+        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
     }
 
     // ANIMATION METHODS FOR TRAP
@@ -89,6 +112,17 @@ public class Trap extends StaticEntity {
         }
     }
 
+    // Load the trap image
+    private void loadTrapImage() {
+        try {
+            InputStream is = getClass().getResourceAsStream("/assets/trap.png");
+            trapImage = ImageIO.read(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // updates the animation array during the game loop thread
     private void updateAnimationTick() {
         animationTick++;
@@ -100,5 +134,19 @@ public class Trap extends StaticEntity {
             }
         }
     }
+
+    @Override
+    public void onCollide(MoveableEntity entity) {
+        // Check if the entity colliding with the trap is a Player
+        if (entity instanceof Player) {
+            // Cast the entity to a Player object
+            Player player = (Player) entity;
+            // Decrease the score when the player collides with the trap
+            player.decreaseScore(damage);
+            // Perform any additional actions if needed
+        }
+    }
+    
+    
 
 }

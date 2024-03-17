@@ -1,9 +1,12 @@
 package StaticEntity;
+import java.awt.image.BufferedImage;
 
 import java.awt.*;
-
+import java.awt.Rectangle;
 import Helpers.Position;
-
+import MoveableEntity.MoveableEntity;
+import MoveableEntity.Player;
+import Helpers.ImageUtils;
 
 //import java.util.Timer;
 
@@ -59,10 +62,22 @@ public abstract class StaticEntity
 
     //Methods
 
-    public void onCollide() 
-    {
+   /**
+     * Handles the collision with the player.
+     * 
+     * @param player The player entity colliding with this static entity.
+     */
+    public abstract void onCollide(MoveableEntity entity);
 
-    }
+    // Define the getPosition() method to return the position
+    public abstract Position getPosition();
+
+    /**
+     * Gets the sprite associated with the static entity.
+     * 
+     * @return The sprite image.
+     */
+    public abstract Image getSprite();
 
     // destroys the object
     public void destroy() 
@@ -79,6 +94,33 @@ public abstract class StaticEntity
     public void render()
     {
 
+    }
+
+    /**
+     * Gets the bounding box of the static entity.
+     * 
+     * @return The bounding box.
+     */
+    public abstract Rectangle getBoundingBox();
+
+    // Method to get the height of the sprite
+    public int getHeight() {
+        BufferedImage sprite = ImageUtils.convertToBufferedImage(getSprite());
+        if (sprite != null) {
+            return sprite.getHeight();
+        } else {
+            return 0; // or handle null sprite case accordingly
+        }
+    }
+
+    // Method to get the width of the sprite
+    public int getWidth() {
+        BufferedImage sprite = ImageUtils.convertToBufferedImage(getSprite());
+        if (sprite != null) {
+            return sprite.getWidth();
+        } else {
+            return 0; // or handle null sprite case accordingly
+        }
     }
 
 }

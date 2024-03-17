@@ -4,11 +4,15 @@ import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import Display.Game;
 import Helpers.BoardData;
+import MoveableEntity.Enemy;
+import MoveableEntity.MoveableEntity;
 
 /**
  * The TileManager class manages the tiles used in the game.
@@ -16,6 +20,7 @@ import Helpers.BoardData;
  */
 public class TileManager {
     
+    private List<StaticEntity> staticEntities;
     public Tile[] tile; // Stores the tile sprites
     public int mapTileNum[][]; // Stores the map data that indicates which tile to use    
 
@@ -23,6 +28,7 @@ public class TileManager {
      * Constructs a TileManager object.
      */
     public TileManager() {
+        this.staticEntities = new ArrayList<>();
         tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
         mapTileNum = new int[Game.maxScreenRow][Game.maxScreenCol];
 
@@ -30,6 +36,15 @@ public class TileManager {
         loadMap("/maps/mapTest.txt");
     }
 
+    /**
+     * Gets the list of static entities.
+     * 
+     * @return The list of static entities.
+     */
+    public List<StaticEntity> getStaticEntities() {
+        return this.staticEntities;
+    }
+    
     /**
      * Loads the tile sprites from the resource files.
      * The tile sprites are sourced from https://limezu.itch.io/moderninteriors
@@ -125,5 +140,35 @@ public class TileManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Gets the list of enemies from the static entities.
+     * 
+     * @return The list of enemy entities.
+     */
+    // public List<MoveableEntity> getEnemies() {
+    //     List<MoveableEntity> enemies = new ArrayList<>();
+    //     for (StaticEntity entity : staticEntities) {
+    //         if (entity instanceof Enemy) {
+    //             enemies.add((MoveableEntity) entity);
+    //         }
+    //     }
+    //     return enemies;
+    // }
+
+    /**
+     * Gets the list of traps from the static entities.
+     * 
+     * @return The list of trap entities.
+     */
+    public List<StaticEntity> getTraps() {
+        List<StaticEntity> traps = new ArrayList<>();
+        for (StaticEntity entity : staticEntities) {
+            if (entity instanceof Trap) {
+                traps.add(entity);
+            }
+        }
+        return traps;
     }
 }

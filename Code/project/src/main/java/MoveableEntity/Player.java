@@ -8,11 +8,17 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+import java.awt.Image;
 
 import Display.Game;
+import Display.Score;
 import Helpers.AnimationConstants;
 import Helpers.CollisionChecker;
+import Helpers.ImageUtils;
 import Helpers.Position;
+import StaticEntity.Reward;
+import StaticEntity.StaticEntity;
+import StaticEntity.TileManager;
 import Helpers.AnimationConstants.PlayerConstants;
 
 public class Player extends MoveableEntity {
@@ -25,14 +31,25 @@ public class Player extends MoveableEntity {
 
     private int regularRewardsCollected;
 
+    private TileManager tileManager;
+
     private CollisionChecker collisionChecker;
 
+    private BufferedImage playerImage;
+    //private float score;
+
+    private Score scoreObject;
+
     // CONSTRUCTOR
-    public Player(Position position, CollisionChecker collisionChecker) {
+    public Player(Position position, CollisionChecker collisionChecker, Score scoreObject, TileManager tileManager) {
         // need to determine the players start position and specific sprite
         super(position);
         this.collisionChecker = collisionChecker;
+        this.scoreObject = scoreObject; // Assign the score object
+        this.tileManager = tileManager; 
+
         loadAnimations();
+        loadPlayerImage();
         speed = 1;
 
         solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
@@ -40,6 +57,38 @@ public class Player extends MoveableEntity {
 
     public void update() {
         updatePos();
+
+    //     // Check collision with rewards
+    // for (StaticEntity entity : tileManager.getStaticEntities()) {
+    //     if (entity instanceof Reward) {
+    //         if (entity.getBoundingBox().intersects(this.getBoundingBox())) {
+    //             // Collision with reward detected
+    //             ((Reward) entity).onCollide(this);
+    //             // Remove the reward from the game world
+    //             tileManager.getStaticEntities().remove(entity);
+    //             break; // Exit loop after detecting collision with one reward
+    //         }
+    //     }
+    // }
+
+    // // Check collision with enemies
+    // for (MoveableEntity enemy : tileManager.getEnemies()) {
+    //     if (enemy.getBoundingBox().intersects(this.getBoundingBox())) {
+    //         // Collision with enemy detected
+    //         // Handle collision with enemy
+    //         break; // Exit loop after detecting collision with one enemy
+    //     }
+    // }
+
+    // Check collision with traps
+    for (StaticEntity trap : tileManager.getTraps()) {
+        if (trap.getBoundingBox().intersects(this.getBoundingBox())) {
+            // Collision with trap detected
+            // Handle collision with trap
+            break; // Exit loop after detecting collision with one trap
+        }
+    }
+
         updateAnimationTick();
     }
 
@@ -57,6 +106,7 @@ public class Player extends MoveableEntity {
         moving = false;
 
         collisionOn = false;
+
         collisionChecker.checkTile(this, playerAction);
 
         if (collisionOn == false) {
@@ -105,6 +155,17 @@ public class Player extends MoveableEntity {
         }
     }
 
+    private void loadPlayerImage() {
+        try {
+            InputStream is = getClass().getResourceAsStream("/assets/player_sprites.png");
+            playerImage = ImageIO.read(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+
     // updates the animation array during the game loop thread
     private void updateAnimationTick() {
         animationTick++;
@@ -117,6 +178,16 @@ public class Player extends MoveableEntity {
         }
     }
 
+    public void increaseScore(float amount) {
+        scoreObject.incrementScore(amount); // Call the increment method in Score class
+    }
+
+    public void decreaseScore(float amount) {
+        scoreObject.incrementScore(-amount); // Call the increment method with negative amount to decrease score
+    }
+    
+    
+
     // GETTERS AND SETTERS
     public void resetDirBooleans() {
         left = false;
@@ -124,6 +195,39 @@ public class Player extends MoveableEntity {
         up = false;
         down = false;
     }
+    @Override
+    public Image getSprite() {
+        return playerImage;
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        // Return the bounding box of the player entity
+        // Implement this method based on how you define the bounding box for the player entity
+        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+    }
+    
+    // @Override
+    // public int getWidth() {
+    //     if (sprite != null) {
+    //         BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
+    //         return bufferedImage.getWidth();
+    //     } else {
+    //         return 0; // Or any default width value you prefer
+    //     }
+    // }
+
+    // @Override
+    // public int getHeight() {
+    //     if (sprite != null) {
+    //         BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
+    //         return bufferedImage.getHeight();
+    //     } else {
+    //         return 0; // Or any default height value you prefer
+    //     }
+    // }
+
+    
 
     public void setMoving(boolean moving) {
         this.moving = moving;
@@ -144,6 +248,10 @@ public class Player extends MoveableEntity {
 
     public void setRegularRewardsCollected(int regularRewardsCollected) {
         this.regularRewardsCollected = regularRewardsCollected;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     public boolean isLeft() {

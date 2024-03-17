@@ -8,11 +8,13 @@ import java.io.InputStream;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
-
+import java.awt.Image;
+import java.awt.Rectangle;
 import Display.Game;
 import Helpers.AnimationConstants;
 import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
+import Helpers.ImageUtils;
 
 // enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
 // 48x48
@@ -95,4 +97,36 @@ public class Enemy extends MoveableEntity {
         }
     }
 
+    @Override
+    public Image getSprite() {
+        // Return the sprite of the enemy
+        return sprite; // Assuming sprite is the attribute storing the sprite
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        // Return the bounding box of the player entity
+        // Implement this method based on how you define the bounding box for the player entity
+        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+    }
+
+    @Override
+    public int getWidth() {
+        if (sprite != null) {
+            BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
+            return bufferedImage.getWidth();
+        } else {
+            return 0; // Or any default width value you prefer
+        }
+    }
+
+    @Override
+    public int getHeight() {
+        if (sprite != null) {
+            BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
+            return bufferedImage.getHeight();
+        } else {
+            return 0; // Or any default height value you prefer
+        }
+    }
 }

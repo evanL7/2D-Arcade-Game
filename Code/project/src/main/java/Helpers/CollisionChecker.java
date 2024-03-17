@@ -1,9 +1,18 @@
 package Helpers;
 
+import java.awt.Rectangle;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import Display.Game;
 import Helpers.AnimationConstants.PlayerConstants;
 import MoveableEntity.MoveableEntity;
+import MoveableEntity.Player;
+import StaticEntity.Reward;
+import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
+import StaticEntity.Trap;
 
 /**
  * The CollisionChecker class is responsible for checking collisions between
@@ -12,6 +21,8 @@ import StaticEntity.TileManager;
 public class CollisionChecker {
     
     TileManager tileManager;
+    private List<StaticEntity> staticEntities; //add
+
 
     /**
      * Constructs a CollisionChecker object with the specified TileManager.
@@ -20,6 +31,10 @@ public class CollisionChecker {
      */
     public CollisionChecker(TileManager tileManager) {
         this.tileManager = tileManager;
+
+        this.staticEntities = new ArrayList<>();
+        // Populate the list of static entities
+        this.staticEntities.addAll(tileManager.getStaticEntities());
     }
 
     /**
@@ -42,6 +57,9 @@ public class CollisionChecker {
         int entityBottomRow = entityBottom / Game.tileSize;
 
         int tileNum1, tileNum2;
+
+        // System.out.println("Entity position: " + entity.getPosition());
+        // System.out.println("Direction: " + direction);
 
         switch (direction) {
             case PlayerConstants.UP:
@@ -81,5 +99,72 @@ public class CollisionChecker {
                 }
                 break;                
         }
+        // // Check collisions with static entities
+        // for (StaticEntity staticEntity : staticEntities) {
+        //     if (checkCollision(entity, staticEntity)) {
+        //         staticEntity.onCollide(entity);
+        //     }
+        // }
+    }
+
+    /**
+     * Checks collision between two entities.
+     * 
+     * @param entity1 the first entity
+     * @param entity2 the second entity
+     * @return true if entities collide, false otherwise
+     */
+    private boolean checkCollision(MoveableEntity entity1, StaticEntity entity2) {
+        // Get the bounding boxes for the entities
+        Rectangle entity1Bounds = new Rectangle(entity1.getPosition().getX(), entity1.getPosition().getY(),
+                                                 entity1.getWidth(), entity1.getHeight());
+        
+        Rectangle entity2Bounds = new Rectangle(entity2.getPosition().getX(), entity2.getPosition().getY(),
+                                                 entity2.getWidth(), entity2.getHeight());
+        
+            // Print information about the bounding boxes
+        System.out.println("Entity 1 Bounds: " + entity1Bounds);
+        System.out.println("Entity 2 Bounds: " + entity2Bounds);
+        
+        // Check if the bounding boxes intersect
+        boolean result = entity1Bounds.intersects(entity2Bounds);
+        
+        // Print the result of the collision check
+        System.out.println("Collision Detected: " + result);
+        // Check if the bounding boxes intersect
+        return result;
+    }
+    
+    /**
+     * Checks for collisions between the specified player and rewards.
+     * 
+     * @param player The player entity.
+     * @param reward The reward entity.
+     * @return true if collision occurred, false otherwise.
+     */
+    public boolean checkPlayerRewardCollision(Player player, Reward reward) {
+        // System.out.println("Player position: " + player.getPosition());
+        // System.out.println("Reward position: " + reward.getPosition());
+        return checkCollision(player, reward);
+    }
+
+    /**
+     * Checks for collisions between the specified player and traps.
+     * 
+     * @param player The player entity.
+     * @param trap The trap entity.
+     * @return true if collision occurred, false otherwise.
+     */
+    public boolean checkPlayerTrapCollision(Player player, Trap trap) {
+        System.out.println("Player position: " + player.getPosition());
+        System.out.println("Trap position: " + trap.getPosition());
+
+        return checkCollision(player, trap);
+    }
+    
+
+    public void updateStaticEntities() {
+        this.staticEntities.clear();
+        this.staticEntities.addAll(tileManager.getStaticEntities());
     }
 }

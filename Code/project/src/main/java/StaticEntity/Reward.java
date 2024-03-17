@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import Display.Game;
 import Helpers.Position;
 import Helpers.RewardType;
+import MoveableEntity.MoveableEntity;
+import MoveableEntity.Player;
 
 // Regular Reward sprite is 16x16
 // I couldn't find any free sprites so I recreated 1
@@ -77,6 +79,25 @@ public class Reward extends StaticEntity {
         loadRewardImage(); // add
     }
 
+    @Override
+    public Position getPosition() {
+        // Return the position of the reward
+        return position; // Assuming position is the attribute storing the position
+    }
+
+    @Override
+    public Image getSprite() {
+        // Return the sprite image associated with the reward entity
+        return rewardImage; // Assuming you have a field named rewardImage that holds the sprite image
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        // Return the bounding box of the reward entity
+        // Implement this method based on how you define the bounding box for the reward entity
+        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+    }
+    
     /**
      * Gets the amount of the reward.
      * 
@@ -152,5 +173,18 @@ public class Reward extends StaticEntity {
             despawnTimer--;
         }
     }
+    @Override
+    public void onCollide(MoveableEntity entity) {
+        // Check if the entity colliding with the reward is a Player
+        if (entity instanceof Player) {
+            // Cast the entity to a Player object
+            Player player = (Player) entity;
+            // Increase the score when the player collides with the reward
+            player.increaseScore(rewardAmount);
+            // Perform any additional actions if needed
+        }
+    }
+    
+
 
 }
