@@ -15,11 +15,22 @@ import Display.Game;
 
 
 
+/**
+ * The GameOver class represents the game over screen displayed when the game ends.
+ * It shows the final score and elapsed time, and provides options to restart the game or quit.
+ * 
+ * <p>Font source: https://tinyworlds.itch.io/free-pixel-font-thaleah
+ */
 public class GameOver extends State implements Statemethods { 
     
     private static Font customFont;
     private Playing playingState;
 
+    /**
+     * Constructs a GameOver object.
+     * 
+     * @param game the Game object
+     */
     public GameOver(Game game) {
         super(game);
         playingState = game.getPlaying();
@@ -42,6 +53,11 @@ public class GameOver extends State implements Statemethods {
 
     }
 
+    /**
+     * Draws the game over screen.
+     * 
+     * @param g the Graphics object
+     */
     @Override
 	public void draw(Graphics g) {
         if (customFont != null) {
@@ -94,6 +110,11 @@ public class GameOver extends State implements Statemethods {
 
     }
 
+    /**
+     * Handles key press event.
+     * 
+     * @param e the KeyEvent object
+     */
     @Override
 	public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
