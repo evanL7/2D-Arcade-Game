@@ -79,8 +79,8 @@ public class Playing extends State implements Statemethods {
         trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1);
 
-        // this takes approx 25 seconds to despawn from the screen
-        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 10000, 10, 1);
+        // this takes approx 12 seconds to despawn from the screen
+        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 10, 1);
 
         // Create the Camera object with the player
         camera = new Camera(player);
@@ -107,6 +107,9 @@ public class Playing extends State implements Statemethods {
         // Decrease score (example: by 10 for hitting a trap)
         score.incrementScore(-10); // Adjust the amount as per your game's logic
         //trap.reset(); // Reset the trap's position
+        if (score.getScore() < 0) {
+            Gamestate.state = Gamestate.GAMEOVER;
+        }
     }
 
         player.update();
