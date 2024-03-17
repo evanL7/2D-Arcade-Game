@@ -21,7 +21,6 @@ import Display.Game;
 public class Menu extends State implements Statemethods {
 
     private static Font customFont;
-    private boolean firstTime = true;
 
     /**
      * Constructs a Menu object.
