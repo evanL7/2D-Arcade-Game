@@ -83,7 +83,7 @@ public class Playing extends State implements Statemethods {
     @Override
     public void update() {
         player.update();
-        enemy.update(player.getPosition());
+        enemy.update(player);
         trap.update();
         rewardReg.update();
         if (rewardBonus != null) {
