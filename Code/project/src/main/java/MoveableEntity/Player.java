@@ -10,6 +10,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import Display.Game;
+import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.CollisionChecker;
 import Helpers.Position;
@@ -28,9 +29,9 @@ public class Player extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     // CONSTRUCTOR
-    public Player(Position position, CollisionChecker collisionChecker) {
+    public Player(Position position, CollisionChecker collisionChecker, Playing playing) {
         // need to determine the players start position and specific sprite
-        super(position);
+        super(position, playing);
         this.collisionChecker = collisionChecker;
         loadAnimations();
         speed = 1;
@@ -45,7 +46,8 @@ public class Player extends MoveableEntity {
 
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72, null);        
+        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72,
+                null);
     }
 
     /**
