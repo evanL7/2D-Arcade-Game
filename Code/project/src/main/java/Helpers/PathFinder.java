@@ -98,13 +98,13 @@ public class PathFinder {
 
     private void getCost(TileNode node) { // if having issues, test the col and row for x and y
         // G COST
-        int xDistance = Math.abs(node.col - startNode.col);
-        int yDistance = Math.abs(node.row - startNode.row);
+        int yDistance = Math.abs(node.col - startNode.col);
+        int xDistance = Math.abs(node.row - startNode.row);
         node.gCost = xDistance + yDistance;
 
         // H COST
-        xDistance = Math.abs(node.col - goalNode.col);
-        yDistance = Math.abs(node.row - goalNode.row);
+        yDistance = Math.abs(node.col - goalNode.col);
+        xDistance = Math.abs(node.row - goalNode.row);
         node.hCost = xDistance + yDistance;
 
         // F COST

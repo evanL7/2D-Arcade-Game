@@ -62,7 +62,7 @@ public class Enemy extends MoveableEntity {
                     position.setX(position.getX() - speed);
                     break;
                 case EnemyConstants.RIGHT:
-                    position.setX(position.getX() + animationSpeed);
+                    position.setX(position.getX() + speed);
                     break;
             }
         }
