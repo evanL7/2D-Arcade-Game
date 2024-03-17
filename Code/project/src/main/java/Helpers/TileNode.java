@@ -5,8 +5,8 @@ import javax.swing.JButton;
 public class TileNode {
 
     TileNode parent;
-    int col;
-    int row;
+    public int col;
+    public int row;
     int gCost; // distance between starting and current node
     int hCost; // distance between current and goal node
     int fCost; // total cost (G+H) of the node
