@@ -12,6 +12,7 @@ import java.awt.Image;
 
 import Display.Game;
 import Display.Score;
+import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.CollisionChecker;
 import Helpers.ImageUtils;
@@ -41,9 +42,9 @@ public class Player extends MoveableEntity {
     private Score scoreObject;
 
     // CONSTRUCTOR
-    public Player(Position position, CollisionChecker collisionChecker, Score scoreObject, TileManager tileManager) {
+    public Player(Position position, CollisionChecker collisionChecker, Playing playing, Score scoreObject, TileManager tileManager) {
         // need to determine the players start position and specific sprite
-        super(position);
+        super(position, playing);
         this.collisionChecker = collisionChecker;
         this.scoreObject = scoreObject; // Assign the score object
         this.tileManager = tileManager; 
@@ -94,7 +95,8 @@ public class Player extends MoveableEntity {
 
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72, null);        
+        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72,
+                null);
     }
 
     /**

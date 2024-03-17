@@ -11,8 +11,10 @@ import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.Rectangle;
 import Display.Game;
+import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.Position;
+import java.awt.Rectangle;
 import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.ImageUtils;
 
@@ -23,6 +25,7 @@ import Helpers.ImageUtils;
 
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES
+
     private Vector<Position> pathToPlayer;
 
     private BufferedImage[][] animations; // 2d image array of the images for player movements
@@ -30,27 +33,56 @@ public class Enemy extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 60;
 
     // CONSTRUCTOR
-    public Enemy(Position position) {
-        super(position);
+    public Enemy(Position position, Playing playing) {
+        super(position, playing);
         loadAnimations();
+        onPath = true;
         speed = 1;
 
+        solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
+
     }
 
-    public void update(Position playerPosition) {
-        updateShortestPath(playerPosition);
+    public void update(Player player) {
+        updateShortestPath(player);
         updateAnimationTick();
+        checkCollision();
+
+        // moving the enemy
+        collisionOn = false;
+        playing.collisionChecker.checkTileEnemy(this, enemyAction);
+        if (collisionOn == false) {
+            switch (enemyAction) {
+                case EnemyConstants.UP:
+                    position.setY(position.getY() - animationSpeed);
+                    break;
+                case EnemyConstants.DOWN:
+                    position.setY(position.getY() + animationSpeed);
+                    break;
+                case EnemyConstants.LEFT:
+                    position.setX(position.getX() - animationSpeed);
+                    break;
+                case EnemyConstants.RIGHT:
+                    position.setX(position.getX() + animationSpeed);
+                    break;
+            }
+        }
     }
 
-    public void updateShortestPath(Position playerPosition) { // THIS WILL CHANGE
+    public void checkCollision() {
+        playing.collisionChecker.checkTileEnemy(this, enemyAction);
+        // add objects and entity checks here
+    }
+
+    public void updateShortestPath(Player player) {
         moving = true;
-        pathToPlayer = AStar(position, playerPosition);
-    }
+        if (onPath == true) {
+            int goalCol = (player.getPosition().getX() + player.solidArea.x) / Game.tileSize;
+            int goalRow = (player.getPosition().getY() + player.solidArea.y) / Game.tileSize;
 
-    public Vector<Position> AStar(Position start, Position goal) { // using A* algorithm for enemy to player
-                                                                   // calculations
+            searchPath(goalCol, goalRow);
+        }
 
-        return null;
     }
 
     // ANIMATION METHODS
@@ -129,4 +161,66 @@ public class Enemy extends MoveableEntity {
             return 0; // Or any default height value you prefer
         }
     }
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (position.getY() + solidArea.y) / Game.tileSize;
+        int startRow = (position.getX() + solidArea.x) / Game.tileSize;
+
+        playing.pathFinder.setNode(startCol, startRow, goalCol, goalRow);
+
+        if (playing.pathFinder.search() == true) {
+            // Next worldX and worldY
+            int nextY = playing.pathFinder.pathList.get(0).col * Game.tileSize;
+            int nextX = playing.pathFinder.pathList.get(0).row * Game.tileSize;
+
+            // Entity's solidArea position
+            int enLeftX = position.getX() + solidArea.x;
+            int enRightX = position.getX() + solidArea.x + solidArea.width;
+            int enTopY = position.getY() + solidArea.y;
+            int enBottomY = position.getY() + solidArea.y + solidArea.height;
+
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
+                enemyAction = EnemyConstants.UP;
+            } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
+                enemyAction = EnemyConstants.DOWN;
+            } else if (enTopY >= nextY && enBottomY < nextY + Game.tileSize) {
+                // left or right
+                if (enLeftX > nextX) {
+                    enemyAction = EnemyConstants.LEFT;
+                }
+                if (enLeftX < nextX) {
+                    enemyAction = EnemyConstants.RIGHT;
+                }
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                // up or left
+                enemyAction = EnemyConstants.UP;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.LEFT;
+                }
+            } else if (enTopY > nextY && enLeftX < nextX) {
+                // up or right
+                enemyAction = EnemyConstants.UP;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.RIGHT;
+                }
+            } else if (enTopY < nextY && enLeftX > nextX) {
+                // down or left
+                enemyAction = EnemyConstants.DOWN;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.LEFT;
+                }
+            } else if (enTopY < nextY && enLeftX < nextX) {
+                // down or right
+                enemyAction = EnemyConstants.DOWN;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.RIGHT;
+                }
+            }
+
+        }
+    }
+
 }

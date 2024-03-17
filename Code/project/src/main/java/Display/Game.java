@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import Gamestates.Gamestate;
 import Gamestates.Menu;
 import Gamestates.Playing;
+import Gamestates.GameOver;
 
 public class Game implements Runnable {
 
@@ -27,8 +28,15 @@ public class Game implements Runnable {
     public final static int screenWidth = tileSize * maxScreenCol;
     public final static int screenHeight = tileSize * maxScreenRow;
 
+    // World size
+    public final static int maxWorldCol = 50;
+    public final static int maxWorldRow = 50;
+    public final static int worldWidth = tileSize * maxWorldCol;
+    public final static int worldHeight = tileSize * maxWorldRow;
+
     private Playing playing;
     private Menu menu;
+    private GameOver gameOver;
 
     public Game() {
         initClasses();
@@ -43,6 +51,7 @@ public class Game implements Runnable {
     private void initClasses() {
         menu = new Menu(this);
         playing = new Playing(this);
+        gameOver = new GameOver(this);
     }
 
     public void startGameLoop() {
@@ -62,6 +71,9 @@ public class Game implements Runnable {
                 break;
             case QUIT:
                 break;
+            case GAMEOVER:
+                gameOver.update();
+                break;
         }
     }
 
@@ -72,11 +84,13 @@ public class Game implements Runnable {
                 break;
             case PLAYING:
                 playing.draw(g);
-                
                 break;
             case OPTIONS:
                 break;
             case QUIT:
+                break;
+            case GAMEOVER:
+                gameOver.draw(g);
                 break;
         }
     }
@@ -136,5 +150,10 @@ public class Game implements Runnable {
 
     public Playing getPlaying() {
         return playing;
+    }
+
+    public GameOver getGameOver()
+    {
+        return gameOver;
     }
 }

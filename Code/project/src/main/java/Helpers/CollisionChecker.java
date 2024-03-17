@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Display.Game;
+import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.AnimationConstants.PlayerConstants;
 import MoveableEntity.MoveableEntity;
 import MoveableEntity.Player;
@@ -19,7 +20,7 @@ import StaticEntity.Trap;
  * a MoveableEntity and the game tiles.
  */
 public class CollisionChecker {
-    
+
     TileManager tileManager;
     private List<StaticEntity> staticEntities; //add
 
@@ -41,7 +42,7 @@ public class CollisionChecker {
      * Checks for collisions between the specified MoveableEntity and the game tiles
      * in the given direction.
      * 
-     * @param entity the MoveableEntity to check for collisions
+     * @param entity    the MoveableEntity to check for collisions
      * @param direction the direction in which the entity is moving
      */
     public void checkTile(MoveableEntity entity, int direction) {
@@ -78,7 +79,7 @@ public class CollisionChecker {
 
                 if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
-            }
+                }
                 break;
             case PlayerConstants.DOWN:
                 entityBottomRow = (entityBottom + entity.speed) / Game.tileSize;
@@ -97,7 +98,7 @@ public class CollisionChecker {
                 if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
                 }
-                break;                
+                break;
         }
         // // Check collisions with static entities
         // for (StaticEntity staticEntity : staticEntities) {
@@ -166,5 +167,59 @@ public class CollisionChecker {
     public void updateStaticEntities() {
         this.staticEntities.clear();
         this.staticEntities.addAll(tileManager.getStaticEntities());
+    }
+
+    public void checkTileEnemy(MoveableEntity entity, int direction) {
+        int entityLeft = entity.position.getX() + entity.solidArea.x;
+        int entityRight = entity.position.getX() + entity.solidArea.x + entity.solidArea.width;
+        int entityTop = entity.position.getY() + entity.solidArea.y;
+        int entityBottom = entity.position.getY() + entity.solidArea.y + entity.solidArea.height;
+
+        // Pinpoints the tile the entity is attempting to move into
+        int entityLeftCol = entityLeft / Game.tileSize;
+        int entityRightCol = entityRight / Game.tileSize;
+        int entityTopRow = entityTop / Game.tileSize;
+        int entityBottomRow = entityBottom / Game.tileSize;
+
+        int tileNum1, tileNum2;
+
+        switch (direction) {
+            case EnemyConstants.UP:
+                entityTopRow = (entityTop - entity.speed) / Game.tileSize;
+                tileNum1 = tileManager.mapTileNum[entityTopRow][entityLeftCol];
+                tileNum2 = tileManager.mapTileNum[entityTopRow][entityRightCol];
+
+                if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
+                    entity.collisionOn = true;
+                }
+                break;
+            case EnemyConstants.LEFT:
+                entityLeftCol = (entityLeft - entity.speed) / Game.tileSize;
+                tileNum1 = tileManager.mapTileNum[entityTopRow][entityLeftCol];
+                tileNum2 = tileManager.mapTileNum[entityBottomRow][entityLeftCol];
+
+                if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
+                    entity.collisionOn = true;
+                }
+                break;
+            case EnemyConstants.DOWN:
+                entityBottomRow = (entityBottom + entity.speed) / Game.tileSize;
+                tileNum1 = tileManager.mapTileNum[entityBottomRow][entityLeftCol];
+                tileNum2 = tileManager.mapTileNum[entityBottomRow][entityRightCol];
+
+                if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
+                    entity.collisionOn = true;
+                }
+                break;
+            case EnemyConstants.RIGHT:
+                entityRightCol = (entityRight + entity.speed) / Game.tileSize;
+                tileNum1 = tileManager.mapTileNum[entityTopRow][entityRightCol];
+                tileNum2 = tileManager.mapTileNum[entityBottomRow][entityRightCol];
+
+                if (tileManager.tile[tileNum1].collision == true || tileManager.tile[tileNum2].collision == true) {
+                    entity.collisionOn = true;
+                }
+                break;
+        }
     }
 }

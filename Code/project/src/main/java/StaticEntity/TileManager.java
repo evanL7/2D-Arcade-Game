@@ -13,6 +13,7 @@ import Display.Game;
 import Helpers.BoardData;
 import MoveableEntity.Enemy;
 import MoveableEntity.MoveableEntity;
+import Gamestates.Playing;
 
 /**
  * The TileManager class manages the tiles used in the game.
@@ -24,16 +25,21 @@ public class TileManager {
     public Tile[] tile; // Stores the tile sprites
     public int mapTileNum[][]; // Stores the map data that indicates which tile to use    
 
+    Playing playing;
+
     /**
      * Constructs a TileManager object.
      */
-    public TileManager() {
+    public TileManager(Playing playing) {
         this.staticEntities = new ArrayList<>();
+    
         tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
-        mapTileNum = new int[Game.maxScreenRow][Game.maxScreenCol];
+        mapTileNum = new int[Game.maxWorldRow][Game.maxWorldCol];
+
+        this.playing = playing;
 
         getTileImage();
-        loadMap("/maps/mapTest.txt");
+        loadMap("/maps/map1.txt");
     }
 
     /**
@@ -90,21 +96,22 @@ public class TileManager {
      * @param g the Graphics object to draw the tiles on
      */
     public void draw(Graphics g) {
-        
-        int col = 0, row = 0, x = 0, y = 0;
-        
-        while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
-            int tileNum = mapTileNum[row][col];
-            g.drawImage(tile[tileNum].image, x, y, Game.tileSize, Game.tileSize, null);
-            
-            col++;
-            x += Game.tileSize;
+        int startCol = Math.max(0, playing.getCamera().getXOffset() / Game.tileSize);
+        int startRow = Math.max(0, playing.getCamera().getYOffset() / Game.tileSize);
+        int endCol = Math.min(Game.maxWorldCol, (playing.getCamera().getXOffset() + Game.screenWidth) / Game.tileSize + 1);
+        int endRow = Math.min(Game.maxWorldRow, (playing.getCamera().getYOffset() + Game.screenHeight) / Game.tileSize + 1);
+    
+        for (int worldRow = startRow; worldRow < endRow; worldRow++) {
+            for (int worldCol = startCol; worldCol < endCol; worldCol++) {
+                int tileNum = mapTileNum[worldRow][worldCol];
+    
+                int worldX = worldCol * Game.tileSize;
+                int worldY = worldRow * Game.tileSize;
 
-            if (col == Game.maxScreenCol) {
-                col = 0;
-                x = 0;
-                row++;
-                y += Game.tileSize;
+                // Check that only the visible tiles are drawn
+                // System.out.println("startCol: " + startCol + " startRow: " + startRow + " endCol: " + endCol + " endRow: " + endRow);
+                
+                g.drawImage(tile[tileNum].image, worldX, worldY, Game.tileSize, Game.tileSize, null);
             }
         }
     }
@@ -121,16 +128,16 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0, row = 0;
-            while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
+            while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
                 String line = br.readLine();
                 String numbers[] = line.split(" ");
-                while (col < Game.maxScreenCol) {
+                while (col < Game.maxWorldCol) {
                     int num = Integer.parseInt(numbers[col]);
 
                     mapTileNum[row][col] = num;
                     col++;
                 }
-                if (col == Game.maxScreenCol) {
+                if (col == Game.maxWorldCol) {
                     col = 0;
                     row++;
                 }
