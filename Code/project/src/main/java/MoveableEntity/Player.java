@@ -25,7 +25,7 @@ import Helpers.AnimationConstants.PlayerConstants;
 public class Player extends MoveableEntity {
 
     // ATTRIBUTES
-    private BufferedImage[][] animations; // 2d image array of the images for player movements
+    public BufferedImage[][] animations; // 2d image array of the images for player movements
     private int playerAction = PlayerConstants.DOWN;
     private boolean up, left, down, right;
     private int animationTick, animationIndex, animationSpeed = 35;
