@@ -13,6 +13,7 @@ public abstract class MoveableEntity {
 
     public Rectangle solidArea;
     public boolean collisionOn = false;
+    public boolean onPath = false;
 
     /**
      * Constructs a MoveableEntity with the given position.
