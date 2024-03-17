@@ -17,8 +17,7 @@ public class PathFinder {
     boolean goalReached = false;
     int step = 0;
 
-    public PathFinder(GamePanel gp, Playing playing) {
-        this.gp = gp;
+    public PathFinder(Playing playing) {
         this.playing = playing;
         setNodes();
 
