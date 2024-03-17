@@ -65,8 +65,8 @@ public class Playing extends State implements Statemethods {
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
 
-        player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker);
-        enemy = new Enemy(new Position(enemyX, enemyY));
+        player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker, this);
+        enemy = new Enemy(new Position(enemyX, enemyY), this);
         trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1);
 
