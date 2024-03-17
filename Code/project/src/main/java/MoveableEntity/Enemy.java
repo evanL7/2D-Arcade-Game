@@ -31,6 +31,7 @@ public class Enemy extends MoveableEntity {
     public Enemy(Position position) {
         super(position);
         loadAnimations();
+        onPath = true;
         speed = 1;
 
     }
@@ -42,13 +43,13 @@ public class Enemy extends MoveableEntity {
 
     public void updateShortestPath(Position playerPosition) { // THIS WILL CHANGE
         moving = true;
-        pathToPlayer = AStar(position, playerPosition);
-    }
+        if (onPath == true) {
+            int goalCol;
+            int goalRow;
 
-    public Vector<Position> AStar(Position start, Position goal) { // using A* algorithm for enemy to player
-                                                                   // calculations
+            // searchPath(goalCol, goalRow);
+        }
 
-        return null;
     }
 
     // ANIMATION METHODS
