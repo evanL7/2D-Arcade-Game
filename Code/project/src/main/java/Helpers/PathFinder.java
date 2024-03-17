@@ -113,13 +113,12 @@ public class PathFinder {
 
     }
 
-    public void search() {
-        while (goalReached == false && step < 300) {
+    public boolean search() {
+        while (goalReached == false && step < 500) {
             int col = currentNode.col;
             int row = currentNode.row;
 
             currentNode.setAsChecked();
-            // checkedList.add(currentNode);
             openList.remove(currentNode);
 
             // CHECK THESE ROW AND COL VALS
@@ -154,14 +153,22 @@ public class PathFinder {
                     }
                 }
             }
+
+            if (openList.size() == 0) { // no nodes in openList
+                break;
+            }
+
             // After the loop finishes, we get the best Node which is our next step
             currentNode = openList.get(bestNodeIndex);
 
             if (currentNode == goalNode) {
                 goalReached = true;
+                trackPath();
             }
+
+            step++;
         }
-        step++;
+        return goalReached;
     }
 
     private void openNode(TileNode node) {
@@ -174,14 +181,11 @@ public class PathFinder {
 
     private void trackPath() {
         // backtrack to find the best path
-
         TileNode current = goalNode;
 
         while (current != startNode) {
+            pathList.add(0, current);
             current = current.parent;
-            if (current != startNode) {
-                // current.setAsPath();
-            }
         }
     }
 }
