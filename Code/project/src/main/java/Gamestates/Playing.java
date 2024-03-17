@@ -103,19 +103,31 @@ public class Playing extends State implements Statemethods {
     // }
 
     // Check collision between player and traps
-    if (collisionChecker.checkPlayerTrapCollision(player, trap)) {
+    if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
         // Decrease score (example: by 10 for hitting a trap)
-        score.incrementScore(-10); // Adjust the amount as per your game's logic
+        score.incrementScore(-1); // Adjust the amount as per your game's logic
         //trap.reset(); // Reset the trap's position
         if (score.getScore() < 0) {
             Gamestate.state = Gamestate.GAMEOVER;
+        }
+        // responsible for despawning trap
+        // not sure where this would go or how to implement this when there are multiple traps
+        else {
+            trap = null;
         }
     }
 
         player.update();
         enemy.update(player);
-        trap.update();
+        
+        if (trap != null) {
+            trap.update();
+        }
+        
         rewardReg.update();
+        
+        // responsible for despawning bonus rewards
+        // not sure where this would go or how to implement this when there are multiple bonus rewards
         if (rewardBonus != null) {
             rewardBonus.update();
             if (rewardBonus.getDespawnTimer() <= 0) {
@@ -137,7 +149,11 @@ public class Playing extends State implements Statemethods {
         // int playerRenderY = player.getPosition().getY() - camera.getYOffset();
         player.render(g);
         enemy.render(g);
-        trap.render(g);
+        
+        if (trap != null) {
+            trap.render(g);
+        }
+        
         rewardReg.render(g);
         if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             rewardBonus.render(g);
