@@ -36,16 +36,16 @@ public class Enemy extends MoveableEntity {
 
     }
 
-    public void update(Position playerPosition) {
-        // updateShortestPath(playerPosition);
+    public void update(Player player) {
+        // updateShortestPath(player);
         updateAnimationTick();
     }
 
-    public void updateShortestPath(Position playerPosition) {
+    public void updateShortestPath(Player player) {
         moving = true;
         if (onPath == true) {
-            int goalCol = (playing.getPlayer().worldY + playing.getPlayer().solidArea.y) / Game.tileSize;
-            int goalRow = (playing.getPlayer().worldX + playing.getPlayer().solidArea.x) / Game.tileSize;
+            int goalCol = (player.getPosition().getX() + playing.getPlayer().solidArea.x) / Game.tileSize;
+            int goalRow = (player.getPosition().getY() + playing.getPlayer().solidArea.y) / Game.tileSize;
 
             searchPath(goalCol, goalRow);
         }
@@ -97,8 +97,8 @@ public class Enemy extends MoveableEntity {
     }
 
     public void searchPath(int goalCol, int goalRow) {
-        int startCol = (worldX + solidArea.x) / Game.tileSize;
-        int startRow = (worldY + solidArea.y) / Game.tileSize;
+        int startCol = (position.getX() + solidArea.x) / Game.tileSize;
+        int startRow = (position.getY() + solidArea.y) / Game.tileSize;
 
         playing.pathFinder.setNode(startCol, startRow, goalCol, goalRow);
 
@@ -108,10 +108,10 @@ public class Enemy extends MoveableEntity {
             int nextY = playing.pathFinder.pathList.get(0).row * Game.tileSize;
 
             // Entity's solidArea position
-            int enLeftX = worldX + solidArea.x;
-            int enRightX = worldX + solidArea.x + solidArea.width;
-            int enTopY = worldY + solidArea.y;
-            int enBottomY = worldY + solidArea.y + solidArea.height;
+            int enLeftX = position.getX() + solidArea.x;
+            int enRightX = position.getX() + solidArea.x + solidArea.width;
+            int enTopY = position.getY() + solidArea.y;
+            int enBottomY = position.getY() + solidArea.y + solidArea.height;
 
             if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
                 enemyAction = EnemyConstants.UP;
