@@ -10,6 +10,7 @@ import Display.Game;
 import Display.Score;
 import Helpers.AnimationConstants.PlayerConstants;
 import Helpers.CollisionChecker;
+import Helpers.PathFinder;
 import Helpers.Position;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
@@ -26,6 +27,7 @@ public class Playing extends State implements Statemethods {
     public TileManager tileManager;
     public CollisionChecker collisionChecker;
     private HashSet<Integer> keysPressed;
+    public PathFinder pathFinder;
 
     private Player player;
     private Enemy enemy;
@@ -61,6 +63,7 @@ public class Playing extends State implements Statemethods {
         keysPressed = new HashSet<>();
         tileManager = new TileManager(this);
         collisionChecker = new CollisionChecker(tileManager);
+        pathFinder = new PathFinder(this);
 
         player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker);
         enemy = new Enemy(new Position(enemyX, enemyY));
@@ -144,9 +147,9 @@ public class Playing extends State implements Statemethods {
                 Gamestate.state = Gamestate.MENU;
                 time.pauseTimer(); // pauses the timer
                 break;
-            
-                // test remove later!!!
-            case KeyEvent.VK_P: 
+
+            // test remove later!!!
+            case KeyEvent.VK_P:
                 Gamestate.state = Gamestate.GAMEOVER;
                 break;
             default:
