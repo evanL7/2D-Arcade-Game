@@ -208,7 +208,11 @@ public class Playing extends State implements Statemethods {
         return time;
     }
 
-    public Score getScoreObj(){
+    public Score getScoreObj() {
         return score;
+    }
+
+    protected void restartGame() {
+        initClasses();
     }
 }
