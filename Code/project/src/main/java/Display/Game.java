@@ -151,4 +151,9 @@ public class Game implements Runnable {
     public Playing getPlaying() {
         return playing;
     }
+
+    public GameOver getGameOver()
+    {
+        return gameOver;
+    }
 }
