@@ -19,21 +19,21 @@ public class PathFinder {
 
     public PathFinder(Playing playing) {
         this.playing = playing;
-        setNodes();
+        initiateNodes();
 
     }
 
-    public void setNodes() {
-        nodeMap = new TileNode[Game.maxScreenRow][Game.maxScreenCol];
+    public void initiateNodes() {
+        nodeMap = new TileNode[Game.maxWorldRow][Game.maxWorldCol];
 
         // place nodes
         int col = 0;
         int row = 0;
-        while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
+        while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
             nodeMap[row][col] = new TileNode(col, row);
 
             col++;
-            if (col == Game.maxScreenCol) {
+            if (col == Game.maxWorldCol) {
                 col = 0;
                 row++;
             }
@@ -44,10 +44,10 @@ public class PathFinder {
     public void resetNodes() {
         int col = 0;
         int row = 0;
-        while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
+        while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
             nodeMap[row][col].resetNode();
             col++;
-            if (col == Game.maxScreenCol) {
+            if (col == Game.maxWorldCol) {
                 col = 0;
                 row++;
             }
@@ -72,7 +72,7 @@ public class PathFinder {
         int row = 0;
         int tileNum;
 
-        while (col < Game.maxScreenCol && row < Game.maxScreenRow) {
+        while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
 
             tileNum = playing.tileManager.mapTileNum[row][col];
 
@@ -87,7 +87,7 @@ public class PathFinder {
             getCost(nodeMap[row][col]);
 
             col++;
-            if (col == Game.maxScreenCol) {
+            if (col == Game.maxWorldCol) {
                 col = 0;
                 row++;
             }
@@ -130,11 +130,11 @@ public class PathFinder {
                 openNode(nodeMap[row - 1][col]);
             }
             // open the below node
-            if (col + 1 < Game.maxScreenCol) {
+            if (col + 1 < Game.maxWorldCol) {
                 openNode(nodeMap[row][col + 1]);
             }
             // open the right node
-            if (row + 1 < Game.maxScreenRow) {
+            if (row + 1 < Game.maxWorldRow) {
                 openNode(nodeMap[row + 1][col]);
             }
 
