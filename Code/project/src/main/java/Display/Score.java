@@ -8,7 +8,7 @@ public class Score {
     private double score;
 
     public Score() {
-        this.score = 0.00;
+        this.score = 2.00;
     }
 
     public double getScore() {
@@ -20,7 +20,7 @@ public class Score {
     }
 
     public void incrementScore(double incrementAmount) {
-        
+
         this.score += incrementAmount;
     }
 
@@ -30,8 +30,8 @@ public class Score {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.BLACK);
+        g.setColor(Color.RED);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString(String.format("%.2f", score), 10, 30);
+        g.drawString(String.format("Score: %.2f", score), 10, 30);
     }
 }
