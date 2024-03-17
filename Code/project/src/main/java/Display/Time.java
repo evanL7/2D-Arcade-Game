@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 public class Time {
 
-    public long startTime; // when the timer initially started
+    private long startTime; // when the timer initially started
     private long pausedTime; // when the timer was paused
     private long totalPausedTime; // how long the timer has been paused
     private String timeElapsedStr; // the string representation of time elapsed
