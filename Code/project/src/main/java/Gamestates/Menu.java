@@ -85,9 +85,9 @@ public class Menu extends State implements Statemethods {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             Gamestate.state = Gamestate.PLAYING;
-
             // allows this class to get the time object from Playing and resume the timer
             Playing playingState = game.getPlaying(); 
+            playingState.windowFocusLost();            
             playingState.getTime().resumeTimer();
         }
     }
