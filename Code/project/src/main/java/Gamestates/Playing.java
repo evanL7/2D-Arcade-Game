@@ -230,17 +230,6 @@ public class Playing extends State implements Statemethods {
                 Gamestate.state = Gamestate.MENU;
                 time.pauseTimer(); // pauses the timer
                 break;
-
-            // test remove later!!!
-            case KeyEvent.VK_P:
-                Gamestate.state = Gamestate.GAMEOVER;
-                break;
-
-            // test remove later!!!
-            case KeyEvent.VK_B:
-                Gamestate.state = Gamestate.WIN;
-                break;
-
             default:
                 if (!keysPressed.contains(keyCode)) {
                     keysPressed.add(keyCode);
