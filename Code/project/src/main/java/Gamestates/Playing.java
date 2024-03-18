@@ -58,15 +58,6 @@ public class Playing extends State implements Statemethods {
     int enemyX = 20 * Game.tileSize;
     int enemyY = 20 * Game.tileSize;
 
-    int trapX = Game.screenWidth / 2 - Game.tileSize / 2;
-    int trapY = Game.screenHeight / 3 - Game.tileSize / 2;
-
-    int regRewardX = Game.screenWidth / 4 - Game.tileSize / 4;
-    int regRewardY = Game.screenHeight / 4 - Game.tileSize / 4;
-
-    int bonusRX = Game.screenWidth / 2 - Game.tileSize / 3;
-    int bonusRY = Game.screenHeight / 4 - Game.tileSize / 5;
-
     public Playing(Game game) {
         super(game);
         initClasses();
