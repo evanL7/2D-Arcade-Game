@@ -152,10 +152,19 @@ public class Playing extends State implements Statemethods {
                 reward.remove();
             }
 
-            else if(reward != null){
+            else if(reward != null) {
                 reward.update();
             }
+        }
 
+        for (Door door: StaticEntity.getAllDoors()) {
+            if (door != null && player.getWin() == 3) {
+                // add code for showing door opening animation
+
+                if (collisionChecker.checkPlayerDoorCollision(player, door)) {
+                    Gamestate.state = Gamestate.WIN;
+                }
+            }
         }
         
         player.update();
@@ -220,17 +229,6 @@ public class Playing extends State implements Statemethods {
                 Gamestate.state = Gamestate.MENU;
                 time.pauseTimer(); // pauses the timer
                 break;
-
-            // test remove later!!!
-            case KeyEvent.VK_P:
-                Gamestate.state = Gamestate.GAMEOVER;
-                break;
-
-            // test remove later!!!
-            case KeyEvent.VK_B:
-                Gamestate.state = Gamestate.WIN;
-                break;
-
             default:
                 if (!keysPressed.contains(keyCode)) {
                     keysPressed.add(keyCode);
