@@ -76,6 +76,8 @@ public class TileManager {
             loadTile("tileWallVertFrontTop", 15, true);
             loadTile("tileWallVertFrontBot", 16, true);
             loadTile("tileWallVertSouthEnd", 17, true);
+            loadTile("tileRoomWallTopLeftCorner", 18, true);
+            loadTile("tileRoomWallBotLeftCorner", 19, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
