@@ -88,26 +88,6 @@ public class GameWin extends State implements Statemethods {
         }
     }
 
-    @Override
-	public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-	public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-	public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-	public void mouseMoved(MouseEvent e) {
-
-    }
-
     /**
      * Handles key press event.
      * 
