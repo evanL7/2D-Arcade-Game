@@ -17,7 +17,7 @@ import Display.Game;
 
 /**
  * The GameOver class represents the game over screen displayed when the game ends.
- * It shows the final score and elapsed time, and provides options to restart the game or quit.
+ * It provides options to restart the game or quit.
  * 
  * <p>Font source: https://tinyworlds.itch.io/free-pixel-font-thaleah
  */
@@ -70,16 +70,6 @@ public class GameOver extends State implements Statemethods {
 
             g.drawString("GAME OVER!", x, y);
             
-            // Draws score
-            y += fm.getHeight();
-            x = (Game.screenWidth - fm.stringWidth("SCORE: " + playingState.getScoreObj().getScore())) / 2;
-            g.drawString("SCORE: " + playingState.getScoreObj().getScore(), x, y);
-
-            y += fm.getHeight();
-            x = (Game.screenWidth - fm.stringWidth("TIME: " + playingState.getTime().getElapsedTime())) / 2;
-            g.drawString("TIME: " + playingState.getTime().getElapsedTime(), x, y);
-
-
             y += fm.getHeight();  // Move down for the second line
             x = (Game.screenWidth - fm.stringWidth("PRESS R TO RESTART THE GAME")) / 2;
             g.drawString("PRESS R TO RESTART THE GAME", x, y);
