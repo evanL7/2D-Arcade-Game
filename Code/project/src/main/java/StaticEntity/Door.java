@@ -11,15 +11,16 @@ import javax.imageio.ImageIO;
 import Display.Game;
 import Helpers.Position;
 
-
 /**
  * Represents a door in the game.
  * Used to transition between levels.
- * Source of door sprite: https://www.youtube.com/watch?v=xYtXz34IJdY&list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
+ * Source of door sprite:
+ * https://www.youtube.com/watch?v=xYtXz34IJdY&list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
  */
 public class Door extends StaticEntity {
 
     private BufferedImage doorImage;
+    private BufferedImage doorOpenImage;
 
     public Door(Position position) {
         super(position);
@@ -28,6 +29,11 @@ public class Door extends StaticEntity {
             InputStream is = getClass().getResourceAsStream("/assets/door.png");
             doorImage = ImageIO.read(is);
             is.close();
+
+            // Load the open door image from the file
+            InputStream isOpen = getClass().getResourceAsStream("/assets/door.png"); // change this
+            doorOpenImage = ImageIO.read(isOpen);
+            isOpen.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
