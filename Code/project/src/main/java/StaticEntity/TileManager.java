@@ -58,23 +58,23 @@ public class TileManager {
     private void getTileImage() {
         try {
             // Load the tile sprites
-            loadTile("/assets/tileFloor.png", 0, false);
-            loadTile("/assets/tileWallN.png", 1, true);
-            loadTile("/assets/tileWallS.png", 2, true);
-            loadTile("/assets/tileWallE.png", 3, true);
-            loadTile("/assets/tileWallW.png", 4, true);
-            loadTile("/assets/tileCornerNW.png", 5, true);
-            loadTile("/assets/tileCornerNE.png", 6, true);
-            loadTile("/assets/tileCornerSW.png", 7, true);
-            loadTile("/assets/tileCornerSE.png", 8, true);
-            loadTile("/assets/tileRoomWall.png", 9, true);
-            loadTile("/assets/tileRoomWallBotMid.png", 10, true);
-            loadTile("/assets/tileRoomWallBotRightCorner.png", 11, true);
-            loadTile("/assets/tileRoomWallTopMid.png", 12, true);
-            loadTile("/assets/tileRoomWallTopRightCorner.png", 13, true);
-            loadTile("/assets/tileWallVert.png", 14, true);
-            loadTile("/assets/tileWallVertFrontTop.png", 15, true);
-            loadTile("/assets/tileWallVertFrontBot.png", 16, true);
+            loadTile("tileFloor", 0, false);
+            loadTile("tileWallN", 1, true);
+            loadTile("tileWallS", 2, true);
+            loadTile("tileWallE", 3, true);
+            loadTile("tileWallW", 4, true);
+            loadTile("tileCornerNW", 5, true);
+            loadTile("tileCornerNE", 6, true);
+            loadTile("tileCornerSW", 7, true);
+            loadTile("tileCornerSE", 8, true);
+            loadTile("tileRoomWall", 9, true);
+            loadTile("tileRoomWallBotMid", 10, true);
+            loadTile("tileRoomWallBotRightCorner", 11, true);
+            loadTile("tileRoomWallTopMid", 12, true);
+            loadTile("tileRoomWallTopRightCorner", 13, true);
+            loadTile("tileWallVert", 14, true);
+            loadTile("tileWallVertFrontTop", 15, true);
+            loadTile("tileWallVertFrontBot", 16, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,7 +83,7 @@ public class TileManager {
     private void loadTile(String filePath, int index, boolean collision) {
         try {
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(getClass().getResourceAsStream(filePath));
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/" + filePath + ".png"));
             tile[index].collision = collision;
         } catch (Exception e) {
             e.printStackTrace();
