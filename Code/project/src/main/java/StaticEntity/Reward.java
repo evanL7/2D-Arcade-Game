@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 import Display.Game;
 import Helpers.Position;
 import Helpers.RewardType;
-import MoveableEntity.MoveableEntity;
-import MoveableEntity.Player;
+// import MoveableEntity.MoveableEntity;
+// import MoveableEntity.Player;
 
 // Regular Reward sprite is 16x16
 // I couldn't find any free sprites so I recreated 1

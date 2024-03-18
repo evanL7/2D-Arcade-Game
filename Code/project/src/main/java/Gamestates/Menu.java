@@ -6,7 +6,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+//import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
 

@@ -12,7 +12,7 @@ import Helpers.AnimationConstants.*;
 // adds animations for enities
 public abstract class Animations {
     // ATTRIBUTES
-    private BufferedImage img;
+    //private BufferedImage img;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
 
     // Tile settings

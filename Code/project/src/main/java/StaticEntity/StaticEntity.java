@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 
 import Helpers.Position;
-import MoveableEntity.MoveableEntity;
-import MoveableEntity.Player;
+// import MoveableEntity.MoveableEntity;
+// import MoveableEntity.Player;
 import Helpers.ImageUtils;
 
 //import java.util.Timer;

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import Helpers.ImageUtils;
-import Display.Game;
+// import Display.Game;
 import Gamestates.Playing;
 import Helpers.Position;
 

@@ -15,10 +15,10 @@ import Display.Score;
 import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.CollisionChecker;
-import Helpers.ImageUtils;
+// import Helpers.ImageUtils;
 import Helpers.Position;
-import StaticEntity.Reward;
-import StaticEntity.StaticEntity;
+// import StaticEntity.Reward;
+// import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
 import Helpers.AnimationConstants.PlayerConstants;
 

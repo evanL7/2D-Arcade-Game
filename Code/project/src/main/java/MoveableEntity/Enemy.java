@@ -5,13 +5,13 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Vector;
+//import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.Rectangle;
 import Display.Game;
-import Gamestates.Gamestate;
+//import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.Position;
@@ -30,7 +30,7 @@ import Helpers.ImageUtils;
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES
 
-    private Vector<Position> pathToPlayer;
+    //private Vector<Position> pathToPlayer;
 
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int enemyAction = EnemyConstants.DOWN;
