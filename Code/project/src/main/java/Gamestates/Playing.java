@@ -75,12 +75,9 @@ public class Playing extends State implements Statemethods {
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
 
-        player = new Player(new Position(playerX, playerY), collisionChecker, this, score, tileManager);
+        player = new Player(new Position(playerX, playerY), collisionChecker, this, score);
 
         enemy = new Enemy(new Position(enemyX, enemyY), this);
-        // player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker,
-        // this);
-        // enemy = new Enemy(new Position(enemyX, enemyY), this);
 
         assetManager = new AssetManager(this);
         // Currently set to 25 static entities can be displayed, adjust as needed
@@ -104,7 +101,7 @@ public class Playing extends State implements Statemethods {
 
         if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
-                score.incrementScore(7);
+                score.incrementScore(rewardBonus.getRewardAmount());
             }
         }
 
@@ -121,9 +118,8 @@ public class Playing extends State implements Statemethods {
         // Check collision between player and traps
         if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
             // Decrease score (example: by 10 for hitting a trap)
-            score.incrementScore(-1); // Adjust the amount as per your game's logic
-            // trap.reset(); // Reset the trap's position
-            if (score.getScore() < 0) {
+            score.incrementScore(trap.getDamage()); // Adjust the amount as per your game's logic
+            if (score.getScore() <= 0) {
                 Gamestate.state = Gamestate.GAMEOVER;
             }
             // responsible for despawning trap

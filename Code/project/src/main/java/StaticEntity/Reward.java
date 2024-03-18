@@ -32,7 +32,7 @@ import Helpers.RewardType;
 public class Reward extends StaticEntity {
 
     /** The amount of the reward that a player receives. */
-    private float rewardAmount;
+    private double rewardAmount = 0.50;
 
     /** The number of rewards that players need to collect to complete the level. */
     private int rewardsToCollect;
@@ -90,7 +90,7 @@ public class Reward extends StaticEntity {
      * 
      * @return The amount of the reward.
      */
-    public float getRewardAmount() {
+    public double getRewardAmount() {
         return rewardAmount;
     }
 

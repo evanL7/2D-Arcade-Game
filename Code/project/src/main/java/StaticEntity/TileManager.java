@@ -10,9 +10,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import Display.Game;
-// import Helpers.BoardData;
-// import MoveableEntity.Enemy;
-// import MoveableEntity.MoveableEntity;
 import Gamestates.Playing;
 
 /**
@@ -83,10 +80,10 @@ public class TileManager {
         }
     }
 
-    private void loadTile(String fileName, int index, boolean collision) {
+    private void loadTile(String filePath, int index, boolean collision) {
         try {
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/" + fileName + ".png"));
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/" + filePath + ".png"));
             tile[index].collision = collision;
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,35 +147,5 @@ public class TileManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Gets the list of enemies from the static entities.
-     * 
-     * @return The list of enemy entities.
-     */
-    // public List<MoveableEntity> getEnemies() {
-    //     List<MoveableEntity> enemies = new ArrayList<>();
-    //     for (MoveableEntity entity : moveableEntities) {
-    //         if (entity instanceof Enemy) {
-    //             enemies.add(entity);
-    //         }
-    //     }
-    //     return enemies;
-    // }
-
-    /**
-     * Gets the list of traps from the static entities.
-     * 
-     * @return The list of trap entities.
-     */
-    public List<StaticEntity> getTraps() {
-        List<StaticEntity> traps = new ArrayList<>();
-        for (StaticEntity entity : staticEntities) {
-            if (entity instanceof Trap) {
-                traps.add(entity);
-            }
-        }
-        return traps;
     }
 }

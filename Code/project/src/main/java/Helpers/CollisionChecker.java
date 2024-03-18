@@ -8,8 +8,10 @@ import java.util.List;
 import Display.Game;
 import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.AnimationConstants.PlayerConstants;
+import MoveableEntity.Enemy;
 import MoveableEntity.MoveableEntity;
 import MoveableEntity.Player;
+import StaticEntity.Door;
 import StaticEntity.Reward;
 import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
@@ -100,12 +102,6 @@ public class CollisionChecker {
                 }
                 break;
         }
-        // // Check collisions with static entities
-        // for (StaticEntity staticEntity : staticEntities) {
-        //     if (checkCollision(entity, staticEntity)) {
-        //         staticEntity.onCollide(entity);
-        //     }
-        // }
     }
 
     /**
@@ -186,6 +182,63 @@ public class CollisionChecker {
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
+        
+        // Print the result of the collision check
+        System.out.println("Collision Detected: " + result);
+        
+        // Return the collision result
+        return result;
+    }
+
+    /**
+     * Checks for collisions between the specified player and doors.
+     * 
+     * @param player The player entity.
+     * @param door The door entity.
+     * @return true if collision occurred, false otherwise.
+     */
+    public boolean checkPlayerDoorCollision(Player player, Door door) {
+        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
+                                                player.getWidth(), player.getHeight());
+        
+        Rectangle doorBounds = new Rectangle(door.getPosition().getX(), door.getPosition().getY(),
+                                                door.getWidth(), door.getHeight());
+        
+        // Print information about the bounding boxes
+        System.out.println("Player Bounds: " + playerBounds);
+        System.out.println("Door Bounds: " + doorBounds);
+        
+        // Check if the bounding boxes intersect
+        boolean result = playerBounds.intersects(doorBounds);
+        
+        // Print the result of the collision check
+        System.out.println("Collision Detected: " + result);
+        
+        // Return the collision result
+        return result;
+    }
+
+    /**
+     * Checks for collisions between the specified player and enemies.
+     * 
+     * @param player The player entity.
+     * @param enemy The enemy entity.
+     * @return true if collision occurred, false otherwise.
+     */
+    public boolean checkPlayerEnemyCollision(Player player, Enemy enemy) {
+        
+        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
+                                                player.getWidth(), player.getHeight());
+        
+        Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(),
+                                                enemy.getWidth(), enemy.getHeight());
+        
+        // Print information about the bounding boxes
+        System.out.println("Player Bounds: " + playerBounds);
+        System.out.println("Enemy Bounds: " + enemyBounds);
+        
+        // Check if the bounding boxes intersect
+        boolean result = playerBounds.intersects(enemyBounds);
         
         // Print the result of the collision check
         System.out.println("Collision Detected: " + result);

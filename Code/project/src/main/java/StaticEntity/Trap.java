@@ -26,7 +26,7 @@ import Helpers.Position;
 public class Trap extends StaticEntity {
 
     /** The amount of damage the trap inflicts. */
-    private float damage;
+    private double damage = -0.5;
 
     private BufferedImage[][] animations; // 2d image array of the images for trap movements
     private int animationTick, animationIndex, animationSpeed = 150;
@@ -53,7 +53,7 @@ public class Trap extends StaticEntity {
      *
      * @return The amount of damage.
      */
-    public float getDamage() {
+    public double getDamage() {
         return damage;
     }
 

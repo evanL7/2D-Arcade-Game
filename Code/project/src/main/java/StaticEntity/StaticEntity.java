@@ -1,7 +1,6 @@
 package StaticEntity;
 
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Method;
 import java.awt.*;
 
 import Helpers.Position;
@@ -22,11 +21,9 @@ import java.util.List;
  */
 public abstract class StaticEntity {
 
-    // Attributes
-
     /** The position of the static entity in the game world. */
     protected Position position;
-
+    
     /**
      * The despawn timer for the entity, measured in milliseconds. A value of -1
      * indicates despawning only on collision.
@@ -98,6 +95,21 @@ public abstract class StaticEntity {
             }
         }
         return traps;
+    }
+
+    /**
+     * Method to get all doors.
+     * 
+     * @return List of all door entities.
+     */
+    public static List<Door> getAllDoors() {
+        List<Door> doors = new ArrayList<>();
+        for (StaticEntity entity : staticEntities) {
+            if (entity instanceof Door) {
+                doors.add((Door) entity);
+            }
+        }
+        return doors;
     }
 
     // Method to clear all static entities

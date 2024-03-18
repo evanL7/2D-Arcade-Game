@@ -15,11 +15,7 @@ import Display.Score;
 import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.CollisionChecker;
-// import Helpers.ImageUtils;
 import Helpers.Position;
-// import StaticEntity.Reward;
-// import StaticEntity.StaticEntity;
-import StaticEntity.TileManager;
 import Helpers.AnimationConstants.PlayerConstants;
 
 /**
@@ -34,9 +30,6 @@ public class Player extends MoveableEntity {
     private int playerAction = PlayerConstants.DOWN;
     private boolean up, left, down, right;
     private int animationTick, animationIndex, animationSpeed = 35;
-
-    private TileManager tileManager;
-
     private CollisionChecker collisionChecker;
 
     private BufferedImage playerImage;
@@ -58,13 +51,11 @@ public class Player extends MoveableEntity {
      * @param tileManager      The tile manager containing information about the
      *                         game map.
      */
-    public Player(Position position, CollisionChecker collisionChecker, Playing playing, Score scoreObject,
-            TileManager tileManager) {
+    public Player(Position position, CollisionChecker collisionChecker, Playing playing, Score scoreObject) {
         // need to determine the players start position and specific sprite
         super(position, playing);
         this.collisionChecker = collisionChecker;
         this.scoreObject = scoreObject; // Assign the score object
-        this.tileManager = tileManager;
 
         loadAnimations();
         loadPlayerImage();
