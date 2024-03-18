@@ -91,31 +91,31 @@ public class Playing extends State implements Statemethods {
     @Override
     public void update() {
         // Check collision between player and rewards
-    // if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
-    //     score.incrementScore(rewardReg.getRewardAmount());
-    //    // rewardReg.reset(); // Reset the reward's position
-    // }
-    // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-    //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
-    //         score.incrementScore(rewardBonus.getRewardAmount());
-    //        // rewardBonus.reset(); // Reset the reward's position
-    //     }
-    // }
+        // if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
+        //     score.incrementScore(rewardReg.getRewardAmount());
+        //    // rewardReg.reset(); // Reset the reward's position
+        // }
+        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
+        //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
+        //         score.incrementScore(rewardBonus.getRewardAmount());
+        //        // rewardBonus.reset(); // Reset the reward's position
+        //     }
+        // }
 
-    // Check collision between player and traps
-    if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
-        // Decrease score (example: by 10 for hitting a trap)
-        score.incrementScore(-1); // Adjust the amount as per your game's logic
-        //trap.reset(); // Reset the trap's position
-        if (score.getScore() < 0) {
-            Gamestate.state = Gamestate.GAMEOVER;
+        // Check collision between player and traps
+        if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
+            // Decrease score (example: by 10 for hitting a trap)
+            score.incrementScore(-1); // Adjust the amount as per your game's logic
+            //trap.reset(); // Reset the trap's position
+            if (score.getScore() < 0) {
+                Gamestate.state = Gamestate.GAMEOVER;
+            }
+            // responsible for despawning trap
+            // not sure where this would go or how to implement this when there are multiple traps
+            else {
+                trap = null;
+            }
         }
-        // responsible for despawning trap
-        // not sure where this would go or how to implement this when there are multiple traps
-        else {
-            trap = null;
-        }
-    }
 
         player.update();
         enemy.update(player);

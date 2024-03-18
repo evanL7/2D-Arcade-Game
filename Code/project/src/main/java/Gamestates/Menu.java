@@ -3,7 +3,6 @@ package Gamestates;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
@@ -58,7 +57,7 @@ public class Menu extends State implements Statemethods {
             // Set the font
             g.setFont(customFont);
 
-            String text = "Grade Quest";
+            String text = Game.gameTitle;
 
             int x = getXCenteredString(g, text);
             int y = Game.tileSize * 3;
@@ -99,10 +98,6 @@ public class Menu extends State implements Statemethods {
             if (commandNum == 2) {
                 g.drawString(">", x - Game.tileSize / 2, y);
             }
-
-            // y += fm.getHeight();  // Move down for the second line
-            // x = (Game.screenWidth - fm.stringWidth("PRESS ESC TO RETURN BACK")) / 2;
-            // g.drawString("PRESS ESC TO RETURN BACK", x, y);
         }
     }
 
@@ -110,8 +105,6 @@ public class Menu extends State implements Statemethods {
         int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
         return (Game.screenWidth - length) / 2;
     }
-
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -148,7 +141,7 @@ public class Menu extends State implements Statemethods {
                     Gamestate.state = Gamestate.PLAYING;
                     // allows this class to get the time object from Playing and resume the timer
                     Playing playingState = game.getPlaying(); 
-                    playingState.windowFocusLost();            
+                    playingState.windowFocusLost();
                     playingState.getTime().resumeTimer();
                     break;
                 case 1:
@@ -159,14 +152,6 @@ public class Menu extends State implements Statemethods {
                     break;
             }
         }
-
-        // if (keyCode == KeyEvent.VK_ENTER) {
-        //     Gamestate.state = Gamestate.PLAYING;
-        //     // allows this class to get the time object from Playing and resume the timer
-        //     Playing playingState = game.getPlaying(); 
-        //     playingState.windowFocusLost();            
-        //     playingState.getTime().resumeTimer();
-        // }
     }
 
     @Override

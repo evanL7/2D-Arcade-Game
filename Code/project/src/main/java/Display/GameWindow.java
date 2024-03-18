@@ -17,7 +17,7 @@ public class GameWindow {
         jframe.setLocationRelativeTo(null);
         jframe.setResizable(false);
         jframe.setVisible(true);
-        jframe.setTitle("2D Game");
+        jframe.setTitle(Game.gameTitle);
 		jframe.addWindowFocusListener(new WindowFocusListener() {
 			@Override
 			public void windowLostFocus(WindowEvent e) {
