@@ -92,8 +92,6 @@ public class Playing extends State implements Statemethods {
         camera = new Camera(player);
         score = new Score();
         time = new Time();
-
-       
     }
 
     @Override
@@ -104,6 +102,7 @@ public class Playing extends State implements Statemethods {
             if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
                 score.decreaseScore(trap.getDamage()); 
                 if (score.getScore() < 0) {
+                    player.resetWin();
                     Gamestate.state = Gamestate.GAMEOVER;
                 }
                 trap.remove();
@@ -116,7 +115,8 @@ public class Playing extends State implements Statemethods {
         }
 
         for (Enemy enemy : MoveableEntity.getAllEnemies()) {
-            if (enemy != null && collisionChecker.checkPlayerEnemyCollision(player, enemy)){
+            if (enemy != null && collisionChecker.checkPlayerEnemyCollision(player, enemy)) {
+                player.resetWin();
                 Gamestate.state = Gamestate.GAMEOVER;
             }
         }
@@ -153,6 +153,7 @@ public class Playing extends State implements Statemethods {
                 // add code for showing door opening animation
 
                 if (collisionChecker.checkPlayerDoorCollision(player, door)) {
+                    player.resetWin();
                     Gamestate.state = Gamestate.WIN;
                 }
             }

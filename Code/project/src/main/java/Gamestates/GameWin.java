@@ -98,12 +98,12 @@ public class GameWin extends State implements Statemethods {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_R:
-                System.out.println("Restarting the game"); // test
+                //System.out.println("Restarting the game"); // test
                 playingState.restartGame();
                 Gamestate.state = Gamestate.PLAYING;
                 break;
             case KeyEvent.VK_Q:
-                System.out.println("Exiting the program"); // test
+                //System.out.println("Exiting the program"); // test
                 System.exit(0);
                 break;
             default:

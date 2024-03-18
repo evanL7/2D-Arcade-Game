@@ -258,6 +258,10 @@ public class Player extends MoveableEntity {
         return win;
     }
 
+    public void resetWin() {
+        win = 0;
+    }
+
     /**
      * Checks if the player is moving left.
      * 
