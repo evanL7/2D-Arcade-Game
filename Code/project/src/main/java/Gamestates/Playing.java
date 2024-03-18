@@ -207,6 +207,21 @@ public class Playing extends State implements Statemethods {
             }
         }
 
+        // Check collision between player and traps
+        for (Trap trap : StaticEntity.getAllTraps()) {
+            if(trap != null){
+                trap.render(g);
+            }
+        }
+
+        // Check collision between player and rewards
+        for (Reward reward : StaticEntity.getAllRewards()) {
+            if(reward != null){
+                reward.render(g);
+            }
+
+        }
+
         // if (trap != null) {
         //     trap.render(g);
         // }
