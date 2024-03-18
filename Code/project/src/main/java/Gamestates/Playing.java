@@ -2,11 +2,7 @@ package Gamestates;
 
 import java.awt.Graphics;
 import java.util.HashSet;
-
-
-
 import java.awt.event.KeyEvent;
-//import java.awt.event.MouseEvent;
 
 import Display.Camera;
 import Display.Game;
@@ -44,9 +40,6 @@ public class Playing extends State implements Statemethods {
     private Player player;
     private Enemy enemy;
     private Time time; // Time object
-
-    public int worldX = Game.tileSize * 23;
-    public int worldY = Game.tileSize * 21;
 
     public int tempPlayerX = 100;
     public int tempplayerY = 200;

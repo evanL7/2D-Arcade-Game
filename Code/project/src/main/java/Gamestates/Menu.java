@@ -13,8 +13,9 @@ import java.io.InputStream;
 import Display.Game;
 
 /**
- * The Menu class represents the main menu of the game.
- * It currently displays options for starting the game or returning back.
+ * The Menu class represents the menu state of the game.
+ * It displays the game title and allows the player to navigate through the menu.
+ * The menu uses a custom font and handles keyboard input to select options.
  * Font source: https://tinyworlds.itch.io/free-pixel-font-thaleah
  */
 public class Menu extends State implements Statemethods {
@@ -29,7 +30,7 @@ public class Menu extends State implements Statemethods {
      */
     public Menu(Game game) {
         super(game);
-
+        
         try {
             // Load the external font file
             InputStream fontStream = getClass().getClassLoader().getResourceAsStream("fonts/ThaleahFat.ttf");

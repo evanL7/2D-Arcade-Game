@@ -8,6 +8,12 @@ import Gamestates.Playing;
 import Gamestates.GameOver;
 import Gamestates.GameWin;
 
+
+/**
+ * The `Game` class represents the main game loop and controls the overall game flow.
+ * It implements the `Runnable` interface to allow it to be executed in a separate thread.
+ * The game loop continuously updates and renders the game state until the game is exited.
+ */
 public class Game implements Runnable {
 
     private GameWindow gameWindow;
