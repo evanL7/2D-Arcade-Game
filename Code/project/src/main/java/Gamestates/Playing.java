@@ -123,7 +123,7 @@ public class Playing extends State implements Statemethods {
 
         // Check collision between player and rewards
         for (Reward reward : StaticEntity.getAllRewards()) {
-            if (reward != null && collisionChecker.checkPlayerRewardCollision(player, reward)) {
+            if (reward != null && collisionChecker.checkPlayerRewardCollision(player, reward) && reward.rewardType == RewardType.RegularReward) {
                 player.increaseWin();
                 
                 if (player.getWin() == 3) {
@@ -133,14 +133,14 @@ public class Playing extends State implements Statemethods {
                 break; // Exit the loop after handling the collision with one reward
             }
 
-            // despawn
-            else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
-                reward.remove();
-            }
-
             else if (reward != null &&  collisionChecker.checkPlayerRewardCollision(player, reward) && reward.rewardType == RewardType.BonusReward) {
                 score.incrementScore(reward.getRewardAmount());
                 reward.remove(); 
+            }
+
+            // despawn
+            else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
+                reward.remove();
             }
 
             else if(reward != null){
