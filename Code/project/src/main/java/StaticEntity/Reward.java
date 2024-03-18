@@ -121,13 +121,11 @@ public class Reward extends StaticEntity {
         this.rewardsToCollect = rewardsToCollect;
     }
 
-    public void render(Graphics g) // add
-    {
+    public void render(Graphics g) {
         g.drawImage(rewardImage, position.getX(), position.getY(), Game.tileSize + 2, 30, null);
     }
 
-    private void loadRewardImage() // add
-    {
+    private void loadRewardImage() {
         if (rewardType == RewardType.RegularReward) {
             try {
                 InputStream is = getClass().getResourceAsStream("/assets/Grad_Cap.png");
@@ -149,13 +147,11 @@ public class Reward extends StaticEntity {
         }
     }
 
-    public int getDespawnTimer() // add
-    {
+    public int getDespawnTimer() {
         return despawnTimer;
     }
 
-    public void update() // add
-    {
+    public void update() {
         if (rewardType == RewardType.BonusReward && despawnTimer > 0) {
             despawnTimer--;
         }
