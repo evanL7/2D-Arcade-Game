@@ -241,11 +241,14 @@ public class CollisionChecker {
      */
     public boolean checkPlayerEnemyCollision(Player player, Enemy enemy) {
         
-        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                                                player.getWidth(), player.getHeight());
+        //Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
+           //                                     player.getWidth(), player.getHeight());
         
-        Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(),
-                                                enemy.getWidth(), enemy.getHeight());
+        //Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(),
+         //                                       enemy.getWidth(), enemy.getHeight());
+
+        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
+        Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         
         // Print information about the bounding boxes
         //System.out.println("Player Bounds: " + playerBounds);
