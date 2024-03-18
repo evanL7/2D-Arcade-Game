@@ -13,6 +13,12 @@ import Display.Game;
 import Helpers.ImageUtils;
 import Helpers.Position;
 
+
+/**
+ * Represents a door in the game.
+ * Used to transition between levels.
+ * Source of door sprite: https://www.youtube.com/watch?v=xYtXz34IJdY&list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
+ */
 public class Door extends StaticEntity {
 
     private BufferedImage doorImage;
