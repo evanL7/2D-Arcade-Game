@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import Helpers.SoundManager;
+
 public class Score {
     private double score;
 
@@ -20,6 +22,10 @@ public class Score {
     }
 
     public void incrementScore(double incrementAmount) {
+
+        //String soundFilePath = "C:\\Users\\mouss\\CMPT276S24_group3\\Code\\project\\src\\main\\resources\\sounds\\bloop_x.wav";
+        String soundFilePath = "/sounds/bloop_x.wav";
+        SoundManager.playSound(soundFilePath);
 
         this.score += incrementAmount;
     }

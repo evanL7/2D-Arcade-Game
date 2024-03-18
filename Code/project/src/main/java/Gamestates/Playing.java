@@ -12,8 +12,10 @@ import Display.Time;
 import Helpers.AnimationConstants.PlayerConstants;
 import Helpers.AssetManager;
 import Helpers.CollisionChecker;
+import Helpers.MusicManager;
 import Helpers.PathFinder;
 import Helpers.Position;
+import Helpers.SoundManager;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import StaticEntity.Reward;
@@ -65,6 +67,11 @@ public class Playing extends State implements Statemethods {
     public Playing(Game game) {
         super(game);
         initClasses();
+
+        // To play background music
+        //MusicManager.playMusic("/resources/assets/music/Optimistic-background-music.mp3");
+        //MusicManager.playMusic("assests/music/Optimistic-background-music.mp3");
+
     }
 
     private void initClasses() {
@@ -98,6 +105,8 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void update() {
+
+        
 
         if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {

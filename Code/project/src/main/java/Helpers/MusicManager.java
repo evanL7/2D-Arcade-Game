@@ -10,7 +10,7 @@ import java.io.IOException;
 public class MusicManager {
     private static Clip clip;
 
-    private static final int BUFFER_SIZE = 4096;
+    //private static final int BUFFER_SIZE = 4096;
 
     /**
      * Plays background music from the given file path.

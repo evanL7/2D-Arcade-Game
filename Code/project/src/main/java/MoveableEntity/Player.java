@@ -70,28 +70,7 @@ public class Player extends MoveableEntity {
      */
     public void update() {
         updatePos();
-
-        // // Check collision with rewards
-        // for (StaticEntity entity : tileManager.getStaticEntities()) {
-        // if (entity instanceof Reward) {
-        // if (entity.getBoundingBox().intersects(this.getBoundingBox())) {
-        // // Collision with reward detected
-        // ((Reward) entity).onCollide(this);
-        // // Remove the reward from the game world
-        // tileManager.getStaticEntities().remove(entity);
-        // break; // Exit loop after detecting collision with one reward
-        // }
-        // }
-        // }
-
-        // // Check collision with enemies
-        // for (MoveableEntity enemy : tileManager.getEnemies()) {
-        // if (enemy.getBoundingBox().intersects(this.getBoundingBox())) {
-        // // Collision with enemy detected
-        // // Handle collision with enemy
-        // break; // Exit loop after detecting collision with one enemy
-        // }
-        // }
+        updateAnimationTick();
 
         // // Check collision with traps
         // for (StaticEntity trap : tileManager.getTraps()) {
@@ -101,8 +80,6 @@ public class Player extends MoveableEntity {
         // break; // Exit loop after detecting collision with one trap
         // }
         // }
-
-        updateAnimationTick();
     }
 
     /**
