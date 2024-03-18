@@ -6,6 +6,11 @@ import Display.Game;
 import Display.GamePanel;
 import Gamestates.Playing;
 
+/**
+ * The PathFinder class provides methods for finding the shortest path between
+ * two points on the game map.
+ * It uses the A* algorithm to calculate the path.
+ */
 public class PathFinder {
 
     GamePanel gp;
@@ -17,12 +22,20 @@ public class PathFinder {
     boolean goalReached = false;
     int step = 0;
 
+    /**
+     * Constructs a PathFinder object with the specified playing state.
+     * 
+     * @param playing The current playing state of the game.
+     */
     public PathFinder(Playing playing) {
         this.playing = playing;
         initiateNodes();
 
     }
 
+    /**
+     * Initializes the nodes of the game map.
+     */
     public void initiateNodes() {
         nodeMap = new TileNode[Game.maxWorldRow][Game.maxWorldCol];
 
@@ -41,6 +54,9 @@ public class PathFinder {
         }
     }
 
+    /**
+     * Resets the nodes and other necessary variables.
+     */
     public void resetNodes() {
         int col = 0;
         int row = 0;
@@ -59,6 +75,14 @@ public class PathFinder {
         step = 0;
     }
 
+    /**
+     * Sets the start and goal nodes for the pathfinding algorithm.
+     * 
+     * @param startCol The column index of the starting position.
+     * @param startRow The row index of the starting position.
+     * @param goalCol  The column index of the goal position.
+     * @param goalRow  The row index of the goal position.
+     */
     public void setNode(int startCol, int startRow, int goalCol, int goalRow) {
         resetNodes();
 
@@ -96,6 +120,11 @@ public class PathFinder {
 
     }
 
+    /**
+     * Calculates the cost (G, H, and F) for the specified node.
+     * 
+     * @param node The node for which to calculate the cost.
+     */
     private void getCost(TileNode node) { // if having issues, test the col and row for x and y
         // G COST
         int yDistance = Math.abs(node.col - startNode.col);
@@ -112,6 +141,11 @@ public class PathFinder {
 
     }
 
+    /**
+     * Searches for the shortest path using the A* algorithm.
+     * 
+     * @return true if the goal is reached and a path is found; otherwise, false.
+     */
     public boolean search() {
         while (goalReached == false && step < 500) {
             int col = currentNode.col;
@@ -170,6 +204,11 @@ public class PathFinder {
         return goalReached;
     }
 
+    /**
+     * Opens the specified node for consideration in the pathfinding process.
+     * 
+     * @param node The node to be opened.
+     */
     private void openNode(TileNode node) {
         if (node.open == false && node.checked == false && node.wall == false) {
             node.setAsOpen();
@@ -178,6 +217,9 @@ public class PathFinder {
         }
     }
 
+    /**
+     * Backtracks from the goal node to determine the shortest path.
+     */
     private void trackPath() {
         // backtrack to find the best path
         TileNode current = goalNode;

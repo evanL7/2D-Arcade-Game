@@ -22,6 +22,10 @@ import Helpers.ImageUtils;
 
 //181x181
 
+/**
+ * The Enemy class represents an enemy entity that can move within the game.
+ * It extends the MoveableEntity class.
+ */
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES
 
@@ -32,6 +36,12 @@ public class Enemy extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 60;
 
     // CONSTRUCTOR
+    /**
+     * Constructs an Enemy object with the given position and playing state.
+     * 
+     * @param position The initial position of the enemy.
+     * @param playing  The current playing state of the game.
+     */
     public Enemy(Position position, Playing playing) {
         super(position, playing);
         loadAnimations();
@@ -42,6 +52,11 @@ public class Enemy extends MoveableEntity {
 
     }
 
+    /**
+     * Updates the state of the enemy based on the player's position.
+     * 
+     * @param player The player object in the game.
+     */
     public void update(Player player) {
         updateAnimationTick();
         updateShortestPath(player);
@@ -66,11 +81,19 @@ public class Enemy extends MoveableEntity {
         }
     }
 
+    /**
+     * Checks for collisions with other entities or objects.
+     */
     public void checkCollision() {
         playing.collisionChecker.checkTileEnemy(this, enemyAction);
         // add objects and entity checks here
     }
 
+    /**
+     * Updates the shortest path to the player's position.
+     * 
+     * @param player The player object in the game.
+     */
     public void updateShortestPath(Player player) {
         moving = true;
         if (onPath == true) {
@@ -83,13 +106,22 @@ public class Enemy extends MoveableEntity {
     }
 
     // ANIMATION METHODS
+
+    /**
+     * Renders the enemy on the screen.
+     * 
+     * @param g The graphics object used for rendering.
+     */
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize + 2, 60,
                 null);
     }
 
-    // creates the Image array for the movement animations
+    /**
+     * Loads the animations for the enemy movement and creates the Image array for
+     * the movement animations
+     */
     private void loadAnimations() {
         InputStream is = getClass().getResourceAsStream("/assets/raccoons.png");
 
@@ -114,7 +146,9 @@ public class Enemy extends MoveableEntity {
         }
     }
 
-    // updates the animation array during the game loop thread
+    /**
+     * Updates the animation tick during the game loop thread.
+     */
     private void updateAnimationTick() {
         animationTick++;
         if (moving && animationTick >= animationSpeed) {
@@ -160,6 +194,12 @@ public class Enemy extends MoveableEntity {
         }
     }
 
+    /**
+     * Searches for the shortest path to the specified goal position.
+     * 
+     * @param goalCol The column index of the goal position.
+     * @param goalRow The row index of the goal position.
+     */
     public void searchPath(int goalCol, int goalRow) {
         int startCol = (position.getY() + solidArea.y) / Game.tileSize;
         int startRow = (position.getX() + solidArea.x) / Game.tileSize;

@@ -22,6 +22,11 @@ import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
 import Helpers.AnimationConstants.PlayerConstants;
 
+/**
+ * The Player class represents the main character controlled by the player.
+ * It extends the MoveableEntity class and includes methods for player movement,
+ * rendering, and interaction with the game environment.
+ */
 public class Player extends MoveableEntity {
 
     // ATTRIBUTES
@@ -37,17 +42,30 @@ public class Player extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     private BufferedImage playerImage;
-    //private float score;
+    // private float score;
 
     private Score scoreObject;
 
     // CONSTRUCTOR
-    public Player(Position position, CollisionChecker collisionChecker, Playing playing, Score scoreObject, TileManager tileManager) {
+    /**
+     * Constructs a Player object with the specified position, collision checker,
+     * playing state, score object, and tile manager.
+     * 
+     * @param position         The initial position of the player.
+     * @param collisionChecker The collision checker used to detect collisions with
+     *                         the environment.
+     * @param playing          The current playing state of the game.
+     * @param scoreObject      The score object associated with the player.
+     * @param tileManager      The tile manager containing information about the
+     *                         game map.
+     */
+    public Player(Position position, CollisionChecker collisionChecker, Playing playing, Score scoreObject,
+            TileManager tileManager) {
         // need to determine the players start position and specific sprite
         super(position, playing);
         this.collisionChecker = collisionChecker;
         this.scoreObject = scoreObject; // Assign the score object
-        this.tileManager = tileManager; 
+        this.tileManager = tileManager;
 
         loadAnimations();
         loadPlayerImage();
@@ -56,43 +74,52 @@ public class Player extends MoveableEntity {
         solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
     }
 
+    /**
+     * Updates the player's state during each game loop iteration.
+     * This includes updating the player's position and animation.
+     */
     public void update() {
         updatePos();
 
-    //     // Check collision with rewards
-    // for (StaticEntity entity : tileManager.getStaticEntities()) {
-    //     if (entity instanceof Reward) {
-    //         if (entity.getBoundingBox().intersects(this.getBoundingBox())) {
-    //             // Collision with reward detected
-    //             ((Reward) entity).onCollide(this);
-    //             // Remove the reward from the game world
-    //             tileManager.getStaticEntities().remove(entity);
-    //             break; // Exit loop after detecting collision with one reward
-    //         }
-    //     }
-    // }
+        // // Check collision with rewards
+        // for (StaticEntity entity : tileManager.getStaticEntities()) {
+        // if (entity instanceof Reward) {
+        // if (entity.getBoundingBox().intersects(this.getBoundingBox())) {
+        // // Collision with reward detected
+        // ((Reward) entity).onCollide(this);
+        // // Remove the reward from the game world
+        // tileManager.getStaticEntities().remove(entity);
+        // break; // Exit loop after detecting collision with one reward
+        // }
+        // }
+        // }
 
-    // // Check collision with enemies
-    // for (MoveableEntity enemy : tileManager.getEnemies()) {
-    //     if (enemy.getBoundingBox().intersects(this.getBoundingBox())) {
-    //         // Collision with enemy detected
-    //         // Handle collision with enemy
-    //         break; // Exit loop after detecting collision with one enemy
-    //     }
-    // }
+        // // Check collision with enemies
+        // for (MoveableEntity enemy : tileManager.getEnemies()) {
+        // if (enemy.getBoundingBox().intersects(this.getBoundingBox())) {
+        // // Collision with enemy detected
+        // // Handle collision with enemy
+        // break; // Exit loop after detecting collision with one enemy
+        // }
+        // }
 
-    // Check collision with traps
-    for (StaticEntity trap : tileManager.getTraps()) {
-        if (trap.getBoundingBox().intersects(this.getBoundingBox())) {
-            // Collision with trap detected
-            // Handle collision with trap
-            break; // Exit loop after detecting collision with one trap
+        // Check collision with traps
+        for (StaticEntity trap : tileManager.getTraps()) {
+            if (trap.getBoundingBox().intersects(this.getBoundingBox())) {
+                // Collision with trap detected
+                // Handle collision with trap
+                break; // Exit loop after detecting collision with one trap
+            }
         }
-    }
 
         updateAnimationTick();
     }
 
+    /**
+     * Renders the player on the screen.
+     * 
+     * @param g The graphics context used for rendering.
+     */
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72,
@@ -130,7 +157,9 @@ public class Player extends MoveableEntity {
         }
     }
 
-    // creates the Image array for the movement animations
+    /**
+     * Loads the player's animation sprites from the resource file.
+     */
     private void loadAnimations() {
         // Source of player sprites:
         // https://axulart.itch.io/small-8-direction-characters
@@ -157,6 +186,9 @@ public class Player extends MoveableEntity {
         }
     }
 
+    /**
+     * Loads the player's image from the resource file.
+     */
     private void loadPlayerImage() {
         try {
             InputStream is = getClass().getResourceAsStream("/assets/player_sprites.png");
@@ -166,9 +198,10 @@ public class Player extends MoveableEntity {
             e.printStackTrace();
         }
     }
-    
 
-    // updates the animation array during the game loop thread
+    /**
+     * Updates the animation tick during the game loop.
+     */
     private void updateAnimationTick() {
         animationTick++;
         if (moving && animationTick >= animationSpeed) {
@@ -180,23 +213,35 @@ public class Player extends MoveableEntity {
         }
     }
 
+    /**
+     * Increases the player's score by the specified amount.
+     * 
+     * @param amount The amount by which to increase the player's score.
+     */
     public void increaseScore(float amount) {
         scoreObject.incrementScore(amount); // Call the increment method in Score class
     }
 
+    /**
+     * Decreases the player's score by the specified amount.
+     * 
+     * @param amount The amount by which to decrease the player's score.
+     */
     public void decreaseScore(float amount) {
         scoreObject.incrementScore(-amount); // Call the increment method with negative amount to decrease score
     }
-    
-    
 
     // GETTERS AND SETTERS
+    /**
+     * Resets the direction booleans indicating the player's movement direction.
+     */
     public void resetDirBooleans() {
         left = false;
         right = false;
         up = false;
         down = false;
     }
+
     @Override
     public Image getSprite() {
         return playerImage;
@@ -205,85 +250,156 @@ public class Player extends MoveableEntity {
     @Override
     public Rectangle getBoundingBox() {
         // Return the bounding box of the player entity
-        // Implement this method based on how you define the bounding box for the player entity
+        // Implement this method based on how you define the bounding box for the player
+        // entity
         return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
     }
-    
+
     // @Override
     // public int getWidth() {
-    //     if (sprite != null) {
-    //         BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
-    //         return bufferedImage.getWidth();
-    //     } else {
-    //         return 0; // Or any default width value you prefer
-    //     }
+    // if (sprite != null) {
+    // BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
+    // return bufferedImage.getWidth();
+    // } else {
+    // return 0; // Or any default width value you prefer
+    // }
     // }
 
     // @Override
     // public int getHeight() {
-    //     if (sprite != null) {
-    //         BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
-    //         return bufferedImage.getHeight();
-    //     } else {
-    //         return 0; // Or any default height value you prefer
-    //     }
+    // if (sprite != null) {
+    // BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
+    // return bufferedImage.getHeight();
+    // } else {
+    // return 0; // Or any default height value you prefer
+    // }
     // }
 
-    
-
+    /**
+     * Sets whether the player is moving.
+     * 
+     * @param moving true if the player is moving; otherwise, false.
+     */
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
 
+    /**
+     * Sets the current action of the player.
+     * 
+     * @param action The action code representing the player's current movement
+     *               direction.
+     */
     public void setAction(int action) {
         this.playerAction = action;
         this.moving = true;
     }
 
+    /**
+     * Retrieves the current action of the player.
+     * 
+     * @return The action code representing the player's current movement direction.
+     */
     public int getAction() {
         return playerAction;
     }
 
+    /**
+     * Retrieves the number of regular rewards collected by the player.
+     * 
+     * @return The number of regular rewards collected by the player.
+     */
     public int getRegularRewardsCollected() {
         return regularRewardsCollected;
     }
 
+    /**
+     * Sets the number of regular rewards collected by the player.
+     * 
+     * @param regularRewardsCollected The number of regular rewards collected by the
+     *                                player.
+     */
     public void setRegularRewardsCollected(int regularRewardsCollected) {
         this.regularRewardsCollected = regularRewardsCollected;
     }
 
+    /**
+     * Retrieves the position of the player.
+     * 
+     * @return The position of the player.
+     */
     public Position getPosition() {
         return position;
     }
 
+    /**
+     * Checks if the player is moving left.
+     * 
+     * @return true if the player is moving left; otherwise, false.
+     */
     public boolean isLeft() {
         return left;
     }
 
+    /**
+     * Sets whether the player is moving left.
+     * 
+     * @param left true if the player is moving left; otherwise, false.
+     */
     public void setLeft(boolean left) {
         this.left = left;
     }
 
+    /**
+     * Checks if the player is moving up.
+     * 
+     * @return true if the player is moving up; otherwise, false.
+     */
     public boolean isUp() {
         return up;
     }
 
+    /**
+     * Sets whether the player is moving up.
+     * 
+     * @param up true if the player is moving up; otherwise, false.
+     */
     public void setUp(boolean up) {
         this.up = up;
     }
 
+    /**
+     * Checks if the player is moving right.
+     * 
+     * @return true if the player is moving right; otherwise, false.
+     */
     public boolean isRight() {
         return right;
     }
 
+    /**
+     * Sets whether the player is moving right.
+     * 
+     * @param right true if the player is moving right; otherwise, false.
+     */
     public void setRight(boolean right) {
         this.right = right;
     }
 
+    /**
+     * Checks if the player is moving down.
+     * 
+     * @return true if the player is moving down; otherwise, false.
+     */
     public boolean isDown() {
         return down;
     }
 
+    /**
+     * Sets whether the player is moving down.
+     * 
+     * @param down true if the player is moving down; otherwise, false.
+     */
     public void setDown(boolean down) {
         this.down = down;
     }
