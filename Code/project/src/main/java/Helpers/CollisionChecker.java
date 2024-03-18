@@ -208,11 +208,15 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerDoorCollision(Player player, Door door) {
-        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                                                player.getWidth(), player.getHeight());
+        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
+        //                                         player.getWidth(), player.getHeight());
+
+        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         
-        Rectangle doorBounds = new Rectangle(door.getPosition().getX(), door.getPosition().getY(),
-                                                door.getWidth(), door.getHeight());
+        // Rectangle doorBounds = new Rectangle(door.getPosition().getX(), door.getPosition().getY(),
+        //                                         door.getWidth(), door.getHeight());
+
+        Rectangle doorBounds = new Rectangle(door.getPosition().getX(), door.getPosition().getY(), Game.tileSize, Game.tileSize);
         
         // Print information about the bounding boxes
         //System.out.println("Player Bounds: " + playerBounds);
