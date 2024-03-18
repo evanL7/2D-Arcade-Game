@@ -116,6 +116,8 @@ public class Game implements Runnable {
 
         int frames = 0;
         int updates = 0;
+        int prevFPS = 0;
+        int prevUPS = 0;
 
         double deltaU = 0;
         double deltaF = 0;
@@ -142,7 +144,11 @@ public class Game implements Runnable {
             // Check frames of the game
             if (System.currentTimeMillis() - lastCheck >= 1_000) {
                 lastCheck = System.currentTimeMillis();
-                System.out.println("FPS: " + frames + " | UPS: " + updates);
+                if (frames != prevFPS || updates != prevUPS) {
+                    System.out.println("FPS: " + frames + " | UPS: " + updates);
+                    prevFPS = frames;
+                    prevUPS = updates;
+                }
                 frames = 0;
                 updates = 0;
             }
