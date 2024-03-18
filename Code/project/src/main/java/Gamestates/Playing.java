@@ -92,10 +92,10 @@ public class Playing extends State implements Statemethods {
 
         assetManager.setObjects();
 
-        rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1);
+        rewardReg = new Reward(new Position(regRewardX, regRewardY), 1, 1);
 
         // this takes approx 12 seconds to despawn from the screen
-        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 10, 1);
+        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 1, 1);
 
         // Create the Camera object with the player
         camera = new Camera(player);
@@ -108,15 +108,17 @@ public class Playing extends State implements Statemethods {
 
         
 
-        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-            if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
-                score.incrementScore(rewardBonus.getRewardAmount());
-            }
-        }
+        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
+        //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
+        //         score.incrementScore(rewardBonus.getRewardAmount());
+        //     }
+        // }
 
         // Check collision between player and rewards
-        if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
+        if (rewardReg != null && collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
             player.increaseWin();
+            rewardReg.update();
+            rewardReg = null;
 
             if (player.getWin() == 3) {
                 // door opens??
@@ -148,18 +150,25 @@ public class Playing extends State implements Statemethods {
 
         for (int i = 0; i < staticEntities.length; i++) {
             if (staticEntities[i] != null) {
+                // if (collisionChecker.checkPlayerTrapCollision(player, staticEntities[i])) {
+
+                // }
                 staticEntities[i].update();
             }
         }
 
-        rewardReg.update();
+        // rewardReg.update();
 
         // responsible for despawning bonus rewards
         // not sure where this would go or how to implement this when there are multiple
         // bonus rewards
-        if (rewardBonus != null) {
+        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             rewardBonus.update();
-            if (rewardBonus.getDespawnTimer() <= 0) {
+            if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
+                score.incrementScore(rewardBonus.getRewardAmount());
+                rewardBonus = null;
+            }
+            else if (rewardBonus.getDespawnTimer() <= 0) {
                 rewardBonus = null;
             }
         }
@@ -188,8 +197,10 @@ public class Playing extends State implements Statemethods {
         if (trap != null) {
             trap.render(g);
         }
-
-        rewardReg.render(g);
+        if (rewardReg != null) {
+            rewardReg.render(g);
+        }
+        
         if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             rewardBonus.render(g);
         }
