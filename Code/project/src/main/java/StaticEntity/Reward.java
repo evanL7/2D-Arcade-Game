@@ -80,22 +80,9 @@ public class Reward extends StaticEntity {
     }
 
     @Override
-    public Position getPosition() {
-        // Return the position of the reward
-        return position; // Assuming position is the attribute storing the position
-    }
-
-    @Override
     public Image getSprite() {
         // Return the sprite image associated with the reward entity
         return rewardImage; // Assuming you have a field named rewardImage that holds the sprite image
-    }
-
-    @Override
-    public Rectangle getBoundingBox() {
-        // Return the bounding box of the reward entity
-        // Implement this method based on how you define the bounding box for the reward entity
-        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
     }
     
     /**

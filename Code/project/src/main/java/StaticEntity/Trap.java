@@ -62,13 +62,7 @@ public class Trap extends StaticEntity {
         // Return the sprite image associated with the trap entity
         return trapImage; // Assuming you have a field named trapImage that holds the sprite image
     }
-
-    @Override
-    public Rectangle getBoundingBox() {
-        // Return the bounding box of the reward entity
-        // Implement this method based on how you define the bounding box for the reward entity
-        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
-    }
+    
 
     // ANIMATION METHODS FOR TRAP
     public void render(Graphics g) {

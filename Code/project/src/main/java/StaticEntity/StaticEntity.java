@@ -1,13 +1,14 @@
 package StaticEntity;
 import java.awt.image.BufferedImage;
-
+import java.lang.reflect.Method;
 import java.awt.*;
 
 import Helpers.Position;
 // import MoveableEntity.MoveableEntity;
 // import MoveableEntity.Player;
 import Helpers.ImageUtils;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An abstract class representing static entities in the game.
@@ -27,6 +28,9 @@ public abstract class StaticEntity {
 
     /** The sprite representing the static entity. */
     protected Image sprite;
+
+    // Static list to store all static entities
+    private static List<StaticEntity> staticEntities = new ArrayList<>();
     
     //protected Timer despawnTimer;
 
@@ -40,6 +44,8 @@ public abstract class StaticEntity {
         // Constructor for StaticEntities that rely on time like bonus rewards
         this.position = position;
         this.despawnTimer = despawnTimer;
+
+        staticEntities.add(this);
     }
 
     /**
@@ -54,8 +60,47 @@ public abstract class StaticEntity {
         
         // a value of -1 represents how the entity will only despawn if collided with
         despawnTimer = -1;
+
+        staticEntities.add(this);
+    }
+
+    // Method to get all static entities
+    public static List<StaticEntity> getAllStaticEntities() {
+        return staticEntities;
+    }
+
+    // Method to get all rewards
+    public static List<Reward> getAllRewards() {
+        List<Reward> rewards = new ArrayList<>();
+        for (StaticEntity entity : staticEntities) {
+            if (entity instanceof Reward) {
+                rewards.add((Reward) entity);
+            }
+        }
+        return rewards;
+    }
+
+    // Method to get all traps
+    public static List<Trap> getAllTraps() {
+        List<Trap> traps = new ArrayList<>();
+        for (StaticEntity entity : staticEntities) {
+            if (entity instanceof Trap) {
+                traps.add((Trap) entity);
+            }
+        }
+        return traps;
+    }
+
+    // Method to clear all static entities
+    public static void clearAllStaticEntities() {
+        staticEntities.clear();
     }
     
+    public Rectangle getBoundingBox() {
+        // Return the bounding box of the reward entity
+        // Implement this method based on how you define the bounding box for the reward entity
+        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+    }
 
     // Method to get the height of the sprite
     public int getHeight() {
@@ -94,7 +139,6 @@ public abstract class StaticEntity {
      * 
      * @return The bounding box.
      */
-    public abstract Rectangle getBoundingBox();
 
 	public void draw(Graphics g) {
 	}

@@ -16,7 +16,7 @@ import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
-import Helpers.ImageUtils;
+// import Helpers.ImageUtils;
 
 // enemy sprite https://www.reddit.com/r/PixelArt/comments/k40t81/sprite_sheet_for_a_raccoon_dude/
 // 181x181
@@ -34,6 +34,8 @@ public class Enemy extends MoveableEntity {
     private int enemyAction = EnemyConstants.DOWN;
     private int animationTick, animationIndex, animationSpeed = 60;
 
+    private BufferedImage enemyImage;
+
     // CONSTRUCTOR
     /**
      * Constructs an Enemy object with the given position and playing state.
@@ -44,6 +46,7 @@ public class Enemy extends MoveableEntity {
     public Enemy(Position position, Playing playing) {
         super(position, playing);
         loadAnimations();
+        loadEnemyImage();
         onPath = true;
         speed = 1;
 
@@ -145,6 +148,16 @@ public class Enemy extends MoveableEntity {
         }
     }
 
+    private void loadEnemyImage() {
+        try {
+            InputStream is = getClass().getResourceAsStream("/assets/raccoons.png");
+            enemyImage = ImageIO.read(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Updates the animation tick during the game loop thread.
      */
@@ -162,7 +175,7 @@ public class Enemy extends MoveableEntity {
     @Override
     public Image getSprite() {
         // Return the sprite of the enemy
-        return sprite; // Assuming sprite is the attribute storing the sprite
+        return enemyImage; // Assuming sprite is the attribute storing the sprite
     }
 
     @Override
@@ -171,26 +184,6 @@ public class Enemy extends MoveableEntity {
         // Implement this method based on how you define the bounding box for the player
         // entity
         return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
-    }
-
-    @Override
-    public int getWidth() {
-        if (sprite != null) {
-            BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
-            return bufferedImage.getWidth();
-        } else {
-            return 0; // Or any default width value you prefer
-        }
-    }
-
-    @Override
-    public int getHeight() {
-        if (sprite != null) {
-            BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
-            return bufferedImage.getHeight();
-        } else {
-            return 0; // Or any default height value you prefer
-        }
     }
 
     /**

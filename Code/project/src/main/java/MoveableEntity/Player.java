@@ -247,34 +247,6 @@ public class Player extends MoveableEntity {
         return playerImage;
     }
 
-    @Override
-    public Rectangle getBoundingBox() {
-        // Return the bounding box of the player entity
-        // Implement this method based on how you define the bounding box for the player
-        // entity
-        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
-    }
-
-    // @Override
-    // public int getWidth() {
-    // if (sprite != null) {
-    // BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
-    // return bufferedImage.getWidth();
-    // } else {
-    // return 0; // Or any default width value you prefer
-    // }
-    // }
-
-    // @Override
-    // public int getHeight() {
-    // if (sprite != null) {
-    // BufferedImage bufferedImage = ImageUtils.convertToBufferedImage(sprite);
-    // return bufferedImage.getHeight();
-    // } else {
-    // return 0; // Or any default height value you prefer
-    // }
-    // }
-
     /**
      * Sets whether the player is moving.
      * 
@@ -322,16 +294,7 @@ public class Player extends MoveableEntity {
     public void setRegularRewardsCollected(int regularRewardsCollected) {
         this.regularRewardsCollected = regularRewardsCollected;
     }
-
-    /**
-     * Retrieves the position of the player.
-     * 
-     * @return The position of the player.
-     */
-    public Position getPosition() {
-        return position;
-    }
-
+    
     /**
      * Checks if the player is moving left.
      * 

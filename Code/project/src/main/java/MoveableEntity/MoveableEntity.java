@@ -3,6 +3,9 @@ package MoveableEntity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Helpers.ImageUtils;
 // import Display.Game;
 import Gamestates.Playing;
@@ -21,6 +24,9 @@ public abstract class MoveableEntity {
     public boolean collisionOn = false;
     public boolean onPath = false;
 
+    // Static list to store all movable entities
+    private static List<MoveableEntity> movableEntities = new ArrayList<>();
+
     /**
      * Constructs a MoveableEntity with the given position.
      * 
@@ -29,6 +35,40 @@ public abstract class MoveableEntity {
     public MoveableEntity(Position position, Playing playing) {
         this.position = position;
         this.playing = playing;
+
+        movableEntities.add(this);
+    }
+
+    // Method to get all movable entities
+    public static List<MoveableEntity> getAllMoveableEntities() {
+        return movableEntities;
+    }
+
+    // Method to get all players
+    public static List<Player> getAllPlayers() {
+        List<Player> players = new ArrayList<>();
+        for (MoveableEntity entity : movableEntities) {
+            if (entity instanceof Player) {
+                players.add((Player) entity);
+            }
+        }
+        return players;
+    }
+
+    // Method to get all enemies
+    public static List<Enemy> getAllEnemies() {
+        List<Enemy> enemies = new ArrayList<>();
+        for (MoveableEntity entity : movableEntities) {
+            if (entity instanceof Enemy) {
+                enemies.add((Enemy) entity);
+            }
+        }
+        return enemies;
+    }
+
+    // Method to clear all movable entities
+    public static void clearAllMoveableEntities() {
+        movableEntities.clear();
     }
 
     // Method to get the height of the sprite
@@ -64,6 +104,11 @@ public abstract class MoveableEntity {
      * 
      * @return The bounding box.
      */
-    public abstract Rectangle getBoundingBox();
+    public Rectangle getBoundingBox() {
+        // Return the bounding box of the player entity
+        // Implement this method based on how you define the bounding box for the player
+        // entity
+        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+    }
 
 }
