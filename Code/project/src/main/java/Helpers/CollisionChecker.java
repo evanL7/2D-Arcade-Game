@@ -149,7 +149,7 @@ public class CollisionChecker {
         
         // new hitboxes
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
-        Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(), (int) (Game.tileSize * 0.5), 15);
+        Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(), (int) (Game.tileSize * 0.6), 15);
 
         // Print information about the bounding boxes
         //System.out.println("Player Bounds: " + playerBounds);
@@ -175,11 +175,16 @@ public class CollisionChecker {
      */
     public boolean checkPlayerTrapCollision(Player player, Trap trap) {
         
-        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                                                player.getWidth(), player.getHeight());
+        // old hitboxes
+        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
+        //                                         player.getWidth(), player.getHeight());
+        // Rectangle trapBounds = new Rectangle(trap.getPosition().getX(), trap.getPosition().getY(),
+        // trap.getWidth(), trap.getHeight());
+
+        // new hitboxes
+        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
+        Rectangle trapBounds = new Rectangle(trap.getPosition().getX(), trap.getPosition().getY(),(int) (Game.tileSize * 0.6), 15);
         
-        Rectangle trapBounds = new Rectangle(trap.getPosition().getX(), trap.getPosition().getY(),
-                                                trap.getWidth(), trap.getHeight());
         
         // Print information about the bounding boxes
         //System.out.println("Player Bounds: " + playerBounds);
