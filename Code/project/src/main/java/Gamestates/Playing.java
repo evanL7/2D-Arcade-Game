@@ -153,10 +153,19 @@ public class Playing extends State implements Statemethods {
                 reward.remove();
             }
 
-            else if(reward != null){
+            else if(reward != null) {
                 reward.update();
             }
+        }
 
+        for (Door door: StaticEntity.getAllDoors()) {
+            if (door != null && player.getWin() == 3) {
+                // add code for showing door opening animation
+
+                if (collisionChecker.checkPlayerDoorCollision(player, door)) {
+                    Gamestate.state = Gamestate.WIN;
+                }
+            }
         }
         
         player.update();
