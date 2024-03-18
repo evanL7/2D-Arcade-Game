@@ -96,7 +96,7 @@ public abstract class StaticEntity {
      */
     public abstract Rectangle getBoundingBox();
 
-	public void draw(Graphics g) {
+	public void render(Graphics g) {
 	}
 
 }

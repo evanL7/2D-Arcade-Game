@@ -163,7 +163,7 @@ public class Playing extends State implements Statemethods {
         
         for (int i = 0; i < staticEntities.length; i++) {
             if (staticEntities[i] != null) {
-                staticEntities[i].draw(g);
+                staticEntities[i].render(g);
             }
         }
 

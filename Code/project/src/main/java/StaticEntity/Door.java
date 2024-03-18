@@ -29,7 +29,7 @@ public class Door extends StaticEntity {
         }
     }
 
-    public void draw(Graphics g) {
+    public void render(Graphics g) {
         g.drawImage(doorImage, position.getX(), position.getY(), Game.tileSize, Game.tileSize, null);
     }
 
