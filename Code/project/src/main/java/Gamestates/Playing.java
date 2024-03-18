@@ -21,7 +21,6 @@ import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
 import StaticEntity.Trap;
 
-
 public class Playing extends State implements Statemethods {
 
     private Camera camera; // add
@@ -50,9 +49,9 @@ public class Playing extends State implements Statemethods {
     // Calculate player initial position to place it in the middle of the screen
     int playerX = (Game.screenWidth - Game.tileSize) / 2;
     int playerY = (Game.screenHeight - Game.tileSize) / 2;
-    
-    int enemyX = Game.screenWidth / 3 - Game.tileSize / 2;
-    int enemyY = Game.screenHeight / 3 - Game.tileSize / 2;
+
+    int enemyX = 20 * Game.tileSize;
+    int enemyY = 20 * Game.tileSize;
 
     int trapX = Game.screenWidth / 2 - Game.tileSize / 2;
     int trapY = Game.screenHeight / 3 - Game.tileSize / 2;
@@ -70,7 +69,7 @@ public class Playing extends State implements Statemethods {
 
     private void initClasses() {
         keysPressed = new HashSet<>();
-       // tileManager = new TileManager();
+        // tileManager = new TileManager();
         score = new Score();
         tileManager = new TileManager(this);
         collisionChecker = new CollisionChecker(tileManager);
@@ -79,16 +78,16 @@ public class Playing extends State implements Statemethods {
         player = new Player(new Position(playerX, playerY), collisionChecker, this, score, tileManager);
 
         enemy = new Enemy(new Position(enemyX, enemyY), this);
-        // player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker, this);
+        // player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker,
+        // this);
         // enemy = new Enemy(new Position(enemyX, enemyY), this);
-        
+
         assetManager = new AssetManager(this);
         // Currently set to 25 static entities can be displayed, adjust as needed
         staticEntities = new StaticEntity[25];
 
         assetManager.setObjects();
 
-        trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1);
 
         // this takes approx 12 seconds to despawn from the screen
@@ -102,14 +101,14 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void update() {
-        
+
         if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
                 score.incrementScore(7);
             }
         }
-        
-        //Check collision between player and rewards
+
+        // Check collision between player and rewards
         if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
             score.incrementScore(1);
         }
@@ -118,12 +117,13 @@ public class Playing extends State implements Statemethods {
         if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
             // Decrease score (example: by 10 for hitting a trap)
             score.incrementScore(-1); // Adjust the amount as per your game's logic
-            //trap.reset(); // Reset the trap's position
+            // trap.reset(); // Reset the trap's position
             if (score.getScore() < 0) {
                 Gamestate.state = Gamestate.GAMEOVER;
             }
             // responsible for despawning trap
-            // not sure where this would go or how to implement this when there are multiple traps
+            // not sure where this would go or how to implement this when there are multiple
+            // traps
             else {
                 trap = null;
             }
@@ -131,15 +131,16 @@ public class Playing extends State implements Statemethods {
 
         player.update();
         enemy.update(player);
-        
+
         if (trap != null) {
             trap.update();
         }
-        
+
         rewardReg.update();
-        
+
         // responsible for despawning bonus rewards
-        // not sure where this would go or how to implement this when there are multiple bonus rewards
+        // not sure where this would go or how to implement this when there are multiple
+        // bonus rewards
         if (rewardBonus != null) {
             rewardBonus.update();
             if (rewardBonus.getDespawnTimer() <= 0) {
@@ -161,18 +162,17 @@ public class Playing extends State implements Statemethods {
         // int playerRenderY = player.getPosition().getY() - camera.getYOffset();
         player.render(g);
         enemy.render(g);
-        
+
         for (int i = 0; i < staticEntities.length; i++) {
             if (staticEntities[i] != null) {
                 staticEntities[i].render(g);
             }
         }
 
-
         if (trap != null) {
             trap.render(g);
         }
-        
+
         rewardReg.render(g);
         if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
             rewardBonus.render(g);
