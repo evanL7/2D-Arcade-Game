@@ -17,10 +17,6 @@ public class Door extends StaticEntity {
     }
 
     @Override
-    public void onCollide(MoveableEntity entity) {
-    }
-
-    @Override
     public Position getPosition() {
         return this.position;
     }
