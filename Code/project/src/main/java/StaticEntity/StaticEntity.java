@@ -140,7 +140,7 @@ public abstract class StaticEntity {
      * @return The bounding box.
      */
 
-	public void draw(Graphics g) {
+	public void render(Graphics g) {
 	}
 
 }
