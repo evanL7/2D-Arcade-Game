@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import Display.Camera;
 import Display.Game;
 import Display.Score;
+import Display.Time;
 import Helpers.AnimationConstants.PlayerConstants;
 import Helpers.CollisionChecker;
 import Helpers.PathFinder;
@@ -17,7 +18,7 @@ import MoveableEntity.Player;
 import StaticEntity.Reward;
 import StaticEntity.TileManager;
 import StaticEntity.Trap;
-import Display.Time;
+
 
 public class Playing extends State implements Statemethods {
 
@@ -170,22 +171,6 @@ public class Playing extends State implements Statemethods {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
@@ -198,6 +183,12 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_P:
                 Gamestate.state = Gamestate.GAMEOVER;
                 break;
+
+            // test remove later!!!
+            case KeyEvent.VK_B:
+                Gamestate.state = Gamestate.WIN;
+                break;
+
             default:
                 if (!keysPressed.contains(keyCode)) {
                     keysPressed.add(keyCode);

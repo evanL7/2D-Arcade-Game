@@ -6,6 +6,7 @@ import Gamestates.Gamestate;
 import Gamestates.Menu;
 import Gamestates.Playing;
 import Gamestates.GameOver;
+import Gamestates.GameWin;
 
 public class Game implements Runnable {
 
@@ -39,6 +40,7 @@ public class Game implements Runnable {
     private Playing playing;
     private Menu menu;
     private GameOver gameOver;
+    private GameWin win;
 
     public Game() {
         initClasses();
@@ -54,6 +56,7 @@ public class Game implements Runnable {
         menu = new Menu(this);
         playing = new Playing(this);
         gameOver = new GameOver(this);
+        win = new GameWin(this);
     }
 
     public void startGameLoop() {
@@ -76,6 +79,9 @@ public class Game implements Runnable {
             case GAMEOVER:
                 gameOver.update();
                 break;
+            case WIN:
+                win.update();
+                break;
         }
     }
 
@@ -93,6 +99,9 @@ public class Game implements Runnable {
                 break;
             case GAMEOVER:
                 gameOver.draw(g);
+                break;
+            case WIN:
+                win.draw(g);
                 break;
         }
     }
@@ -154,8 +163,11 @@ public class Game implements Runnable {
         return playing;
     }
 
-    public GameOver getGameOver()
-    {
+    public GameOver getGameOver() {
         return gameOver;
+    }
+
+    public GameWin getGameWin() {
+        return win;
     }
 }

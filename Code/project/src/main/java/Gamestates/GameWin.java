@@ -13,25 +13,23 @@ import java.io.InputStream;
 
 import Display.Game;
 
-
-
 /**
- * The GameOver class represents the game over screen displayed when the game ends.
+ * The Game Win class represents the win screen displayed when the game ends.
  * It shows the final score and elapsed time, and provides options to restart the game or quit.
  * 
  * <p>Font source: https://tinyworlds.itch.io/free-pixel-font-thaleah
  */
-public class GameOver extends State implements Statemethods { 
+public class GameWin extends State implements Statemethods {
     
     private static Font customFont;
     private Playing playingState;
 
     /**
-     * Constructs a GameOver object.
+     * Constructs a GameWin object.
      * 
      * @param game the Game object
      */
-    public GameOver(Game game) {
+    public GameWin(Game game) {
         super(game);
         playingState = game.getPlaying();
 
@@ -54,7 +52,7 @@ public class GameOver extends State implements Statemethods {
     }
 
     /**
-     * Draws the game over screen.
+     * Draws the win screen.
      * 
      * @param g the Graphics object
      */
@@ -65,10 +63,10 @@ public class GameOver extends State implements Statemethods {
             g.setColor(Color.BLACK);
 
             FontMetrics fm = g.getFontMetrics();
-            int x = (Game.screenWidth - fm.stringWidth("GAME OVER!")) / 2;
+            int x = (Game.screenWidth - fm.stringWidth("YOU WIN!")) / 2;
             int y = (Game.screenHeight - fm.getHeight()) / 2 + fm.getAscent() - 40;
 
-            g.drawString("GAME OVER!", x, y);
+            g.drawString("YOU WIN!", x, y);
             
             // Draws score
             y += fm.getHeight();
@@ -117,5 +115,4 @@ public class GameOver extends State implements Statemethods {
 	public void keyReleased(KeyEvent e) {
 
     }
-    
 }
