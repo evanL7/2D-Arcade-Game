@@ -63,6 +63,8 @@ public class Enemy extends MoveableEntity {
         updateAnimationTick();
         updateShortestPath(player);
 
+        collisionOn = false;
+
         // moving the enemy
         playing.collisionChecker.checkTileEnemy(this, enemyAction);
         if (collisionOn == false) {
