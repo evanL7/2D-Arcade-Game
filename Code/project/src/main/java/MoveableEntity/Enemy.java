@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.awt.Rectangle;
 import Display.Game;
+import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.AnimationConstants;
 import Helpers.Position;
@@ -259,6 +260,13 @@ public class Enemy extends MoveableEntity {
                 }
             }
 
+            // enemy reaches player
+            int nextCol = playing.pathFinder.pathList.get(0).col;
+            int nextRow = playing.pathFinder.pathList.get(0).col;
+
+            if (nextCol == goalCol && nextRow == goalRow) {
+                playing.getPlayer().decreaseScore(4); // change this
+            }
         }
     }
 
