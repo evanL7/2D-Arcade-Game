@@ -136,6 +136,12 @@ public class Playing extends State implements Statemethods {
             trap.update();
         }
 
+        for (int i = 0; i < staticEntities.length; i++) {
+            if (staticEntities[i] != null) {
+                staticEntities[i].update();
+            }
+        }
+
         rewardReg.update();
 
         // responsible for despawning bonus rewards
