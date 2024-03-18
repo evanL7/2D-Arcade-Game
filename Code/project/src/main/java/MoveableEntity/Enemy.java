@@ -18,10 +18,8 @@ import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.ImageUtils;
 
-// enemy sprite https://forums.rpgmakerweb.com/index.php?threads/whtdragons-animals-and-running-horses-now-with-more-dragons.53552/
-// 48x48
-
-//181x181
+// enemy sprite https://www.reddit.com/r/PixelArt/comments/k40t81/sprite_sheet_for_a_raccoon_dude/
+// 181x181
 
 /**
  * The Enemy class represents an enemy entity that can move within the game.
