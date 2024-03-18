@@ -83,10 +83,10 @@ public class TileManager {
         }
     }
 
-    private void loadTile(String filePath, int index, boolean collision) {
+    private void loadTile(String fileName, int index, boolean collision) {
         try {
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/" + filePath + ".png"));
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/" + fileName + ".png"));
             tile[index].collision = collision;
         } catch (Exception e) {
             e.printStackTrace();

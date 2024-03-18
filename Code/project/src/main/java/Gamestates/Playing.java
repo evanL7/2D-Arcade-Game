@@ -10,12 +10,14 @@ import Display.Game;
 import Display.Score;
 import Display.Time;
 import Helpers.AnimationConstants.PlayerConstants;
+import Helpers.AssetManager;
 import Helpers.CollisionChecker;
 import Helpers.PathFinder;
 import Helpers.Position;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import StaticEntity.Reward;
+import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
 import StaticEntity.Trap;
 
@@ -29,6 +31,8 @@ public class Playing extends State implements Statemethods {
     public CollisionChecker collisionChecker;
     private HashSet<Integer> keysPressed;
     public PathFinder pathFinder;
+    public AssetManager assetManager;
+    public StaticEntity staticEntities[];
 
     private Player player;
     private Enemy enemy;
@@ -77,6 +81,12 @@ public class Playing extends State implements Statemethods {
         enemy = new Enemy(new Position(enemyX, enemyY), this);
         // player = new Player(new Position(tempPlayerX, tempplayerY), collisionChecker, this);
         // enemy = new Enemy(new Position(enemyX, enemyY), this);
+        
+        assetManager = new AssetManager(this);
+        staticEntities = new StaticEntity[25];
+
+        assetManager.setObjects();
+
         trap = new Trap(new Position(trapX, trapY), 1);
         rewardReg = new Reward(new Position(regRewardX, regRewardY), 10, 1);
 
@@ -151,6 +161,13 @@ public class Playing extends State implements Statemethods {
         player.render(g);
         enemy.render(g);
         
+        for (int i = 0; i < staticEntities.length; i++) {
+            if (staticEntities[i] != null) {
+                staticEntities[i].draw(g);
+            }
+        }
+
+
         if (trap != null) {
             trap.render(g);
         }
