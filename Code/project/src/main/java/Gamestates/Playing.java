@@ -110,7 +110,12 @@ public class Playing extends State implements Statemethods {
 
         // Check collision between player and rewards
         if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
-            score.incrementScore(1);
+            player.increaseWin();
+
+            if (player.getWin() == 3) {
+                // door opens??
+            }
+
         }
 
         // Check collision between player and traps
