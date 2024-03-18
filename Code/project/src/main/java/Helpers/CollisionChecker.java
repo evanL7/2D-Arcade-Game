@@ -159,7 +159,7 @@ public class CollisionChecker {
         boolean result = playerBounds.intersects(rewardBounds);
         
         // Print the result of the collision check
-        System.out.println("Collision Detected: " + result);
+        //System.out.println("Collision Detected: " + result);
         
         // Return the collision result
         return result;
@@ -194,7 +194,7 @@ public class CollisionChecker {
         boolean result = playerBounds.intersects(trapBounds);
         
         // Print the result of the collision check
-        System.out.println("Collision Detected: " + result);
+        //System.out.println("Collision Detected: " + result);
         
         // Return the collision result
         return result;
@@ -222,7 +222,7 @@ public class CollisionChecker {
         boolean result = playerBounds.intersects(doorBounds);
         
         // Print the result of the collision check
-        System.out.println("Collision Detected: " + result);
+        //System.out.println("Collision Detected: " + result);
         
         // Return the collision result
         return result;
@@ -255,7 +255,7 @@ public class CollisionChecker {
         boolean result = playerBounds.intersects(enemyBounds);
         
         // Print the result of the collision check
-        System.out.println("Collision Detected: " + result);
+        //System.out.println("Collision Detected: " + result);
         
         // Return the collision result
         return result;
