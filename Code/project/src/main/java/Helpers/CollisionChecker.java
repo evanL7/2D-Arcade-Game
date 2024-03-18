@@ -140,12 +140,17 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerRewardCollision(Player player, Reward reward) {
-        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                                                player.getWidth(), player.getHeight());
+        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
+        //                                         player.getWidth(), player.getHeight());
         
-        Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(),
-                                                reward.getWidth(), reward.getHeight());
+        // new hitboxes
+        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
+        // Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(),
+        //                                         reward.getWidth(), reward.getHeight());
         
+        // new hitboxes
+        Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(), (int) (Game.tileSize * 0.5), 15);
+
         // Print information about the bounding boxes
         System.out.println("Player Bounds: " + playerBounds);
         System.out.println("Reward Bounds: " + rewardBounds);
@@ -217,6 +222,10 @@ public class CollisionChecker {
         // Return the collision result
         return result;
     }
+
+    // public boolean checkCollisionStatic(Player player) {
+        
+    // }
 
     /**
      * Checks for collisions between the specified player and enemies.
