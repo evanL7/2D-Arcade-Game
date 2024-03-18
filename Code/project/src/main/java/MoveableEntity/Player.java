@@ -35,8 +35,6 @@ public class Player extends MoveableEntity {
     private boolean up, left, down, right;
     private int animationTick, animationIndex, animationSpeed = 35;
 
-    private int regularRewardsCollected;
-
     private TileManager tileManager;
 
     private CollisionChecker collisionChecker;
@@ -45,6 +43,7 @@ public class Player extends MoveableEntity {
     // private float score;
 
     private Score scoreObject;
+    private int win = 0; // needs 3 to wins
 
     // CONSTRUCTOR
     /**
@@ -105,11 +104,11 @@ public class Player extends MoveableEntity {
 
         // // Check collision with traps
         // for (StaticEntity trap : tileManager.getTraps()) {
-        //     if (trap.getBoundingBox().intersects(this.getBoundingBox())) {
-        //         // Collision with trap detected
-        //         // Handle collision with trap
-        //         break; // Exit loop after detecting collision with one trap
-        //     }
+        // if (trap.getBoundingBox().intersects(this.getBoundingBox())) {
+        // // Collision with trap detected
+        // // Handle collision with trap
+        // break; // Exit loop after detecting collision with one trap
+        // }
         // }
 
         updateAnimationTick();
@@ -231,7 +230,13 @@ public class Player extends MoveableEntity {
         scoreObject.incrementScore(-amount); // Call the increment method with negative amount to decrease score
     }
 
-    // GETTERS AND SETTERS
+    /**
+     * Increases the player's win score by 1
+     */
+    public void increaseWin() {
+        win++; // Call the increment method in Score class
+    }
+
     /**
      * Resets the direction booleans indicating the player's movement direction.
      */
@@ -277,24 +282,14 @@ public class Player extends MoveableEntity {
     }
 
     /**
-     * Retrieves the number of regular rewards collected by the player.
+     * Retrieves the win number from player
      * 
-     * @return The number of regular rewards collected by the player.
+     * @return The number of regular rewards collected
      */
-    public int getRegularRewardsCollected() {
-        return regularRewardsCollected;
+    public int getWin() {
+        return win;
     }
 
-    /**
-     * Sets the number of regular rewards collected by the player.
-     * 
-     * @param regularRewardsCollected The number of regular rewards collected by the
-     *                                player.
-     */
-    public void setRegularRewardsCollected(int regularRewardsCollected) {
-        this.regularRewardsCollected = regularRewardsCollected;
-    }
-    
     /**
      * Checks if the player is moving left.
      * 
