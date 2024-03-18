@@ -169,4 +169,8 @@ public abstract class StaticEntity {
 
     }
 
+    public void remove() {
+        staticEntities.remove(this);
+    }
+
 }

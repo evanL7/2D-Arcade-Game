@@ -143,17 +143,17 @@ public class CollisionChecker {
         // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
         //                                         player.getWidth(), player.getHeight());
         
-        // new hitboxes
-        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
+        
         // Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(),
         //                                         reward.getWidth(), reward.getHeight());
         
         // new hitboxes
+        Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(), (int) (Game.tileSize * 0.5), 15);
 
         // Print information about the bounding boxes
-        System.out.println("Player Bounds: " + playerBounds);
-        System.out.println("Reward Bounds: " + rewardBounds);
+        //System.out.println("Player Bounds: " + playerBounds);
+        //System.out.println("Reward Bounds: " + rewardBounds);
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(rewardBounds);
@@ -182,8 +182,8 @@ public class CollisionChecker {
                                                 trap.getWidth(), trap.getHeight());
         
         // Print information about the bounding boxes
-        System.out.println("Player Bounds: " + playerBounds);
-        System.out.println("Trap Bounds: " + trapBounds);
+        //System.out.println("Player Bounds: " + playerBounds);
+        //System.out.println("Trap Bounds: " + trapBounds);
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
@@ -210,8 +210,8 @@ public class CollisionChecker {
                                                 door.getWidth(), door.getHeight());
         
         // Print information about the bounding boxes
-        System.out.println("Player Bounds: " + playerBounds);
-        System.out.println("Door Bounds: " + doorBounds);
+        //System.out.println("Player Bounds: " + playerBounds);
+        //System.out.println("Door Bounds: " + doorBounds);
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(doorBounds);
@@ -243,8 +243,8 @@ public class CollisionChecker {
                                                 enemy.getWidth(), enemy.getHeight());
         
         // Print information about the bounding boxes
-        System.out.println("Player Bounds: " + playerBounds);
-        System.out.println("Enemy Bounds: " + enemyBounds);
+        //System.out.println("Player Bounds: " + playerBounds);
+        //System.out.println("Enemy Bounds: " + enemyBounds);
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(enemyBounds);

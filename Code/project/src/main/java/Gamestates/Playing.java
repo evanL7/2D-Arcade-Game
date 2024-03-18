@@ -15,6 +15,7 @@ import Helpers.CollisionChecker;
 import Helpers.MusicManager;
 import Helpers.PathFinder;
 import Helpers.Position;
+import Helpers.RewardType;
 import Helpers.SoundManager;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
@@ -37,9 +38,9 @@ public class Playing extends State implements Statemethods {
 
     private Player player;
     private Enemy enemy;
-    private Trap trap;
-    private Reward rewardReg;
-    private Reward rewardBonus;
+    // private Trap trap;
+    // private Reward rewardReg;
+    // private Reward rewardBonus;
     private Time time; // Time object
 
     public int worldX = Game.tileSize * 23;
@@ -92,10 +93,10 @@ public class Playing extends State implements Statemethods {
 
         assetManager.setObjects();
 
-        rewardReg = new Reward(new Position(regRewardX, regRewardY), 1, 1);
+        //rewardReg = new Reward(new Position(regRewardX, regRewardY), 1, 1);
 
         // this takes approx 12 seconds to despawn from the screen
-        rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 1, 1);
+        //rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 1, 1);
 
         // Create the Camera object with the player
         camera = new Camera(player);
@@ -106,73 +107,85 @@ public class Playing extends State implements Statemethods {
     @Override
     public void update() {
 
-        
+        // Check collision between player and traps
+        for (Trap trap : StaticEntity.getAllTraps()) {
+            if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
+                score.incrementScore(trap.getDamage()); 
+                if (score.getScore() <= 0) {
+                    Gamestate.state = Gamestate.GAMEOVER;
+                }
+                trap.remove();
+                break; // Exit the loop after handling the collision with one trap
+            }
 
-        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-        //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
-        //         score.incrementScore(rewardBonus.getRewardAmount());
-        //     }
-        // }
+            else if(trap != null){
+                trap.update();
+            }
+        }
 
         // Check collision between player and rewards
-        if (rewardReg != null && collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
-            player.increaseWin();
-            rewardReg.update();
-            rewardReg = null;
+        for (Reward reward : StaticEntity.getAllRewards()) {
+            if (reward != null && collisionChecker.checkPlayerRewardCollision(player, reward)) {
+                player.increaseWin();
+                
+                if (player.getWin() == 3) {
+                    // door opens??
+                }   
+                reward.remove();        
+                break; // Exit the loop after handling the collision with one reward
+            }
 
-            if (player.getWin() == 3) {
-                // door opens??
+            // despwan
+            else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
+                reward.remove();
+            }
+
+            else if (reward != null &&  collisionChecker.checkPlayerRewardCollision(player, reward) && reward.rewardType == RewardType.BonusReward) {
+                score.incrementScore(reward.getRewardAmount());
+                reward.remove(); 
+            }
+
+            else if(reward != null){
+                reward.update();
             }
 
         }
 
-        // Check collision between player and traps
-        if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
-            // Decrease score (example: by 10 for hitting a trap)
-            score.incrementScore(trap.getDamage()); // Adjust the amount as per your game's logic
-            if (score.getScore() <= 0) {
-                Gamestate.state = Gamestate.GAMEOVER;
-            }
-            // responsible for despawning trap
-            // not sure where this would go or how to implement this when there are multiple
-            // traps
-            else {
-                trap = null;
-            }
-        }
 
         player.update();
         enemy.update(player);
 
-        if (trap != null) {
-            trap.update();
-        }
+        // if (trap != null) {
+        //     trap.update();
+        // }
 
-        for (int i = 0; i < staticEntities.length; i++) {
-            if (staticEntities[i] != null) {
-                // if (collisionChecker.checkPlayerTrapCollision(player, staticEntities[i])) {
+        // for (int i = 0; i < staticEntities.length; i++) {
+        //     if (staticEntities[i] != null) {
+        //         // if (collisionChecker.checkPlayerTrapCollision(player, staticEntities[i])) {
 
-                // }
-                staticEntities[i].update();
-            }
-        }
+        //         // }
+        //         staticEntities[i].update();
+        //     }
+        // }
 
         // rewardReg.update();
 
         // responsible for despawning bonus rewards
         // not sure where this would go or how to implement this when there are multiple
         // bonus rewards
-        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-            rewardBonus.update();
-            if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
-                score.incrementScore(rewardBonus.getRewardAmount());
-                rewardBonus = null;
-            }
-            else if (rewardBonus.getDespawnTimer() <= 0) {
-                rewardBonus = null;
-            }
-        }
+        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
+        //     rewardBonus.update();
+        //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
+        //         score.incrementScore(rewardBonus.getRewardAmount());
+        //         rewardBonus = null;
+        //     }
+        //     else if (rewardBonus.getDespawnTimer() <= 0) {
+        //         rewardBonus = null;
+        //     }
+        // }
     }
+
+
 
     @Override
     public void draw(Graphics g) {
@@ -194,16 +207,16 @@ public class Playing extends State implements Statemethods {
             }
         }
 
-        if (trap != null) {
-            trap.render(g);
-        }
-        if (rewardReg != null) {
-            rewardReg.render(g);
-        }
+        // if (trap != null) {
+        //     trap.render(g);
+        // }
+        // if (rewardReg != null) {
+        //     rewardReg.render(g);
+        // }
         
-        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-            rewardBonus.render(g);
-        }
+        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
+        //     rewardBonus.render(g);
+        // }
 
         // Reset graphics translation
         camera.reset(g);
