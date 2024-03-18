@@ -23,6 +23,7 @@ import StaticEntity.Reward;
 import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
 import StaticEntity.Trap;
+import StaticEntity.Door;
 
 public class Playing extends State implements Statemethods {
 
@@ -38,9 +39,6 @@ public class Playing extends State implements Statemethods {
 
     private Player player;
     private Enemy enemy;
-    // private Trap trap;
-    // private Reward rewardReg;
-    // private Reward rewardBonus;
     private Time time; // Time object
 
     public int worldX = Game.tileSize * 23;
@@ -110,8 +108,8 @@ public class Playing extends State implements Statemethods {
         // Check collision between player and traps
         for (Trap trap : StaticEntity.getAllTraps()) {
             if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
-                score.incrementScore(trap.getDamage()); 
-                if (score.getScore() <= 0) {
+                score.decreaseScore(trap.getDamage()); 
+                if (score.getScore() < 0) {
                     Gamestate.state = Gamestate.GAMEOVER;
                 }
                 trap.remove();
@@ -135,7 +133,7 @@ public class Playing extends State implements Statemethods {
                 break; // Exit the loop after handling the collision with one reward
             }
 
-            // despwan
+            // despawn
             else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
                 reward.remove();
             }
@@ -150,39 +148,9 @@ public class Playing extends State implements Statemethods {
             }
 
         }
-
-
+        
         player.update();
         enemy.update(player);
-
-        // if (trap != null) {
-        //     trap.update();
-        // }
-
-        // for (int i = 0; i < staticEntities.length; i++) {
-        //     if (staticEntities[i] != null) {
-        //         // if (collisionChecker.checkPlayerTrapCollision(player, staticEntities[i])) {
-
-        //         // }
-        //         staticEntities[i].update();
-        //     }
-        // }
-
-        // rewardReg.update();
-
-        // responsible for despawning bonus rewards
-        // not sure where this would go or how to implement this when there are multiple
-        // bonus rewards
-        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-        //     rewardBonus.update();
-        //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
-        //         score.incrementScore(rewardBonus.getRewardAmount());
-        //         rewardBonus = null;
-        //     }
-        //     else if (rewardBonus.getDespawnTimer() <= 0) {
-        //         rewardBonus = null;
-        //     }
-        // }
     }
 
 
@@ -201,37 +169,31 @@ public class Playing extends State implements Statemethods {
         player.render(g);
         enemy.render(g);
 
-        for (int i = 0; i < staticEntities.length; i++) {
-            if (staticEntities[i] != null) {
-                staticEntities[i].render(g);
-            }
-        }
+        // for (int i = 0; i < staticEntities.length; i++) {
+        //     if (staticEntities[i] != null) {
+        //         staticEntities[i].render(g);
+        //     }
+        // }
 
         // Check collision between player and traps
         for (Trap trap : StaticEntity.getAllTraps()) {
-            if(trap != null){
+            if(trap != null) {
                 trap.render(g);
             }
         }
 
         // Check collision between player and rewards
         for (Reward reward : StaticEntity.getAllRewards()) {
-            if(reward != null){
+            if(reward != null) {
                 reward.render(g);
             }
-
         }
 
-        // if (trap != null) {
-        //     trap.render(g);
-        // }
-        // if (rewardReg != null) {
-        //     rewardReg.render(g);
-        // }
-        
-        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-        //     rewardBonus.render(g);
-        // }
+        for (Door door : StaticEntity.getAllDoors()) {
+            if(door != null) {
+                door.render(g);
+            }
+        }
 
         // Reset graphics translation
         camera.reset(g);
