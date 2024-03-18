@@ -8,7 +8,6 @@ import Helpers.Position;
 // import MoveableEntity.Player;
 import Helpers.ImageUtils;
 
-//import java.util.Timer;
 
 /**
  * An abstract class representing static entities in the game.
@@ -16,8 +15,7 @@ import Helpers.ImageUtils;
  * <p>A static entity is an object that does not move and has defined behavior when interacting with other entities.
  * This class serves as a base for various static entities, defining common attributes and methods.
  */
-public abstract class StaticEntity 
-{
+public abstract class StaticEntity {
 
     // Attributes
 
@@ -38,8 +36,7 @@ public abstract class StaticEntity
      * @param position        The position of the static entity.
      * @param despawnTimer    The time, in milliseconds, after which the entity will despawn. Use -1 for despawning only on collision.
      */
-    public StaticEntity(Position position, int despawnTimer)
-    {
+    public StaticEntity(Position position, int despawnTimer) {
         // Constructor for StaticEntities that rely on time like bonus rewards
         this.position = position;
         this.despawnTimer = despawnTimer;
@@ -51,8 +48,7 @@ public abstract class StaticEntity
      * @param position        The position of the static entity.
      * @param sprite          The sprite representing the static entity.
      */
-    public StaticEntity(Position position)
-    {
+    public StaticEntity(Position position) {
         // constructor for StaticEntities that don't despawn on a timer like traps and Regular Rewards
         this.position = position;
         
@@ -81,7 +77,7 @@ public abstract class StaticEntity
         }
     }
 
-        /**
+    /**
      * Gets the sprite associated with the static entity.
      * 
      * @return The sprite image.
