@@ -31,6 +31,12 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
     </dependency>
+  
+    <dependency>
+      <groupId>org.opensmarthouse.core.bundles</groupId>
+      <artifactId>org.opensmarthouse.core.audio.core</artifactId>
+      <version>0.10.1</version>
+    </dependency>
   </dependencies>
 
   <build>

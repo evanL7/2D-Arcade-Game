@@ -1,16 +1,15 @@
 package Helpers;
 
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+
+import java.io.InputStream;
 
 /**
  * A class to manage playing looping background music in the game.
  */
 public class MusicManager {
-    private static Clip clip;
-
-    //private static final int BUFFER_SIZE = 4096;
+    private static AdvancedPlayer player;
 
     /**
      * Plays background music from the given file path.
@@ -18,16 +17,26 @@ public class MusicManager {
      */
     public static void playMusic(String filePath) {
         try {
-            // Create a new Clip object to play the music
-            clip = AudioSystem.getClip();
+            // Get the input stream for the resource
+            InputStream inputStream = MusicManager.class.getClassLoader().getResourceAsStream(filePath);
 
-            // Get an AudioInputStream from the file
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(filePath));
+            // Check if input stream is null
+            if (inputStream == null) {
+                throw new RuntimeException("File not found: " + filePath);
+            }
 
-            // Open the clip and start playing the music in a loop
-            clip.open(inputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
+            // Create an AdvancedPlayer to play the music
+            player = new AdvancedPlayer(inputStream);
+
+            // Start playing the music in a loop
+            new Thread(() -> {
+                try {
+                    player.play();
+                } catch (JavaLayerException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -36,9 +45,8 @@ public class MusicManager {
      * Stops the currently playing background music.
      */
     public static void stopMusic() {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-            clip.close();
+        if (player != null) {
+            player.close();
         }
     }
 }

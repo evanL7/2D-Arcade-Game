@@ -71,10 +71,7 @@ public class Playing extends State implements Statemethods {
         super(game);
         initClasses();
 
-        // To play background music
-        //MusicManager.playMusic("/resources/assets/music/Optimistic-background-music.mp3");
-        //MusicManager.playMusic("assests/music/Optimistic-background-music.mp3");
-
+        MusicManager.playMusic("music/Optimistic-background-music.mp3");
     }
 
     private void initClasses() {
@@ -104,11 +101,13 @@ public class Playing extends State implements Statemethods {
         camera = new Camera(player);
         score = new Score();
         time = new Time();
+
+       
     }
 
     @Override
     public void update() {
-
+        
         // Check collision between player and traps
         for (Trap trap : StaticEntity.getAllTraps()) {
             if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
