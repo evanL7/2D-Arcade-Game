@@ -29,13 +29,17 @@ public class MusicManager {
             player = new AdvancedPlayer(inputStream);
 
             // Start playing the music in a loop
-            new Thread(() -> {
-                try {
-                    player.play();
-                } catch (JavaLayerException e) {
-                    e.printStackTrace();
+            Thread playerThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        player.play();
+                    } catch (JavaLayerException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }).start();
+            });
+            playerThread.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
