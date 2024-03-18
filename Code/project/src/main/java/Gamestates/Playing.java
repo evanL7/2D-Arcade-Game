@@ -83,6 +83,7 @@ public class Playing extends State implements Statemethods {
         // enemy = new Enemy(new Position(enemyX, enemyY), this);
         
         assetManager = new AssetManager(this);
+        // Currently set to 25 static entities can be displayed, adjust as needed
         staticEntities = new StaticEntity[25];
 
         assetManager.setObjects();

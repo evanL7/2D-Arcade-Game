@@ -26,6 +26,5 @@ public class AssetManager {
         playing.staticEntities[4] = new Reward(new Position(10 * Game.tileSize, 3 *  Game.tileSize), 1, 1);
         playing.staticEntities[5] = new Reward(new Position(10 * Game.tileSize, 4 *  Game.tileSize), 1, 1);
         playing.staticEntities[6] = new Reward(new Position(10 * Game.tileSize, 5 *  Game.tileSize), 1, 1);
-
     }
 }
