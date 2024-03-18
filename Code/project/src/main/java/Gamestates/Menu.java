@@ -83,19 +83,19 @@ public class Menu extends State implements Statemethods {
                 g.drawString(">", x - Game.tileSize / 2, y);
             }
 
-            text = "SETTINGS";
-            x = getXCenteredString(g, text);
-            y += Game.tileSize;
-            g.drawString(text, x, y);
-            if (commandNum == 1) {
-                g.drawString(">", x - Game.tileSize / 2, y);
-            }
+            // text = "SETTINGS";
+            // x = getXCenteredString(g, text);
+            // y += Game.tileSize;
+            // g.drawString(text, x, y);
+            // if (commandNum == 1) {
+            //     g.drawString(">", x - Game.tileSize / 2, y);
+            // }
 
             text = "QUIT";
             x = getXCenteredString(g, text);
             y += Game.tileSize;
             g.drawString(text, x, y);
-            if (commandNum == 2) {
+            if (commandNum == 1) {
                 g.drawString(">", x - Game.tileSize / 2, y);
             }
         }
@@ -127,13 +127,13 @@ public class Menu extends State implements Statemethods {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
             commandNum++;
-            if (commandNum > 2) {
+            if (commandNum > 1) {
                 commandNum = 0;
             }
         } else if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
             commandNum--;
             if (commandNum < 0) {
-                commandNum = 2;
+                commandNum = 1;
             }
         } else if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
             switch (commandNum) {
@@ -144,10 +144,10 @@ public class Menu extends State implements Statemethods {
                     playingState.windowFocusLost();
                     playingState.getTime().resumeTimer();
                     break;
+                // case 1:
+                //     Gamestate.state = Gamestate.OPTIONS;
+                //     break;
                 case 1:
-                    Gamestate.state = Gamestate.OPTIONS;
-                    break;
-                case 2:
                     System.exit(0);
                     break;
             }
