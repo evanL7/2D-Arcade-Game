@@ -159,9 +159,9 @@ public class TileManager {
      */
     // public List<MoveableEntity> getEnemies() {
     //     List<MoveableEntity> enemies = new ArrayList<>();
-    //     for (StaticEntity entity : staticEntities) {
+    //     for (MoveableEntity entity : moveableEntities) {
     //         if (entity instanceof Enemy) {
-    //             enemies.add((MoveableEntity) entity);
+    //             enemies.add(entity);
     //         }
     //     }
     //     return enemies;

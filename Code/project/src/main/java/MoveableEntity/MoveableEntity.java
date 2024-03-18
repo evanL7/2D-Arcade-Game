@@ -12,6 +12,7 @@ public abstract class MoveableEntity {
     // ATTRIBUTES
     protected Image sprite;
     public Position position;
+
     public Playing playing;
     public int speed;
     protected boolean moving = false;
@@ -28,11 +29,6 @@ public abstract class MoveableEntity {
     public MoveableEntity(Position position, Playing playing) {
         this.position = position;
         this.playing = playing;
-    }
-
-    // gets and returns the entities position
-    public Position getPosition() {
-        return this.position;
     }
 
     // Method to get the height of the sprite
@@ -57,6 +53,11 @@ public abstract class MoveableEntity {
 
     // Define the getSprite() method to return the sprite
     public abstract Image getSprite();
+
+    // gets and returns the entities position
+    public Position getPosition() {
+        return this.position;
+    }
 
     /**
      * Gets the bounding box of the movable entity.

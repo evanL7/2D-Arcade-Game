@@ -2,7 +2,7 @@ package StaticEntity;
 import java.awt.image.BufferedImage;
 
 import java.awt.*;
-import java.awt.Rectangle;
+
 import Helpers.Position;
 import MoveableEntity.MoveableEntity;
 import MoveableEntity.Player;
@@ -59,49 +59,7 @@ public abstract class StaticEntity
         // a value of -1 represents how the entity will only despawn if collided with
         despawnTimer = -1;
     }
-
-    //Methods
-
-   /**
-     * Handles the collision with the player.
-     * 
-     * @param player The player entity colliding with this static entity.
-     */
-    public abstract void onCollide(MoveableEntity entity);
-
-    // Define the getPosition() method to return the position
-    public abstract Position getPosition();
-
-    /**
-     * Gets the sprite associated with the static entity.
-     * 
-     * @return The sprite image.
-     */
-    public abstract Image getSprite();
-
-    // destroys the object
-    public void destroy() 
-    {
-
-    }
-
-    public void update()
-    {
-
-    }
-
-
-    public void render()
-    {
-
-    }
-
-    /**
-     * Gets the bounding box of the static entity.
-     * 
-     * @return The bounding box.
-     */
-    public abstract Rectangle getBoundingBox();
+    
 
     // Method to get the height of the sprite
     public int getHeight() {
@@ -122,5 +80,24 @@ public abstract class StaticEntity
             return 0; // or handle null sprite case accordingly
         }
     }
+
+        /**
+     * Gets the sprite associated with the static entity.
+     * 
+     * @return The sprite image.
+     */
+    public abstract Image getSprite();
+
+    // gets and returns the entities position
+    public Position getPosition() {
+        return this.position;
+    }
+
+    /**
+     * Gets the bounding box of the static entity.
+     * 
+     * @return The bounding box.
+     */
+    public abstract Rectangle getBoundingBox();
 
 }

@@ -90,17 +90,17 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void update() {
-        // Check collision between player and rewards
-        // if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
-        //     score.incrementScore(rewardReg.getRewardAmount());
-        //    // rewardReg.reset(); // Reset the reward's position
-        // }
-        // if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
-        //     if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
-        //         score.incrementScore(rewardBonus.getRewardAmount());
-        //        // rewardBonus.reset(); // Reset the reward's position
-        //     }
-        // }
+        
+        if (rewardBonus != null && rewardBonus.getDespawnTimer() > 0) {
+            if (collisionChecker.checkPlayerRewardCollision(player, rewardBonus)) {
+                score.incrementScore(7);
+            }
+        }
+        
+        //Check collision between player and rewards
+        if (collisionChecker.checkPlayerRewardCollision(player, rewardReg)) {
+            score.incrementScore(1);
+        }
 
         // Check collision between player and traps
         if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {

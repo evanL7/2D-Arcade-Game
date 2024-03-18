@@ -58,12 +58,6 @@ public class Trap extends StaticEntity {
     }
 
     @Override
-    public Position getPosition() {
-        // Return the position of the trap
-        return position;
-    }
-
-    @Override
     public Image getSprite() {
         // Return the sprite image associated with the trap entity
         return trapImage; // Assuming you have a field named trapImage that holds the sprite image
@@ -135,17 +129,6 @@ public class Trap extends StaticEntity {
         }
     }
 
-    @Override
-    public void onCollide(MoveableEntity entity) {
-        // Check if the entity colliding with the trap is a Player
-        if (entity instanceof Player) {
-            // Cast the entity to a Player object
-            Player player = (Player) entity;
-            // Decrease the score when the player collides with the trap
-            player.decreaseScore(damage);
-            // Perform any additional actions if needed
-        }
-    }
     
     
 

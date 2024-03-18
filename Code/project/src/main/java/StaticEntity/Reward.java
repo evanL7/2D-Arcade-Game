@@ -173,17 +173,7 @@ public class Reward extends StaticEntity {
             despawnTimer--;
         }
     }
-    @Override
-    public void onCollide(MoveableEntity entity) {
-        // Check if the entity colliding with the reward is a Player
-        if (entity instanceof Player) {
-            // Cast the entity to a Player object
-            Player player = (Player) entity;
-            // Increase the score when the player collides with the reward
-            player.increaseScore(rewardAmount);
-            // Perform any additional actions if needed
-        }
-    }
+
     
 
 

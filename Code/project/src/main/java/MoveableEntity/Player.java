@@ -103,14 +103,14 @@ public class Player extends MoveableEntity {
         // }
         // }
 
-        // Check collision with traps
-        for (StaticEntity trap : tileManager.getTraps()) {
-            if (trap.getBoundingBox().intersects(this.getBoundingBox())) {
-                // Collision with trap detected
-                // Handle collision with trap
-                break; // Exit loop after detecting collision with one trap
-            }
-        }
+        // // Check collision with traps
+        // for (StaticEntity trap : tileManager.getTraps()) {
+        //     if (trap.getBoundingBox().intersects(this.getBoundingBox())) {
+        //         // Collision with trap detected
+        //         // Handle collision with trap
+        //         break; // Exit loop after detecting collision with one trap
+        //     }
+        // }
 
         updateAnimationTick();
     }
