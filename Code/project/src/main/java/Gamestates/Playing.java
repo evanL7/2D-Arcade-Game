@@ -62,7 +62,7 @@ public class Playing extends State implements Statemethods {
         super(game);
         initClasses();
 
-        MusicManager.playMusic("music/Optimistic-background-music.mp3");
+        MusicManager.playMusic("music/Optimistic-background-music.mp3", 0.5f);
     }
 
     private void initClasses() {

@@ -3,40 +3,32 @@ package Helpers;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.Port;
 import java.io.InputStream;
 
-/**
- * A class to manage playing looping background music in the game.
- */
 public class MusicManager {
     private static AdvancedPlayer player;
 
     /**
      * Plays background music from the given file path.
      * @param filePath The file path of the background music to be played.
+     * @param volume The volume level (0.0f to 1.0f).
      */
-    public static void playMusic(String filePath) {
+    public static void playMusic(String filePath, float volume) {
         try {
-            // Get the input stream for the resource
             InputStream inputStream = MusicManager.class.getClassLoader().getResourceAsStream(filePath);
-
-            // Check if input stream is null
             if (inputStream == null) {
                 throw new RuntimeException("File not found: " + filePath);
             }
-
-            // Create an AdvancedPlayer to play the music
             player = new AdvancedPlayer(inputStream);
-
-            // Start playing the music in a loop
-            Thread playerThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        player.play();
-                    } catch (JavaLayerException e) {
-                        e.printStackTrace();
-                    }
+            setMusicVolume(volume);
+            Thread playerThread = new Thread(() -> {
+                try {
+                    player.play();
+                } catch (JavaLayerException e) {
+                    e.printStackTrace();
                 }
             });
             playerThread.start();
@@ -51,6 +43,30 @@ public class MusicManager {
     public static void stopMusic() {
         if (player != null) {
             player.close();
+        }
+    }
+
+    /**
+     * Sets the system-wide volume for the background music.
+     * @param volume The volume level (0.0f to 1.0f).
+     */
+    public static void setMusicVolume(float volume) {
+        try {
+            Mixer.Info[] mixerInfo = javax.sound.sampled.AudioSystem.getMixerInfo();
+            for (Mixer.Info info : mixerInfo) {
+                Mixer mixer = javax.sound.sampled.AudioSystem.getMixer(info);
+                if (mixer.isLineSupported(Port.Info.SPEAKER)) {
+                    Port port = (Port) mixer.getLine(Port.Info.SPEAKER);
+                    port.open();
+                    if (port.isControlSupported(javax.sound.sampled.FloatControl.Type.VOLUME)) {
+                        javax.sound.sampled.FloatControl volumeControl = (javax.sound.sampled.FloatControl) port.getControl(javax.sound.sampled.FloatControl.Type.VOLUME);
+                        volumeControl.setValue(volume);
+                    }
+                    port.close();
+                }
+            }
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
         }
     }
 }

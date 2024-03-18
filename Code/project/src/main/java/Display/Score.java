@@ -23,7 +23,7 @@ public class Score {
 
     public void incrementScore(double incrementAmount) {
         String soundFilePath = "sounds/bloop_x.wav";
-        SoundManager.playSound(soundFilePath);
+        SoundManager.playSound(soundFilePath, 0.5f);
         this.score += incrementAmount;
     }
 
