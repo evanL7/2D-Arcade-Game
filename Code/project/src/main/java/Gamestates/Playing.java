@@ -25,6 +25,20 @@ import StaticEntity.TileManager;
 import StaticEntity.Trap;
 import StaticEntity.Door;
 
+/**
+ * The `Playing` class represents the game state when the player is actively playing the game.
+ * It extends the `State` class and implements the `Statemethods` interface.
+ * It handles the game logic, updates the game objects, and renders them on the screen.
+ * 
+ * The `Playing` class contains various instance variables such as `camera`, `score`, `tileManager`, `collisionChecker`, etc.
+ * It also has methods to initialize the game objects, update the game state, draw the game objects on the screen,
+ * handle key events, and retrieve player, camera, time, and score objects.
+ * 
+ * The `Playing` class is responsible for checking collision between the player and traps, enemies, and rewards.
+ * It also handles player movement based on the keys pressed by the user.
+ * 
+ * The `Playing` class is used by the `Game` class to represent the playing state of the game.
+ */
 public class Playing extends State implements Statemethods {
 
     private Camera camera; // add
@@ -166,9 +180,7 @@ public class Playing extends State implements Statemethods {
 
         // Render game objects with adjusted coordinates
         tileManager.draw(g);
-        // Adjust player's position based on camera
-        // int playerRenderX = player.getPosition().getX() - camera.getXOffset();
-        // int playerRenderY = player.getPosition().getY() - camera.getYOffset();
+
         player.render(g);
         enemy.render(g);
 
