@@ -30,7 +30,7 @@ public class AssetManager {
         playing.staticEntities[8] = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize), 1, 1);
         playing.staticEntities[9] = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize), 1, 1);
         playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize), 1, 1);
-        playing.staticEntities[11] = new Reward(new Position(18 * Game.tileSize, 14 * Game.tileSize), 10000, 1, 0);
-        playing.staticEntities[12] = new Reward(new Position(4 * Game.tileSize, 20 * Game.tileSize), 10000, 1, 0);
+        playing.staticEntities[11] = new Reward(new Position(18 * Game.tileSize, 14 * Game.tileSize), 4000, 1, 0);
+        playing.staticEntities[12] = new Reward(new Position(4 * Game.tileSize, 20 * Game.tileSize), 4000, 1, 0);
     }
 }

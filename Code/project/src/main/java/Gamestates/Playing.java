@@ -2,6 +2,9 @@ package Gamestates;
 
 import java.awt.Graphics;
 import java.util.HashSet;
+
+
+
 import java.awt.event.KeyEvent;
 //import java.awt.event.MouseEvent;
 
@@ -17,6 +20,7 @@ import Helpers.PathFinder;
 import Helpers.Position;
 import Helpers.RewardType;
 import Helpers.SoundManager;
+import MoveableEntity.MoveableEntity;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import StaticEntity.Reward;
@@ -121,6 +125,12 @@ public class Playing extends State implements Statemethods {
             }
         }
 
+        // for(Enemy enemy : MoveableEntity.getAllEnemies()) {
+        //     if(enemy != null && collisionChecker.checkPlayerEnemyCollision(player, enemy)){
+        //         Gamestate.state = Gamestate.GAMEOVER;
+        //     }
+        // }
+
         // Check collision between player and rewards
         for (Reward reward : StaticEntity.getAllRewards()) {
             if (reward != null && collisionChecker.checkPlayerRewardCollision(player, reward) && reward.rewardType == RewardType.RegularReward) {
@@ -175,14 +185,12 @@ public class Playing extends State implements Statemethods {
         //     }
         // }
 
-        // Check collision between player and traps
         for (Trap trap : StaticEntity.getAllTraps()) {
             if(trap != null) {
                 trap.render(g);
             }
         }
 
-        // Check collision between player and rewards
         for (Reward reward : StaticEntity.getAllRewards()) {
             if(reward != null) {
                 reward.render(g);
