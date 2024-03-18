@@ -125,11 +125,11 @@ public class Playing extends State implements Statemethods {
             }
         }
 
-        // for(Enemy enemy : MoveableEntity.getAllEnemies()) {
-        //     if(enemy != null && collisionChecker.checkPlayerEnemyCollision(player, enemy)){
-        //         Gamestate.state = Gamestate.GAMEOVER;
-        //     }
-        // }
+        for (Enemy enemy : MoveableEntity.getAllEnemies()) {
+            if (enemy != null && collisionChecker.checkPlayerEnemyCollision(player, enemy)){
+                Gamestate.state = Gamestate.GAMEOVER;
+            }
+        }
 
         // Check collision between player and rewards
         for (Reward reward : StaticEntity.getAllRewards()) {
