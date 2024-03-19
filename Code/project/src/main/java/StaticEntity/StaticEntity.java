@@ -36,12 +36,6 @@ public abstract class StaticEntity {
     // Static list to store all static entities
     private static List<StaticEntity> staticEntities = new ArrayList<>();
 
-    public static void resetStaticEntities() {
-        staticEntities = new ArrayList<>();
-    }
-
-    // protected Timer despawnTimer;
-
     /**
      * Constructs a new static entity with a despawn timer.
      *
@@ -177,4 +171,10 @@ public abstract class StaticEntity {
         staticEntities.remove(this);
     }
 
+    /**
+     * Recreates the array so it discards the previous entities.
+     */
+    public static void resetStaticEntities() {
+        staticEntities = new ArrayList<>();
+    }
 }

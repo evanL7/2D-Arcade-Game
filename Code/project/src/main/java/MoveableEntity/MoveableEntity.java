@@ -25,7 +25,7 @@ public abstract class MoveableEntity {
     public boolean onPath = false;
 
     // Static list to store all movable entities
-    private static List<MoveableEntity> movableEntities = new ArrayList<>();
+    private static List<MoveableEntity> moveableEntities = new ArrayList<>();
 
     /**
      * Constructs a MoveableEntity with the given position.
@@ -36,18 +36,18 @@ public abstract class MoveableEntity {
         this.position = position;
         this.playing = playing;
 
-        movableEntities.add(this);
+        moveableEntities.add(this);
     }
 
     // Method to get all movable entities
     public static List<MoveableEntity> getAllMoveableEntities() {
-        return movableEntities;
+        return moveableEntities;
     }
 
     // Method to get all players
     public static List<Player> getAllPlayers() {
         List<Player> players = new ArrayList<>();
-        for (MoveableEntity entity : movableEntities) {
+        for (MoveableEntity entity : moveableEntities) {
             if (entity instanceof Player) {
                 players.add((Player) entity);
             }
@@ -58,7 +58,7 @@ public abstract class MoveableEntity {
     // Method to get all enemies
     public static List<Enemy> getAllEnemies() {
         List<Enemy> enemies = new ArrayList<>();
-        for (MoveableEntity entity : movableEntities) {
+        for (MoveableEntity entity : moveableEntities) {
             if (entity instanceof Enemy) {
                 enemies.add((Enemy) entity);
             }
@@ -68,7 +68,7 @@ public abstract class MoveableEntity {
 
     // Method to clear all movable entities
     public static void clearAllMoveableEntities() {
-        movableEntities.clear();
+        moveableEntities.clear();
     }
 
     // Method to get the height of the sprite
@@ -109,6 +109,14 @@ public abstract class MoveableEntity {
         // Implement this method based on how you define the bounding box for the player
         // entity
         return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+    }
+
+    /**
+     * Recreates the array so it discards the previous entities.
+     * 
+     */
+    public static void resetMoveableEntities() {
+        moveableEntities = new ArrayList<>();
     }
 
 }

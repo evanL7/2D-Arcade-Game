@@ -122,8 +122,4 @@ public class Trap extends StaticEntity {
             }
         }
     }
-
-    
-    
-
 }

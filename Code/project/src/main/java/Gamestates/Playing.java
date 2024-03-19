@@ -293,12 +293,8 @@ public class Playing extends State implements Statemethods {
     }
 
     protected void restartGame() {
-        // collisionChecker = null;
-        // assetManager = null;
-        // enemy = null;
-        // player = null;
-        // tileManager.mapTileNum = null;
-        StaticEntity.resetStaticEntities(); //Added this
+        StaticEntity.resetStaticEntities(); // Added this
+        MoveableEntity.resetMoveableEntities(); // Added this
         initClasses();
     }
 }
