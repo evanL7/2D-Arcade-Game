@@ -57,11 +57,6 @@ public class Playing extends State implements Statemethods {
     private Enemy enemy;
     private Time time; // Time object
 
-
-    // Calculate player initial position to place it in the middle of the screen
-    int playerX = (Game.screenWidth - Game.tileSize) / 2;
-    int playerY = (Game.screenHeight - Game.tileSize) / 2;
-
     int enemyX = 20 * Game.tileSize;
     int enemyY = 20 * Game.tileSize;
 
