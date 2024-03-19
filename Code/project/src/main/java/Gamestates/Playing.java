@@ -269,15 +269,46 @@ public class Playing extends State implements Statemethods {
 
         // Determine the primary direction based on the last key pressed
         int action = player.getAction(); // Default action
-        if (up) {
-            action = PlayerConstants.UP;
-        } else if (left) {
-            action = PlayerConstants.LEFT;
-        } else if (down) {
-            action = PlayerConstants.DOWN;
-        } else if (right) {
-            action = PlayerConstants.RIGHT;
-        }
+        
+        // Prevent bug where animations were not matching most recent key press
+        switch (action) {
+            case PlayerConstants.UP:
+                if (right) {
+                    action = PlayerConstants.RIGHT;
+                } else if (left) {
+                    action = PlayerConstants.LEFT;
+                } else if (down) {
+                    action = PlayerConstants.DOWN;
+                }
+                break;
+            case PlayerConstants.LEFT:
+                if (up) {
+                    action = PlayerConstants.UP;
+                } else if (down) {
+                    action = PlayerConstants.DOWN;
+                } else if (right) {
+                    action = PlayerConstants.RIGHT;
+                }
+                break;
+            case PlayerConstants.DOWN:
+                if (up) {
+                    action = PlayerConstants.UP;
+                } else if (left) {
+                    action = PlayerConstants.LEFT;
+                } else if (right) {
+                    action = PlayerConstants.RIGHT;
+                }
+                break;
+            case PlayerConstants.RIGHT:
+                if (up) {
+                    action = PlayerConstants.UP;
+                } else if (down) {
+                    action = PlayerConstants.DOWN;
+                } else if (left) {
+                    action = PlayerConstants.LEFT;
+                }
+                break;
+        }        
         player.setAction(action);
     }
 
