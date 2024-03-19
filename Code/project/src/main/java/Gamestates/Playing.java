@@ -2,6 +2,7 @@ package Gamestates;
 
 import java.awt.Graphics;
 import java.util.HashSet;
+import java.util.Random;
 import java.awt.event.KeyEvent;
 
 import Display.Camera;
@@ -50,13 +51,12 @@ public class Playing extends State implements Statemethods {
     public PathFinder pathFinder;
     public AssetManager assetManager;
     public StaticEntity staticEntities[];
+    Position playerSpawnPositions[]; 
 
     private Player player;
     private Enemy enemy;
     private Time time; // Time object
 
-    public int tempPlayerX = 100;
-    public int tempplayerY = 200;
 
     // Calculate player initial position to place it in the middle of the screen
     int playerX = (Game.screenWidth - Game.tileSize) / 2;
@@ -80,7 +80,14 @@ public class Playing extends State implements Statemethods {
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
 
-        player = new Player(new Position(playerX, playerY), collisionChecker, this, score);
+        playerSpawnPositions = new Position[4];
+        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top left corner of the map
+        playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize); // Spawn point at the bottom left corner of the map
+        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top right corner of the map
+        playerSpawnPositions[3] = new Position(22 * Game.tileSize, 22 * Game.tileSize); // Spawn point at the bottom right corner of the map
+
+        Random rand = new Random();
+        player = new Player(playerSpawnPositions[rand.nextInt(4)], collisionChecker, this, score);
 
         enemy = new Enemy(new Position(enemyX, enemyY), this);
 
