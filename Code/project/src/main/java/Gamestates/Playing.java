@@ -27,18 +27,24 @@ import StaticEntity.Trap;
 import StaticEntity.Door;
 
 /**
- * The `Playing` class represents the game state when the player is actively playing the game.
+ * The `Playing` class represents the game state when the player is actively
+ * playing the game.
  * It extends the `State` class and implements the `Statemethods` interface.
- * It handles the game logic, updates the game objects, and renders them on the screen.
+ * It handles the game logic, updates the game objects, and renders them on the
+ * screen.
  * 
- * The `Playing` class contains various instance variables such as `camera`, `score`, `tileManager`, `collisionChecker`, etc.
- * It also has methods to initialize the game objects, update the game state, draw the game objects on the screen,
+ * The `Playing` class contains various instance variables such as `camera`,
+ * `score`, `tileManager`, `collisionChecker`, etc.
+ * It also has methods to initialize the game objects, update the game state,
+ * draw the game objects on the screen,
  * handle key events, and retrieve player, camera, time, and score objects.
  * 
- * The `Playing` class is responsible for checking collision between the player and traps, enemies, and rewards.
+ * The `Playing` class is responsible for checking collision between the player
+ * and traps, enemies, and rewards.
  * It also handles player movement based on the keys pressed by the user.
  * 
- * The `Playing` class is used by the `Game` class to represent the playing state of the game.
+ * The `Playing` class is used by the `Game` class to represent the playing
+ * state of the game.
  */
 public class Playing extends State implements Statemethods {
 
@@ -51,7 +57,7 @@ public class Playing extends State implements Statemethods {
     public PathFinder pathFinder;
     public AssetManager assetManager;
     public StaticEntity staticEntities[];
-    Position playerSpawnPositions[]; 
+    Position playerSpawnPositions[];
 
     private Player player;
     private Enemy enemy;
@@ -76,13 +82,17 @@ public class Playing extends State implements Statemethods {
         pathFinder = new PathFinder(this);
 
         playerSpawnPositions = new Position[4];
-        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top left corner of the map
-        playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize); // Spawn point at the bottom left corner of the map
-        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top right corner of the map
-        playerSpawnPositions[3] = new Position(22 * Game.tileSize, 22 * Game.tileSize); // Spawn point at the bottom right corner of the map
+        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top left
+                                                                                      // corner of the map
+        playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize); // Spawn point at the bottom left
+                                                                                       // corner of the map
+        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top right
+                                                                                       // corner of the map
+        // playerSpawnPositions[3] = new Position(22 * Game.tileSize, 22 *
+        // Game.tileSize); // Spawn point at the bottom right corner of the map
 
         Random rand = new Random();
-        player = new Player(playerSpawnPositions[rand.nextInt(4)], collisionChecker, this, score);
+        player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
 
         enemy = new Enemy(new Position(enemyX, enemyY), this);
 
@@ -92,10 +102,10 @@ public class Playing extends State implements Statemethods {
 
         assetManager.setObjects();
 
-        //rewardReg = new Reward(new Position(regRewardX, regRewardY), 1, 1);
+        // rewardReg = new Reward(new Position(regRewardX, regRewardY), 1, 1);
 
         // this takes approx 12 seconds to despawn from the screen
-        //rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 1, 1);
+        // rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 1, 1);
 
         // Create the Camera object with the player
         camera = new Camera(player);
@@ -105,11 +115,11 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void update() {
-        
+
         // Check collision between player and traps
         for (Trap trap : StaticEntity.getAllTraps()) {
             if (trap != null && collisionChecker.checkPlayerTrapCollision(player, trap)) {
-                score.decreaseScore(trap.getDamage()); 
+                score.decreaseScore(trap.getDamage());
                 if (score.getScore() < 0) {
                     player.resetWin();
                     Gamestate.state = Gamestate.GAMEOVER;
@@ -118,7 +128,7 @@ public class Playing extends State implements Statemethods {
                 break; // Exit the loop after handling the collision with one trap
             }
 
-            else if(trap != null){
+            else if (trap != null) {
                 trap.update();
             }
         }
@@ -132,19 +142,21 @@ public class Playing extends State implements Statemethods {
 
         // Check collision between player and rewards
         for (Reward reward : StaticEntity.getAllRewards()) {
-            if (reward != null && collisionChecker.checkPlayerRewardCollision(player, reward) && reward.rewardType == RewardType.RegularReward) {
+            if (reward != null && collisionChecker.checkPlayerRewardCollision(player, reward)
+                    && reward.rewardType == RewardType.RegularReward) {
                 player.increaseWin();
-                
+
                 if (player.getWin() == 3) {
                     // door opens??
-                }   
-                reward.remove();        
+                }
+                reward.remove();
                 break; // Exit the loop after handling the collision with one reward
             }
 
-            else if (reward != null &&  collisionChecker.checkPlayerRewardCollision(player, reward) && reward.rewardType == RewardType.BonusReward) {
+            else if (reward != null && collisionChecker.checkPlayerRewardCollision(player, reward)
+                    && reward.rewardType == RewardType.BonusReward) {
                 score.incrementScore(reward.getRewardAmount());
-                reward.remove(); 
+                reward.remove();
             }
 
             // despawn
@@ -152,12 +164,12 @@ public class Playing extends State implements Statemethods {
                 reward.remove();
             }
 
-            else if(reward != null) {
+            else if (reward != null) {
                 reward.update();
             }
         }
 
-        for (Door door: StaticEntity.getAllDoors()) {
+        for (Door door : StaticEntity.getAllDoors()) {
             if (door != null && player.getWin() == 3) {
                 // add code for showing door opening animation
 
@@ -167,12 +179,10 @@ public class Playing extends State implements Statemethods {
                 }
             }
         }
-        
+
         player.update();
         enemy.update(player);
     }
-
-
 
     @Override
     public void draw(Graphics g) {
@@ -187,25 +197,25 @@ public class Playing extends State implements Statemethods {
         enemy.render(g);
 
         // for (int i = 0; i < staticEntities.length; i++) {
-        //     if (staticEntities[i] != null) {
-        //         staticEntities[i].render(g);
-        //     }
+        // if (staticEntities[i] != null) {
+        // staticEntities[i].render(g);
+        // }
         // }
 
         for (Trap trap : StaticEntity.getAllTraps()) {
-            if(trap != null) {
+            if (trap != null) {
                 trap.render(g);
             }
         }
 
         for (Reward reward : StaticEntity.getAllRewards()) {
-            if(reward != null) {
+            if (reward != null) {
                 reward.render(g);
             }
         }
 
         for (Door door : StaticEntity.getAllDoors()) {
-            if(door != null) {
+            if (door != null) {
                 door.render(g);
             }
         }
