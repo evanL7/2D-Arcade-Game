@@ -36,6 +36,10 @@ public abstract class StaticEntity {
     // Static list to store all static entities
     private static List<StaticEntity> staticEntities = new ArrayList<>();
 
+    public static void resetStaticEntities() {
+        staticEntities = new ArrayList<>();
+    }
+
     // protected Timer despawnTimer;
 
     /**
