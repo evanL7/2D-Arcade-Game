@@ -34,24 +34,19 @@ public class AssetManager {
         playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize), 1, 1);
         playing.staticEntities[11] = new Reward(generateRandomPosition(), 4000, 1, 0);
         playing.staticEntities[12] = new Reward(generateRandomPosition(), 4000, 1, 0);
-        System.out.println("Bone Reward 1: " + playing.staticEntities[11].getPosition());
-        System.out.println("Bone Reward 2: " + playing.staticEntities[12].getPosition());
     }
 
     private Position generateRandomPosition() {
+        Random rand = new Random();
         while (true) {
-            Position position = randomPosition();
+            int randomX = rand.nextInt(Game.maxWorldCol);
+            int randomY = rand.nextInt(Game.maxWorldRow);
+            Position position = new Position(randomX * Game.tileSize, randomY * Game.tileSize);
+            // Regenerates a new random position if the position is invalid
             if (isPositionValid(position)) {
                 return position;
             }
         }
-    }
-
-    private Position randomPosition() {
-        Random rand = new Random();
-        int randomX = rand.nextInt(Game.maxWorldRow);
-        int randomY = rand.nextInt(Game.maxWorldCol);
-        return new Position(randomX * Game.tileSize, randomY * Game.tileSize);
     }
 
     public boolean isPositionValid(Position position) {
@@ -62,7 +57,11 @@ public class AssetManager {
             }
         }
         // Check if the position conflicts with a map tile
-        if (playing.tileManager.mapTileNum[position.getX() / Game.tileSize][position.getY() / Game.tileSize] != 0) {
+        if (playing.tileManager.mapTileNum[position.getY() / Game.tileSize][position.getX() / Game.tileSize] != 0) {
+            return false;
+        }
+        // Check if the position conflicts with the player's location
+        if (position.equals(playing.getPlayer().getPosition())) {
             return false;
         }
         return true;
