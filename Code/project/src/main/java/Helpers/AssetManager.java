@@ -1,5 +1,7 @@
 package Helpers;
 
+import java.util.Random;
+
 import Display.Game;
 import Gamestates.Playing;
 import StaticEntity.Door;
@@ -30,7 +32,39 @@ public class AssetManager {
         playing.staticEntities[8] = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize), 1, 1);
         playing.staticEntities[9] = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize), 1, 1);
         playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize), 1, 1);
-        playing.staticEntities[11] = new Reward(new Position(18 * Game.tileSize, 14 * Game.tileSize), 4000, 1, 0);
-        playing.staticEntities[12] = new Reward(new Position(4 * Game.tileSize, 20 * Game.tileSize), 4000, 1, 0);
+        playing.staticEntities[11] = new Reward(generateRandomPosition(), 4000, 1, 0);
+        playing.staticEntities[12] = new Reward(generateRandomPosition(), 4000, 1, 0);
+        System.out.println("Bone Reward 1: " + playing.staticEntities[11].getPosition());
+        System.out.println("Bone Reward 2: " + playing.staticEntities[12].getPosition());
+    }
+
+    private Position generateRandomPosition() {
+        while (true) {
+            Position position = randomPosition();
+            if (isPositionValid(position)) {
+                return position;
+            }
+        }
+    }
+
+    private Position randomPosition() {
+        Random rand = new Random();
+        int randomX = rand.nextInt(Game.maxWorldRow);
+        int randomY = rand.nextInt(Game.maxWorldCol);
+        return new Position(randomX * Game.tileSize, randomY * Game.tileSize);
+    }
+
+    public boolean isPositionValid(Position position) {
+        // Check if the position conflicts with an existing static entity
+        for (int i = 0; i < playing.staticEntities.length; i++) {
+            if (playing.staticEntities[i] != null && playing.staticEntities[i].getPosition().equals(position)) {
+                return false;
+            }
+        }
+        // Check if the position conflicts with a map tile
+        if (playing.tileManager.mapTileNum[position.getX() / Game.tileSize][position.getY() / Game.tileSize] != 0) {
+            return false;
+        }
+        return true;
     }
 }
