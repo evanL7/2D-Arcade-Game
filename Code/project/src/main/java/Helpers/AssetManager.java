@@ -50,12 +50,6 @@ public class AssetManager {
     }
 
     public boolean isPositionValid(Position position) {
-        // Check if the position conflicts with an existing static entity
-        for (int i = 0; i < playing.staticEntities.length; i++) {
-            if (playing.staticEntities[i] != null && playing.staticEntities[i].getPosition().equals(position)) {
-                return false;
-            }
-        }
         // Check if the position conflicts with a map tile
         if (playing.tileManager.mapTileNum[position.getY() / Game.tileSize][position.getX() / Game.tileSize] != 0) {
             return false;
@@ -63,6 +57,12 @@ public class AssetManager {
         // Check if the position conflicts with the player's location
         if (position.equals(playing.getPlayer().getPosition())) {
             return false;
+        }
+        // Check if the position conflicts with an existing static entity
+        for (int i = 0; i < playing.staticEntities.length; i++) {
+            if (playing.staticEntities[i] != null && playing.staticEntities[i].getPosition().equals(position)) {
+                return false;
+            }
         }
         return true;
     }
