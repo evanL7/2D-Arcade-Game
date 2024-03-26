@@ -51,7 +51,8 @@ public class AssetManager {
 
     public boolean isPositionValid(Position position) {
         // Check if the position conflicts with a map tile
-        if (playing.tileManager.mapTileNum[position.getY() / Game.tileSize][position.getX() / Game.tileSize] != 0) {
+        int tileNum = playing.tileManager.mapTileNum[position.getY() / Game.tileSize][position.getX() / Game.tileSize];
+        if (playing.tileManager.tile[tileNum].collision == true) {
             return false;
         }
         // Check if the position conflicts with the player's location
