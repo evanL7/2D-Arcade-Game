@@ -119,7 +119,7 @@ public class Playing extends State implements Statemethods {
         // Check collision between player and traps
         for (Trap trap : StaticEntity.getAllTraps()) {
             if (collisionChecker.checkPlayerTrapCollision(player, trap)) {
-                score.decreaseScore(trap.getDamage());
+                // score.decreaseScore(trap.getDamage());
                 if (score.getScore() < 0) {
                     player.resetWin();
                     Gamestate.state = Gamestate.GAMEOVER;
@@ -139,26 +139,16 @@ public class Playing extends State implements Statemethods {
                 Gamestate.state = Gamestate.GAMEOVER;
             }
         }
-
-        // Check collision between player and rewards
+        
         for (Reward reward : StaticEntity.getAllRewards()) {
-            if (collisionChecker.checkPlayerRewardCollision(player, reward)
-                    && reward.rewardType == RewardType.RegularReward) {
-                //player.increaseWin();
-
+            if (collisionChecker.checkPlayerRewardCollision(player, reward)) {
                 if (player.getWin() == 3) {
                     // door opens??
                 }
                 reward.remove();
                 break; // Exit the loop after handling the collision with one reward
             }
-
-            else if (collisionChecker.checkPlayerRewardCollision(player, reward)
-                    && reward.rewardType == RewardType.BonusReward) {
-                score.incrementScore(reward.getRewardAmount());
-                reward.remove();
-            }
-
+    
             // despawn
             else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
                 reward.remove();

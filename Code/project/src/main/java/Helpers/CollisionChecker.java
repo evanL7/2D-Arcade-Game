@@ -26,7 +26,6 @@ public class CollisionChecker {
     TileManager tileManager;
     private List<StaticEntity> staticEntities; //add
 
-
     /**
      * Constructs a CollisionChecker object with the specified TileManager.
      * 
@@ -100,14 +99,6 @@ public class CollisionChecker {
                 break;
         }
     }
-
-    /**
-     * Checks collision between two entities.
-     * 
-     * @param entity1 the first entity
-     * @param entity2 the second entity
-     * @return true if entities collide, false otherwise
-     */
     
     /**
      * Checks for collisions between the specified player and rewards.
@@ -127,12 +118,10 @@ public class CollisionChecker {
         if (result) {
             if (reward.rewardType == RewardType.RegularReward) {
                 player.increaseWin();
-                player.getScoreObj().incrementScore(1);
             }
-            
-            else {
-                
-            }
+            //System.out.println("Reward Amount is: " + reward.getRewardAmount());
+            player.getScoreObj().incrementScore(reward.getRewardAmount());
+            //System.out.println("Current Score is: " + player.getScoreObj().getScore());
         }
 
         // Return the collision result
@@ -148,7 +137,6 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerTrapCollision(Player player, Trap trap) {
-        
         // new hitboxes
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle trapBounds = new Rectangle(trap.getPosition().getX(), trap.getPosition().getY(),(int) (Game.tileSize * 0.6), 15);
@@ -156,6 +144,9 @@ public class CollisionChecker {
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
+        if (result) {
+            player.getScoreObj().decreaseScore(trap.getDamage());
+        }
         
         // Return the collision result
         return result;
