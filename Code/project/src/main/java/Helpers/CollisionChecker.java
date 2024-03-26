@@ -61,9 +61,6 @@ public class CollisionChecker {
 
         int tileNum1, tileNum2;
 
-        // System.out.println("Entity position: " + entity.getPosition());
-        // System.out.println("Direction: " + direction);
-
         switch (direction) {
             case PlayerConstants.UP:
                 entityTopRow = (entityTop - entity.speed) / Game.tileSize;
@@ -111,26 +108,6 @@ public class CollisionChecker {
      * @param entity2 the second entity
      * @return true if entities collide, false otherwise
      */
-    // private boolean checkCollision(MoveableEntity entity1, StaticEntity entity2) {
-    //     // Get the bounding boxes for the entities
-    //     Rectangle entity1Bounds = new Rectangle(entity1.getPosition().getX(), entity1.getPosition().getY(),
-    //                                              entity1.getWidth(), entity1.getHeight());
-        
-    //     Rectangle entity2Bounds = new Rectangle(entity2.getPosition().getX(), entity2.getPosition().getY(),
-    //                                              entity2.getWidth(), entity2.getHeight());
-        
-    //         // Print information about the bounding boxes
-    //     System.out.println("Entity 1 Bounds: " + entity1Bounds);
-    //     System.out.println("Entity 2 Bounds: " + entity2Bounds);
-        
-    //     // Check if the bounding boxes intersect
-    //     boolean result = entity1Bounds.intersects(entity2Bounds);
-        
-    //     // Print the result of the collision check
-    //     System.out.println("Collision Detected: " + result);
-    //     // Check if the bounding boxes intersect
-    //     return result;
-    // }
     
     /**
      * Checks for collisions between the specified player and rewards.
@@ -140,27 +117,24 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerRewardCollision(Player player, Reward reward) {
-        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-        //                                         player.getWidth(), player.getHeight());
-        
-        
-        // Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(),
-        //                                         reward.getWidth(), reward.getHeight());
-        
+
         // new hitboxes
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(), (int) (Game.tileSize * 0.6), 15);
-
-        // Print information about the bounding boxes
-        //System.out.println("Player Bounds: " + playerBounds);
-        //System.out.println("Reward Bounds: " + rewardBounds);
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(rewardBounds);
-        
-        // Print the result of the collision check
-        //System.out.println("Collision Detected: " + result);
-        
+        if (result) {
+            if (reward.rewardType == RewardType.RegularReward) {
+                player.increaseWin();
+                player.getScoreObj().incrementScore(1);
+            }
+            
+            else {
+                
+            }
+        }
+
         // Return the collision result
         return result;
     }
@@ -175,26 +149,13 @@ public class CollisionChecker {
      */
     public boolean checkPlayerTrapCollision(Player player, Trap trap) {
         
-        // old hitboxes
-        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-        //                                         player.getWidth(), player.getHeight());
-        // Rectangle trapBounds = new Rectangle(trap.getPosition().getX(), trap.getPosition().getY(),
-        // trap.getWidth(), trap.getHeight());
-
         // new hitboxes
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle trapBounds = new Rectangle(trap.getPosition().getX(), trap.getPosition().getY(),(int) (Game.tileSize * 0.6), 15);
         
         
-        // Print information about the bounding boxes
-        //System.out.println("Player Bounds: " + playerBounds);
-        //System.out.println("Trap Bounds: " + trapBounds);
-        
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
-        
-        // Print the result of the collision check
-        //System.out.println("Collision Detected: " + result);
         
         // Return the collision result
         return result;
@@ -208,33 +169,16 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerDoorCollision(Player player, Door door) {
-        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-        //                                         player.getWidth(), player.getHeight());
 
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
-        
-        // Rectangle doorBounds = new Rectangle(door.getPosition().getX(), door.getPosition().getY(),
-        //                                         door.getWidth(), door.getHeight());
-
         Rectangle doorBounds = new Rectangle(door.getPosition().getX(), door.getPosition().getY(), Game.tileSize, Game.tileSize);
-        
-        // Print information about the bounding boxes
-        //System.out.println("Player Bounds: " + playerBounds);
-        //System.out.println("Door Bounds: " + doorBounds);
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(doorBounds);
         
-        // Print the result of the collision check
-        //System.out.println("Collision Detected: " + result);
-        
         // Return the collision result
         return result;
     }
-
-    // public boolean checkCollisionStatic(Player player) {
-        
-    // }
 
     /**
      * Checks for collisions between the specified player and enemies.
@@ -245,24 +189,11 @@ public class CollisionChecker {
      */
     public boolean checkPlayerEnemyCollision(Player player, Enemy enemy) {
         
-        //Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-           //                                     player.getWidth(), player.getHeight());
-        
-        //Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(),
-         //                                       enemy.getWidth(), enemy.getHeight());
-
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
-        
-        // Print information about the bounding boxes
-        //System.out.println("Player Bounds: " + playerBounds);
-        //System.out.println("Enemy Bounds: " + enemyBounds);
-        
+             
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(enemyBounds);
-        
-        // Print the result of the collision check
-        //System.out.println("Collision Detected: " + result);
         
         // Return the collision result
         return result;

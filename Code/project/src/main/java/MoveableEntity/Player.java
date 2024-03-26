@@ -333,4 +333,8 @@ public class Player extends MoveableEntity {
     public void setDown(boolean down) {
         this.down = down;
     }
+
+    public Score getScoreObj() {
+        return playing.getScoreObj();
+    }
 }

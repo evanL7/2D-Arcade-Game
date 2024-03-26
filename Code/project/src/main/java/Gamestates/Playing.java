@@ -144,7 +144,7 @@ public class Playing extends State implements Statemethods {
         for (Reward reward : StaticEntity.getAllRewards()) {
             if (collisionChecker.checkPlayerRewardCollision(player, reward)
                     && reward.rewardType == RewardType.RegularReward) {
-                player.increaseWin();
+                //player.increaseWin();
 
                 if (player.getWin() == 3) {
                     // door opens??
@@ -322,8 +322,8 @@ public class Playing extends State implements Statemethods {
     }
 
     protected void restartGame() {
-        StaticEntity.resetStaticEntities(); // Added this
-        MoveableEntity.resetMoveableEntities(); // Added this
+        StaticEntity.resetStaticEntities(); 
+        MoveableEntity.resetMoveableEntities(); 
         initClasses();
     }
 }
