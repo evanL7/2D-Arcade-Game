@@ -29,11 +29,11 @@ public class AssetManager {
         playing.staticEntities[5] = new Trap(new Position(9 * Game.tileSize, 20 * Game.tileSize), 1);
         playing.staticEntities[6] = new Trap(new Position(18 * Game.tileSize, 12 * Game.tileSize), 1);
         playing.staticEntities[7] = new Trap(new Position(15 * Game.tileSize, 16 * Game.tileSize), 1);
-        playing.staticEntities[8] = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize), 1, 1);
-        playing.staticEntities[9] = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize), 1, 1);
-        playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize), 1, 1);
+        playing.staticEntities[8] = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize), 0.5f, 1);
+        playing.staticEntities[9] = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize), 0.5f, 1);
+        playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize), 0.5f, 1);
         playing.staticEntities[11] = new Reward(generateRandomPosition(), 4000, 1, 0);
-        playing.staticEntities[12] = new Reward(generateRandomPosition(), 4000, 1, 0);
+        playing.staticEntities[12] = new Reward(generateRandomPosition(), 4000, 1, 0); // 4000 is roughly 20 seconds
     }
 
     private Position generateRandomPosition() {

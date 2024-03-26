@@ -23,12 +23,12 @@ public class GradCapTest {
         Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
 
-        Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize), 1, 1);
+        Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize), 0.5f, 1);
 
         Boolean result = collisionChecker.checkPlayerRewardCollision(player, reward);
         double score = player.getScoreObj().getScore();
         
         assertTrue(result);
-        assertEquals(3, score);
+        assertEquals(2.5, score);
     }
 }
