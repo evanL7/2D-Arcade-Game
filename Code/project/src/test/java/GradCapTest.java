@@ -1,5 +1,4 @@
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import Display.Game;
@@ -20,16 +19,16 @@ public class GradCapTest {
         TileManager tileManager = new TileManager(playing);
         CollisionChecker collisionChecker = new CollisionChecker(tileManager);
         Score scoreObject = new Score();
-
+        assertTrue(scoreObject.getScore() == 2);
         Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
 
         Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize), 1, 1);
 
         Boolean result = collisionChecker.checkPlayerRewardCollision(player, reward);
-        double score = scoreObject.getScore();
-
+        double score = player.getScoreObj().getScore();
+        
         assertTrue(result);
-        assertTrue(score == 3.00);
+        assertEquals(3, score);
     }
 }
