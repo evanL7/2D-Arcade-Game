@@ -41,7 +41,7 @@ public class AssetManager {
         while (true) {
             int randomX = rand.nextInt(Game.maxWorldCol);
             int randomY = rand.nextInt(Game.maxWorldRow);
-            Position position = new Position(randomX * Game.tileSize, randomY * Game.tileSize);
+            Position position = new Position(randomX * Game.tileSize, randomY * Game.tileSize);            
             // Regenerates a new random position if the position is invalid
             if (isPositionValid(position)) {
                 return position;
@@ -56,12 +56,12 @@ public class AssetManager {
             return false;
         }
         // Check if the position conflicts with the player's location
-        if (position.equals(playing.getPlayer().getPosition())) {
+        if (position.getX() == playing.getPlayer().getPosition().getX() && position.getY() == playing.getPlayer().getPosition().getY()) {
             return false;
         }
         // Check if the position conflicts with an existing static entity
         for (int i = 0; i < playing.staticEntities.length; i++) {
-            if (playing.staticEntities[i] != null && playing.staticEntities[i].getPosition().equals(position)) {
+            if (playing.staticEntities[i] != null && position.getX() == playing.staticEntities[i].getPosition().getX() && position.getY() == playing.staticEntities[i].getPosition().getY()) {
                 return false;
             }
         }
