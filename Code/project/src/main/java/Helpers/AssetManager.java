@@ -41,7 +41,7 @@ public class AssetManager {
         while (true) {
             int randomX = rand.nextInt(Game.maxWorldCol);
             int randomY = rand.nextInt(Game.maxWorldRow);
-            Position position = new Position(randomX * Game.tileSize, randomY * Game.tileSize);            
+            Position position = new Position(randomX * Game.tileSize, randomY * Game.tileSize);
             // Regenerates a new random position if the position is invalid
             if (isPositionValid(position)) {
                 return position;
