@@ -98,17 +98,17 @@ public class TileManager {
      * @param g the Graphics object to draw the tiles on
      */
     public void draw(Graphics g) {
-        int startRow = Math.max(0, playing.getCamera().getXOffset() / Game.tileSize);
-        int startCol = Math.max(0, playing.getCamera().getYOffset() / Game.tileSize);
-        int endRow = Math.min(Game.maxWorldCol, (playing.getCamera().getXOffset() + Game.screenWidth) / Game.tileSize + 1);
-        int endCol = Math.min(Game.maxWorldRow, (playing.getCamera().getYOffset() + Game.screenHeight) / Game.tileSize + 1);
+        int startCol = Math.max(0, playing.getCamera().getXOffset() / Game.tileSize);
+        int startRow = Math.max(0, playing.getCamera().getYOffset() / Game.tileSize);
+        int endCol = Math.min(Game.maxWorldCol, (playing.getCamera().getXOffset() + Game.screenWidth) / Game.tileSize + 1);
+        int endRow = Math.min(Game.maxWorldRow, (playing.getCamera().getYOffset() + Game.screenHeight) / Game.tileSize + 1);
 
-        for (int worldCol = startCol; worldCol < endCol; worldCol++) {
-            for (int worldRow = startRow; worldRow < endRow; worldRow++) {
-                int tileNum = mapTileNum[worldCol][worldRow];
+        for (int worldRow = startRow; worldRow < endRow; worldRow++) {
+            for (int worldCol = startCol; worldCol < endCol; worldCol++) {
+                int tileNum = mapTileNum[worldRow][worldCol];
 
-                int worldX = worldRow * Game.tileSize;
-                int worldY = worldCol * Game.tileSize;
+                int worldX = worldCol * Game.tileSize;
+                int worldY = worldRow * Game.tileSize;
 
                 // Check that only the visible tiles are drawn
                 // System.out.println("startRow: " + startRow + " startCol: " + startCol + " endRow: " + endRow + " endCol: " + endCol);
@@ -129,19 +129,19 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            int row = 0, col = 0;
-            while (row < Game.maxWorldCol && col < Game.maxWorldRow) {
+            int col = 0, row = 0;
+            while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
                 String line = br.readLine();
                 String numbers[] = line.split(" ");
-                while (row < Game.maxWorldCol) {
-                    int num = Integer.parseInt(numbers[row]);
+                while (col < Game.maxWorldCol) {
+                    int num = Integer.parseInt(numbers[col]);
 
-                    mapTileNum[col][row] = num;
-                    row++;
-                }
-                if (row == Game.maxWorldCol) {
-                    row = 0;
+                    mapTileNum[row][col] = num;
                     col++;
+                }
+                if (col == Game.maxWorldCol) {
+                    col = 0;
+                    row++;
                 }
             }
             br.close();
