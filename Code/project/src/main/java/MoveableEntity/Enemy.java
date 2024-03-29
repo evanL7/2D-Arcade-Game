@@ -202,8 +202,8 @@ public class Enemy extends MoveableEntity {
 
         if (playing.pathFinder.search() == true) {
             // Next worldX and worldY
-            int nextY = playing.pathFinder.pathList.get(0).col; // --> int nextY = playing.pathFinder.pathList.get(0).col * Game.tileSize;
-            int nextX = playing.pathFinder.pathList.get(0).row; // --> int nextX = playing.pathFinder.pathList.get(0).row * Game.tileSize;
+            int nextY = playing.pathFinder.pathList.get(0).col * Game.tileSize;
+            int nextX = playing.pathFinder.pathList.get(0).row * Game.tileSize;
 
             // Entity's solidArea position
             int enLeftX = (position.getX() + solidArea.x);
@@ -215,7 +215,7 @@ public class Enemy extends MoveableEntity {
                 enemyAction = EnemyConstants.UP;
             } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
                 enemyAction = EnemyConstants.DOWN;
-            } else if (enTopY >= nextY && enBottomY < nextY + Game.tileSize) {
+            } else if (enTopY >= nextY && enBottomY <= nextY + Game.tileSize) {
                 // left or right
                 if (enLeftX > nextX) {
                     enemyAction = EnemyConstants.LEFT;
