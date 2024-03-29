@@ -56,7 +56,6 @@ public class EnemyTest {
 
         enemy.update(player);
 
-        // Does not pass tests beyond this point
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
 
         enemy.getPosition().setX(5 * Game.tileSize);

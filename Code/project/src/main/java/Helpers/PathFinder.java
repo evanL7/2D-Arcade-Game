@@ -43,7 +43,7 @@ public class PathFinder {
         int col = 0;
         int row = 0;
         while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
-            nodeMap[row][col] = new TileNode(col, row);
+            nodeMap[col][row] = new TileNode(col, row);
 
             col++;
             if (col == Game.maxWorldCol) {
@@ -61,7 +61,7 @@ public class PathFinder {
         int col = 0;
         int row = 0;
         while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
-            nodeMap[row][col].resetNode();
+            nodeMap[col][row].resetNode();
             col++;
             if (col == Game.maxWorldCol) {
                 col = 0;
@@ -87,9 +87,9 @@ public class PathFinder {
         resetNodes();
 
         // set start and goal node
-        startNode = nodeMap[startRow][startCol];
+        startNode = nodeMap[startCol][startRow];
         currentNode = startNode;
-        goalNode = nodeMap[goalRow][goalCol];
+        goalNode = nodeMap[goalCol][goalRow];
         openList.add(currentNode);
 
         int col = 0;
@@ -98,17 +98,17 @@ public class PathFinder {
 
         while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
 
-            tileNum = playing.tileManager.mapTileNum[row][col];
+            tileNum = playing.tileManager.mapTileNum[col][row];
 
             // check for walls
             if (playing.tileManager.tile[tileNum].collision == true) {
-                nodeMap[row][col].setWall();
+                nodeMap[col][row].setWall();
             }
 
             // CHECK FOR INTERACTIVE TILES (TRAPS AND REWARDS)
             // TO DO ONCE DONE (11:27)
 
-            getCost(nodeMap[row][col]);
+            getCost(nodeMap[col][row]);
 
             col++;
             if (col == Game.maxWorldCol) {
@@ -127,13 +127,13 @@ public class PathFinder {
      */
     private void getCost(TileNode node) { // if having issues, test the col and row for x and y
         // G COST
-        int yDistance = Math.abs(node.col - startNode.col);
-        int xDistance = Math.abs(node.row - startNode.row);
+        int yDistance = Math.abs(node.row - startNode.row);
+        int xDistance = Math.abs(node.col - startNode.col);
         node.gCost = xDistance + yDistance;
 
         // H COST
-        yDistance = Math.abs(node.col - goalNode.col);
-        xDistance = Math.abs(node.row - goalNode.row);
+        yDistance = Math.abs(node.row - goalNode.row);
+        xDistance = Math.abs(node.col - goalNode.col);
         node.hCost = xDistance + yDistance;
 
         // F COST
@@ -157,19 +157,19 @@ public class PathFinder {
             // CHECK THESE ROW AND COL VALS
             // open the above node
             if (col - 1 >= 0) {
-                openNode(nodeMap[row][col - 1]);
+                openNode(nodeMap[col - 1][row]);
             }
             // open the left node
             if (row - 1 >= 0) {
-                openNode(nodeMap[row - 1][col]);
+                openNode(nodeMap[col][row - 1]);
             }
             // open the below node
             if (col + 1 < Game.maxWorldCol) {
-                openNode(nodeMap[row][col + 1]);
+                openNode(nodeMap[col + 1][row]);
             }
             // open the right node
             if (row + 1 < Game.maxWorldRow) {
-                openNode(nodeMap[row + 1][col]);
+                openNode(nodeMap[col][row + 1]);
             }
 
             // FIND THE BEST NODE
