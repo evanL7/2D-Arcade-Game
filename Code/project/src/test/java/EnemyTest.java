@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import Display.Game;
 import Display.Score;
+import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
@@ -28,6 +29,7 @@ public class EnemyTest {
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
         scoreObject = new Score();
+        Gamestate.state = Gamestate.PLAYING;
     }
 
     @Test
@@ -42,13 +44,11 @@ public class EnemyTest {
 
     @Test
     public void testEnemyFollowsPlayer() {
-
         // Enemy should move down
         Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
         Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
 
-        enemy.update(player);
-        
+        updateEnemy(enemy, player, 5);
         assertEquals(EnemyConstants.DOWN, enemy.getEnemyAction());
 
         // Enemy should move up
@@ -57,20 +57,16 @@ public class EnemyTest {
         player.getPosition().setX(2 * Game.tileSize);
         player.getPosition().setY(3 * Game.tileSize);
 
-        enemy.update(player);
-
+        updateEnemy(enemy, player, 25);
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
 
         // Enemy should move left
         enemy.getPosition().setX(5 * Game.tileSize);
         enemy.getPosition().setY(3 * Game.tileSize);
-        player.getPosition().setX(2 * Game.tileSize);
-        player.getPosition().setY(3 * Game.tileSize);
+        player.getPosition().setX(1 * Game.tileSize);
+        player.getPosition().setY(3 * Game.tileSize);        
 
-        enemy.update(player);
-        enemy.update(player);
-        enemy.update(player);
-
+        updateEnemy(enemy, player, 25);
         assertEquals(EnemyConstants.LEFT, enemy.getEnemyAction());
 
         // Enemy should move right
@@ -79,8 +75,15 @@ public class EnemyTest {
         player.getPosition().setX(5 * Game.tileSize);
         player.getPosition().setY(3 * Game.tileSize);
 
-        enemy.update(player);
-
+        updateEnemy(enemy, player, 25);
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
+    }
+
+    private void updateEnemy(Enemy enemy, Player player, int maxNumUpdates) {
+        int updates = 0;
+        while (updates < maxNumUpdates) {
+            enemy.update(player);
+            updates++;
+        }
     }
 }
