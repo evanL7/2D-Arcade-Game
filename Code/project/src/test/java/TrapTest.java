@@ -26,7 +26,7 @@ public class TrapTest {
     void setUp() {
         game = new Game();
         playing = new Playing(game);
-        tileManager = new TileManager(playing);      
+        tileManager = new TileManager(playing, Game.mapFilePath);      
         collisionChecker = new CollisionChecker(tileManager);
         scoreObject = new Score();  
     }
