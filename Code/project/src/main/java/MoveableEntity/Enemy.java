@@ -211,24 +211,25 @@ public class Enemy extends MoveableEntity {
             int enTopY = (position.getY() + solidArea.y);
             int enBottomY = (position.getY() + solidArea.y + solidArea.height);
 
-            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
+            if (enTopY >= nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
                 enemyAction = EnemyConstants.UP;
             } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
                 enemyAction = EnemyConstants.DOWN;
-            } else if (enTopY >= nextY && enBottomY <= nextY + Game.tileSize) {
-                // left or right
-                if (enLeftX > nextX) {
-                    enemyAction = EnemyConstants.LEFT;
-                }
-                if (enLeftX < nextX) {
-                    enemyAction = EnemyConstants.RIGHT;
-                }
             } else if (enTopY > nextY && enLeftX > nextX) {
                 // up or left
-                enemyAction = EnemyConstants.UP;
-                checkCollision();
                 if (collisionOn == true) {
                     enemyAction = EnemyConstants.LEFT;
+                }
+            } else if (enTopY >= nextY && enBottomY <= nextY + Game.tileSize) {
+                // left or right
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.UP;
+                } else {                
+                    if (enLeftX > nextX) {
+                        enemyAction = EnemyConstants.LEFT;
+                    } else if (enLeftX < nextX) {
+                        enemyAction = EnemyConstants.RIGHT;
+                    }
                 }
             } else if (enTopY > nextY && enLeftX < nextX) {
                 // up or right

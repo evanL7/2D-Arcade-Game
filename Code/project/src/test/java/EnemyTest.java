@@ -42,6 +42,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyFollowsPlayer() {
+
+        // Enemy should move down
         Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
         Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
 
@@ -49,6 +51,7 @@ public class EnemyTest {
         
         assertEquals(EnemyConstants.DOWN, enemy.getEnemyAction());
 
+        // Enemy should move up
         enemy.getPosition().setX(2 * Game.tileSize);
         enemy.getPosition().setY(5 * Game.tileSize);
         player.getPosition().setX(2 * Game.tileSize);
@@ -58,15 +61,19 @@ public class EnemyTest {
 
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
 
+        // Enemy should move left
         enemy.getPosition().setX(5 * Game.tileSize);
         enemy.getPosition().setY(3 * Game.tileSize);
         player.getPosition().setX(2 * Game.tileSize);
         player.getPosition().setY(3 * Game.tileSize);
 
         enemy.update(player);
+        enemy.update(player);
+        enemy.update(player);
 
         assertEquals(EnemyConstants.LEFT, enemy.getEnemyAction());
 
+        // Enemy should move right
         enemy.getPosition().setX(2 * Game.tileSize);
         enemy.getPosition().setY(3 * Game.tileSize);
         player.getPosition().setX(5 * Game.tileSize);
