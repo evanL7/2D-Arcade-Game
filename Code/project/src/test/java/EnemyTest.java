@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 
 import Display.Game;
 import Display.Score;
-import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
@@ -33,8 +32,6 @@ public class EnemyTest {
 
     @Test
     public void testCheckPlayerEnemyCollision() {
-        Gamestate.state = Gamestate.PLAYING;
-
         Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
         Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
 
@@ -59,6 +56,7 @@ public class EnemyTest {
 
         enemy.update(player);
 
+        // Does not pass tests beyond this point
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
 
         enemy.getPosition().setX(5 * Game.tileSize);
