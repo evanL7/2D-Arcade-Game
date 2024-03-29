@@ -11,6 +11,7 @@ import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.CollisionChecker;
 import MoveableEntity.Enemy;
+import MoveableEntity.MoveableEntity;
 import MoveableEntity.Player;
 import StaticEntity.TileManager;
 
@@ -52,31 +53,30 @@ public class EnemyTest {
         assertEquals(EnemyConstants.DOWN, enemy.getEnemyAction());
 
         // Enemy should move up
-        enemy.getPosition().setX(2 * Game.tileSize);
-        enemy.getPosition().setY(5 * Game.tileSize);
-        player.getPosition().setX(2 * Game.tileSize);
-        player.getPosition().setY(3 * Game.tileSize);
-
+        setPosition(enemy, 2, 5);
+        setPosition(player, 2, 3);
         updateEnemy(enemy, player, 25);
+
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
 
         // Enemy should move left
-        enemy.getPosition().setX(5 * Game.tileSize);
-        enemy.getPosition().setY(3 * Game.tileSize);
-        player.getPosition().setX(1 * Game.tileSize);
-        player.getPosition().setY(3 * Game.tileSize);        
-
+        setPosition(enemy, 5, 3);
+        setPosition(player, 1, 3);
         updateEnemy(enemy, player, 25);
+
         assertEquals(EnemyConstants.LEFT, enemy.getEnemyAction());
 
         // Enemy should move right
-        enemy.getPosition().setX(2 * Game.tileSize);
-        enemy.getPosition().setY(3 * Game.tileSize);
-        player.getPosition().setX(5 * Game.tileSize);
-        player.getPosition().setY(3 * Game.tileSize);
-
+        setPosition(enemy, 2, 3);
+        setPosition(player, 5, 3);
         updateEnemy(enemy, player, 25);
+        
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
+    }
+
+    private void setPosition(MoveableEntity entity, int x, int y) {
+        entity.getPosition().setX(x * Game.tileSize);
+        entity.getPosition().setY(y * Game.tileSize);
     }
 
     private void updateEnemy(Enemy enemy, Player player, int maxNumUpdates) {
