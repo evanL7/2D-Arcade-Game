@@ -72,6 +72,13 @@ public class EnemyTest {
         updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
+
+        // Enemy should move around walls
+        setPosition(enemy, 21, 4);
+        setPosition(player, 21, 8);
+        updateEnemy(enemy, player, 750);
+
+        assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
     }
 
     private void setPosition(MoveableEntity entity, int x, int y) {
