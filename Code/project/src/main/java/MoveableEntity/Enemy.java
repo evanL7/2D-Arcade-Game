@@ -261,6 +261,10 @@ public class Enemy extends MoveableEntity {
                 playing.getPlayer().decreaseScore(4); // change this
             }
         }
+        else {
+            //System.out.println("NO ACTION!!!");
+            enemyAction = EnemyConstants.LEFT;
+        }
     }
 
     public int getEnemyAction() {
