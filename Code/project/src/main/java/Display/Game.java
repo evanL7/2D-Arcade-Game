@@ -41,6 +41,7 @@ public class Game implements Runnable {
     public final static int worldWidth = tileSize * maxWorldCol;
     public final static int worldHeight = tileSize * maxWorldRow;
 
+    public static String mapFilePath = "/maps/map1.txt";
     public static String gameTitle = "Grade Quest";
 
     private Playing playing;

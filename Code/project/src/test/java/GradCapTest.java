@@ -16,7 +16,7 @@ public class GradCapTest {
     public void testCheckPlayerRewardCollision() {
         Game game = new Game();
         Playing playing = new Playing(game);
-        TileManager tileManager = new TileManager(playing, "/maps/map1.txt");
+        TileManager tileManager = new TileManager(playing, Game.mapFilePath);
         CollisionChecker collisionChecker = new CollisionChecker(tileManager);
         Score scoreObject = new Score();
         assertTrue(scoreObject.getScore() == 2);
