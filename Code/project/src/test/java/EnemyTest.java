@@ -55,22 +55,22 @@ public class EnemyTest {
         // Enemy should move up
         setPosition(enemy, 2, 5);
         setPosition(player, 2, 3);
-        updateEnemy(enemy, player, 25);
+        updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
 
         // Enemy should move left
         setPosition(enemy, 5, 3);
         setPosition(player, 1, 3);
-        updateEnemy(enemy, player, 25);
+        updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.LEFT, enemy.getEnemyAction());
 
         // Enemy should move right
         setPosition(enemy, 2, 3);
         setPosition(player, 5, 3);
-        updateEnemy(enemy, player, 25);
-        
+        updateEnemy(enemy, player, 20);
+
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
     }
 
