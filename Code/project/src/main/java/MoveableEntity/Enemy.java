@@ -211,9 +211,6 @@ public class Enemy extends MoveableEntity {
             int enTopY = (position.getY() + solidArea.y);
             int enBottomY = (position.getY() + solidArea.y + solidArea.height);
 
-            System.out.println("enLeftX: " + enLeftX + " enRightX: " + enRightX + " enTopY: " + enTopY + " enBottomY: "
-                    + enBottomY + " \nnextX: " + nextX + " nextY: " + nextY);
-
             if (enTopY >= nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
                 System.out.println("here1");
                 enemyAction = EnemyConstants.UP;
