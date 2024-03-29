@@ -27,7 +27,7 @@ public class TileManager {
     /**
      * Constructs a TileManager object.
      */
-    public TileManager(Playing playing) {
+    public TileManager(Playing playing, String mapFilePath) {
         this.staticEntities = new ArrayList<>();
     
         tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
@@ -36,7 +36,7 @@ public class TileManager {
         this.playing = playing;
 
         getTileImage();
-        loadMap("/maps/map1.txt");
+        loadMap(mapFilePath);
     }
 
     /**

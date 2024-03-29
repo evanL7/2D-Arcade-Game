@@ -263,4 +263,7 @@ public class Enemy extends MoveableEntity {
         }
     }
 
+    public int getEnemyAction() {
+        return enemyAction;
+    }
 }

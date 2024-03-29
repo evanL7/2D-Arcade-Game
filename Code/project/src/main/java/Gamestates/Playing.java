@@ -77,7 +77,7 @@ public class Playing extends State implements Statemethods {
         keysPressed = new HashSet<>();
         // tileManager = new TileManager();
         score = new Score();
-        tileManager = new TileManager(this);
+        tileManager = new TileManager(this, "/maps/map1.txt");
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
 
