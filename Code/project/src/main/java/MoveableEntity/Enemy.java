@@ -202,14 +202,14 @@ public class Enemy extends MoveableEntity {
 
         if (playing.pathFinder.search() == true) {
             // Next worldX and worldY
-            int nextY = playing.pathFinder.pathList.get(0).col;
-            int nextX = playing.pathFinder.pathList.get(0).row;
+            int nextY = playing.pathFinder.pathList.get(0).col; // --> int nextY = playing.pathFinder.pathList.get(0).col * Game.tileSize;
+            int nextX = playing.pathFinder.pathList.get(0).row; // --> int nextX = playing.pathFinder.pathList.get(0).row * Game.tileSize;
 
             // Entity's solidArea position
-            int enLeftX = (position.getX() + solidArea.x) / Game.tileSize;
-            int enRightX = (position.getX() + solidArea.x + solidArea.width) / Game.tileSize;
-            int enTopY = (position.getY() + solidArea.y) / Game.tileSize;
-            int enBottomY = (position.getY() + solidArea.y + solidArea.height) / Game.tileSize;
+            int enLeftX = (position.getX() + solidArea.x);
+            int enRightX = (position.getX() + solidArea.x + solidArea.width);
+            int enTopY = (position.getY() + solidArea.y);
+            int enBottomY = (position.getY() + solidArea.y + solidArea.height);
 
             if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
                 enemyAction = EnemyConstants.UP;
@@ -252,10 +252,9 @@ public class Enemy extends MoveableEntity {
                     enemyAction = EnemyConstants.RIGHT;
                 }
             }
-
             // enemy reaches player
             int nextCol = playing.pathFinder.pathList.get(0).col;
-            int nextRow = playing.pathFinder.pathList.get(0).col;
+            int nextRow = playing.pathFinder.pathList.get(0).row;
 
             if (nextCol == goalCol && nextRow == goalRow) {
                 playing.getPlayer().decreaseScore(4); // change this
