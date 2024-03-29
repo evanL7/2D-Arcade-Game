@@ -212,29 +212,19 @@ public class Enemy extends MoveableEntity {
             int enBottomY = (position.getY() + solidArea.y + solidArea.height);
 
             if (enTopY >= nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
-                System.out.println("here1");
                 enemyAction = EnemyConstants.UP;
             } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX) {
-                System.out.println("here2");
                 enemyAction = EnemyConstants.DOWN;
             } else if (enTopY > nextY && enLeftX > nextX) {
-                System.out.println("here3");
-
                 // up or left
                 if (collisionOn == true) {
                     enemyAction = EnemyConstants.LEFT;
                 }
             } else if (enTopY >= nextY && enBottomY <= nextY + Game.tileSize) {
-                System.out.println("here4");
-
                 // left or right
                 if (collisionOn == true) {
-                    System.out.println("here5");
-
                     enemyAction = EnemyConstants.UP;
                 } else {                
-                    System.out.println("here6");
-
                     if (enLeftX > nextX) {
                         enemyAction = EnemyConstants.LEFT;
                     } else if (enLeftX < nextX) {
@@ -242,8 +232,6 @@ public class Enemy extends MoveableEntity {
                     }
                 }
             } else if (enTopY > nextY && enLeftX < nextX) {
-                System.out.println("here7");
-
                 // up or right
                 enemyAction = EnemyConstants.UP;
                 checkCollision();
@@ -251,8 +239,6 @@ public class Enemy extends MoveableEntity {
                     enemyAction = EnemyConstants.RIGHT;
                 }
             } else if (enTopY < nextY && enLeftX > nextX) {
-                System.out.println("here8");
-
                 // down or left
                 enemyAction = EnemyConstants.DOWN;
                 checkCollision();
@@ -260,8 +246,6 @@ public class Enemy extends MoveableEntity {
                     enemyAction = EnemyConstants.LEFT;
                 }
             } else if (enTopY < nextY && enLeftX < nextX) {
-                System.out.println("here9");
-
                 // down or right
                 enemyAction = EnemyConstants.DOWN;
                 checkCollision();
