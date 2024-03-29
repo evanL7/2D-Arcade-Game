@@ -25,7 +25,7 @@ public class EnemyTest {
     public void setUp() {
         game = new Game();
         playing = new Playing(game);
-        tileManager = new TileManager(playing, Game.mapFilePath);
+        tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
         scoreObject = new Score();
     }
