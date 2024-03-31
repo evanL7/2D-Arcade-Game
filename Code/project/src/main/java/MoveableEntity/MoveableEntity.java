@@ -119,4 +119,8 @@ public abstract class MoveableEntity {
         moveableEntities = new ArrayList<>();
     }
 
+    public void setPosition(int x, int y) {
+        position.setX(x);
+        position.setY(y);
+    }
 }
