@@ -23,6 +23,9 @@ public class EnemyTest {
     private CollisionChecker collisionChecker;
     private Score scoreObject;
 
+    private Enemy enemy;
+    private Player player;
+
     @BeforeEach
     public void setUp() {
         game = new Game();
@@ -31,13 +34,13 @@ public class EnemyTest {
         collisionChecker = new CollisionChecker(tileManager);
         scoreObject = new Score();
         Gamestate.state = Gamestate.PLAYING;
+
+        enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
+        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
     }
 
     @Test
     public void testCheckPlayerEnemyCollision() {
-        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
-
         Boolean result = collisionChecker.checkPlayerEnemyCollision(player, enemy);
 
         assertTrue(result);
@@ -45,18 +48,15 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesDownWhenPlayerBelow() {
-        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
-
+        setPosition(enemy, 2, 3);
+        setPosition(player, 2, 5);
         updateEnemy(enemy, player, 5);
+
         assertEquals(EnemyConstants.DOWN, enemy.getEnemyAction());
     }
 
     @Test
     public void testEnemyMovesUpWhenPlayerAbove() {
-        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
-
         setPosition(enemy, 2, 5);
         setPosition(player, 2, 3);
         updateEnemy(enemy, player, 20);
@@ -66,9 +66,6 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesLeftWhenPlayerToTheLeft() {
-        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
-
         setPosition(enemy, 5, 3);
         setPosition(player, 1, 3);
         updateEnemy(enemy, player, 100);
@@ -78,9 +75,6 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesRightWhenPlayerToTheRight() {
-        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
-
         setPosition(enemy, 2, 3);
         setPosition(player, 5, 3);
         updateEnemy(enemy, player, 20);
@@ -90,9 +84,6 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesAroundWalls() {
-        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
-
         setPosition(enemy, 21, 4);
         setPosition(player, 21, 8);
         updateEnemy(enemy, player, 750);
