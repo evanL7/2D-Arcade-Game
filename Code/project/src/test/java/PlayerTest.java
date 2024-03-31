@@ -48,8 +48,34 @@ public class PlayerTest {
         assertEquals(expectedWin, actualWin);
     }
 
+    @Test
+    public void checkRightWallCollision() {
+        
+        // spawn the player right next to the right wall
+        // want to check if going right changes the player's position at all
+        player = new Player(new Position(1108, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        
+        // Simulate pressing the "D" key to go right
+        player.setRight(true);
+
+        // Check if the right variable is set to true
+        assertTrue(player.isRight());
+    
+        Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("OldPos is: " + oldPos.toString());
+        
+        player.update();
+        player.update();
+        player.update();
+
+        Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("NewPos is: " + newPos.toString());
+        
+        assertTrue(comparePos(oldPos, newPos));
+    }
+
     // helper to check before and after positions
-    public boolean comparePos(Position pos1, Position pos2) {
+    private boolean comparePos(Position pos1, Position pos2) {
         if (pos1 == null || pos2 == null) {
             return false;
         }
