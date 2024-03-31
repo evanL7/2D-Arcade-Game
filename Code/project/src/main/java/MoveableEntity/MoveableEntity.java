@@ -119,6 +119,12 @@ public abstract class MoveableEntity {
         moveableEntities = new ArrayList<>();
     }
 
+    /**
+     * Sets the entities position attribute
+     * 
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
     public void setPosition(int x, int y) {
         position.setX(x);
         position.setY(y);
