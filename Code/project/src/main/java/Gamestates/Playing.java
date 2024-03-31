@@ -119,15 +119,12 @@ public class Playing extends State implements Statemethods {
         // Check collision between player and traps
         for (Trap trap : StaticEntity.getAllTraps()) {
             if (collisionChecker.checkPlayerTrapCollision(player, trap)) {
-                // score.decreaseScore(trap.getDamage());
                 if (score.getScore() < 0) {
-                    player.resetWin();
                     Gamestate.state = Gamestate.GAMEOVER;
                 }
                 trap.remove();
                 break; // Exit the loop after handling the collision with one trap
             }
-
             else {
                 trap.update();
             }
@@ -135,16 +132,12 @@ public class Playing extends State implements Statemethods {
 
         for (Enemy enemy : MoveableEntity.getAllEnemies()) {
             if (collisionChecker.checkPlayerEnemyCollision(player, enemy)) {
-                player.resetWin();
                 Gamestate.state = Gamestate.GAMEOVER;
             }
         }
         
         for (Reward reward : StaticEntity.getAllRewards()) {
             if (collisionChecker.checkPlayerRewardCollision(player, reward)) {
-                if (player.getWin() == 3) {
-                    // door opens??
-                }
                 reward.remove();
                 break; // Exit the loop after handling the collision with one reward
             }
@@ -164,7 +157,6 @@ public class Playing extends State implements Statemethods {
                 // add code for showing door opening animation
 
                 if (collisionChecker.checkPlayerDoorCollision(player, door)) {
-                    player.resetWin();
                     Gamestate.state = Gamestate.WIN;
                 }
             }
@@ -315,5 +307,7 @@ public class Playing extends State implements Statemethods {
         StaticEntity.resetStaticEntities(); 
         MoveableEntity.resetMoveableEntities(); 
         initClasses();
+        player.resetWin();
+        //System.out.println("\n\n");
     }
 }
