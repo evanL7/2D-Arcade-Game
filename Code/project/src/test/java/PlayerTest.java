@@ -74,6 +74,32 @@ public class PlayerTest {
         assertTrue(comparePos(oldPos, newPos));
     }
 
+    @Test
+    public void checkLeftWallCollision() {
+        
+        // spawn the player right next to the left wall
+        // want to check if going left changes the player's position at all
+        player = new Player(new Position(39, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        
+        // Simulate pressing the "A" key to go left
+        player.setLeft(true);
+
+        // Check if the left variable is set to true
+        assertTrue(player.isLeft());
+    
+        Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("OldPos is: " + oldPos.toString());
+        
+        player.update();
+        player.update();
+        player.update();
+
+        Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("NewPos is: " + newPos.toString());
+        
+        assertTrue(comparePos(oldPos, newPos));
+    }
+
     // helper to check before and after positions
     private boolean comparePos(Position pos1, Position pos2) {
         if (pos1 == null || pos2 == null) {
