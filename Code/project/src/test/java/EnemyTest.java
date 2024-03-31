@@ -44,36 +44,55 @@ public class EnemyTest {
     }
 
     @Test
-    public void testEnemyFollowsPlayer() {
-        // Enemy should move down
+    public void testEnemyMovesDownWhenPlayerBelow() {
         Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
         Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
 
         updateEnemy(enemy, player, 5);
         assertEquals(EnemyConstants.DOWN, enemy.getEnemyAction());
+    }
 
-        // Enemy should move up
+    @Test
+    public void testEnemyMovesUpWhenPlayerAbove() {
+        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
+        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
+
         setPosition(enemy, 2, 5);
         setPosition(player, 2, 3);
         updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
+    }
 
-        // Enemy should move left
+    @Test
+    public void testEnemyMovesLeftWhenPlayerToTheLeft() {
+        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
+        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
+
         setPosition(enemy, 5, 3);
         setPosition(player, 1, 3);
-        updateEnemy(enemy, player, 20);
+        updateEnemy(enemy, player, 100);
 
         assertEquals(EnemyConstants.LEFT, enemy.getEnemyAction());
+    }
 
-        // Enemy should move right
+    @Test
+    public void testEnemyMovesRightWhenPlayerToTheRight() {
+        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
+        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
+
         setPosition(enemy, 2, 3);
         setPosition(player, 5, 3);
         updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
+    }
 
-        // Enemy should move around walls
+    @Test
+    public void testEnemyMovesAroundWalls() {
+        Enemy enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
+        Player player = new Player(new Position(2 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing, scoreObject);
+
         setPosition(enemy, 21, 4);
         setPosition(player, 21, 8);
         updateEnemy(enemy, player, 750);
