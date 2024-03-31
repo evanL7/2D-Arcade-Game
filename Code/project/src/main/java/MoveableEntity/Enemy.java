@@ -258,11 +258,11 @@ public class Enemy extends MoveableEntity {
             int nextRow = playing.pathFinder.pathList.get(0).row;
 
             if (nextCol == goalCol && nextRow == goalRow) {
-                playing.getPlayer().decreaseScore(4); // change this
+                //playing.getPlayer().decreaseScore(4); // change this
             }
         }
         else {
-            //System.out.println("NO ACTION!!!");
+            System.out.println("NO ACTION!!!");
             enemyAction = EnemyConstants.LEFT;
         }
     }

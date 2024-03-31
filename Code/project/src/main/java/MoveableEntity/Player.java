@@ -181,24 +181,6 @@ public class Player extends MoveableEntity {
     }
 
     /**
-     * Increases the player's score by the specified amount.
-     * 
-     * @param amount The amount by which to increase the player's score.
-     */
-    public void increaseScore(float amount) {
-        scoreObject.incrementScore(amount); // Call the increment method in Score class
-    }
-
-    /**
-     * Decreases the player's score by the specified amount.
-     * 
-     * @param amount The amount by which to decrease the player's score.
-     */
-    public void decreaseScore(float amount) {
-        scoreObject.incrementScore(-amount); // Call the increment method with negative amount to decrease score
-    }
-
-    /**
      * Increases the player's win score by 1
      */
     public void increaseWin() {
