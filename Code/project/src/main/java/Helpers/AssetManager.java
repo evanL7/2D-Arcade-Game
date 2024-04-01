@@ -22,13 +22,13 @@ public class AssetManager {
 
     public void setObjects() {
         playing.staticEntities[0] = new Door(new Position(23 * Game.tileSize, 23 * Game.tileSize));
-        playing.staticEntities[1] = new Trap(new Position(9 * Game.tileSize, 9 * Game.tileSize), 1);
-        playing.staticEntities[2] = new Trap(new Position(19 * Game.tileSize, 4 * Game.tileSize), 1);
-        playing.staticEntities[3] = new Trap(new Position(9 * Game.tileSize, 12 * Game.tileSize), 1);
-        playing.staticEntities[4] = new Trap(new Position(4 * Game.tileSize, 18 * Game.tileSize), 1);
-        playing.staticEntities[5] = new Trap(new Position(9 * Game.tileSize, 20 * Game.tileSize), 1);
-        playing.staticEntities[6] = new Trap(new Position(18 * Game.tileSize, 12 * Game.tileSize), 1);
-        playing.staticEntities[7] = new Trap(new Position(15 * Game.tileSize, 16 * Game.tileSize), 1);
+        playing.staticEntities[1] = new Trap(new Position(9 * Game.tileSize, 9 * Game.tileSize));
+        playing.staticEntities[2] = new Trap(new Position(19 * Game.tileSize, 4 * Game.tileSize));
+        playing.staticEntities[3] = new Trap(new Position(9 * Game.tileSize, 12 * Game.tileSize));
+        playing.staticEntities[4] = new Trap(new Position(4 * Game.tileSize, 18 * Game.tileSize));
+        playing.staticEntities[5] = new Trap(new Position(9 * Game.tileSize, 20 * Game.tileSize));
+        playing.staticEntities[6] = new Trap(new Position(18 * Game.tileSize, 12 * Game.tileSize));
+        playing.staticEntities[7] = new Trap(new Position(15 * Game.tileSize, 16 * Game.tileSize));
         playing.staticEntities[8] = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize));
         playing.staticEntities[9] = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize));
         playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize));

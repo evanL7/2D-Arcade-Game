@@ -26,24 +26,24 @@ import Helpers.Position;
 public class Trap extends StaticEntity {
 
     /** The amount of damage the trap inflicts. */
-    private double damage = -0.5;
+    private double damage;
 
     private BufferedImage[][] animations; // 2d image array of the images for trap movements
     private int animationTick, animationIndex, animationSpeed = 150;
 
-    private BufferedImage trapImage; // add
+    private BufferedImage trapImage;
+    
     /**
      * Constructs a new Trap.
      *
      * @param position The position of the trap.
-     * @param damage   The amount of damage the trap inflicts.
      */
-    public Trap(Position position, float damage) {
+    public Trap(Position position) {
         // doesn't need despawnTimer as it would only despawn if collided with
         super(position);
         loadAnimations();
-        loadTrapImage(); // add
-        this.damage = damage;
+        loadTrapImage();
+        this.damage = 1; // default value of 1
     }
 
     // Methods

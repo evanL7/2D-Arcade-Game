@@ -35,7 +35,7 @@ public class TrapTest {
     public void testDamage() {
         
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
-        trap = new Trap(new Position(2 * Game.tileSize, 3 * Game.tileSize), 1);
+        trap = new Trap(new Position(2 * Game.tileSize, 3 * Game.tileSize));
 
         double originalScore = player.getScoreObj().getScore();
         assertTrue(originalScore == 2);
