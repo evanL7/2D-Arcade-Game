@@ -46,6 +46,10 @@ public class PlayerTest {
         int actualWin = player.getWin();
 
         assertEquals(expectedWin, actualWin);
+
+        // check if resetWin properly sets win variable to 0
+        player.resetWin();
+        assertEquals(0, player.getWin());
     }
 
     @Test
@@ -53,10 +57,12 @@ public class PlayerTest {
         
         // spawn the player right next to the right wall
         // want to check if going right changes the player's position at all
-        player = new Player(new Position(1108, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        player = new Player(new Position(1107, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
         
         // Simulate pressing the "D" key to go right
         player.setRight(true);
+        player.setAction(1);
+        assertEquals(1, player.getAction());
 
         // Check if the right variable is set to true
         assertTrue(player.isRight());
@@ -72,6 +78,7 @@ public class PlayerTest {
         //System.out.println("NewPos is: " + newPos.toString());
         
         assertTrue(comparePos(oldPos, newPos));
+        player.resetDirBooleans();
     }
 
     @Test
@@ -79,13 +86,15 @@ public class PlayerTest {
         
         // spawn the player right next to the left wall
         // want to check if going left changes the player's position at all
-        player = new Player(new Position(39, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        player = new Player(new Position(40, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
         
         // Simulate pressing the "A" key to go left
         player.setLeft(true);
+        player.setAction(3);
 
         // Check if the left variable is set to true
         assertTrue(player.isLeft());
+        assertEquals(3, player.getAction());
     
         Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         //System.out.println("OldPos is: " + oldPos.toString());
@@ -98,6 +107,65 @@ public class PlayerTest {
         //System.out.println("NewPos is: " + newPos.toString());
         
         assertTrue(comparePos(oldPos, newPos));
+        player.resetDirBooleans();
+    }
+
+    @Test
+    public void checkTopWallCollision() {
+        
+        // spawn the player right under the top wall
+        // want to check if going up changes the player's position at all
+        player = new Player(new Position(2 * Game.tileSize, 128), collisionChecker, playing, scoreObject);
+        
+        // Simulate pressing the "W" key to go up
+        player.setUp(true);
+        player.setAction(0);
+
+        // Check if the left variable is set to true
+        assertTrue(player.isUp());
+        assertEquals(0, player.getAction());
+    
+        Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("OldPos is: " + oldPos.toString());
+        
+        player.update();
+        player.update();
+        player.update();
+
+        Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("NewPos is: " + newPos.toString());
+        
+        assertTrue(comparePos(oldPos, newPos));
+        player.resetDirBooleans();
+    }
+
+    @Test
+    public void checkBottomWallCollision() {
+        
+        // spawn the player right above the bottom wall
+        // want to check if going down changes the player's position at all
+        player = new Player(new Position(2 * Game.tileSize, 1087), collisionChecker, playing, scoreObject);
+        
+        // Simulate pressing the "S" key to go down
+        player.setDown(true);
+        player.setAction(2);
+
+        // Check if the left variable is set to true
+        assertTrue(player.isDown());
+        assertEquals(2, player.getAction());
+    
+        Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("OldPos is: " + oldPos.toString());
+        
+        player.update();
+        player.update();
+        player.update();
+
+        Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        //System.out.println("NewPos is: " + newPos.toString());
+        
+        assertTrue(comparePos(oldPos, newPos));
+        player.resetDirBooleans();
     }
 
     // helper to check before and after positions
