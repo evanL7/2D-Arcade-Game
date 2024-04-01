@@ -38,7 +38,7 @@ public class PlayerTest {
     public void testCheckRewardCollision() {
         
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
-        reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize), 1, 1);
+        reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
 
         Boolean collided = collisionChecker.checkPlayerRewardCollision(player, reward);
         assertTrue(collided);

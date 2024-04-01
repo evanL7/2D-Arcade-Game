@@ -32,10 +32,7 @@ import Helpers.RewardType;
 public class Reward extends StaticEntity {
 
     /** The amount of the reward that a player receives. */
-    private double rewardAmount = 0.50;
-
-    /** The number of rewards that players need to collect to complete the level. */
-    private int rewardsToCollect;
+    private double rewardAmount;
 
     /** The type of reward, either Bonus Reward or Regular Reward. */
     public RewardType rewardType;
@@ -48,35 +45,29 @@ public class Reward extends StaticEntity {
      * @param position         The position of the reward.
      * @param despawnTimer     The time, in milliseconds, after which the Bonus
      *                         Reward will despawn.
-     * @param rewardAmount     The amount of the reward.
-     * @param rewardsToCollect The number of rewards to collect.
      */
-    public Reward(Position position, int despawnTimer, float rewardAmount, int rewardsToCollect) {
+    public Reward(Position position, int despawnTimer) {
         super(position, despawnTimer);
-        this.rewardAmount = rewardAmount;
-        this.rewardsToCollect = rewardsToCollect;
+        this.rewardAmount = 1;
 
         // since the only reward that also relies on despawnTimer to despawn are Bonus
         // Rewards
         rewardType = RewardType.BonusReward;
-        loadRewardImage(); // add
+        loadRewardImage();
     }
 
     /**
      * Constructs a new Regular Reward.
      * 
      * @param position         The position of the reward.
-     * @param rewardAmount     The amount of the reward.
-     * @param rewardsToCollect The number of rewards to collect.
      */
-    public Reward(Position position, float rewardAmount, int rewardsToCollect) {
+    public Reward(Position position) {
         super(position);
-        this.rewardAmount = rewardAmount;
-        this.rewardsToCollect = rewardsToCollect;
+        this.rewardAmount = 0.5;
 
         // since regular rewards don't rely on despawnTimer
         rewardType = RewardType.RegularReward;
-        loadRewardImage(); // add
+        loadRewardImage();
     }
 
     @Override
@@ -92,33 +83,6 @@ public class Reward extends StaticEntity {
      */
     public double getRewardAmount() {
         return rewardAmount;
-    }
-
-    /**
-     * Sets the amount of the reward.
-     * 
-     * @param rewardAmount The new amount of the reward.
-     */
-    public void setRewardAmount(float rewardAmount) {
-        this.rewardAmount = rewardAmount;
-    }
-
-    /**
-     * Gets the number of rewards to collect to complete the level.
-     * 
-     * @return The number of rewards to collect.
-     */
-    public int getRewardsToCollect() {
-        return rewardsToCollect;
-    }
-
-    /**
-     * Sets the number of rewards to collect to complete the level.
-     * 
-     * @param rewardsToCollect The new number of rewards to collect.
-     */
-    public void setRewardsToCollect(int rewardsToCollect) {
-        this.rewardsToCollect = rewardsToCollect;
     }
 
     public void render(Graphics g) {

@@ -36,7 +36,7 @@ public class GradCapTest {
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
 
-        Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize), 0.5f, 1);
+        Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
 
         Boolean result = collisionChecker.checkPlayerRewardCollision(player, reward);
         double score = player.getScoreObj().getScore();
@@ -52,9 +52,9 @@ public class GradCapTest {
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
 
-        Reward reward1 = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize), 0.5f, 1);
-        Reward reward2 = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize), 0.5f, 2);
-        Reward reward3 = new Reward(new Position(6 * Game.tileSize, 7 * Game.tileSize), 0.5f, 3);
+        Reward reward1 = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
+        Reward reward2 = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize));
+        Reward reward3 = new Reward(new Position(6 * Game.tileSize, 7 * Game.tileSize));
 
         collisionChecker.checkPlayerRewardCollision(player, reward1);
 
