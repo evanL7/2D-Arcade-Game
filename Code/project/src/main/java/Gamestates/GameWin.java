@@ -22,6 +22,11 @@ public class GameWin extends State implements Statemethods {
     
     private static Font customFont;
     private Playing playingState;
+    
+    private String previousTime;
+    private double previousScore;
+
+    private int playThruNum = 1;
 
     /**
      * Constructs a GameWin object.
@@ -76,6 +81,17 @@ public class GameWin extends State implements Statemethods {
             x = (Game.screenWidth - fm.stringWidth("TIME: " + playingState.getTime().getElapsedTime())) / 2;
             g.drawString("TIME: " + playingState.getTime().getElapsedTime(), x, y);
 
+            if (playThruNum >= 2) {
+                y += fm.getHeight();
+                x = (Game.screenWidth - fm.stringWidth("PREVIOUS SCORE: " + previousScore)) / 2;
+                g.drawString("PREVIOUS SCORE: " + previousScore, x, y);
+
+                y += fm.getHeight();
+                x = (Game.screenWidth - fm.stringWidth("PREVIOUS TIME: " + previousTime)) / 2;
+                g.drawString("PREVIOUS TIME: " + previousTime, x, y);
+
+            }
+
 
             y += fm.getHeight();  // Move down for the second line
             x = (Game.screenWidth - fm.stringWidth("PRESS R TO RESTART THE GAME")) / 2;
@@ -97,12 +113,12 @@ public class GameWin extends State implements Statemethods {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_R:
-                //System.out.println("Restarting the game"); // test
+                setPastPerformance();
+                playThruNum++;
                 playingState.restartGame();
                 Gamestate.state = Gamestate.PLAYING;
                 break;
             case KeyEvent.VK_Q:
-                //System.out.println("Exiting the program"); // test
                 System.exit(0);
                 break;
             default:
@@ -113,5 +129,10 @@ public class GameWin extends State implements Statemethods {
     @Override
 	public void keyReleased(KeyEvent e) {
 
+    }
+
+    private void setPastPerformance() {
+        previousTime = playingState.getTime().getElapsedTime();
+        previousScore = playingState.getScoreObj().getScore();
     }
 }
