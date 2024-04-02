@@ -215,11 +215,6 @@ public class Enemy extends MoveableEntity {
                 enemyAction = EnemyConstants.UP;
             } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX) {
                 enemyAction = EnemyConstants.DOWN;
-            } else if (enTopY > nextY && enLeftX > nextX) {
-                // up or left
-                if (collisionOn == true) {
-                    enemyAction = EnemyConstants.LEFT;
-                }
             } else if (enTopY >= nextY && enBottomY <= nextY + Game.tileSize) {
                 // left or right
                 if (collisionOn == true) {
@@ -230,6 +225,13 @@ public class Enemy extends MoveableEntity {
                     } else if (enLeftX < nextX) {
                         enemyAction = EnemyConstants.RIGHT;
                     }
+                }
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                // up or left
+                enemyAction = EnemyConstants.UP;
+                checkCollision();
+                if (collisionOn == true) {
+                    enemyAction = EnemyConstants.LEFT;
                 }
             } else if (enTopY > nextY && enLeftX < nextX) {
                 // up or right
