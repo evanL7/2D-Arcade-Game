@@ -82,14 +82,15 @@ public class Playing extends State implements Statemethods {
         pathFinder = new PathFinder(this);
 
         playerSpawnPositions = new Position[4];
-        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top left
-                                                                                      // corner of the map
-        playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize); // Spawn point at the bottom left
-                                                                                       // corner of the map
-        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize); // Spawn point at the top right
-                                                                                       // corner of the map
-        // playerSpawnPositions[3] = new Position(22 * Game.tileSize, 22 *
-        // Game.tileSize); // Spawn point at the bottom right corner of the map
+
+        // Spawn point at the top left corner of the map
+        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize); 
+        
+        // Spawn point at the bottom left corner of the map
+        playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize);
+        
+        // Spawn point at the top right corner of the map
+        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize); 
 
         Random rand = new Random();
         player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
