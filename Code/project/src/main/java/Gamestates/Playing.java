@@ -163,6 +163,7 @@ public class Playing extends State implements Statemethods {
             }
         }
 
+        assetManager.update();
         player.update();
         enemy.update(player);
     }

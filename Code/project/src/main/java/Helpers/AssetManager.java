@@ -15,9 +15,11 @@ import StaticEntity.Trap;
 public class AssetManager {
 
     Playing playing;
+    private Random rand;
 
     public AssetManager(Playing playing) {
         this.playing = playing;
+        this.rand = new Random();
     }
 
     public void setObjects() {
@@ -32,12 +34,25 @@ public class AssetManager {
         playing.staticEntities[8] = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize));
         playing.staticEntities[9] = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize));
         playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize));
-        playing.staticEntities[11] = new Reward(generateRandomPosition(), 4000);
-        playing.staticEntities[12] = new Reward(generateRandomPosition(), 4000); // 4000 is roughly 20 seconds
+    }
+
+    public void update() {
+        // Check if it's time to spawn a new reward
+
+        if (rand.nextInt(2000) < 1) { // 0.05% chance of spawning a reward
+            // Find an empty slot in the staticEntities array to place the new reward
+            for (int i = 0; i < playing.staticEntities.length; i++) {
+                if (playing.staticEntities[i] == null) {
+                    Position randomPosition = generateRandomPosition();
+                    Reward newReward = new Reward(randomPosition, 4000); // 4000 is roughly 20 seconds
+                    playing.staticEntities[i] = newReward;
+                    break;
+                }
+            }
+        }
     }
 
     private Position generateRandomPosition() {
-        Random rand = new Random();
         while (true) {
             int randomX = rand.nextInt(Game.maxWorldCol);
             int randomY = rand.nextInt(Game.maxWorldRow);
