@@ -38,7 +38,6 @@ public class AssetManager {
 
     public void update() {
         // Check if it's time to spawn a new reward
-
         if (rand.nextInt(2000) < 1) { // 0.05% chance of spawning a reward
             // Find an empty slot in the staticEntities array to place the new reward
             for (int i = 0; i < playing.staticEntities.length; i++) {

@@ -75,38 +75,25 @@ public class Playing extends State implements Statemethods {
 
     private void initClasses() {
         keysPressed = new HashSet<>();
-        // tileManager = new TileManager();
-        score = new Score();
         tileManager = new TileManager(this);
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
 
-        playerSpawnPositions = new Position[4];
-
+        playerSpawnPositions = new Position[3]; // 3 spawn points for the player
         // Spawn point at the top left corner of the map
         playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize); 
-        
         // Spawn point at the bottom left corner of the map
         playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize);
-        
         // Spawn point at the top right corner of the map
         playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize); 
 
         Random rand = new Random();
         player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
-
         enemy = new Enemy(new Position(enemyX, enemyY), this);
 
+        staticEntities = new StaticEntity[25]; // Currently set to 25 static entities can be displayed, adjust as needed
         assetManager = new AssetManager(this);
-        // Currently set to 25 static entities can be displayed, adjust as needed
-        staticEntities = new StaticEntity[25];
-
         assetManager.setObjects();
-
-        // rewardReg = new Reward(new Position(regRewardX, regRewardY), 1, 1);
-
-        // this takes approx 12 seconds to despawn from the screen
-        // rewardBonus = new Reward(new Position(bonusRX, bonusRY), 2500, 1, 1);
 
         // Create the Camera object with the player
         camera = new Camera(player);
