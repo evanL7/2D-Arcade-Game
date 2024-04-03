@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 
 import Display.Game;
 import Display.Score;
-import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
