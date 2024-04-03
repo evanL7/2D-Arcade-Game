@@ -33,7 +33,6 @@ public class EnemyTest {
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
         scoreObject = new Score();
-        Gamestate.state = Gamestate.PLAYING;
 
         enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
