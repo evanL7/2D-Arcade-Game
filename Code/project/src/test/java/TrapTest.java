@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import Display.Game;
 import Display.Score;
+import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.CollisionChecker;
@@ -48,39 +49,4 @@ public class TrapTest {
     }
 
     @Test
-    public void testMultipleTrapPlayerCollisions() {
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
-        Trap trap1 = new Trap(new Position(2 * Game.tileSize, 3 * Game.tileSize));
-        Trap trap2 = new Trap(new Position(4 * Game.tileSize, 5 * Game.tileSize));
-        Trap trap3 = new Trap(new Position(6 * Game.tileSize, 7 * Game.tileSize));
-        Trap trap4 = new Trap(new Position(2 * Game.tileSize, 5 * Game.tileSize));
-        Trap trap5 = new Trap(new Position(6 * Game.tileSize, 3 * Game.tileSize));
-        Trap trap6 = new Trap(new Position(4 * Game.tileSize, 3 * Game.tileSize));
-
-        double originalScore = player.getScoreObj().getScore();
-        assertTrue(originalScore == 2);
-
-        collisionChecker.checkPlayerTrapCollision(player, trap1);
-
-        player.setPosition(4 * Game.tileSize, 5 * Game.tileSize);
-        collisionChecker.checkPlayerTrapCollision(player, trap2);
-
-        player.setPosition(6 * Game.tileSize, 7 * Game.tileSize);
-        collisionChecker.checkPlayerTrapCollision(player, trap3);
-
-        player.setPosition(2 * Game.tileSize, 5 * Game.tileSize);
-        collisionChecker.checkPlayerTrapCollision(player, trap4);
-
-        player.setPosition(6 * Game.tileSize, 3 * Game.tileSize);
-        collisionChecker.checkPlayerTrapCollision(player, trap5);
-
-        player.setPosition(4 * Game.tileSize, 3 * Game.tileSize);
-        collisionChecker.checkPlayerTrapCollision(player, trap6);
-
-        double actualScore = player.getScoreObj().getScore();
-        double expectedScore = originalScore - (trap1.getDamage() * 6);
-
-        assertEquals(expectedScore, actualScore);
-    }
-
-}
+    public void testMultipleT
