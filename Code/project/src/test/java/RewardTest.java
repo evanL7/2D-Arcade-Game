@@ -12,7 +12,7 @@ import MoveableEntity.Player;
 import StaticEntity.Reward;
 import StaticEntity.TileManager;
 
-public class GradCapTest {
+public class RewardTest {
     private Player player;
     private Game game;
     private Playing playing;
