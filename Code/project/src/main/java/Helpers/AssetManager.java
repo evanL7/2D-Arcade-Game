@@ -10,7 +10,7 @@ import StaticEntity.Trap;
 
 /**
  * The AssetManager class manages the assets used in the game.
- * It sets the objects in the game.
+ * It sets the static entity objects in the game.
  */
 public class AssetManager {
 
@@ -51,6 +51,12 @@ public class AssetManager {
         }
     }
 
+    /**
+     * Generates a random position within the Game World
+     * Checks if the position is valid (no walls)
+     * 
+     * @return the random position
+     */
     private Position generateRandomPosition() {
         while (true) {
             int randomX = rand.nextInt(Game.maxWorldCol);
@@ -63,6 +69,13 @@ public class AssetManager {
         }
     }
 
+    /**
+     * Checks if a position is valid (no walls or another static entity) to place an
+     * entity there
+     * 
+     * @param position the position to check if valid or not
+     * @return
+     */
     public boolean isPositionValid(Position position) {
         // Check if the position conflicts with a map tile
         int tileNum = playing.tileManager.mapTileNum[position.getY() / Game.tileSize][position.getX() / Game.tileSize];
@@ -70,12 +83,14 @@ public class AssetManager {
             return false;
         }
         // Check if the position conflicts with the player's location
-        if (position.getX() == playing.getPlayer().getPosition().getX() && position.getY() == playing.getPlayer().getPosition().getY()) {
+        if (position.getX() == playing.getPlayer().getPosition().getX()
+                && position.getY() == playing.getPlayer().getPosition().getY()) {
             return false;
         }
         // Check if the position conflicts with an existing static entity
         for (int i = 0; i < playing.staticEntities.length; i++) {
-            if (playing.staticEntities[i] != null && position.getX() == playing.staticEntities[i].getPosition().getX() && position.getY() == playing.staticEntities[i].getPosition().getY()) {
+            if (playing.staticEntities[i] != null && position.getX() == playing.staticEntities[i].getPosition().getX()
+                    && position.getY() == playing.staticEntities[i].getPosition().getY()) {
                 return false;
             }
         }
