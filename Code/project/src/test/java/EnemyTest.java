@@ -46,8 +46,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesDownWhenPlayerBelow() {
-        setPosition(enemy, 2, 3);
-        setPosition(player, 2, 5);
+        enemy.setPosition(2 * Game.tileSize, 3 * Game.tileSize);
+        player.setPosition(2 * Game.tileSize, 5 * Game.tileSize);
         updateEnemy(enemy, player, 5);
 
         assertEquals(EnemyConstants.DOWN, enemy.getEnemyAction());
@@ -55,8 +55,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesUpWhenPlayerAbove() {
-        setPosition(enemy, 2, 5);
-        setPosition(player, 2, 3);
+        enemy.setPosition(2 * Game.tileSize, 5 * Game.tileSize);
+        player.setPosition(2 * Game.tileSize, 3 * Game.tileSize);
         updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
@@ -64,8 +64,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesLeftWhenPlayerToTheLeft() {
-        setPosition(enemy, 5, 3);
-        setPosition(player, 1, 3);
+        enemy.setPosition(5 * Game.tileSize, 3 * Game.tileSize);
+        player.setPosition(1 * Game.tileSize, 3 * Game.tileSize);
         updateEnemy(enemy, player, 100);
 
         assertEquals(EnemyConstants.LEFT, enemy.getEnemyAction());
@@ -73,8 +73,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesRightWhenPlayerToTheRight() {
-        setPosition(enemy, 2, 3);
-        setPosition(player, 5, 3);
+        enemy.setPosition(2 * Game.tileSize, 3 * Game.tileSize);
+        player.setPosition(5 * Game.tileSize, 3 * Game.tileSize);
         updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
@@ -82,16 +82,11 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesAroundWalls() {
-        setPosition(enemy, 21, 4);
-        setPosition(player, 21, 8);
+        enemy.setPosition(21 * Game.tileSize, 4 * Game.tileSize);
+        player.setPosition(21 * Game.tileSize, 8 * Game.tileSize);
         updateEnemy(enemy, player, 750);
 
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
-    }
-
-    private void setPosition(MoveableEntity entity, int x, int y) {
-        entity.getPosition().setX(x * Game.tileSize);
-        entity.getPosition().setY(y * Game.tileSize);
     }
 
     private void updateEnemy(Enemy enemy, Player player, int maxNumUpdates) {
