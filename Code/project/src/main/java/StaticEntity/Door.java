@@ -58,6 +58,15 @@ public class Door extends StaticEntity {
         open = true;
     }
 
+    /**
+     * Gets the boolean attribute open
+     * 
+     * @return a boolean
+     */
+    public boolean getOpen() {
+        return open;
+    }
+
     @Override
     public Image getSprite() {
         return doorImage;
