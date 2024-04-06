@@ -81,11 +81,11 @@ public class Playing extends State implements Statemethods {
 
         playerSpawnPositions = new Position[3]; // 3 spawn points for the player
         // Spawn point at the top left corner of the map
-        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize); 
+        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize);
         // Spawn point at the bottom left corner of the map
         playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize);
         // Spawn point at the top right corner of the map
-        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize); 
+        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize);
 
         Random rand = new Random();
         player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
@@ -112,8 +112,7 @@ public class Playing extends State implements Statemethods {
                 }
                 trap.remove();
                 break; // Exit the loop after handling the collision with one trap
-            }
-            else {
+            } else {
                 trap.update();
             }
         }
@@ -123,13 +122,13 @@ public class Playing extends State implements Statemethods {
                 Gamestate.state = Gamestate.GAMEOVER;
             }
         }
-        
+
         for (Reward reward : StaticEntity.getAllRewards()) {
             if (collisionChecker.checkPlayerRewardCollision(player, reward)) {
                 reward.remove();
                 break; // Exit the loop after handling the collision with one reward
             }
-    
+
             // despawn
             else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
                 reward.remove();
@@ -142,7 +141,7 @@ public class Playing extends State implements Statemethods {
 
         for (Door door : StaticEntity.getAllDoors()) {
             if (player.getWin() == 3) {
-                // add code for showing door opening animation
+                door.setOpen();
 
                 if (collisionChecker.checkPlayerDoorCollision(player, door)) {
                     Gamestate.state = Gamestate.WIN;
@@ -172,7 +171,7 @@ public class Playing extends State implements Statemethods {
         }
 
         for (Reward reward : StaticEntity.getAllRewards()) {
-            reward.render(g);          
+            reward.render(g);
         }
 
         for (Door door : StaticEntity.getAllDoors()) {
@@ -228,7 +227,7 @@ public class Playing extends State implements Statemethods {
 
         // Determine the primary direction based on the last key pressed
         int action = player.getAction(); // Default action
-        
+
         // Prevent bug where animations were not matching most recent key press
         switch (action) {
             case PlayerConstants.UP:
@@ -267,7 +266,7 @@ public class Playing extends State implements Statemethods {
                     action = PlayerConstants.LEFT;
                 }
                 break;
-        }        
+        }
         player.setAction(action);
     }
 
@@ -293,10 +292,10 @@ public class Playing extends State implements Statemethods {
     }
 
     protected void restartGame() {
-        StaticEntity.resetStaticEntities(); 
-        MoveableEntity.resetMoveableEntities(); 
+        StaticEntity.resetStaticEntities();
+        MoveableEntity.resetMoveableEntities();
         initClasses();
         player.resetWin();
-        //System.out.println("\n\n");
+        // System.out.println("\n\n");
     }
 }

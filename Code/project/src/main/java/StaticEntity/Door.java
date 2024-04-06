@@ -16,22 +16,26 @@ import Helpers.Position;
  * Used to transition between levels.
  * Source of door sprite:
  * https://www.youtube.com/watch?v=xYtXz34IJdY&list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
+ * 
+ * new doors: 32x16
  */
 public class Door extends StaticEntity {
 
     private BufferedImage doorImage;
     private BufferedImage doorOpenImage;
+    private boolean open;
 
     public Door(Position position) {
         super(position);
+        open = false;
         try {
             // Load the image from the file
-            InputStream is = getClass().getResourceAsStream("/assets/door.png");
+            InputStream is = getClass().getResourceAsStream("/assets/closeDoor.png");
             doorImage = ImageIO.read(is);
             is.close();
 
             // Load the open door image from the file
-            InputStream isOpen = getClass().getResourceAsStream("/assets/door.png"); // change this
+            InputStream isOpen = getClass().getResourceAsStream("/assets/openDoor.png"); // change this
             doorOpenImage = ImageIO.read(isOpen);
             isOpen.close();
         } catch (IOException e) {
@@ -40,7 +44,18 @@ public class Door extends StaticEntity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(doorImage, position.getX(), position.getY(), Game.tileSize, Game.tileSize, null);
+        if (open) {
+            g.drawImage(doorOpenImage, position.getX(), position.getY(), 48, 96, null);
+        } else {
+            g.drawImage(doorImage, position.getX(), position.getY(), 48, 96, null);
+        }
+    }
+
+    /**
+     * Sets the Door to open
+     */
+    public void setOpen() {
+        open = true;
     }
 
     @Override
