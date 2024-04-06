@@ -68,7 +68,7 @@ public class GameWin extends State implements Statemethods {
 
             FontMetrics fm = g.getFontMetrics();
             int x = (Game.screenWidth - fm.stringWidth("YOU WIN!")) / 2;
-            int y = (Game.screenHeight - fm.getHeight()) / 2 + fm.getAscent() - 40;
+            int y = (Game.screenHeight - fm.getHeight()) / 2 + fm.getAscent() - 125;
 
             g.drawString("YOU WIN!", x, y);
             
