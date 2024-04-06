@@ -23,7 +23,7 @@ public class AssetManager {
     }
 
     public void setObjects() {
-        playing.staticEntities[0] = new Door(new Position(23 * Game.tileSize, 23 * Game.tileSize));
+        playing.staticEntities[0] = new Door(new Position(23 * Game.tileSize, 22 * Game.tileSize));
         playing.staticEntities[1] = new Trap(new Position(9 * Game.tileSize, 9 * Game.tileSize));
         playing.staticEntities[2] = new Trap(new Position(19 * Game.tileSize, 4 * Game.tileSize));
         playing.staticEntities[3] = new Trap(new Position(9 * Game.tileSize, 12 * Game.tileSize));
