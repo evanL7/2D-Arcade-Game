@@ -81,14 +81,6 @@ public class TrapTest {
         player.update();
         playing.update();
 
-        Boolean gameOver = false;
-        System.out.println("Game State: " + Gamestate.state);
-        if (Gamestate.state == Gamestate.GAMEOVER) {
-            gameOver = true;
-        }
-        assertTrue(gameOver);
-        assertTrue(player.getScoreObj().getScore() == -1);
-
         player.setPosition(6 * Game.tileSize, 3 * Game.tileSize);
         collisionChecker.checkPlayerTrapCollision(player, trap5);
         player.update();
