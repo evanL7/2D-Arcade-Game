@@ -10,7 +10,6 @@ import Helpers.Position;
 import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.CollisionChecker;
 import MoveableEntity.Enemy;
-import MoveableEntity.MoveableEntity;
 import MoveableEntity.Player;
 import StaticEntity.TileManager;
 

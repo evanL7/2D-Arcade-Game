@@ -8,7 +8,6 @@ import Gamestates.Playing;
 import Gamestates.GameOver;
 import Gamestates.GameWin;
 
-
 /**
  * The `Game` class represents the main game loop and controls the overall game flow.
  * It implements the `Runnable` interface to allow it to be executed in a separate thread.
@@ -163,8 +162,8 @@ public class Game implements Runnable {
     }
 
     public void windowFocusLost() {
-		if (Gamestate.state == Gamestate.PLAYING) {
-			playing.getPlayer().resetDirBooleans();
+        if (Gamestate.state == Gamestate.PLAYING) {
+            playing.getPlayer().resetDirBooleans();
         }
     }
 
