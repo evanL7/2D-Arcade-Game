@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 
 import Display.Game;
 import Display.Score;
@@ -16,21 +16,22 @@ import StaticEntity.Reward;
 public class PlayerTest {
     
     private Player player;
-    private Game game;
-    private Score scoreObject;
-    private Playing playing;
-    private TileManager tileManager;
-    private CollisionChecker collisionChecker;
+    private static Game game;
+    private static Score scoreObject;
+    private static Playing playing;
+    private static TileManager tileManager;
+    private static CollisionChecker collisionChecker;
     private Reward reward;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUpAll() {
         game = new Game();
         playing = new Playing(game);
         tileManager = new TileManager(playing);      
         collisionChecker = new CollisionChecker(tileManager); 
         scoreObject = new Score(); 
     }
+
 
     // Tests to see if colliding with a regular reward properly increments 
     // the number of regular rewards collected (variable win)
