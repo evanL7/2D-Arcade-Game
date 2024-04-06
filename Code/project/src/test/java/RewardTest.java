@@ -1,10 +1,11 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import Display.Game;
 import Display.Score;
+import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.CollisionChecker;
 import Helpers.Position;
@@ -14,19 +15,20 @@ import StaticEntity.TileManager;
 
 public class RewardTest {
     private Player player;
-    private Game game;
-    private Playing playing;
-    private TileManager tileManager;
-    private CollisionChecker collisionChecker;
-    private Score scoreObject;
+    private static Game game;
+    private static Score scoreObject;
+    private static Playing playing;
+    private static TileManager tileManager;
+    private static CollisionChecker collisionChecker;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUpAll() {
         game = new Game();
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
         scoreObject = new Score();
+        Gamestate.state = Gamestate.PLAYING;
     }
 
     @Test
@@ -35,6 +37,8 @@ public class RewardTest {
         assertTrue(scoreObject.getScore() == 2);
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
+
+        player.getScoreObj().setScore(2.0);
 
         Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
 
@@ -51,6 +55,8 @@ public class RewardTest {
 
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
+
+        player.getScoreObj().setScore(2.0);
 
         Reward reward1 = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
         Reward reward2 = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize));
