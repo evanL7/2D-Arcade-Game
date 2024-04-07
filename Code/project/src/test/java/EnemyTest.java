@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 import Display.Game;
@@ -13,6 +16,7 @@ import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import StaticEntity.TileManager;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class EnemyTest {
 
     private Game game;
@@ -24,14 +28,17 @@ public class EnemyTest {
     private Enemy enemy;
     private Player player;
 
-    @BeforeEach
+    @BeforeAll
     public void setUp() {
         game = new Game();
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
         scoreObject = new Score();
+    }
 
+    @BeforeEach
+    public void reset() {
         enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
     }
