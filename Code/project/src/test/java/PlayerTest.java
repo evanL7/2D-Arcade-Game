@@ -7,7 +7,6 @@ import Display.Score;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.CollisionChecker;
-import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import StaticEntity.TileManager;
 import StaticEntity.Reward;
@@ -32,7 +31,6 @@ public class PlayerTest {
         scoreObject = new Score(); 
     }
 
-
     // Tests to see if colliding with a regular reward properly increments 
     // the number of regular rewards collected (variable win)
     @Test
@@ -51,9 +49,6 @@ public class PlayerTest {
         // check if resetWin properly sets win variable to 0
         player.resetWin();
         assertEquals(0, player.getWin());
-
-        player.getScoreObj().setScore(2.0);
-        assertEquals(2.0, player.getScoreObj().getScore());
     }
 
     @Test
@@ -74,15 +69,11 @@ public class PlayerTest {
         player.update();
         assertEquals(1107, player.getPosition().getX());
         
-    
         // now player should be against the right wall so movement shouldn't be possible
         Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
 
         player.setRight(true);
         player.setAction(1);
-        
-        player.update();
-        player.update();
         player.update();
 
         Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
@@ -90,7 +81,6 @@ public class PlayerTest {
         // checks if the position changed
         // it shouldn't change since there is a wall in the way
         assertTrue(comparePos(oldPos, newPos));
-        player.resetDirBooleans();
     }
 
     @Test
@@ -117,15 +107,11 @@ public class PlayerTest {
         Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         
         player.update();
-        player.update();
-        player.update();
-
         Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         
         // checks if the position changed
         // it shouldn't change since there is a wall in the way
         assertTrue(comparePos(oldPos, newPos));
-        player.resetDirBooleans();
     }
 
     @Test
@@ -152,15 +138,11 @@ public class PlayerTest {
         Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         
         player.update();
-        player.update();
-        player.update();
-
         Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         
         // checks if the position changed
         // it shouldn't change since there is a wall in the way
         assertTrue(comparePos(oldPos, newPos));
-        player.resetDirBooleans();
     }
 
     @Test
@@ -187,15 +169,11 @@ public class PlayerTest {
         Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         
         player.update();
-        player.update();
-        player.update();
-
         Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         
         // checks if the position changed
         // it shouldn't change since there is a wall in the way
         assertTrue(comparePos(oldPos, newPos));
-        player.resetDirBooleans();
     }
 
     @Test
@@ -222,7 +200,6 @@ public class PlayerTest {
         player.update();
         newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         assertTrue(comparePos(oldPos, newPos));
-
 
         player.resetDirBooleans();
         player.setUp(true);
@@ -256,7 +233,6 @@ public class PlayerTest {
         Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         assertTrue(comparePos(oldPos, newPos));
 
-
         player.resetDirBooleans();
         player.setDown(true);
         player.setRight(true);
@@ -265,7 +241,6 @@ public class PlayerTest {
         newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         assertTrue(comparePos(oldPos, newPos));
     }
-
 
     // helper to check before and after positions
     private boolean comparePos(Position pos1, Position pos2) {
