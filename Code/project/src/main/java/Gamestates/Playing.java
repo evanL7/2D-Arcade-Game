@@ -140,13 +140,9 @@ public class Playing extends State implements Statemethods {
         }
 
         for (Door door : StaticEntity.getAllDoors()) {
-            if (player.getWin() == 3) {
-                door.setOpen();
-
-                if (collisionChecker.checkPlayerDoorCollision(player, door)) {
-                    Gamestate.state = Gamestate.WIN;
-                }
-            }
+           if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player, door)) {
+            Gamestate.state = Gamestate.WIN;
+           }
         }
 
         assetManager.update();

@@ -118,6 +118,14 @@ public class CollisionChecker {
         if (result) {
             if (reward.rewardType == RewardType.RegularReward) {
                 player.increaseWin();
+
+                if (player.getWin() == 3) {
+                    for (Door door : StaticEntity.getAllDoors()) {
+                        if (player.getWin() == 3) {
+                            door.setOpen();
+                        }
+                    }
+                }
             }
             //System.out.println("Reward Amount is: " + reward.getRewardAmount());
             player.getScoreObj().incrementScore(reward.getRewardAmount());
