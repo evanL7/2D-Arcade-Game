@@ -36,7 +36,7 @@ public class PlayerTest {
     // Tests to see if colliding with a regular reward properly increments 
     // the number of regular rewards collected (variable win)
     @Test
-    public void testCheckRewardCollision() {
+    public void testRewardCollision() {
         
         player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
         reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
@@ -51,6 +51,9 @@ public class PlayerTest {
         // check if resetWin properly sets win variable to 0
         player.resetWin();
         assertEquals(0, player.getWin());
+
+        player.getScoreObj().setScore(2.0);
+        assertEquals(2.0, player.getScoreObj().getScore());
     }
 
     @Test
@@ -91,7 +94,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void checkLeftMovement() {
+    public void testLeftMovement() {
         
         // spawn the player right next to the left wall
         // want to check if going left changes the player's position at all
@@ -126,7 +129,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void checkUpMovement() {
+    public void testUpMovement() {
         
         // spawn the player right under the top wall
         // want to check if going up changes the player's position at all
@@ -161,7 +164,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void checkDownMovement() {
+    public void testDownMovement() {
         
         // spawn the player right above the bottom wall
         // want to check if going down changes the player's position at all
@@ -194,6 +197,75 @@ public class PlayerTest {
         assertTrue(comparePos(oldPos, newPos));
         player.resetDirBooleans();
     }
+
+    @Test
+    public void testInvalidMovement1() {
+        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        
+        Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+
+        player.setUp(true);
+        player.setDown(true);
+        player.setRight(true);
+        player.setLeft(true);
+
+        player.update();
+
+        Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+
+        assertTrue(comparePos(oldPos, newPos));
+
+        player.resetDirBooleans();
+        player.setUp(true);
+        player.setDown(true);
+
+        player.update();
+        newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        assertTrue(comparePos(oldPos, newPos));
+
+
+        player.resetDirBooleans();
+        player.setUp(true);
+        player.setRight(true);
+        
+        player.update();
+        newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        assertTrue(comparePos(oldPos, newPos));
+
+
+        player.resetDirBooleans();
+        player.setUp(true);
+        player.setLeft(true);
+        
+        player.update();
+        newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        assertTrue(comparePos(oldPos, newPos));
+    }
+
+    @Test
+    public void testInvalidMovement2() {
+        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        
+        Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+
+        player.resetDirBooleans();
+        player.setDown(true);
+        player.setLeft(true);
+
+        player.update();
+        Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        assertTrue(comparePos(oldPos, newPos));
+
+
+        player.resetDirBooleans();
+        player.setDown(true);
+        player.setRight(true);
+        
+        player.update();
+        newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        assertTrue(comparePos(oldPos, newPos));
+    }
+
 
     // helper to check before and after positions
     private boolean comparePos(Position pos1, Position pos2) {
