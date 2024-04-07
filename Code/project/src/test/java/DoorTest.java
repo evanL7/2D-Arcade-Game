@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -37,11 +37,11 @@ public class DoorTest {
         Door door = new Door(new Position(23 * Game.tileSize, 22 * Game.tileSize));
         player = new Player(new Position(23 * Game.tileSize, 22 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
-
+        assertEquals(0, player.getWin());
         Boolean collideDoor = collisionChecker.checkPlayerDoorCollision(player, door);
 
         assertTrue(collideDoor);
-        playing.update();
+        assertEquals(0, player.getWin());
         assertTrue(!door.getOpen());
 
     }
@@ -53,18 +53,16 @@ public class DoorTest {
         Reward reward = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize));
         player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
-
+        assertEquals(0, player.getWin());
         boolean collideReward = collisionChecker.checkPlayerRewardCollision(player, reward);
         assertTrue(collideReward);
 
         player.setPosition(23 * Game.tileSize, 22 * Game.tileSize);
 
         Boolean collideDoor = collisionChecker.checkPlayerDoorCollision(player, door);
-
         assertTrue(collideDoor);
-        playing.update();
+        assertEquals(1, player.getWin());
         assertTrue(!door.getOpen());
-
     }
 
     // test for 2 grad caps collected
@@ -75,7 +73,7 @@ public class DoorTest {
         Reward reward2 = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize));
         player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
-
+        assertEquals(0, player.getWin());
         boolean collideReward1 = collisionChecker.checkPlayerRewardCollision(player, reward1);
         assertTrue(collideReward1);
 
@@ -85,9 +83,8 @@ public class DoorTest {
 
         player.setPosition(23 * Game.tileSize, 22 * Game.tileSize);
         Boolean collideDoor = collisionChecker.checkPlayerDoorCollision(player, door);
-
         assertTrue(collideDoor);
-        playing.update();
+        assertEquals(2, player.getWin());
         assertTrue(!door.getOpen());
     }
 
@@ -100,6 +97,7 @@ public class DoorTest {
         Reward reward3 = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize));
         player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing,
                 scoreObject);
+        assertEquals(0, player.getWin());
 
         boolean collideReward1 = collisionChecker.checkPlayerRewardCollision(player, reward1);
         assertTrue(collideReward1);
@@ -116,7 +114,8 @@ public class DoorTest {
         Boolean collideDoor = collisionChecker.checkPlayerDoorCollision(player, door);
 
         assertTrue(collideDoor);
-        playing.update();
-        // assertTrue(door.getOpen());
+        assertEquals(3, player.getWin());
+
+        assertTrue(door.getOpen());
     }
 }
