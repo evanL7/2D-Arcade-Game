@@ -109,15 +109,19 @@ public class Player extends MoveableEntity {
             if (left && !right && !up && !down) {
                 position.setX(position.getX() - speed); // Move left
                 moving = true;
-            } else if (right && !left && !up && !down) {
+            } 
+            
+            else if (right && !left && !up && !down) {
                 position.setX(position.getX() + speed); // Move right
                 moving = true;
             }
 
-            if (up && !down && !left && !right) {
+            else if (up && !down && !left && !right) {
                 position.setY(position.getY() - speed); // Move up
                 moving = true;
-            } else if (down && !up && !left && !right) {
+            } 
+            
+            else if (down && !up && !left && !right) {
                 position.setY(position.getY() + speed); // Move down
                 moving = true;
             }
@@ -200,15 +204,6 @@ public class Player extends MoveableEntity {
     @Override
     public Image getSprite() {
         return playerImage;
-    }
-
-    /**
-     * Sets whether the player is moving.
-     * 
-     * @param moving true if the player is moving; otherwise, false.
-     */
-    public void setMoving(boolean moving) {
-        this.moving = moving;
     }
 
     /**
