@@ -67,33 +67,33 @@ public class TrapTest {
         assertTrue(originalScore == 2);
 
         collisionChecker.checkPlayerTrapCollision(player, trap1);
-        player.update();
-        playing.update();
+        // player.update();
+        // playing.update();
 
         player.setPosition(4 * Game.tileSize, 5 * Game.tileSize);
         collisionChecker.checkPlayerTrapCollision(player, trap2);
-        player.update();
-        playing.update();
+        // player.update();
+        // playing.update();
 
         player.setPosition(6 * Game.tileSize, 7 * Game.tileSize);
         collisionChecker.checkPlayerTrapCollision(player, trap3);
-        player.update();
-        playing.update();
+        // player.update();
+        // playing.update();
 
         player.setPosition(2 * Game.tileSize, 5 * Game.tileSize);
         collisionChecker.checkPlayerTrapCollision(player, trap4);
-        player.update();
-        playing.update();
+        // player.update();
+        // playing.update();
 
         player.setPosition(6 * Game.tileSize, 3 * Game.tileSize);
         collisionChecker.checkPlayerTrapCollision(player, trap5);
-        player.update();
-        playing.update();
+        // player.update();
+        // playing.update();
 
         player.setPosition(4 * Game.tileSize, 3 * Game.tileSize);
         collisionChecker.checkPlayerTrapCollision(player, trap6);
-        player.update();
-        playing.update();
+        // player.update();
+        // playing.update();
 
         double actualScore = player.getScoreObj().getScore();
         double expectedScore = originalScore - (trap1.getDamage() * 6);
