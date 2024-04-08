@@ -6,10 +6,10 @@ import Gamestates.*;
 
 public class GameStateTest {
 
-    private Game game;
+    private static Game game;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         game = new Game();
     }
 
