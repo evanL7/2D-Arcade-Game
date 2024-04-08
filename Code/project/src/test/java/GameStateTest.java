@@ -50,7 +50,7 @@ public class GameStateTest {
     }
 
     @Test
-    public void testGameOverExtraState() {
+    public void testGameOverCollisionState() {
         KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
         menu.keyPressed(keyEvent1); // Start the game
 
@@ -75,9 +75,10 @@ public class GameStateTest {
     }
 
     @Test
-    public void testWinExtraState() {
+    public void testWinCollisionState() {
         KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
         menu.keyPressed(keyEvent1); // Start the game
+
         Playing playing = game.getPlaying();
         TileManager tileManager = new TileManager(playing);      
         CollisionChecker collisionChecker = new CollisionChecker(tileManager); 
