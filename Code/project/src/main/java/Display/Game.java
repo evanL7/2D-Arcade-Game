@@ -182,4 +182,9 @@ public class Game implements Runnable {
     public GameWin getGameWin() {
         return win;
     }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+    
 }

@@ -1,53 +1,54 @@
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.event.KeyEvent;
 import Display.Game;
 import Gamestates.*;
 
 public class GameStateTest {
 
-    private static Game game;
+    private Game game;
+    private Menu menu;
 
-    @BeforeAll
-    public static void setUp() {
+    @BeforeEach
+    public void setUp() {
         game = new Game();
+        menu = game.getMenu();
+        Gamestate.state = Gamestate.MENU; // Reset the game state to MENU before each test
     }
 
     @Test
     public void testMenuState() {
-        State currentState = new Menu(game);
-        Gamestate.state = Gamestate.MENU;
-        
         assertEquals(Gamestate.MENU, Gamestate.state);
-        assertTrue(currentState instanceof Menu);
+        assertNotNull(menu);
     }
 
     @Test
     public void testPlayingState() {
-        State currentState = new Playing(game);
-        Gamestate.state = Gamestate.PLAYING;
-
+        KeyEvent keyEvent = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        menu.keyPressed(keyEvent); // Start the game
         assertEquals(Gamestate.PLAYING, Gamestate.state);
-        assertTrue(currentState instanceof Playing);
     }
 
     @Test
     public void testGameOverState() {
-        State currentState = new GameOver(game);
-        Gamestate.state = Gamestate.GAMEOVER;
+        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        menu.keyPressed(keyEvent1); // Start the game
+
+        KeyEvent keyEvent2 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_Q, KeyEvent.CHAR_UNDEFINED);
+        game.getPlaying().keyPressed(keyEvent2); // Trigger game over
 
         assertEquals(Gamestate.GAMEOVER, Gamestate.state);
-        assertTrue(currentState instanceof GameOver);
     }
 
     @Test
     public void testWinState() {
-        State currentState = new GameWin(game);
-        Gamestate.state = Gamestate.WIN;
+        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        menu.keyPressed(keyEvent1); // Start the game
+
+        KeyEvent keyEvent2 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, KeyEvent.CHAR_UNDEFINED);
+        game.getPlaying().keyPressed(keyEvent2); // Trigger win
 
         assertEquals(Gamestate.WIN, Gamestate.state);
-        assertTrue(currentState instanceof GameWin);
     }
-    
-
 }

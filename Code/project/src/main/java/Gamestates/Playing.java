@@ -197,6 +197,10 @@ public class Playing extends State implements Statemethods {
                 Gamestate.state = Gamestate.WIN;
                 break;
 
+            case KeyEvent.VK_Q:
+                Gamestate.state = Gamestate.GAMEOVER;
+                break;
+
             default:
                 if (!keysPressed.contains(keyCode)) {
                     keysPressed.add(keyCode);
