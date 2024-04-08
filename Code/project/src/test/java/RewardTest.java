@@ -75,4 +75,42 @@ public class RewardTest {
         assertEquals(3.5, score);
     }
 
+    @Test
+    public void testBonusReward() {
+        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing,
+                scoreObject);
+        Reward bonusReward = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize), 4000);
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            // Handle interrupted exception
+            e.printStackTrace();
+        }
+
+        player.setPosition(4 * Game.tileSize, 5 * Game.tileSize);
+
+        Boolean collide = collisionChecker.checkPlayerRewardCollision(player, bonusReward);
+
+        assertTrue(scoreObject.getScore() == 2);
+        assertTrue(collide);
+
+    }
+
+    @Test
+    public void testBonusRewardCollide() {
+        player = new Player(new Position(4 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing,
+                scoreObject);
+        Reward bonusReward = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize), 4000);
+
+        Boolean collide = collisionChecker.checkPlayerRewardCollision(player, bonusReward);
+
+        double actualScore = player.getScoreObj().getScore();
+        double expectedScore = 3.0;
+
+        assertEquals(actualScore, expectedScore);
+        assertTrue(collide);
+
+    }
+
 }
