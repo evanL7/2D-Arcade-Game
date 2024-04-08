@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import Display.Game;
@@ -8,9 +8,13 @@ public class GameStateTest {
 
     private Game game;
 
+    @BeforeEach
+    public void setUp() {
+        game = new Game();
+    }
+
     @Test
     public void testMenuState() {
-        game = new Game();
         State currentState = new Menu(game);
         Gamestate.state = Gamestate.MENU;
         
@@ -20,7 +24,6 @@ public class GameStateTest {
 
     @Test
     public void testPlayingState() {
-        game = new Game();
         State currentState = new Playing(game);
         Gamestate.state = Gamestate.PLAYING;
 
@@ -30,7 +33,6 @@ public class GameStateTest {
 
     @Test
     public void testGameOverState() {
-        game = new Game();
         State currentState = new GameOver(game);
         Gamestate.state = Gamestate.GAMEOVER;
 
@@ -40,12 +42,12 @@ public class GameStateTest {
 
     @Test
     public void testWinState() {
-        game = new Game();
         State currentState = new GameWin(game);
         Gamestate.state = Gamestate.WIN;
 
         assertEquals(Gamestate.WIN, Gamestate.state);
         assertTrue(currentState instanceof GameWin);
     }
+    
 
 }
