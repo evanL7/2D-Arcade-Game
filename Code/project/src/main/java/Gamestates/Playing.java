@@ -141,6 +141,8 @@ public class Playing extends State implements Statemethods {
 
         for (Door door : StaticEntity.getAllDoors()) {
            if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player, door)) {
+            String soundFilePath = "sounds/mixkit-game-bonus-reached-2065.wav";
+            SoundManager.playSound(soundFilePath, 0.5f);
             Gamestate.state = Gamestate.WIN;
            }
         }
