@@ -88,6 +88,9 @@ public class Playing extends State implements Statemethods {
         playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize);
 
         Random rand = new Random();
+
+        score = new Score();
+        
         player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
         enemy = new Enemy(new Position(enemyX, enemyY), this);
 
@@ -97,7 +100,7 @@ public class Playing extends State implements Statemethods {
 
         // Create the Camera object with the player
         camera = new Camera(player);
-        score = new Score();
+        
         time = new Time();
     }
 
