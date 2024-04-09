@@ -96,10 +96,8 @@ public class EnemyTest {
     }
 
     private void updateEnemy(Enemy enemy, Player player, int maxNumUpdates) {
-        int updates = 0;
-        while (updates < maxNumUpdates) {
+        for (int updates = 0; updates < maxNumUpdates; updates++) {
             enemy.update(player);
-            updates++;
         }
     }
 }
