@@ -24,7 +24,7 @@ import StaticEntity.Trap;
 public class CollisionChecker {
 
     TileManager tileManager;
-    private List<StaticEntity> staticEntities; //add
+    private List<StaticEntity> staticEntities;
 
     /**
      * Constructs a CollisionChecker object with the specified TileManager.
@@ -109,7 +109,6 @@ public class CollisionChecker {
      */
     public boolean checkPlayerRewardCollision(Player player, Reward reward) {
 
-        // new hitboxes
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(), reward.getPosition().getY(), (int) (Game.tileSize * 0.6), 15);
         
@@ -121,15 +120,11 @@ public class CollisionChecker {
 
                 if (player.getWin() == 3) {
                     for (Door door : StaticEntity.getAllDoors()) {
-                        if (player.getWin() == 3) {
-                            door.setOpen();
-                        }
+                        door.setOpen();
                     }
                 }
             }
-            //System.out.println("Reward Amount is: " + reward.getRewardAmount());
             player.getScoreObj().incrementScore(reward.getRewardAmount());
-            //System.out.println("Current Score is: " + player.getScoreObj().getScore());
         }
 
         // Return the collision result
@@ -145,10 +140,8 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerTrapCollision(Player player, Trap trap) {
-        // new hitboxes
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle trapBounds = new Rectangle(trap.getPosition().getX(), trap.getPosition().getY(),(int) (Game.tileSize * 0.6), 15);
-        
         
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
