@@ -63,10 +63,7 @@ public class Menu extends State implements Statemethods {
             int y = Game.tileSize * 3;
 
             // Draw the game title
-            g.setColor(Color.GRAY);
-            g.drawString(text, x+5, y+5); // Draw a shadow
-            g.setColor(Color.WHITE);
-            g.drawString(text, x, y);
+            drawShadowedString(g, text, x, y, Color.GRAY, Color.WHITE);
 
             // Draw character sprite
             x = (Game.screenWidth - Game.tileSize * 2) / 2;
@@ -75,35 +72,28 @@ public class Menu extends State implements Statemethods {
 
             // Draw game options
             g.setFont(customFont.deriveFont(60f));
-            text = "START";
-            x = getXCenteredString(g, text);
-            y += Game.tileSize * 3.5;
-            g.drawString(text, x, y);
-            if (commandNum == 0) {
-                g.drawString(">", x - Game.tileSize / 2, y);
-            }
-
-            // text = "SETTINGS";
-            // x = getXCenteredString(g, text);
-            // y += Game.tileSize;
-            // g.drawString(text, x, y);
-            // if (commandNum == 1) {
-            //     g.drawString(">", x - Game.tileSize / 2, y);
-            // }
-
-            text = "QUIT";
-            x = getXCenteredString(g, text);
-            y += Game.tileSize;
-            g.drawString(text, x, y);
-            if (commandNum == 1) {
-                g.drawString(">", x - Game.tileSize / 2, y);
-            }
+            drawOption(g, "START", getXCenteredString(g, "START"), y += Game.tileSize * 3.5, commandNum == 0);
+            drawOption(g, "QUIT", getXCenteredString(g, "QUIT"), y += Game.tileSize, commandNum == 1);
         }
     }
 
     public int getXCenteredString(Graphics g, String text) {
         int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
         return (Game.screenWidth - length) / 2;
+    }
+
+    public void drawShadowedString(Graphics g, String text, int x, int y, Color shadowColor, Color textColor) {
+        g.setColor(shadowColor);
+        g.drawString(text, x + 5, y + 5); // Draw a shadow
+        g.setColor(textColor);
+        g.drawString(text, x, y);
+    }
+
+    public void drawOption(Graphics g, String text, int x, int y, boolean isSelected) {
+        g.drawString(text, x, y);
+        if (isSelected) {
+            g.drawString(">", x - Game.tileSize / 2, y);
+        }
     }
 
     @Override
@@ -128,9 +118,6 @@ public class Menu extends State implements Statemethods {
                     playingState.windowFocusLost();
                     playingState.getTime().resumeTimer();
                     break;
-                // case 1:
-                //     Gamestate.state = Gamestate.OPTIONS;
-                //     break;
                 case 1:
                     System.exit(0);
                     break;
