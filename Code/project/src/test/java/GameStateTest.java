@@ -15,13 +15,17 @@ import StaticEntity.Trap;
 
 public class GameStateTest {
 
-    private Game game;
-    private Menu menu;
+    private static Game game;
+    private static Menu menu;
+
+    @BeforeAll
+    public static void setUpAll() {
+        game = new Game();
+        menu = game.getMenu();
+    }
 
     @BeforeEach
     public void setUp() {
-        game = new Game();
-        menu = game.getMenu();
         Gamestate.state = Gamestate.MENU; // Reset the game state to MENU before each test
     }
 
