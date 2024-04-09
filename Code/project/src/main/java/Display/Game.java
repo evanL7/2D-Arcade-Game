@@ -78,10 +78,6 @@ public class Game implements Runnable {
             case PLAYING:
                 playing.update();
                 break;
-            case OPTIONS:
-                break;
-            case QUIT:
-                break;
             case GAMEOVER:
                 gameOver.update();
                 break;
@@ -98,10 +94,6 @@ public class Game implements Runnable {
                 break;
             case PLAYING:
                 playing.draw(g);
-                break;
-            case OPTIONS:
-                break;
-            case QUIT:
                 break;
             case GAMEOVER:
                 gameOver.draw(g);
@@ -185,6 +177,5 @@ public class Game implements Runnable {
 
     public GamePanel getGamePanel() {
         return gamePanel;
-    }
-    
+    }    
 }
