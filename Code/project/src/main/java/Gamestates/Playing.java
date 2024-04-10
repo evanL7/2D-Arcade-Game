@@ -1,5 +1,6 @@
 package Gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Random;
@@ -150,6 +151,10 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
+        // Set background color to gray
+        g.setColor(Color.GRAY);
+        g.fillRect(0, 0, Game.screenWidth, Game.screenHeight);
+
         // Translate graphics object to adjust for camera position
         camera.update();
         camera.translate(g);
