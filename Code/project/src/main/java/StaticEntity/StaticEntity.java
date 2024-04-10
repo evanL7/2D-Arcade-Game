@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 
 import Helpers.Position;
-// import MoveableEntity.MoveableEntity;
-// import MoveableEntity.Player;
 import Helpers.ImageUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +92,7 @@ public abstract class StaticEntity {
         }
         return traps;
     }
-    
+
     /**
      * Method to get the door.
      * 

@@ -9,8 +9,6 @@ import javax.imageio.ImageIO;
 import Display.Game;
 import Helpers.Position;
 import Helpers.RewardType;
-// import MoveableEntity.MoveableEntity;
-// import MoveableEntity.Player;
 
 // Regular Reward sprite is 16x16
 // I couldn't find any free sprites so I recreated 1
@@ -37,7 +35,7 @@ public class Reward extends StaticEntity {
     /** The type of reward, either Bonus Reward or Regular Reward. */
     public RewardType rewardType;
 
-    private BufferedImage rewardImage; // add
+    private BufferedImage rewardImage;
 
     /**
      * Constructs a new Bonus Reward.
@@ -120,8 +118,4 @@ public class Reward extends StaticEntity {
             despawnTimer--;
         }
     }
-
-    
-
-
 }
