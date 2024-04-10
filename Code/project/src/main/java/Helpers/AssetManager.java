@@ -22,6 +22,9 @@ public class AssetManager {
         this.rand = new Random();
     }
 
+    /**
+     * Sets the objects in the game world.
+     */
     public void setObjects() {
         playing.staticEntities[0] = new Door(new Position(23 * Game.tileSize, 22 * Game.tileSize));
         playing.staticEntities[1] = new Trap(new Position(9 * Game.tileSize, 9 * Game.tileSize));
@@ -36,6 +39,9 @@ public class AssetManager {
         playing.staticEntities[10] = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize));
     }
 
+    /**
+     * Updates the game world.
+     */
     public void update() {
         // Check if it's time to spawn a new reward
         if (rand.nextInt(2000) < 1) { // 0.05% chance of spawning a reward
@@ -74,7 +80,7 @@ public class AssetManager {
      * entity there
      * 
      * @param position the position to check if valid or not
-     * @return
+     * @return true if the position is valid, false otherwise
      */
     public boolean isPositionValid(Position position) {
         // Check if the position conflicts with a map tile
