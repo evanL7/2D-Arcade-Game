@@ -5,17 +5,13 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-//import java.util.Vector;
 
 import javax.imageio.ImageIO;
-
-import Animation.AnimationConstants;
 import Animation.AnimationConstants.EnemyConstants;
 
 import java.awt.Image;
 import java.awt.Rectangle;
 import Display.Game;
-//import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.Position;
 

@@ -21,7 +21,6 @@ public abstract class Animations {
     final int tileSize = originalTileSize * scale;
 
     private int animationTick, animationIndex, animationSpeed = 35;
-    private int playerAction = PlayerConstants.UP;
 
     // CONSTRUCTOR
     // param:

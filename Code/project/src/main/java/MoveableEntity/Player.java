@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-
-import Animation.AnimationConstants;
 import Animation.AnimationConstants.PlayerConstants;
 
 import java.awt.Image;
