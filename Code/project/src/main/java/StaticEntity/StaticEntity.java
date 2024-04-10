@@ -94,21 +94,22 @@ public abstract class StaticEntity {
         }
         return traps;
     }
-
+    
     /**
-     * Method to get all doors.
+     * Method to get the door.
      * 
-     * @return List of all door entities.
+     * @return The door object.
      */
-    public static List<Door> getAllDoors() {
-        List<Door> doors = new ArrayList<>();
+    public static Door getDoor() {
+        Door door = null;
         for (StaticEntity entity : staticEntities) {
             if (entity instanceof Door) {
-                doors.add((Door) entity);
+                door = (Door)entity;
             }
         }
-        return doors;
+        return door;
     }
+    
 
     // Method to clear all static entities
     public static void clearAllStaticEntities() {

@@ -119,9 +119,7 @@ public class CollisionChecker {
                 player.increaseWin();
 
                 if (player.getWin() == 3) {
-                    for (Door door : StaticEntity.getAllDoors()) {
-                        door.setOpen();
-                    }
+                    StaticEntity.getDoor().setOpen();
                 }
             }
             player.getScoreObj().incrementScore(reward.getRewardAmount());
