@@ -35,6 +35,7 @@ public class Player extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     private BufferedImage playerImage;
+    private int animationAmount = 3;
     // private float score;
 
     private Score scoreObject;
@@ -180,7 +181,7 @@ public class Player extends MoveableEntity {
         if (moving && animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= AnimationConstants.SpriteAmount(playerAction)) {
+            if (animationIndex >= animationAmount) {
                 animationIndex = 0;
             }
         }

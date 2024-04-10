@@ -75,13 +75,13 @@ public abstract class Animations {
     }
 
     // updates the animation array during the game loop thread
-    private void updateAnimationTick() {
+    private void updateAnimationTick(int animationAmount) { // change the variable?
 
         animationTick++;
         if (animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= AnimationConstants.SpriteAmount(playerAction)) {
+            if (animationIndex >= animationAmount) {
                 animationIndex = 0;
             }
         }

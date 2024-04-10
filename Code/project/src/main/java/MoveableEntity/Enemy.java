@@ -36,6 +36,7 @@ public class Enemy extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 60;
 
     private BufferedImage enemyImage;
+    private int animationAmount = 4;
 
     // CONSTRUCTOR
     /**
@@ -169,7 +170,7 @@ public class Enemy extends MoveableEntity {
         if (moving && animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= AnimationConstants.SpriteEnemyAmount(enemyAction)) {
+            if (animationIndex >= animationAmount) {
                 animationIndex = 0;
             }
         }
