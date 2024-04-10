@@ -95,7 +95,7 @@ public class GameStateTest {
         
         if(collisionChecker.checkPlayerRewardCollision(player, reward) ){
             door.setOpen();
-            if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player, door)) {
+            if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player)) {
                 Gamestate.state = Gamestate.WIN;
                }
         }
