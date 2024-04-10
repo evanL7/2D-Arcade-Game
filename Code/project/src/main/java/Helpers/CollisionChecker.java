@@ -117,12 +117,12 @@ public class CollisionChecker {
         if (result) {
             if (reward.rewardType == RewardType.RegularReward) {
                 player.increaseWin();
-                player.getScoreObj().incrementScore(reward.getRewardAmount());
 
                 if (player.getWin() == 3) {
                     StaticEntity.getDoor().setOpen();
                 }
             }
+            player.getScoreObj().incrementScore(reward.getRewardAmount());
         }
 
         // Return the collision result
