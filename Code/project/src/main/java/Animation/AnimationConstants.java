@@ -9,20 +9,6 @@ public class AnimationConstants {
         public static final int LEFT = 3;
     }
 
-    // returns the amount of animation sprites in an array
-    // TO DO: add switch cases for enemys, static entities, etc.
-    public static int SpriteAmount(int playerAction) {
-        switch (playerAction) {
-            case PlayerConstants.UP:
-            case PlayerConstants.DOWN:
-            case PlayerConstants.LEFT:
-            case PlayerConstants.RIGHT:
-                return 3;
-            default:
-                return 1;
-        }
-    }
-
     public static class EnemyConstants {
         public static final int RIGHT = 0;
         public static final int UP = 1;
@@ -31,15 +17,4 @@ public class AnimationConstants {
 
     }
 
-    public static int SpriteEnemyAmount(int playerAction) {
-        switch (playerAction) {
-            case EnemyConstants.UP:
-            case EnemyConstants.DOWN:
-            case EnemyConstants.LEFT:
-            case EnemyConstants.RIGHT:
-                return 4;
-            default:
-                return 1;
-        }
-    }
 }
