@@ -103,17 +103,12 @@ public class TileManager {
         int endCol = Math.min(Game.maxWorldCol, (playing.getCamera().getXOffset() + Game.screenWidth) / Game.tileSize + 1);
         int endRow = Math.min(Game.maxWorldRow, (playing.getCamera().getYOffset() + Game.screenHeight) / Game.tileSize + 1);
 
-        for (int worldRow = startRow; worldRow < endRow; worldRow++) {
-            for (int worldCol = startCol; worldCol < endCol; worldCol++) {
-                int tileNum = mapTileNum[worldRow][worldCol];
-
-                int worldX = worldCol * Game.tileSize;
-                int worldY = worldRow * Game.tileSize;
-
-                // Check that only the visible tiles are drawn
-                // System.out.println("startRow: " + startRow + " startCol: " + startCol + " endRow: " + endRow + " endCol: " + endCol);
-
-                g.drawImage(tile[tileNum].image, worldX, worldY, Game.tileSize, Game.tileSize, null);
+        for (int row = startRow; row < endRow; row++) {
+            for (int col = startCol; col < endCol; col++) {
+                int tileNum = mapTileNum[row][col];
+                int x = col * Game.tileSize;
+                int y = row * Game.tileSize;
+                g.drawImage(tile[tileNum].image, x, y, Game.tileSize, Game.tileSize, null);
             }
         }
     }
