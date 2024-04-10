@@ -48,7 +48,7 @@ import StaticEntity.Door;
  */
 public class Playing extends State implements Statemethods {
 
-    private Camera camera; // add
+    private Camera camera;
     private Score score; // Score object
 
     public TileManager tileManager;
@@ -62,9 +62,6 @@ public class Playing extends State implements Statemethods {
     private Player player;
     private Enemy enemy;
     private Time time; // Time object
-
-    int enemyX = 20 * Game.tileSize;
-    int enemyY = 20 * Game.tileSize;
 
     public Playing(Game game) {
         super(game);
@@ -92,7 +89,7 @@ public class Playing extends State implements Statemethods {
         score = new Score();
         
         player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
-        enemy = new Enemy(new Position(enemyX, enemyY), this);
+        enemy = new Enemy(new Position(20 * Game.tileSize, 20 * Game.tileSize), this);
 
         staticEntities = new StaticEntity[25]; // Currently set to 25 static entities can be displayed, adjust as needed
         assetManager = new AssetManager(this);
@@ -130,14 +127,9 @@ public class Playing extends State implements Statemethods {
             if (collisionChecker.checkPlayerRewardCollision(player, reward)) {
                 reward.remove();
                 break; // Exit the loop after handling the collision with one reward
-            }
-
-            // despawn
-            else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
-                reward.remove();
-            }
-
-            else {
+            } else if (reward.getDespawnTimer() <= 0 && reward.rewardType == RewardType.BonusReward) {
+                reward.remove(); // despawn
+            } else {
                 reward.update();
             }
         }
@@ -197,16 +189,13 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
                 time.pauseTimer(); // pauses the timer
-                break;
-            
+                break;            
             case KeyEvent.VK_P:
                 Gamestate.state = Gamestate.WIN;
                 break;
-
             case KeyEvent.VK_Q:
                 Gamestate.state = Gamestate.GAMEOVER;
                 break;
-
             default:
                 if (!keysPressed.contains(keyCode)) {
                     keysPressed.add(keyCode);
@@ -281,6 +270,13 @@ public class Playing extends State implements Statemethods {
         player.setAction(action);
     }
 
+    protected void restartGame() {
+        StaticEntity.resetStaticEntities();
+        MoveableEntity.resetMoveableEntities();
+        initClasses();
+        player.resetWin();
+    }
+
     public void windowFocusLost() {
         player.resetDirBooleans();
         keysPressed.clear();
@@ -300,13 +296,5 @@ public class Playing extends State implements Statemethods {
 
     public Score getScoreObj() {
         return score;
-    }
-
-    protected void restartGame() {
-        StaticEntity.resetStaticEntities();
-        MoveableEntity.resetMoveableEntities();
-        initClasses();
-        player.resetWin();
-        // System.out.println("\n\n");
     }
 }
