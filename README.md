@@ -2,7 +2,7 @@
 
 ## How to Run the Game
 
-1. Open the terminal and navigate to the project directory.
+1. Open the terminal and navigate to the Code/project directory.
 
 2. Compile the Maven project by running the following command:
     ```
