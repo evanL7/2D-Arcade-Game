@@ -10,7 +10,7 @@ public class Score {
     private double score;
 
     public Score() {
-        this.score = 2.00;
+        this.score = 0.00;
     }
 
     public double getScore() {
