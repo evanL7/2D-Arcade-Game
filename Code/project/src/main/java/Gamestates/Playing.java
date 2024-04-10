@@ -144,7 +144,7 @@ public class Playing extends State implements Statemethods {
             Gamestate.state = Gamestate.WIN;
         }
 
-        // Update the assetManager class only if there are less than 6 rewards on the map.
+        // Update the assetManager class only if there are 6 or less rewards on the map.
         // Initially, 3 rewards are allocated to the grad caps and 3 rewards can be the bonus rewards.
         // If the player collects all the grad caps, up to 6 bonus rewards can be spawned
         if (StaticEntity.getAllRewards().size() <= 6) {
