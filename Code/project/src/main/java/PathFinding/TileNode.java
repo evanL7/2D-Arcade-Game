@@ -1,4 +1,4 @@
-package Helpers;
+package PathFinding;
 
 //import javax.swing.JButton;
 

@@ -8,15 +8,16 @@ import java.io.InputStream;
 //import java.util.Vector;
 
 import javax.imageio.ImageIO;
+
+import Animation.AnimationConstants;
+import Animation.AnimationConstants.EnemyConstants;
+
 import java.awt.Image;
 import java.awt.Rectangle;
 import Display.Game;
 //import Gamestates.Gamestate;
 import Gamestates.Playing;
-import Helpers.AnimationConstants;
 import Helpers.Position;
-import Helpers.AnimationConstants.EnemyConstants;
-// import Helpers.ImageUtils;
 
 // enemy sprite https://www.reddit.com/r/PixelArt/comments/k40t81/sprite_sheet_for_a_raccoon_dude/
 // 181x181
@@ -28,7 +29,7 @@ import Helpers.AnimationConstants.EnemyConstants;
 public class Enemy extends MoveableEntity {
     // ATTRIBUTES
 
-    //private Vector<Position> pathToPlayer;
+    // private Vector<Position> pathToPlayer;
 
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int enemyAction = EnemyConstants.DOWN;
@@ -219,7 +220,7 @@ public class Enemy extends MoveableEntity {
                 // left or right
                 if (collisionOn == true) {
                     enemyAction = EnemyConstants.UP;
-                } else {                
+                } else {
                     if (enLeftX > nextX) {
                         enemyAction = EnemyConstants.LEFT;
                     } else if (enLeftX < nextX) {
@@ -260,10 +261,9 @@ public class Enemy extends MoveableEntity {
             int nextRow = playing.pathFinder.pathList.get(0).row;
 
             if (nextCol == goalCol && nextRow == goalRow) {
-                //playing.getPlayer().decreaseScore(4); // change this
+                // playing.getPlayer().decreaseScore(4); // change this
             }
-        }
-        else {
+        } else {
             System.out.println("NO ACTION!!!");
             enemyAction = EnemyConstants.LEFT;
         }

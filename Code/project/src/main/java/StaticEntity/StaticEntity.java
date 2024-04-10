@@ -4,9 +4,11 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 
 import Helpers.Position;
-import Helpers.ImageUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import Animation.ImageUtils;
 import Display.Game;
 
 /**
@@ -22,7 +24,7 @@ public abstract class StaticEntity {
 
     /** The position of the static entity in the game world. */
     protected Position position;
-    
+
     /**
      * The despawn timer for the entity, measured in milliseconds. A value of -1
      * indicates despawning only on collision.
@@ -103,12 +105,11 @@ public abstract class StaticEntity {
         Door door = null;
         for (StaticEntity entity : staticEntities) {
             if (entity instanceof Door) {
-                door = (Door)entity;
+                door = (Door) entity;
             }
         }
         return door;
     }
-    
 
     // Method to clear all static entities
     public static void clearAllStaticEntities() {

@@ -1,4 +1,4 @@
-package Helpers;
+package Animation;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -7,12 +7,12 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import Helpers.AnimationConstants.*;
+import Animation.AnimationConstants.*;
 
 // adds animations for enities
 public abstract class Animations {
     // ATTRIBUTES
-    //private BufferedImage img;
+    // private BufferedImage img;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
 
     // Tile settings

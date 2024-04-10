@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import Helpers.ImageUtils;
+import Animation.ImageUtils;
 // import Display.Game;
 import Gamestates.Playing;
 import Helpers.Position;

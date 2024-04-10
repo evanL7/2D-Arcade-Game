@@ -1,4 +1,4 @@
-package Helpers;
+package Animation;
 
 // AnimationConstants keeps all sprite image array constants together
 public class AnimationConstants {

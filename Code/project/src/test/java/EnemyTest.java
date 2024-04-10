@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import Animation.AnimationConstants.EnemyConstants;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -10,7 +12,6 @@ import Display.Game;
 import Display.Score;
 import Gamestates.Playing;
 import Helpers.Position;
-import Helpers.AnimationConstants.EnemyConstants;
 import Helpers.CollisionChecker;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;

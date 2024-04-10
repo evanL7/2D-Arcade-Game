@@ -3,23 +3,25 @@ package Gamestates;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Random;
+
+import Animation.AnimationConstants.PlayerConstants;
+
 import java.awt.event.KeyEvent;
 
 import Display.Camera;
 import Display.Game;
 import Display.Score;
 import Display.Time;
-import Helpers.AnimationConstants.PlayerConstants;
 import Helpers.AssetManager;
 import Helpers.CollisionChecker;
 import Helpers.MusicManager;
-import Helpers.PathFinder;
 import Helpers.Position;
 import Helpers.RewardType;
 import Helpers.SoundManager;
 import MoveableEntity.MoveableEntity;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
+import PathFinding.PathFinder;
 import StaticEntity.Reward;
 import StaticEntity.StaticEntity;
 import StaticEntity.TileManager;
@@ -87,7 +89,7 @@ public class Playing extends State implements Statemethods {
         Random rand = new Random();
 
         score = new Score();
-        
+
         player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
         enemy = new Enemy(new Position(20 * Game.tileSize, 20 * Game.tileSize), this);
 
@@ -97,7 +99,7 @@ public class Playing extends State implements Statemethods {
 
         // Create the Camera object with the player
         camera = new Camera(player);
-        
+
         time = new Time();
     }
 
@@ -185,7 +187,7 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_ESCAPE:
                 Gamestate.state = Gamestate.MENU;
                 time.pauseTimer(); // pauses the timer
-                break;            
+                break;
             case KeyEvent.VK_P:
                 Gamestate.state = Gamestate.WIN;
                 break;
