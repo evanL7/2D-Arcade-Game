@@ -1,17 +1,27 @@
-Group 3 Project
+# Group 3 Project
 
-How to RUN our game:
+## How to Run the Game
 
-Open up the terminal and navigate to Code/project directory
+1. Open the terminal and navigate to the project directory.
 
-Compile the maven project using command: mvn compile
+2. Compile the Maven project by running the following command:
+    ```
+    mvn compile
+    ```
 
-Execute the main file using command: mvn exec:java -Dexec.mainClass="Main"
+3. Execute the main file using the following command:
+    ```
+    mvn exec:java -Dexec.mainClass="Main"
+    ```
 
----
+## How to Test the Game
 
-How to TEST our game:
+1. Open the terminal and navigate to the project directory.
 
-Open up the terminal and navigate to Code/project directory
+2. Run the tests using the following command:
+    ```
+    mvn test
+    ```
 
-Execute the tests using command: mvn test
+Note: Make sure you have Maven installed on your system before running the above commands.
+
