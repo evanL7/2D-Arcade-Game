@@ -152,7 +152,7 @@ public class Playing extends State implements Statemethods {
     @Override
     public void draw(Graphics g) {
         // Set background color to gray
-        g.setColor(Color.GRAY);
+        g.setColor(new Color(0xadd8e6));
         g.fillRect(0, 0, Game.screenWidth, Game.screenHeight);
 
         // Translate graphics object to adjust for camera position
