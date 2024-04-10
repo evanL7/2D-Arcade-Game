@@ -158,8 +158,9 @@ public class CollisionChecker {
      * @param door The door entity.
      * @return true if collision occurred, false otherwise.
      */
-    public boolean checkPlayerDoorCollision(Player player, Door door) {
+    public boolean checkPlayerDoorCollision(Player player) {
 
+        Door door = StaticEntity.getDoor();
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(), (int) (Game.tileSize * 0.75), Game.tileSize);
         Rectangle doorBounds = new Rectangle(door.getPosition().getX(), door.getPosition().getY(), Game.tileSize, Game.tileSize);
         

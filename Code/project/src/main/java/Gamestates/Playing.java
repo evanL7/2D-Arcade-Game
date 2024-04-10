@@ -135,7 +135,7 @@ public class Playing extends State implements Statemethods {
         }
 
         Door door = StaticEntity.getDoor();
-        if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player, door)) {
+        if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player)) {
             String soundFilePath = "sounds/mixkit-game-bonus-reached-2065.wav";
             SoundManager.playSound(soundFilePath, 0.5f);
             Gamestate.state = Gamestate.WIN;
@@ -165,10 +165,6 @@ public class Playing extends State implements Statemethods {
         for (Reward reward : StaticEntity.getAllRewards()) {
             reward.render(g);
         }
-
-        // for (Door door : StaticEntity.getAllDoors()) {
-        //     door.render(g);
-        // }
 
         StaticEntity.getDoor().render(g);
 
