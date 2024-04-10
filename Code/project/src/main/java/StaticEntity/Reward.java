@@ -70,8 +70,7 @@ public class Reward extends StaticEntity {
 
     @Override
     public Image getSprite() {
-        // Return the sprite image associated with the reward entity
-        return rewardImage; // Assuming you have a field named rewardImage that holds the sprite image
+        return rewardImage;
     }
     
     /**

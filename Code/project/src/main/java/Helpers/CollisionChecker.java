@@ -111,20 +111,18 @@ public class CollisionChecker {
 
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
                 (int) (Game.tileSize * 0.75), Game.tileSize);
-        // Rectangle rewardBounds = new Rectangle(reward.getPosition().getX(),
-        // reward.getPosition().getY(), (int) (Game.tileSize * 0.6), 15);
         Rectangle rewardBounds = reward.getBoundingBox();
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(rewardBounds);
         if (result) {
             if (reward.rewardType == RewardType.RegularReward) {
                 player.increaseWin();
+                player.getScoreObj().incrementScore(reward.getRewardAmount());
 
                 if (player.getWin() == 3) {
                     StaticEntity.getDoor().setOpen();
                 }
             }
-            player.getScoreObj().incrementScore(reward.getRewardAmount());
         }
 
         // Return the collision result
@@ -141,8 +139,6 @@ public class CollisionChecker {
     public boolean checkPlayerTrapCollision(Player player, Trap trap) {
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
                 (int) (Game.tileSize * 0.75), Game.tileSize);
-        // Rectangle trapBounds = new Rectangle(trap.getPosition().getX(),
-        // trap.getPosition().getY(),(int) (Game.tileSize * 0.6), 15);
         Rectangle trapBounds = trap.getBoundingBox();
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
@@ -165,8 +161,6 @@ public class CollisionChecker {
         Door door = StaticEntity.getDoor();
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
                 (int) (Game.tileSize * 0.75), Game.tileSize);
-        // Rectangle doorBounds = new Rectangle(door.getPosition().getX(),
-        // door.getPosition().getY(), Game.tileSize, Game.tileSize);
         Rectangle doorBounds = door.getBoundingBox();
 
         // Check if the bounding boxes intersect

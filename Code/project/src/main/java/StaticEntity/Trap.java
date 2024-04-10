@@ -9,8 +9,6 @@ import javax.imageio.ImageIO;
 
 import Display.Game;
 import Helpers.Position;
-// import MoveableEntity.MoveableEntity;
-// import MoveableEntity.Player;
 
 // trap sprite from https://bdragon1727.itch.io/free-trap-platformer
 // width:32, height: 22
