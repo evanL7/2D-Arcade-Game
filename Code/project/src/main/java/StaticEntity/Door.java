@@ -1,6 +1,6 @@
 package StaticEntity;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -70,5 +70,10 @@ public class Door extends StaticEntity {
     @Override
     public Image getSprite() {
         return doorImage;
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        return new Rectangle(position.getX(), position.getY(), Game.tileSize, Game.tileSize);
     }
 }

@@ -7,6 +7,7 @@ import Helpers.Position;
 import Helpers.ImageUtils;
 import java.util.ArrayList;
 import java.util.List;
+import Display.Game;
 
 /**
  * An abstract class representing static entities in the game.
@@ -114,11 +115,14 @@ public abstract class StaticEntity {
         staticEntities.clear();
     }
 
+    /**
+     * Gets the bounding box of the static entity.
+     * 
+     * @return The bounding box.
+     */
     public Rectangle getBoundingBox() {
         // Return the bounding box of the reward entity
-        // Implement this method based on how you define the bounding box for the reward
-        // entity
-        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+        return new Rectangle(position.getX(), position.getY(), (int) (Game.tileSize * 0.6), 15);
     }
 
     // Method to get the height of the sprite
@@ -152,12 +156,6 @@ public abstract class StaticEntity {
     public Position getPosition() {
         return this.position;
     }
-
-    /**
-     * Gets the bounding box of the static entity.
-     * 
-     * @return The bounding box.
-     */
 
     public void render(Graphics g) {
     }
