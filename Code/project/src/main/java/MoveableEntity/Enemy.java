@@ -36,7 +36,6 @@ public class Enemy extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 60;
 
     private BufferedImage enemyImage;
-    private int animationAmount = 4;
 
     // CONSTRUCTOR
     /**
@@ -47,6 +46,7 @@ public class Enemy extends MoveableEntity {
      */
     public Enemy(Position position, Playing playing) {
         super(position, playing);
+        animationAmount = 4;
         loadAnimations();
         loadEnemyImage();
         onPath = true;

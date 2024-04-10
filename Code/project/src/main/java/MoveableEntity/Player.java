@@ -35,8 +35,6 @@ public class Player extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     private BufferedImage playerImage;
-    private int animationAmount = 3;
-    // private float score;
 
     private Score scoreObject;
     private int win = 0; // needs 3 to wins
@@ -59,6 +57,7 @@ public class Player extends MoveableEntity {
         super(position, playing);
         this.collisionChecker = collisionChecker;
         this.scoreObject = scoreObject; // Assign the score object
+        animationAmount = 3;
 
         loadAnimations();
         loadPlayerImage();

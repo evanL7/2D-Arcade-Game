@@ -14,6 +14,7 @@ import Helpers.Position;
 public abstract class MoveableEntity {
     // ATTRIBUTES
     protected Image sprite;
+    protected int animationAmount;
     public Position position;
 
     public Playing playing;
