@@ -133,7 +133,7 @@ public class Player extends MoveableEntity {
             animations = new BufferedImage[4][3];
             for (int j = 0; j < animations.length; j++) {
                 for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 32, 24 + (i * 24), 16, 24);
+                    animations[j][i] = img.getSubimage(j * 16, i * 24, 16, 24);
                 }
             }
 
