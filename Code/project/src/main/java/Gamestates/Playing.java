@@ -60,7 +60,7 @@ public class Playing extends State implements Statemethods {
     public PathFinder pathFinder;
     public AssetManager assetManager;
     public StaticEntity staticEntities[];
-    Position playerSpawnPositions[];
+    private Position playerSpawnPositions[];
 
     private Player player;
     private Enemy enemy;
@@ -148,7 +148,7 @@ public class Playing extends State implements Statemethods {
         // Initially, 3 rewards are allocated to the grad caps and 3 rewards can be the
         // bonus rewards.
         // If the player collects all the grad caps, up to 6 bonus rewards can be
-        // spawned
+        // spawned.
         if (StaticEntity.getAllRewards().size() <= 6) {
             assetManager.update();
         }
