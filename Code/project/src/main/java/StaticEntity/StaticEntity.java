@@ -34,9 +34,9 @@ public abstract class StaticEntity {
     /** The sprite representing the static entity. */
     protected Image sprite;
 
+    protected GameSettings gameSettings = new GameSettings();
     // Static list to store all static entities
     private static List<StaticEntity> staticEntities = new ArrayList<>();
-    protected GameSettings gameSettings = new GameSettings();
 
     /**
      * Constructs a new static entity with a despawn timer.

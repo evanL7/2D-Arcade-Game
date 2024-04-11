@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import Display.Game;
-import Display.GameSettings;
 
 /**
  * The Game Win class represents the win screen displayed when the game ends.
@@ -23,7 +22,6 @@ public class GameWin extends State implements Statemethods {
     
     private Font customFont;
     private Playing playingState;
-    private GameSettings gameSettings;
     
     private String previousTime;
     private double previousScore;
@@ -38,7 +36,6 @@ public class GameWin extends State implements Statemethods {
     public GameWin(Game game) {
         super(game);
         playingState = game.getPlaying();
-        gameSettings = new GameSettings();
 
         try {
             // Load the external font file

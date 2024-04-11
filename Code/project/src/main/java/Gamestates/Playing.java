@@ -11,7 +11,6 @@ import java.awt.event.KeyEvent;
 
 import Display.Camera;
 import Display.Game;
-import Display.GameSettings;
 import Display.Score;
 import Display.Time;
 import Helpers.AssetManager;
@@ -54,7 +53,6 @@ public class Playing extends State implements Statemethods {
 
     private Camera camera;
     private Score score; // Score object
-    private GameSettings gameSettings;
 
     public TileManager tileManager;
     public CollisionChecker collisionChecker;
@@ -80,7 +78,6 @@ public class Playing extends State implements Statemethods {
         tileManager = new TileManager(this);
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
-        gameSettings = new GameSettings();
 
         playerSpawnPositions = new Position[3]; // 3 spawn points for the player
         // Spawn point at the top left corner of the map

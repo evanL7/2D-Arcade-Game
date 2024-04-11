@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import Display.Game;
-import Display.GameSettings;
 
 /**
  * The GameOver class represents the game over screen displayed when the game ends.
@@ -23,7 +22,6 @@ public class GameOver extends State implements Statemethods {
     
     private Font customFont;
     private Playing playingState;
-    private GameSettings gameSettings;
 
     /**
      * Constructs a GameOver object.
@@ -33,7 +31,6 @@ public class GameOver extends State implements Statemethods {
     public GameOver(Game game) {
         super(game);
         playingState = game.getPlaying();
-        gameSettings = new GameSettings();
 
         try {
             // Load the external font file

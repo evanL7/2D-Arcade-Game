@@ -12,7 +12,6 @@ import Animation.AnimationConstants.PlayerConstants;
 
 import java.awt.Image;
 
-import Display.GameSettings;
 import Display.Score;
 import Gamestates.Playing;
 import Helpers.CollisionChecker;
@@ -33,7 +32,6 @@ public class Player extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     private BufferedImage playerImage;
-    private GameSettings gameSettings;
 
     private int win = 0; // needs 3 to wins
 
@@ -55,12 +53,9 @@ public class Player extends MoveableEntity {
         super(position, playing);
         this.collisionChecker = collisionChecker;
         animationAmount = 3;
-
         loadAnimations();
         loadPlayerImage();
         speed = 1;
-
-        gameSettings = new GameSettings();
         solidArea = new Rectangle(8, 16, (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
     }
 

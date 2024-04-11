@@ -1,6 +1,7 @@
 package Gamestates;
 
 import Display.Game;
+import Display.GameSettings;
 
 /**
  * The State class represents a game state in the application.
@@ -9,6 +10,7 @@ import Display.Game;
 public class State {
 
     protected Game game;
+    protected GameSettings gameSettings = new GameSettings();
 
     /**
      * Constructs a State object with the specified game.

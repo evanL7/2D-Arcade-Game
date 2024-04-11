@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import Display.Game;
-import Display.GameSettings;
 
 /**
  * The Menu class represents the menu state of the game.
@@ -22,7 +21,6 @@ public class Menu extends State implements Statemethods {
 
     private Font customFont;
     private int commandNum = 0;
-    private GameSettings gameSettings;
 
     /**
      * Constructs a Menu object.
@@ -31,7 +29,6 @@ public class Menu extends State implements Statemethods {
      */
     public Menu(Game game) {
         super(game);
-        gameSettings = new GameSettings();
 
         try {
             // Load the external font file

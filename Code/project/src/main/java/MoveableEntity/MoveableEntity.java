@@ -1,13 +1,13 @@
 package MoveableEntity;
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import Animation.ImageUtils;
-// import Display.Game;
+import Display.GameSettings;
 import Gamestates.Playing;
 import Helpers.Position;
 
@@ -25,6 +25,7 @@ public abstract class MoveableEntity {
     public boolean collisionOn = false;
     public boolean onPath = false;
 
+    protected GameSettings gameSettings = new GameSettings();
     // Static list to store all movable entities
     private static List<MoveableEntity> moveableEntities = new ArrayList<>();
 

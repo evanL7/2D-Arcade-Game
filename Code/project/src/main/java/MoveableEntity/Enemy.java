@@ -11,7 +11,6 @@ import Animation.AnimationConstants.EnemyConstants;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import Display.GameSettings;
 import Gamestates.Playing;
 import Helpers.Position;
 
@@ -32,7 +31,6 @@ public class Enemy extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 60;
 
     private BufferedImage enemyImage;
-    private GameSettings gameSettings;
 
     // CONSTRUCTOR
     /**
@@ -48,8 +46,6 @@ public class Enemy extends MoveableEntity {
         loadEnemyImage();
         onPath = true;
         speed = 1;
-
-        gameSettings = new GameSettings();
         solidArea = new Rectangle(8, 16, (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
     }
 
@@ -262,7 +258,6 @@ public class Enemy extends MoveableEntity {
                 // playing.getPlayer().decreaseScore(4); // change this
             }
         } else {
-            System.out.println("NO ACTION!!!");
             enemyAction = EnemyConstants.LEFT;
         }
     }
