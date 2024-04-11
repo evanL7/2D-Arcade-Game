@@ -1,13 +1,9 @@
 package MoveableEntity;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
 import Animation.AnimationConstants.PlayerConstants;
 import Animation.Animations;
 
@@ -26,13 +22,11 @@ import Helpers.Position;
 public class Player extends MoveableEntity {
 
     // ATTRIBUTES
-    public BufferedImage[][] animations; // 2d image array of the images for player movements
+    public BufferedImage[][] playerAnimations; // 2d image array of the images for player movements
     private int playerAction = PlayerConstants.DOWN;
     private boolean up, left, down, right;
-    private int animationTick, animationIndex, animationSpeed = 35;
     private CollisionChecker collisionChecker;
 
-    private BufferedImage playerImage;
     private Animations animation;
 
     private int win = 0; // needs 3 to wins
@@ -54,9 +48,18 @@ public class Player extends MoveableEntity {
         // need to determine the players start position and specific sprite
         super(position, playing);
         this.collisionChecker = collisionChecker;
-        animationAmount = 3;
-        loadAnimations();
-        loadPlayerImage();
+        animation = new Animations("/assets/player_sprites.png");
+        animation.setAnimationAmount(3);
+        animation.setAnimationArrayHeight(3);
+        animation.setAnimationArrayWidth(4);
+        animation.setSpriteHeight(24);
+        animation.setSpriteWidth(16);
+        animation.setAnimationSpeed(35);
+
+        animation.loadAnimations();
+        animation.loadImage();
+        playerAnimations = animation.getBufferedImages();
+
         speed = 1;
         solidArea = new Rectangle(8, 16, (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
     }
@@ -67,7 +70,9 @@ public class Player extends MoveableEntity {
      */
     public void update() {
         updatePos();
-        updateAnimationTick();
+        if (moving) {
+            animation.updateAnimationTick();
+        }
     }
 
     /**
@@ -76,10 +81,7 @@ public class Player extends MoveableEntity {
      * @param g The graphics context used for rendering.
      */
     public void render(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(),
-                gameSettings.getTileSize(), 72,
-                null);
+        animation.render(g, playerAction, position.getX(), position.getY(), gameSettings.getTileSize(), 72);
     }
 
     /**
@@ -118,62 +120,6 @@ public class Player extends MoveableEntity {
     }
 
     /**
-     * Loads the player's animation sprites from the resource file.
-     */
-    private void loadAnimations() {
-        // Source of player sprites:
-        // https://axulart.itch.io/small-8-direction-characters
-        InputStream is = getClass().getResourceAsStream("/assets/player_sprites.png");
-
-        try {
-            BufferedImage img = ImageIO.read(is);
-
-            animations = new BufferedImage[4][3];
-            for (int j = 0; j < animations.length; j++) {
-                for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 16, i * 24, 16, 24);
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Loads the player's image from the resource file.
-     */
-    private void loadPlayerImage() {
-        try {
-            InputStream is = getClass().getResourceAsStream("/assets/player_sprites.png");
-            playerImage = ImageIO.read(is);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Updates the animation tick during the game loop.
-     */
-    private void updateAnimationTick() {
-        animationTick++;
-        if (moving && animationTick >= animationSpeed) {
-            animationTick = 0;
-            animationIndex++;
-            if (animationIndex >= animationAmount) {
-                animationIndex = 0;
-            }
-        }
-    }
-
-    /**
      * Increases the player's win score by 1
      */
     public void increaseWin() {
@@ -192,7 +138,7 @@ public class Player extends MoveableEntity {
 
     @Override
     public Image getSprite() {
-        return playerImage;
+        return animation.getImage();
     }
 
     /**
@@ -300,7 +246,21 @@ public class Player extends MoveableEntity {
         this.down = down;
     }
 
+    /**
+     * gets the Score object
+     * 
+     * @return the score object
+     */
     public Score getScoreObj() {
         return playing.getScoreObj();
+    }
+
+    /**
+     * gets the players image sprite array
+     * 
+     * @return the players image sprite array
+     */
+    public BufferedImage[][] getPlayerAnimations() {
+        return playerAnimations;
     }
 }
