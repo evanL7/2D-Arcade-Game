@@ -65,7 +65,7 @@ public class Trap extends StaticEntity {
      */
     @Override
     public Image getSprite() {
-        return animation.getImage(); // Assuming you have a field named trapImage that holds the sprite image
+        return animation.getImage();
     }
 
     /**

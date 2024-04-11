@@ -123,7 +123,6 @@ public abstract class StaticEntity {
      * @return The bounding box.
      */
     public Rectangle getBoundingBox() {
-        // Return the bounding box of the reward entity
         return new Rectangle(position.getX(), position.getY(), (int) (gameSettings.getTileSize() * 0.6), 15);
     }
 

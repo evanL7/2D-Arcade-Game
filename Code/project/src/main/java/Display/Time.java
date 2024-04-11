@@ -38,7 +38,6 @@ public class Time {
     public void pauseTimer() {
         // takes the time when it was paused
         pausedTime = System.currentTimeMillis();
-        //System.out.println("The game was paused"); // test
     }
 
     /**
@@ -50,7 +49,6 @@ public class Time {
         
         // resets the pausedTime
         pausedTime = 0;
-        //System.out.println("Game unpaused and the total time paused is: " + totalPausedTime); // test
     }
 
     /**
