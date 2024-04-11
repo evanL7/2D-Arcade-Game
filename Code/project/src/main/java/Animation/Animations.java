@@ -7,40 +7,28 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import Animation.AnimationConstants.*;
-
 // adds animations for enities
 public abstract class Animations {
     // ATTRIBUTES
     // private BufferedImage img;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
-
-    // Tile settings
-    final int originalTileSize = 16;
-    final int scale = 3;
-    final int tileSize = originalTileSize * scale;
+    private int animationArrayHeight;
+    private int animationArrayWidth;
+    private int spriteHeight;
+    private int spriteWidth;
+    private int animationAmount;
 
     private int animationTick, animationIndex, animationSpeed = 35;
 
     // CONSTRUCTOR
     // param:
     // imageName: the image file path of the sprite
-    // posX and posY: the starting x and y position of the entity
     // width: the width of the sprite
     // height: the height of the sprite
     // animationArrayWidth: the number of elements in the width of the 2d array
     // animationArrayHeight: the number of elements in the height of the 2d array
-    public Animations(String imageName, int posX, int posY, int width, int height, int animationArrayWidth,
-            int animationArrayHeight) {
+    public Animations(String imageName) {
         loadAnimations(imageName, animationArrayWidth, animationArrayHeight);
-
-    }
-
-    // params:
-    // posX and posY: the starting x and y position of the entity
-    // width: the width of the sprite
-    // height: the height of the sprite
-    public void render(Graphics g, int posX, int posY, int width, int height) {
 
     }
 
@@ -58,7 +46,7 @@ public abstract class Animations {
             animations = new BufferedImage[animationArrayWidth][animationArrayHeight];
             for (int j = 0; j < animations.length; j++) {
                 for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 32, 24 + (i * 24), 16, 24);
+                    animations[j][i] = img.getSubimage(j * spriteWidth, i * spriteHeight, spriteWidth, spriteHeight);
                 }
             }
 
