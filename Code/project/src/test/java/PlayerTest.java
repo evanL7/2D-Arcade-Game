@@ -30,7 +30,7 @@ public class PlayerTest {
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
-        gameSettings = playing.getGame().getGameSettings();
+        gameSettings = new GameSettings();
     }
 
     // Tests to see if colliding with a regular reward properly increments

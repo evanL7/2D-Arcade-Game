@@ -29,7 +29,7 @@ public class GameStateTest {
     public void setUpAll() {
         game = new Game();
         menu = game.getMenu();
-        gameSettings = game.getGameSettings();
+        gameSettings = new GameSettings();
     }
 
     @BeforeEach

@@ -34,7 +34,7 @@ public class EnemyTest {
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
-        gameSettings = playing.getGame().getGameSettings();
+        gameSettings = new GameSettings();
     }
 
     @BeforeEach
