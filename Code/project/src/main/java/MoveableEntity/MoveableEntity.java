@@ -41,12 +41,20 @@ public abstract class MoveableEntity {
         moveableEntities.add(this);
     }
 
-    // Method to get all movable entities
+    /**
+     * Retrieves a list of all movable entities.
+     * 
+     * @return A list containing all movable entities.
+     */
     public static List<MoveableEntity> getAllMoveableEntities() {
         return moveableEntities;
     }
 
-    // Method to get all players
+    /**
+     * Retrieves a list of all player entities.
+     * 
+     * @return A list containing all player entities.
+     */
     public static List<Player> getAllPlayers() {
         List<Player> players = new ArrayList<>();
         for (MoveableEntity entity : moveableEntities) {
@@ -57,7 +65,11 @@ public abstract class MoveableEntity {
         return players;
     }
 
-    // Method to get all enemies
+    /**
+     * Retrieves a list of all enemy entities.
+     * 
+     * @return A list containing all enemy entities.
+     */
     public static List<Enemy> getAllEnemies() {
         List<Enemy> enemies = new ArrayList<>();
         for (MoveableEntity entity : moveableEntities) {
@@ -68,12 +80,18 @@ public abstract class MoveableEntity {
         return enemies;
     }
 
-    // Method to clear all movable entities
+    /**
+     * Clears all movable entities.
+     */
     public static void clearAllMoveableEntities() {
         moveableEntities.clear();
     }
 
-    // Method to get the height of the sprite
+    /**
+     * Retrieves the height of the sprite.
+     * 
+     * @return The height of the sprite.
+     */
     public int getHeight() {
         BufferedImage sprite = ImageUtils.convertToBufferedImage(getSprite());
         if (sprite != null) {
@@ -83,7 +101,11 @@ public abstract class MoveableEntity {
         }
     }
 
-    // Method to get the width of the sprite
+    /**
+     * Retrieves the width of the sprite.
+     * 
+     * @return The width of the sprite.
+     */
     public int getWidth() {
         BufferedImage sprite = ImageUtils.convertToBufferedImage(getSprite());
         if (sprite != null) {
@@ -93,10 +115,18 @@ public abstract class MoveableEntity {
         }
     }
 
-    // Define the getSprite() method to return the sprite
+    /**
+     * Abstract method to retrieve the sprite image associated with the entity.
+     * 
+     * @return The sprite image associated with the entity.
+     */
     public abstract Image getSprite();
 
-    // gets and returns the entities position
+    /**
+     * Retrieves the position of the entity.
+     * 
+     * @return The position of the entity.
+     */
     public Position getPosition() {
         return this.position;
     }
