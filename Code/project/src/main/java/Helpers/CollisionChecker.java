@@ -7,7 +7,7 @@ import java.util.List;
 
 import Animation.AnimationConstants.EnemyConstants;
 import Animation.AnimationConstants.PlayerConstants;
-import Display.Game;
+import Display.GameSettings;
 import MoveableEntity.Enemy;
 import MoveableEntity.MoveableEntity;
 import MoveableEntity.Player;
@@ -23,8 +23,9 @@ import StaticEntity.Trap;
  */
 public class CollisionChecker {
 
-    TileManager tileManager;
+    private TileManager tileManager;
     private List<StaticEntity> staticEntities;
+    private GameSettings gameSettings;
 
     /**
      * Constructs a CollisionChecker object with the specified TileManager.
@@ -33,10 +34,10 @@ public class CollisionChecker {
      */
     public CollisionChecker(TileManager tileManager) {
         this.tileManager = tileManager;
-
         this.staticEntities = new ArrayList<>();
         // Populate the list of static entities
         this.staticEntities.addAll(tileManager.getStaticEntities());
+        this.gameSettings = new GameSettings();
     }
 
     /**
@@ -53,16 +54,16 @@ public class CollisionChecker {
         int entityBottom = entity.position.getY() + entity.solidArea.y + entity.solidArea.height;
 
         // Pinpoints the tile the entity is attempting to move into
-        int entityLeftCol = entityLeft / Game.tileSize;
-        int entityRightCol = entityRight / Game.tileSize;
-        int entityTopRow = entityTop / Game.tileSize;
-        int entityBottomRow = entityBottom / Game.tileSize;
+        int entityLeftCol = entityLeft / gameSettings.getTileSize();
+        int entityRightCol = entityRight / gameSettings.getTileSize();
+        int entityTopRow = entityTop / gameSettings.getTileSize();
+        int entityBottomRow = entityBottom / gameSettings.getTileSize();
 
         int tileNum1, tileNum2;
 
         switch (direction) {
             case PlayerConstants.UP:
-                entityTopRow = (entityTop - entity.speed) / Game.tileSize;
+                entityTopRow = (entityTop - entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityTopRow][entityLeftCol];
                 tileNum2 = tileManager.mapTileNum[entityTopRow][entityRightCol];
 
@@ -71,7 +72,7 @@ public class CollisionChecker {
                 }
                 break;
             case PlayerConstants.LEFT:
-                entityLeftCol = (entityLeft - entity.speed) / Game.tileSize;
+                entityLeftCol = (entityLeft - entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityTopRow][entityLeftCol];
                 tileNum2 = tileManager.mapTileNum[entityBottomRow][entityLeftCol];
 
@@ -80,7 +81,7 @@ public class CollisionChecker {
                 }
                 break;
             case PlayerConstants.DOWN:
-                entityBottomRow = (entityBottom + entity.speed) / Game.tileSize;
+                entityBottomRow = (entityBottom + entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityBottomRow][entityLeftCol];
                 tileNum2 = tileManager.mapTileNum[entityBottomRow][entityRightCol];
 
@@ -89,7 +90,7 @@ public class CollisionChecker {
                 }
                 break;
             case PlayerConstants.RIGHT:
-                entityRightCol = (entityRight + entity.speed) / Game.tileSize;
+                entityRightCol = (entityRight + entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityTopRow][entityRightCol];
                 tileNum2 = tileManager.mapTileNum[entityBottomRow][entityRightCol];
 
@@ -110,7 +111,7 @@ public class CollisionChecker {
     public boolean checkPlayerRewardCollision(Player player, Reward reward) {
 
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                (int) (Game.tileSize * 0.75), Game.tileSize);
+            (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
         Rectangle rewardBounds = reward.getBoundingBox();
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(rewardBounds);
@@ -138,7 +139,7 @@ public class CollisionChecker {
      */
     public boolean checkPlayerTrapCollision(Player player, Trap trap) {
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                (int) (Game.tileSize * 0.75), Game.tileSize);
+                (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
         Rectangle trapBounds = trap.getBoundingBox();
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
@@ -160,7 +161,7 @@ public class CollisionChecker {
 
         Door door = StaticEntity.getDoor();
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                (int) (Game.tileSize * 0.75), Game.tileSize);
+                (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
         Rectangle doorBounds = door.getBoundingBox();
 
         // Check if the bounding boxes intersect
@@ -180,9 +181,9 @@ public class CollisionChecker {
     public boolean checkPlayerEnemyCollision(Player player, Enemy enemy) {
 
         Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-                (int) (Game.tileSize * 0.75), Game.tileSize);
+            (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
         Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(),
-                (int) (Game.tileSize * 0.75), Game.tileSize);
+            (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
 
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(enemyBounds);
@@ -203,16 +204,16 @@ public class CollisionChecker {
         int entityBottom = entity.position.getY() + entity.solidArea.y + entity.solidArea.height;
 
         // Pinpoints the tile the entity is attempting to move into
-        int entityLeftCol = entityLeft / Game.tileSize;
-        int entityRightCol = entityRight / Game.tileSize;
-        int entityTopRow = entityTop / Game.tileSize;
-        int entityBottomRow = entityBottom / Game.tileSize;
+        int entityLeftCol = entityLeft / gameSettings.getTileSize();
+        int entityRightCol = entityRight / gameSettings.getTileSize();
+        int entityTopRow = entityTop / gameSettings.getTileSize();
+        int entityBottomRow = entityBottom / gameSettings.getTileSize();
 
         int tileNum1, tileNum2;
 
         switch (direction) {
             case EnemyConstants.UP:
-                entityTopRow = (entityTop - entity.speed) / Game.tileSize;
+                entityTopRow = (entityTop - entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityTopRow][entityLeftCol];
                 tileNum2 = tileManager.mapTileNum[entityTopRow][entityRightCol];
 
@@ -221,7 +222,7 @@ public class CollisionChecker {
                 }
                 break;
             case EnemyConstants.LEFT:
-                entityLeftCol = (entityLeft - entity.speed) / Game.tileSize;
+                entityLeftCol = (entityLeft - entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityTopRow][entityLeftCol];
                 tileNum2 = tileManager.mapTileNum[entityBottomRow][entityLeftCol];
 
@@ -230,7 +231,7 @@ public class CollisionChecker {
                 }
                 break;
             case EnemyConstants.DOWN:
-                entityBottomRow = (entityBottom + entity.speed) / Game.tileSize;
+                entityBottomRow = (entityBottom + entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityBottomRow][entityLeftCol];
                 tileNum2 = tileManager.mapTileNum[entityBottomRow][entityRightCol];
 
@@ -239,7 +240,7 @@ public class CollisionChecker {
                 }
                 break;
             case EnemyConstants.RIGHT:
-                entityRightCol = (entityRight + entity.speed) / Game.tileSize;
+                entityRightCol = (entityRight + entity.speed) / gameSettings.getTileSize();
                 tileNum1 = tileManager.mapTileNum[entityTopRow][entityRightCol];
                 tileNum2 = tileManager.mapTileNum[entityBottomRow][entityRightCol];
 

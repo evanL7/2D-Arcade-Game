@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import Display.Game;
+import Display.GameSettings;
 
 /**
  * The Game Win class represents the win screen displayed when the game ends.
@@ -20,8 +21,9 @@ import Display.Game;
  */
 public class GameWin extends State implements Statemethods {
     
-    private static Font customFont;
+    private Font customFont;
     private Playing playingState;
+    private GameSettings gameSettings;
     
     private String previousTime;
     private double previousScore;
@@ -36,6 +38,7 @@ public class GameWin extends State implements Statemethods {
     public GameWin(Game game) {
         super(game);
         playingState = game.getPlaying();
+        gameSettings = new GameSettings();
 
         try {
             // Load the external font file
@@ -52,7 +55,6 @@ public class GameWin extends State implements Statemethods {
     
     @Override
     public void update() {
-
     }
 
     /**
@@ -61,44 +63,42 @@ public class GameWin extends State implements Statemethods {
      * @param g the Graphics object
      */
     @Override
-	public void draw(Graphics g) {
+    public void draw(Graphics g) {
         if (customFont != null) {
             g.setFont(customFont);
             g.setColor(Color.BLACK);
 
             FontMetrics fm = g.getFontMetrics();
-            int x = (Game.screenWidth - fm.stringWidth("YOU WIN!")) / 2;
-            int y = (Game.screenHeight - fm.getHeight()) / 2 + fm.getAscent() - 125;
+            int x = (gameSettings.getScreenWidth() - fm.stringWidth("YOU WIN!")) / 2;
+            int y = (gameSettings.getScreenHeight() - fm.getHeight()) / 2 + fm.getAscent() - 125;
 
             g.drawString("YOU WIN!", x, y);
             
             // Draws score
             y += fm.getHeight();
-            x = (Game.screenWidth - fm.stringWidth("SCORE: " + playingState.getScoreObj().getScore())) / 2;
+            x = (gameSettings.getScreenWidth() - fm.stringWidth("SCORE: " + playingState.getScoreObj().getScore())) / 2;
             g.drawString("SCORE: " + playingState.getScoreObj().getScore(), x, y);
 
             y += fm.getHeight();
-            x = (Game.screenWidth - fm.stringWidth("TIME: " + playingState.getTime().getElapsedTime())) / 2;
+            x = (gameSettings.getScreenWidth() - fm.stringWidth("TIME: " + playingState.getTime().getElapsedTime())) / 2;
             g.drawString("TIME: " + playingState.getTime().getElapsedTime(), x, y);
 
             if (playThruNum >= 2) {
                 y += fm.getHeight();
-                x = (Game.screenWidth - fm.stringWidth("PREVIOUS SCORE: " + previousScore)) / 2;
+                x = (gameSettings.getScreenWidth() - fm.stringWidth("PREVIOUS SCORE: " + previousScore)) / 2;
                 g.drawString("PREVIOUS SCORE: " + previousScore, x, y);
 
                 y += fm.getHeight();
-                x = (Game.screenWidth - fm.stringWidth("PREVIOUS TIME: " + previousTime)) / 2;
+                x = (gameSettings.getScreenWidth() - fm.stringWidth("PREVIOUS TIME: " + previousTime)) / 2;
                 g.drawString("PREVIOUS TIME: " + previousTime, x, y);
-
             }
 
-
             y += fm.getHeight();  // Move down for the second line
-            x = (Game.screenWidth - fm.stringWidth("PRESS R TO RESTART THE GAME")) / 2;
+            x = (gameSettings.getScreenWidth() - fm.stringWidth("PRESS R TO RESTART THE GAME")) / 2;
             g.drawString("PRESS R TO RESTART THE GAME", x, y);
 
             y += fm.getHeight(); // Move down for the third line
-            x = (Game.screenWidth - fm.stringWidth("PRESS Q TO QUIT THE GAME")) / 2;
+            x = (gameSettings.getScreenWidth() - fm.stringWidth("PRESS Q TO QUIT THE GAME")) / 2;
             g.drawString("PRESS Q TO QUIT THE GAME", x, y);
         }
     }
@@ -128,7 +128,6 @@ public class GameWin extends State implements Statemethods {
 
     @Override
 	public void keyReleased(KeyEvent e) {
-
     }
 
     private void setPastPerformance() {

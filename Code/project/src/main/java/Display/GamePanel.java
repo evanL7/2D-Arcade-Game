@@ -15,6 +15,7 @@ public class GamePanel extends JPanel {
 
     private Game game;
     private Camera camera;
+    private GameSettings gameSettings;
 
     /**
      * Constructs a GamePanel object with the specified game.
@@ -26,6 +27,7 @@ public class GamePanel extends JPanel {
     public GamePanel(Game game) {
         this.game = game;
         this.camera = new Camera(game.getPlaying().getPlayer());
+        this.gameSettings = new GameSettings();
 
         this.setPanelSize();
         this.addKeyListener(new KeyboardInputs(this));
@@ -48,7 +50,7 @@ public class GamePanel extends JPanel {
      * Sets the size of the panel to the screen size of the game.
      */
     private void setPanelSize() {
-        Dimension size = new Dimension(Game.screenWidth, Game.screenHeight);
+        Dimension size = new Dimension(gameSettings.getScreenWidth(), gameSettings.getScreenHeight());
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);

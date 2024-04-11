@@ -12,7 +12,7 @@ import Animation.AnimationConstants.PlayerConstants;
 
 import java.awt.Image;
 
-import Display.Game;
+import Display.GameSettings;
 import Display.Score;
 import Gamestates.Playing;
 import Helpers.CollisionChecker;
@@ -33,6 +33,7 @@ public class Player extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     private BufferedImage playerImage;
+    private GameSettings gameSettings;
 
     private int win = 0; // needs 3 to wins
 
@@ -59,7 +60,8 @@ public class Player extends MoveableEntity {
         loadPlayerImage();
         speed = 1;
 
-        solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
+        gameSettings = new GameSettings();
+        solidArea = new Rectangle(8, 16, (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
     }
 
     /**
@@ -78,7 +80,7 @@ public class Player extends MoveableEntity {
      */
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), Game.tileSize, 72,
+        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), gameSettings.getTileSize(), 72,
                 null);
     }
 

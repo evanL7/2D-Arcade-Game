@@ -26,4 +26,48 @@ public class GameSettings {
     public final int maxWorldRow = 25;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
+
+    public int getFPS_SET() {
+        return FPS_SET;
+    }
+
+    public int getUPS_SET() {
+        return UPS_SET;
+    }
+
+    public String getMapFilePath() {
+        return mapFilePath;
+    }
+
+    public String getGameTitle() {
+        return gameTitle;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public int getMaxWorldCol() {
+        return maxWorldCol;
+    }
+
+    public int getMaxWorldRow() {
+        return maxWorldRow;
+    }
+
+    public int getWorldWidth() {
+        return worldWidth;
+    }
+
+    public int getWorldHeight() {
+        return worldHeight;
+    }
 }

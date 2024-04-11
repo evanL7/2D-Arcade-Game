@@ -2,8 +2,7 @@ package PathFinding;
 
 import java.util.ArrayList;
 
-import Display.Game;
-import Display.GamePanel;
+import Display.GameSettings;
 import Gamestates.Playing;
 
 /**
@@ -13,14 +12,15 @@ import Gamestates.Playing;
  */
 public class PathFinder {
 
-    GamePanel gp;
-    Playing playing;
-    TileNode nodeMap[][];
-    TileNode startNode, goalNode, currentNode;
-    ArrayList<TileNode> openList = new ArrayList<>();
+    private Playing playing;
+    private GameSettings gameSettings;
+
+    private TileNode nodeMap[][];
+    private TileNode startNode, goalNode, currentNode;
+    private ArrayList<TileNode> openList = new ArrayList<>();
     public ArrayList<TileNode> pathList = new ArrayList<>();
-    boolean goalReached = false;
-    int step = 0;
+    private boolean goalReached = false;
+    private int step = 0;
 
     /**
      * Constructs a PathFinder object with the specified playing state.
@@ -29,28 +29,27 @@ public class PathFinder {
      */
     public PathFinder(Playing playing) {
         this.playing = playing;
+        gameSettings = new GameSettings();
         initiateNodes();
-
     }
 
     /**
      * Initializes the nodes of the game map.
      */
     public void initiateNodes() {
-        nodeMap = new TileNode[Game.maxWorldRow][Game.maxWorldCol];
+        nodeMap = new TileNode[gameSettings.getMaxWorldRow()][gameSettings.getMaxWorldCol()];
 
         // place nodes
         int col = 0;
         int row = 0;
-        while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
+        while (col < gameSettings.getMaxWorldCol() && row < gameSettings.getMaxWorldRow()) {
             nodeMap[col][row] = new TileNode(col, row);
 
             col++;
-            if (col == Game.maxWorldCol) {
+            if (col == gameSettings.getMaxWorldCol()) {
                 col = 0;
                 row++;
             }
-
         }
     }
 
@@ -60,10 +59,10 @@ public class PathFinder {
     public void resetNodes() {
         int col = 0;
         int row = 0;
-        while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
+        while (col < gameSettings.getMaxWorldCol() && row < gameSettings.getMaxWorldRow()) {
             nodeMap[col][row].resetNode();
             col++;
-            if (col == Game.maxWorldCol) {
+            if (col == gameSettings.getMaxWorldCol()) {
                 col = 0;
                 row++;
             }
@@ -96,7 +95,7 @@ public class PathFinder {
         int row = 0;
         int tileNum;
 
-        while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
+        while (col < gameSettings.getMaxWorldCol() && row < gameSettings.getMaxWorldRow()) {
 
             tileNum = playing.tileManager.mapTileNum[col][row];
 
@@ -111,7 +110,7 @@ public class PathFinder {
             getCost(nodeMap[col][row]);
 
             col++;
-            if (col == Game.maxWorldCol) {
+            if (col == gameSettings.getMaxWorldCol()) {
                 col = 0;
                 row++;
             }
@@ -164,11 +163,11 @@ public class PathFinder {
                 openNode(nodeMap[col][row - 1]);
             }
             // open the below node
-            if (col + 1 < Game.maxWorldCol) {
+            if (col + 1 < gameSettings.getMaxWorldCol()) {
                 openNode(nodeMap[col + 1][row]);
             }
             // open the right node
-            if (row + 1 < Game.maxWorldRow) {
+            if (row + 1 < gameSettings.getMaxWorldRow()) {
                 openNode(nodeMap[col][row + 1]);
             }
 

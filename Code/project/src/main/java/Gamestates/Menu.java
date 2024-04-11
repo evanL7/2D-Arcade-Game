@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import Display.Game;
+import Display.GameSettings;
 
 /**
  * The Menu class represents the menu state of the game.
@@ -19,8 +20,9 @@ import Display.Game;
  */
 public class Menu extends State implements Statemethods {
 
-    private static Font customFont;
-    int commandNum = 0;
+    private Font customFont;
+    private int commandNum = 0;
+    private GameSettings gameSettings;
 
     /**
      * Constructs a Menu object.
@@ -29,7 +31,8 @@ public class Menu extends State implements Statemethods {
      */
     public Menu(Game game) {
         super(game);
-        
+        gameSettings = new GameSettings();
+
         try {
             // Load the external font file
             InputStream fontStream = getClass().getClassLoader().getResourceAsStream("fonts/ThaleahFat.ttf");
@@ -44,42 +47,38 @@ public class Menu extends State implements Statemethods {
     }
 
     @Override
-    public void update() {
-    }
-
-    @Override
     public void draw(Graphics g) {
         if (customFont != null) {
             // Set the background color to black
             g.setColor(Color.BLACK);
-            g.fillRect(0, 0, Game.screenWidth, Game.screenHeight);
+            g.fillRect(0, 0, gameSettings.getScreenWidth(), gameSettings.getScreenHeight());
 
             // Set the font
             g.setFont(customFont);
 
-            String text = Game.gameTitle;
+            String text = gameSettings.getGameTitle();
 
             int x = getXCenteredString(g, text);
-            int y = Game.tileSize * 3;
+            int y = gameSettings.getTileSize() * 3;
 
             // Draw the game title
             drawShadowedString(g, text, x, y, Color.GRAY, Color.WHITE);
 
             // Draw character sprite
-            x = (Game.screenWidth - Game.tileSize * 2) / 2;
-            y += Game.tileSize * 1.25;
-            g.drawImage(game.getPlaying().getPlayer().animations[2][1], x, y, Game.tileSize * 2, Game.tileSize * 2, null);
+            x = (gameSettings.getScreenWidth() - gameSettings.getTileSize() * 2) / 2;
+            y += gameSettings.getTileSize() * 1.25;
+            g.drawImage(game.getPlaying().getPlayer().animations[2][1], x, y, gameSettings.getTileSize() * 2, gameSettings.getTileSize() * 2, null);
 
             // Draw game options
             g.setFont(customFont.deriveFont(60f));
-            drawOption(g, "START", getXCenteredString(g, "START"), y += Game.tileSize * 3.5, commandNum == 0);
-            drawOption(g, "QUIT", getXCenteredString(g, "QUIT"), y += Game.tileSize, commandNum == 1);
+            drawOption(g, "START", getXCenteredString(g, "START"), y += gameSettings.getTileSize() * 3.5, commandNum == 0);
+            drawOption(g, "QUIT", getXCenteredString(g, "QUIT"), y += gameSettings.getTileSize(), commandNum == 1);
         }
     }
 
     public int getXCenteredString(Graphics g, String text) {
         int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
-        return (Game.screenWidth - length) / 2;
+        return (gameSettings.getScreenWidth() - length) / 2;
     }
 
     public void drawShadowedString(Graphics g, String text, int x, int y, Color shadowColor, Color textColor) {
@@ -92,7 +91,7 @@ public class Menu extends State implements Statemethods {
     public void drawOption(Graphics g, String text, int x, int y, boolean isSelected) {
         g.drawString(text, x, y);
         if (isSelected) {
-            g.drawString(">", x - Game.tileSize / 2, y);
+            g.drawString(">", x - gameSettings.getTileSize() / 2, y);
         }
     }
 
@@ -123,6 +122,10 @@ public class Menu extends State implements Statemethods {
                     break;
             }
         }
+    }
+
+    @Override
+    public void update() {
     }
 
     @Override

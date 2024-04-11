@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Animation.ImageUtils;
-import Display.Game;
+import Display.GameSettings;
 
 /**
  * An abstract class representing static entities in the game.
@@ -36,6 +36,7 @@ public abstract class StaticEntity {
 
     // Static list to store all static entities
     private static List<StaticEntity> staticEntities = new ArrayList<>();
+    protected GameSettings gameSettings = new GameSettings();
 
     /**
      * Constructs a new static entity with a despawn timer.
@@ -123,7 +124,7 @@ public abstract class StaticEntity {
      */
     public Rectangle getBoundingBox() {
         // Return the bounding box of the reward entity
-        return new Rectangle(position.getX(), position.getY(), (int) (Game.tileSize * 0.6), 15);
+        return new Rectangle(position.getX(), position.getY(), (int) (gameSettings.getTileSize() * 0.6), 15);
     }
 
     // Method to get the height of the sprite
@@ -162,7 +163,6 @@ public abstract class StaticEntity {
     }
 
     public void update() {
-
     }
 
     public void remove() {

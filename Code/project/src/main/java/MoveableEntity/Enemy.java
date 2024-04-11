@@ -11,7 +11,7 @@ import Animation.AnimationConstants.EnemyConstants;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import Display.Game;
+import Display.GameSettings;
 import Gamestates.Playing;
 import Helpers.Position;
 
@@ -32,6 +32,7 @@ public class Enemy extends MoveableEntity {
     private int animationTick, animationIndex, animationSpeed = 60;
 
     private BufferedImage enemyImage;
+    private GameSettings gameSettings;
 
     // CONSTRUCTOR
     /**
@@ -48,8 +49,8 @@ public class Enemy extends MoveableEntity {
         onPath = true;
         speed = 1;
 
-        solidArea = new Rectangle(8, 16, (int) (Game.tileSize * 0.75), Game.tileSize);
-
+        gameSettings = new GameSettings();
+        solidArea = new Rectangle(8, 16, (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
     }
 
     /**
@@ -99,8 +100,8 @@ public class Enemy extends MoveableEntity {
     public void updateShortestPath(Player player) {
         moving = true;
         if (onPath == true) {
-            int goalCol = (player.getPosition().getY() + player.solidArea.y) / Game.tileSize;
-            int goalRow = (player.getPosition().getX() + player.solidArea.x) / Game.tileSize;
+            int goalCol = (player.getPosition().getY() + player.solidArea.y) / gameSettings.getTileSize();
+            int goalRow = (player.getPosition().getX() + player.solidArea.x) / gameSettings.getTileSize();
 
             searchPath(goalCol, goalRow);
         }
@@ -116,7 +117,7 @@ public class Enemy extends MoveableEntity {
      */
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), Game.tileSize + 2, 60,
+        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), gameSettings.getTileSize() + 2, 60,
                 null);
     }
 
@@ -193,15 +194,15 @@ public class Enemy extends MoveableEntity {
      * @param goalRow The row index of the goal position.
      */
     public void searchPath(int goalCol, int goalRow) {
-        int startCol = (position.getY() + solidArea.y) / Game.tileSize;
-        int startRow = (position.getX() + solidArea.x) / Game.tileSize;
+        int startCol = (position.getY() + solidArea.y) / gameSettings.getTileSize();
+        int startRow = (position.getX() + solidArea.x) / gameSettings.getTileSize();
 
         playing.pathFinder.setNode(startCol, startRow, goalCol, goalRow);
 
         if (playing.pathFinder.search() == true) {
             // Next worldX and worldY
-            int nextY = playing.pathFinder.pathList.get(0).col * Game.tileSize;
-            int nextX = playing.pathFinder.pathList.get(0).row * Game.tileSize;
+            int nextY = playing.pathFinder.pathList.get(0).col * gameSettings.getTileSize();
+            int nextX = playing.pathFinder.pathList.get(0).row * gameSettings.getTileSize();
 
             // Entity's solidArea position
             int enLeftX = (position.getX() + solidArea.x);
@@ -209,11 +210,11 @@ public class Enemy extends MoveableEntity {
             int enTopY = (position.getY() + solidArea.y);
             int enBottomY = (position.getY() + solidArea.y + solidArea.height);
 
-            if (enTopY >= nextY && enLeftX >= nextX && enRightX < nextX + Game.tileSize) {
-                enemyAction = EnemyConstants.UP;
+            if (enTopY >= nextY && enLeftX >= nextX && enRightX < nextX + gameSettings.getTileSize()) {
+            enemyAction = EnemyConstants.UP;
             } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX) {
-                enemyAction = EnemyConstants.DOWN;
-            } else if (enTopY >= nextY && enBottomY <= nextY + Game.tileSize) {
+            enemyAction = EnemyConstants.DOWN;
+            } else if (enTopY >= nextY && enBottomY <= nextY + gameSettings.getTileSize()) {
                 // left or right
                 if (collisionOn == true) {
                     enemyAction = EnemyConstants.UP;

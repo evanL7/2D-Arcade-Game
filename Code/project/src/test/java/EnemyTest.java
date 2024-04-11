@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -5,10 +7,8 @@ import Animation.AnimationConstants.EnemyConstants;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-
 import Display.Game;
+import Display.GameSettings;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.CollisionChecker;
@@ -23,6 +23,7 @@ public class EnemyTest {
     private Playing playing;
     private TileManager tileManager;
     private CollisionChecker collisionChecker;
+    private GameSettings gameSettings;
 
     private Enemy enemy;
     private Player player;
@@ -33,13 +34,13 @@ public class EnemyTest {
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
-
+        gameSettings = playing.getGame().getGameSettings();
     }
 
     @BeforeEach
     public void reset() {
-        enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
+        enemy = new Enemy(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), playing);
+        player = new Player(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), collisionChecker, playing);
     }
 
     @Test
@@ -51,8 +52,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesDownWhenPlayerBelow() {
-        enemy.setPosition(2 * Game.tileSize, 3 * Game.tileSize);
-        player.setPosition(2 * Game.tileSize, 5 * Game.tileSize);
+        enemy.setPosition(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
+        player.setPosition(2 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize());
         updateEnemy(enemy, player, 5);
 
         assertEquals(EnemyConstants.DOWN, enemy.getEnemyAction());
@@ -60,8 +61,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesUpWhenPlayerAbove() {
-        enemy.setPosition(2 * Game.tileSize, 5 * Game.tileSize);
-        player.setPosition(2 * Game.tileSize, 3 * Game.tileSize);
+        enemy.setPosition(2 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize());
+        player.setPosition(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
         updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.UP, enemy.getEnemyAction());
@@ -69,8 +70,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesLeftWhenPlayerToTheLeft() {
-        enemy.setPosition(5 * Game.tileSize, 3 * Game.tileSize);
-        player.setPosition(1 * Game.tileSize, 3 * Game.tileSize);
+        enemy.setPosition(5 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
+        player.setPosition(1 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
         updateEnemy(enemy, player, 100);
 
         assertEquals(EnemyConstants.LEFT, enemy.getEnemyAction());
@@ -78,8 +79,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesRightWhenPlayerToTheRight() {
-        enemy.setPosition(2 * Game.tileSize, 3 * Game.tileSize);
-        player.setPosition(5 * Game.tileSize, 3 * Game.tileSize);
+        enemy.setPosition(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
+        player.setPosition(5 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
         updateEnemy(enemy, player, 20);
 
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());
@@ -87,8 +88,8 @@ public class EnemyTest {
 
     @Test
     public void testEnemyMovesAroundWalls() {
-        enemy.setPosition(21 * Game.tileSize, 4 * Game.tileSize);
-        player.setPosition(21 * Game.tileSize, 8 * Game.tileSize);
+        enemy.setPosition(21 * gameSettings.getTileSize(), 4 * gameSettings.getTileSize());
+        player.setPosition(21 * gameSettings.getTileSize(), 8 * gameSettings.getTileSize());
         updateEnemy(enemy, player, 750);
 
         assertEquals(EnemyConstants.RIGHT, enemy.getEnemyAction());

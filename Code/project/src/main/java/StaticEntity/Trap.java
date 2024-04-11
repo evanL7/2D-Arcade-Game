@@ -7,7 +7,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import Display.Game;
 import Helpers.Position;
 
 // trap sprite from https://bdragon1727.itch.io/free-trap-platformer
@@ -39,9 +38,10 @@ public class Trap extends StaticEntity {
     public Trap(Position position) {
         // doesn't need despawnTimer as it would only despawn if collided with
         super(position);
+        damage = 1; // default value of 1
+
         loadAnimations();
         loadTrapImage();
-        this.damage = 1; // default value of 1
     }
 
     // Methods
@@ -65,8 +65,8 @@ public class Trap extends StaticEntity {
     // ANIMATION METHODS FOR TRAP
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[animationIndex][0], position.getX(), position.getY(), Game.tileSize + 2, 30,
-                null);
+        g2.drawImage(animations[animationIndex][0], position.getX(), position.getY(), gameSettings.getTileSize() + 2, 30,
+            null);
     }
 
     public void update() {

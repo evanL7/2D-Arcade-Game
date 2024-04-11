@@ -18,30 +18,7 @@ public class Game implements Runnable {
     private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
-    private final int FPS_SET = 120;
-    private final int UPS_SET = 200; // Updates per second to prevent the game from running too fast
-
-    // Tile settings
-    private final static int originalTileSize = 16;
-    private final static int scale = 3;
-    public final static int tileSize = originalTileSize * scale;
-
-    // Grid size
-    private final static int maxScreenCol = 16;
-    private final static int maxScreenRow = 12;
-
-    // Scaled screen size
-    public final static int screenWidth = tileSize * maxScreenCol;
-    public final static int screenHeight = tileSize * maxScreenRow;
-
-    // World size
-    public final static int maxWorldCol = 25;
-    public final static int maxWorldRow = 25;
-    public final static int worldWidth = tileSize * maxWorldCol;
-    public final static int worldHeight = tileSize * maxWorldRow;
-
-    public static String mapFilePath = "/maps/map1.txt";
-    public static String gameTitle = "Grade Quest";
+    private GameSettings gameSettings;
 
     private Playing playing;
     private Menu menu;
@@ -51,6 +28,7 @@ public class Game implements Runnable {
     public Game() {
         initClasses();
 
+        gameSettings = new GameSettings();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
@@ -106,8 +84,8 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        double timePerFrame = 1_000_000_000.0 / FPS_SET;
-        double timePerUpdate = 1_000_000_000.0 / UPS_SET;
+        double timePerFrame = 1_000_000_000.0 / gameSettings.getFPS_SET();
+        double timePerUpdate = 1_000_000_000.0 / gameSettings.getUPS_SET();
 
         long previousTime = System.nanoTime();
         long lastCheck = System.currentTimeMillis();
@@ -177,5 +155,9 @@ public class Game implements Runnable {
 
     public GamePanel getGamePanel() {
         return gamePanel;
-    }    
+    }
+    
+    public GameSettings getGameSettings() {
+        return gameSettings;
+    }
 }

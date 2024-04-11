@@ -1,8 +1,13 @@
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.event.KeyEvent;
 import Display.Game;
+import Display.GameSettings;
 import Display.Score;
 import Gamestates.*;
 import Helpers.CollisionChecker;
@@ -13,15 +18,18 @@ import StaticEntity.Reward;
 import StaticEntity.TileManager;
 import StaticEntity.Trap;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GameStateTest {
 
-    private static Game game;
-    private static Menu menu;
+    private Game game;
+    private Menu menu;
+    private GameSettings gameSettings;
 
     @BeforeAll
-    public static void setUpAll() {
+    public void setUpAll() {
         game = new Game();
         menu = game.getMenu();
+        gameSettings = game.getGameSettings();
     }
 
     @BeforeEach
@@ -68,8 +76,8 @@ public class GameStateTest {
         Score scoreObject = new Score();
         scoreObject.setScore(0);
 
-        Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
-        Trap trap = new Trap(new Position(2 * Game.tileSize, 3 * Game.tileSize));
+        Player player = new Player(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), collisionChecker, playing);
+        Trap trap = new Trap(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()));
 
         if (collisionChecker.checkPlayerTrapCollision(player, trap)) {
             scoreObject.decreaseScore(1);
@@ -93,9 +101,9 @@ public class GameStateTest {
         Score scoreObject = new Score();
         scoreObject.setScore(0);
 
-        Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
-        Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
-        Door door = new Door(new Position(2 * Game.tileSize, 3 * Game.tileSize));
+        Player player = new Player(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), collisionChecker, playing);
+        Reward reward = new Reward(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()));
+        Door door = new Door(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()));
 
         if (collisionChecker.checkPlayerRewardCollision(player, reward)) {
             door.setOpen();

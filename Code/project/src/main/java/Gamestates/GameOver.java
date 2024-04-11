@@ -11,8 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import Display.Game;
-
-
+import Display.GameSettings;
 
 /**
  * The GameOver class represents the game over screen displayed when the game ends.
@@ -22,8 +21,9 @@ import Display.Game;
  */
 public class GameOver extends State implements Statemethods { 
     
-    private static Font customFont;
+    private Font customFont;
     private Playing playingState;
+    private GameSettings gameSettings;
 
     /**
      * Constructs a GameOver object.
@@ -33,6 +33,7 @@ public class GameOver extends State implements Statemethods {
     public GameOver(Game game) {
         super(game);
         playingState = game.getPlaying();
+        gameSettings = new GameSettings();
 
         try {
             // Load the external font file
@@ -49,7 +50,6 @@ public class GameOver extends State implements Statemethods {
     
     @Override
     public void update() {
-
     }
 
     /**
@@ -64,17 +64,17 @@ public class GameOver extends State implements Statemethods {
             g.setColor(Color.BLACK);
 
             FontMetrics fm = g.getFontMetrics();
-            int x = (Game.screenWidth - fm.stringWidth("GAME OVER!")) / 2;
-            int y = (Game.screenHeight - fm.getHeight()) / 2 + fm.getAscent() - 40;
+            int x = (gameSettings.getScreenWidth() - fm.stringWidth("GAME OVER!")) / 2;
+            int y = (gameSettings.getScreenHeight() - fm.getHeight()) / 2 + fm.getAscent() - 40;
 
             g.drawString("GAME OVER!", x, y);
-            
+
             y += fm.getHeight();  // Move down for the second line
-            x = (Game.screenWidth - fm.stringWidth("PRESS R TO RESTART THE GAME")) / 2;
+            x = (gameSettings.getScreenWidth() - fm.stringWidth("PRESS R TO RESTART THE GAME")) / 2;
             g.drawString("PRESS R TO RESTART THE GAME", x, y);
 
             y += fm.getHeight(); // Move down for the third line
-            x = (Game.screenWidth - fm.stringWidth("PRESS Q TO QUIT THE GAME")) / 2;
+            x = (gameSettings.getScreenWidth() - fm.stringWidth("PRESS Q TO QUIT THE GAME")) / 2;
             g.drawString("PRESS Q TO QUIT THE GAME", x, y);
         }
     }
@@ -89,12 +89,10 @@ public class GameOver extends State implements Statemethods {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_R:
-                //System.out.println("Restarting the game"); // test
                 playingState.restartGame();
                 Gamestate.state = Gamestate.PLAYING;
                 break;
             case KeyEvent.VK_Q:
-                //System.out.println("Exiting the program"); // test
                 System.exit(0);
                 break;
             default:
@@ -104,7 +102,5 @@ public class GameOver extends State implements Statemethods {
 
     @Override
 	public void keyReleased(KeyEvent e) {
-
-    }
-    
+    }    
 }

@@ -1,29 +1,34 @@
 package Display;
 
 import java.awt.Graphics;
-
 import MoveableEntity.Player;
+
 public class Camera {
+
     private int xOffset, yOffset;
     private Player player;
+    private GameSettings gameSettings;
 
     public Camera(Player player) {
         this.player = player;
         this.xOffset = 0;
         this.yOffset = 0;
+        this.gameSettings = new GameSettings();
     }
 
     public void update() {
         // Adjust camera position based on player's position
-        xOffset = player.getPosition().getX() - (Game.screenWidth / 2);
-        yOffset = player.getPosition().getY() - (Game.screenHeight / 2);
+        xOffset = player.getPosition().getX() - (gameSettings.getScreenWidth() / 2);
+        yOffset = player.getPosition().getY() - (gameSettings.getScreenHeight() / 2);
 
         // Ensure camera doesn't go out of bounds
         if (xOffset < 0) xOffset = 0;
         if (yOffset < 0) yOffset = 0;
 
-        if (xOffset > Game.worldWidth - Game.screenWidth) xOffset = Game.worldWidth - Game.screenWidth;
-        if (yOffset > Game.worldHeight - Game.screenHeight) yOffset = Game.worldHeight - Game.screenHeight;
+        if (xOffset > gameSettings.getWorldWidth() - gameSettings.getScreenWidth())
+            xOffset = gameSettings.getWorldWidth() - gameSettings.getScreenWidth();
+        if (yOffset > gameSettings.getWorldHeight() - gameSettings.getScreenHeight())
+            yOffset = gameSettings.getWorldHeight() - gameSettings.getScreenHeight();
     }
 
     public void translate(Graphics g) {

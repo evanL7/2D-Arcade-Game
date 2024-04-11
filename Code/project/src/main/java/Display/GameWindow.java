@@ -11,7 +11,9 @@ import javax.swing.JFrame;
  * It also handles window focus events.
  */
 public class GameWindow {
+
     private JFrame jframe;
+    private GameSettings gameSettings;
 
     /**
      * Constructs a GameWindow object with the specified GamePanel.
@@ -19,6 +21,7 @@ public class GameWindow {
      */
     public GameWindow(GamePanel gamePanel) {
         jframe = new JFrame();
+        gameSettings = new GameSettings();
 
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gamePanel);
@@ -26,7 +29,7 @@ public class GameWindow {
         jframe.setLocationRelativeTo(null);
         jframe.setResizable(false);
         jframe.setVisible(true);
-        jframe.setTitle(Game.gameTitle);
+        jframe.setTitle(gameSettings.getGameTitle());
 		jframe.addWindowFocusListener(new WindowFocusListener() {
 			@Override
 			public void windowLostFocus(WindowEvent e) {

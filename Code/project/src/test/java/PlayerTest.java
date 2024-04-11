@@ -1,8 +1,11 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 
 import Display.Game;
+import Display.GameSettings;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.CollisionChecker;
@@ -10,30 +13,32 @@ import MoveableEntity.Player;
 import StaticEntity.TileManager;
 import StaticEntity.Reward;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PlayerTest {
 
     private Player player;
-    private static Game game;
-    private static Playing playing;
-    private static TileManager tileManager;
-    private static CollisionChecker collisionChecker;
+    private Game game;
+    private Playing playing;
+    private TileManager tileManager;
+    private CollisionChecker collisionChecker;
+    private GameSettings gameSettings;
     private Reward reward;
 
     @BeforeAll
-    static void setUpAll() {
+    public void setUpAll() {
         game = new Game();
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
+        gameSettings = playing.getGame().getGameSettings();
     }
 
     // Tests to see if colliding with a regular reward properly increments
     // the number of regular rewards collected (variable win)
     @Test
     public void testRewardCollision() {
-
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
-        reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
+        player = new Player(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), collisionChecker, playing);
+        reward = new Reward(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()));
 
         Boolean collided = collisionChecker.checkPlayerRewardCollision(player, reward);
         assertTrue(collided);
@@ -52,7 +57,7 @@ public class PlayerTest {
 
         // spawn the player right next to the right wall
         // want to check if going right changes the player's position at all
-        player = new Player(new Position(1106, 3 * Game.tileSize), collisionChecker, playing);
+        player = new Player(new Position(1106, 3 * gameSettings.getTileSize()), collisionChecker, playing);
 
         // Simulate pressing the "D" key to go right
         // player should be able to move 1 to the right
@@ -84,7 +89,7 @@ public class PlayerTest {
 
         // spawn the player right next to the left wall
         // want to check if going left changes the player's position at all
-        player = new Player(new Position(41, 3 * Game.tileSize), collisionChecker, playing);
+        player = new Player(new Position(41, 3 * gameSettings.getTileSize()), collisionChecker, playing);
 
         // Simulate pressing the "A" key to go left
         // player should be able to move 1 to the left
@@ -115,7 +120,7 @@ public class PlayerTest {
 
         // spawn the player right under the top wall
         // want to check if going up changes the player's position at all
-        player = new Player(new Position(2 * Game.tileSize, 129), collisionChecker, playing);
+        player = new Player(new Position(2 * gameSettings.getTileSize(), 129), collisionChecker, playing);
 
         // Simulate pressing the "W" key to go up
         // player should be able to move 1 up
@@ -146,7 +151,7 @@ public class PlayerTest {
 
         // spawn the player right above the bottom wall
         // want to check if going down changes the player's position at all
-        player = new Player(new Position(2 * Game.tileSize, 1086), collisionChecker, playing);
+        player = new Player(new Position(2 * gameSettings.getTileSize(), 1086), collisionChecker, playing);
 
         // Simulate pressing the "S" key to go down
         // player should be able to move 1 down
@@ -175,7 +180,7 @@ public class PlayerTest {
 
     @Test
     public void testInvalidMovement1() {
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
+        player = new Player(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), collisionChecker, playing);
 
         Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
 
@@ -217,7 +222,7 @@ public class PlayerTest {
 
     @Test
     public void testInvalidMovement2() {
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
+        player = new Player(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), collisionChecker, playing);
 
         Position oldPos = new Position(player.getPosition().getX(), player.getPosition().getY());
 

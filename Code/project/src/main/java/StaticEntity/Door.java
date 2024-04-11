@@ -8,7 +8,6 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import Display.Game;
 import Helpers.Position;
 
 /**
@@ -74,6 +73,6 @@ public class Door extends StaticEntity {
 
     @Override
     public Rectangle getBoundingBox() {
-        return new Rectangle(position.getX(), position.getY(), Game.tileSize, Game.tileSize);
+        return new Rectangle(position.getX(), position.getY(), gameSettings.getTileSize(), gameSettings.getTileSize());
     }
 }

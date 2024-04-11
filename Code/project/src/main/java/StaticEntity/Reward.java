@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
-import Display.Game;
 import Helpers.Position;
 import Helpers.RewardType;
 
@@ -34,7 +33,6 @@ public class Reward extends StaticEntity {
 
     /** The type of reward, either Bonus Reward or Regular Reward. */
     public RewardType rewardType;
-
     private BufferedImage rewardImage;
 
     /**
@@ -83,7 +81,7 @@ public class Reward extends StaticEntity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(rewardImage, position.getX(), position.getY(), Game.tileSize + 2, 30, null);
+        g.drawImage(rewardImage, position.getX(), position.getY(), gameSettings.getTileSize() + 2, 30, null);
     }
 
     private void loadRewardImage() {

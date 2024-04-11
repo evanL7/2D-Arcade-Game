@@ -15,6 +15,8 @@ public class Time {
     private long totalPausedTime; // how long the timer has been paused
     private String timeElapsedStr; // the string representation of time elapsed
 
+    private GameSettings gameSettings;
+
     /**
      * Constructs a Time object and initializes the timer.
      * The timer is initially paused.
@@ -24,7 +26,8 @@ public class Time {
         pausedTime = 0;
         totalPausedTime = 0;
         timeElapsedStr = null;
-        
+        gameSettings = new GameSettings();
+
         // since the user sees the main menu first so timer should be paused
         pauseTimer(); 
     }
@@ -87,6 +90,6 @@ public class Time {
         // Display elapsed time in the top right corner
         g.setColor(Color.RED);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Elapsed Time: " + elapsedTime, Game.screenWidth - 200, 30);
+        g.drawString("Elapsed Time: " + elapsedTime, gameSettings.getScreenWidth() - 200, 30);
     }
 }

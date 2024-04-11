@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 
 import Display.Camera;
 import Display.Game;
+import Display.GameSettings;
 import Display.Score;
 import Display.Time;
 import Helpers.AssetManager;
@@ -53,6 +54,7 @@ public class Playing extends State implements Statemethods {
 
     private Camera camera;
     private Score score; // Score object
+    private GameSettings gameSettings;
 
     public TileManager tileManager;
     public CollisionChecker collisionChecker;
@@ -78,21 +80,22 @@ public class Playing extends State implements Statemethods {
         tileManager = new TileManager(this);
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
+        gameSettings = new GameSettings();
 
         playerSpawnPositions = new Position[3]; // 3 spawn points for the player
         // Spawn point at the top left corner of the map
-        playerSpawnPositions[0] = new Position(2 * Game.tileSize, 3 * Game.tileSize);
+        playerSpawnPositions[0] = new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
         // Spawn point at the bottom left corner of the map
-        playerSpawnPositions[1] = new Position(2 * Game.tileSize, 22 * Game.tileSize);
+        playerSpawnPositions[1] = new Position(2 * gameSettings.getTileSize(), 22 * gameSettings.getTileSize());
         // Spawn point at the top right corner of the map
-        playerSpawnPositions[2] = new Position(22 * Game.tileSize, 3 * Game.tileSize);
+        playerSpawnPositions[2] = new Position(22 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
 
         Random rand = new Random();
 
         score = new Score();
 
         player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this);
-        enemy = new Enemy(new Position(20 * Game.tileSize, 20 * Game.tileSize), this);
+        enemy = new Enemy(new Position(20 * gameSettings.getTileSize(), 20 * gameSettings.getTileSize()), this);
 
         staticEntities = new StaticEntity[25]; // Currently set to 25 static entities can be displayed, adjust as needed
         assetManager = new AssetManager(this);
@@ -161,7 +164,7 @@ public class Playing extends State implements Statemethods {
     public void draw(Graphics g) {
         // Set background color
         g.setColor(new Color(0xadd8e6));
-        g.fillRect(0, 0, Game.screenWidth, Game.screenHeight);
+        g.fillRect(0, 0, gameSettings.getScreenWidth(), gameSettings.getScreenHeight());
 
         // Translate graphics object to adjust for camera position
         camera.update();

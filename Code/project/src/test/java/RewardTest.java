@@ -3,8 +3,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import Display.Game;
+import Display.GameSettings;
 import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.CollisionChecker;
@@ -13,31 +15,34 @@ import MoveableEntity.Player;
 import StaticEntity.Reward;
 import StaticEntity.TileManager;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RewardTest {
     private Player player;
-    private static Game game;
-    private static Playing playing;
-    private static TileManager tileManager;
-    private static CollisionChecker collisionChecker;
+    private Game game;
+    private Playing playing;
+    private TileManager tileManager;
+    private CollisionChecker collisionChecker;
+    private GameSettings gameSettings;
 
     @BeforeAll
-    static void setUpAll() {
+    public void setUpAll() {
         game = new Game();
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
+        gameSettings = playing.getGame().getGameSettings();
         Gamestate.state = Gamestate.PLAYING;
     }
 
     @BeforeEach
-    void setUp() {
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
+    public void setUp() {
+        player = new Player(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()), collisionChecker, playing);
         player.getScoreObj().setScore(0);
     }
 
     @Test
     public void testCheckPlayerRewardCollision() {
-        Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
+        Reward reward = new Reward(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()));
 
         double originalScore = player.getScoreObj().getScore();
         Boolean result = collisionChecker.checkPlayerRewardCollision(player, reward);
@@ -50,17 +55,17 @@ public class RewardTest {
 
     @Test
     public void testCollectMultipleRewards() {
-        Reward reward1 = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
-        Reward reward2 = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize));
-        Reward reward3 = new Reward(new Position(6 * Game.tileSize, 7 * Game.tileSize));
+        Reward reward1 = new Reward(new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize()));
+        Reward reward2 = new Reward(new Position(4 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize()));
+        Reward reward3 = new Reward(new Position(6 * gameSettings.getTileSize(), 7 * gameSettings.getTileSize()));
 
         double originalScore = player.getScoreObj().getScore();
         collisionChecker.checkPlayerRewardCollision(player, reward1);
 
-        player.setPosition(4 * Game.tileSize, 5 * Game.tileSize);
+        player.setPosition(4 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize());
         collisionChecker.checkPlayerRewardCollision(player, reward2);
 
-        player.setPosition(6 * Game.tileSize, 7 * Game.tileSize);
+        player.setPosition(6 * gameSettings.getTileSize(), 7 * gameSettings.getTileSize());
         collisionChecker.checkPlayerRewardCollision(player, reward3);
 
         double actualScore = player.getScoreObj().getScore();
@@ -71,7 +76,7 @@ public class RewardTest {
 
     @Test
     public void testBonusReward() {
-        Reward bonusReward = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize), 4000);
+        Reward bonusReward = new Reward(new Position(4 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize()), 4000);
 
         try {
             Thread.sleep(4000);
@@ -80,7 +85,7 @@ public class RewardTest {
             e.printStackTrace();
         }
 
-        player.setPosition(4 * Game.tileSize, 5 * Game.tileSize);
+        player.setPosition(4 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize());
 
         Boolean collide = collisionChecker.checkPlayerRewardCollision(player, bonusReward);
         // assertTrue(scoreObject.getScore() == 2);
@@ -89,8 +94,8 @@ public class RewardTest {
 
     @Test
     public void testBonusRewardCollide() {
-        player = new Player(new Position(4 * Game.tileSize, 5 * Game.tileSize), collisionChecker, playing);
-        Reward bonusReward = new Reward(new Position(4 * Game.tileSize, 5 * Game.tileSize), 4000);
+        player = new Player(new Position(4 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize()), collisionChecker, playing);
+        Reward bonusReward = new Reward(new Position(4 * gameSettings.getTileSize(), 5 * gameSettings.getTileSize()), 4000);
         double originalScore = player.getScoreObj().getScore();
 
         Boolean collide = collisionChecker.checkPlayerRewardCollision(player, bonusReward);

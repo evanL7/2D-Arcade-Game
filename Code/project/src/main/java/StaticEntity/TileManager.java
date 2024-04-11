@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import Display.Game;
+import Display.GameSettings;
 import Gamestates.Playing;
 
 /**
@@ -22,21 +22,22 @@ public class TileManager {
     public Tile[] tile; // Stores the tile sprites
     public int mapTileNum[][]; // Stores the map data that indicates which tile to use    
 
-    Playing playing;
+    private Playing playing;
+    private GameSettings gameSettings;
 
     /**
      * Constructs a TileManager object.
      */
     public TileManager(Playing playing) {
-        this.staticEntities = new ArrayList<>();
-    
-        tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
-        mapTileNum = new int[Game.maxWorldRow][Game.maxWorldCol];
-
         this.playing = playing;
+        gameSettings = new GameSettings();
+
+        staticEntities = new ArrayList<>();
+        tile = new Tile[48]; // Assuming 48 tiles are used, adjust as needed
+        mapTileNum = new int[gameSettings.getMaxWorldRow()][gameSettings.getMaxWorldCol()];
 
         getTileImage();
-        loadMap(Game.mapFilePath);
+        loadMap(gameSettings.getMapFilePath());
     }
 
     /**
@@ -98,17 +99,17 @@ public class TileManager {
      * @param g the Graphics object to draw the tiles on
      */
     public void draw(Graphics g) {
-        int startCol = Math.max(0, playing.getCamera().getXOffset() / Game.tileSize);
-        int startRow = Math.max(0, playing.getCamera().getYOffset() / Game.tileSize);
-        int endCol = Math.min(Game.maxWorldCol, (playing.getCamera().getXOffset() + Game.screenWidth) / Game.tileSize + 1);
-        int endRow = Math.min(Game.maxWorldRow, (playing.getCamera().getYOffset() + Game.screenHeight) / Game.tileSize + 1);
+        int startCol = Math.max(0, playing.getCamera().getXOffset() / gameSettings.getTileSize());
+        int startRow = Math.max(0, playing.getCamera().getYOffset() / gameSettings.getTileSize());
+        int endCol = Math.min(gameSettings.getMaxWorldCol(), (playing.getCamera().getXOffset() + gameSettings.getScreenWidth()) / gameSettings.getTileSize() + 1);
+        int endRow = Math.min(gameSettings.getMaxWorldRow(), (playing.getCamera().getYOffset() + gameSettings.getScreenHeight()) / gameSettings.getTileSize() + 1);
 
         for (int row = startRow; row < endRow; row++) {
             for (int col = startCol; col < endCol; col++) {
                 int tileNum = mapTileNum[row][col];
-                int x = col * Game.tileSize;
-                int y = row * Game.tileSize;
-                g.drawImage(tile[tileNum].image, x, y, Game.tileSize, Game.tileSize, null);
+                int x = col * gameSettings.getTileSize();
+                int y = row * gameSettings.getTileSize();
+                g.drawImage(tile[tileNum].image, x, y, gameSettings.getTileSize(), gameSettings.getTileSize(), null);
             }
         }
     }
@@ -125,22 +126,21 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0, row = 0;
-            while (col < Game.maxWorldCol && row < Game.maxWorldRow) {
+            while (col < gameSettings.getMaxWorldCol() && row < gameSettings.getMaxWorldRow()) {
                 String line = br.readLine();
                 String numbers[] = line.split(" ");
-                while (col < Game.maxWorldCol) {
+                while (col < gameSettings.getMaxWorldCol()) {
                     int num = Integer.parseInt(numbers[col]);
 
                     mapTileNum[row][col] = num;
                     col++;
                 }
-                if (col == Game.maxWorldCol) {
+                if (col == gameSettings.getMaxWorldCol()) {
                     col = 0;
                     row++;
                 }
             }
             br.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
