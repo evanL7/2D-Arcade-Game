@@ -6,6 +6,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -13,7 +14,8 @@ import Display.Game;
 
 /**
  * The Menu class represents the menu state of the game.
- * It displays the game title and allows the player to navigate through the menu.
+ * It displays the game title and allows the player to navigate through the
+ * menu.
  * The menu uses a custom font and handles keyboard input to select options.
  * Font source: https://tinyworlds.itch.io/free-pixel-font-thaleah
  */
@@ -39,7 +41,7 @@ public class Menu extends State implements Statemethods {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
         } catch (IOException | FontFormatException e) {
-            e.printStackTrace(); // Handle font loading errors            
+            e.printStackTrace(); // Handle font loading errors
         }
     }
 
@@ -64,11 +66,14 @@ public class Menu extends State implements Statemethods {
             // Draw character sprite
             x = (gameSettings.getScreenWidth() - gameSettings.getTileSize() * 2) / 2;
             y += gameSettings.getTileSize() * 1.25;
-            g.drawImage(game.getPlaying().getPlayer().animations[2][1], x, y, gameSettings.getTileSize() * 2, gameSettings.getTileSize() * 2, null);
+            BufferedImage[][] characterImage = game.getPlaying().getPlayer().getPlayerAnimations();
+            g.drawImage(characterImage[2][1], x, y, gameSettings.getTileSize() * 2,
+                    gameSettings.getTileSize() * 2, null);
 
             // Draw game options
             g.setFont(customFont.deriveFont(60f));
-            drawOption(g, "START", getXCenteredString(g, "START"), y += gameSettings.getTileSize() * 3.5, commandNum == 0);
+            drawOption(g, "START", getXCenteredString(g, "START"), y += gameSettings.getTileSize() * 3.5,
+                    commandNum == 0);
             drawOption(g, "QUIT", getXCenteredString(g, "QUIT"), y += gameSettings.getTileSize(), commandNum == 1);
         }
     }
@@ -110,7 +115,7 @@ public class Menu extends State implements Statemethods {
                 case 0:
                     Gamestate.state = Gamestate.PLAYING;
                     // allows this class to get the time object from Playing and resume the timer
-                    Playing playingState = game.getPlaying(); 
+                    Playing playingState = game.getPlaying();
                     playingState.windowFocusLost();
                     playingState.getTime().resumeTimer();
                     break;
