@@ -8,9 +8,9 @@ import Display.Game;
 import Display.GameSettings;
 import Gamestates.Playing;
 import Helpers.Position;
+import Helpers.TileManager;
 import Helpers.CollisionChecker;
 import MoveableEntity.Player;
-import StaticEntity.TileManager;
 import StaticEntity.Reward;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

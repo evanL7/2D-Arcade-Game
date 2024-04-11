@@ -1,4 +1,4 @@
-package StaticEntity;
+package Helpers;
 
 import java.awt.Graphics;
 import java.io.BufferedReader;
@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import Display.GameSettings;
 import Gamestates.Playing;
+import StaticEntity.StaticEntity;
 
 /**
  * The TileManager class manages the tiles used in the game.

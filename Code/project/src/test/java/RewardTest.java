@@ -11,9 +11,9 @@ import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.CollisionChecker;
 import Helpers.Position;
+import Helpers.TileManager;
 import MoveableEntity.Player;
 import StaticEntity.Reward;
-import StaticEntity.TileManager;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RewardTest {

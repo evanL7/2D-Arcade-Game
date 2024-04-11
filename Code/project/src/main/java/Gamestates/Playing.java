@@ -20,13 +20,13 @@ import Helpers.MusicManager;
 import Helpers.Position;
 import Helpers.RewardType;
 import Helpers.SoundManager;
+import Helpers.TileManager;
 import MoveableEntity.MoveableEntity;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
 import PathFinding.PathFinder;
 import StaticEntity.Reward;
 import StaticEntity.StaticEntity;
-import StaticEntity.TileManager;
 import StaticEntity.Trap;
 import StaticEntity.Door;
 

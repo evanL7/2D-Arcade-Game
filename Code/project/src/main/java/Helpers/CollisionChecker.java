@@ -14,7 +14,6 @@ import MoveableEntity.Player;
 import StaticEntity.Door;
 import StaticEntity.Reward;
 import StaticEntity.StaticEntity;
-import StaticEntity.TileManager;
 import StaticEntity.Trap;
 
 /**

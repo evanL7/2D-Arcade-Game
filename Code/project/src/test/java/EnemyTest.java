@@ -11,10 +11,10 @@ import Display.Game;
 import Display.GameSettings;
 import Gamestates.Playing;
 import Helpers.Position;
+import Helpers.TileManager;
 import Helpers.CollisionChecker;
 import MoveableEntity.Enemy;
 import MoveableEntity.Player;
-import StaticEntity.TileManager;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class EnemyTest {

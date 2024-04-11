@@ -1,4 +1,4 @@
-package StaticEntity;
+package Helpers;
 
 import java.awt.image.BufferedImage;
 

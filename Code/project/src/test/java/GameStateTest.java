@@ -12,10 +12,10 @@ import Display.Score;
 import Gamestates.*;
 import Helpers.CollisionChecker;
 import Helpers.Position;
+import Helpers.TileManager;
 import MoveableEntity.Player;
 import StaticEntity.Door;
 import StaticEntity.Reward;
-import StaticEntity.TileManager;
 import StaticEntity.Trap;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
