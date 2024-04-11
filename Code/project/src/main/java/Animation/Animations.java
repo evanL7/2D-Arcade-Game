@@ -62,7 +62,7 @@ public abstract class Animations {
     }
 
     // updates the animation array during the game loop thread
-    private void updateAnimationTick(int animationAmount) { // change the variable?
+    public void updateAnimationTick() {
 
         animationTick++;
         if (animationTick >= animationSpeed) {
@@ -75,4 +75,36 @@ public abstract class Animations {
 
     }
 
+    // SETTERS AND GETTERS
+    public void setAnimationArrayHeight(int height) {
+        animationArrayHeight = height;
+    }
+
+    public void setAnimationArrayWidth(int width) {
+        animationArrayWidth = width;
+    }
+
+    public void setSpriteHeight(int height) {
+        spriteHeight = height;
+    }
+
+    public void setSpriteWidth(int width) {
+        spriteWidth = width;
+    }
+
+    public void setAnimationAmount(int amount) {
+        animationAmount = amount;
+    }
+
+    public void setAnimationSpeed(int speed) {
+        animationSpeed = speed;
+    }
+
+    public BufferedImage[][] getBufferedImages() {
+        return animations;
+    }
+
+    public int getAnimationIndex() {
+        return animationIndex;
+    }
 }

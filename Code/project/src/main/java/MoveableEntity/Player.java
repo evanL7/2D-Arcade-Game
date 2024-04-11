@@ -9,6 +9,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import Animation.AnimationConstants.PlayerConstants;
+import Animation.Animations;
 
 import java.awt.Image;
 
@@ -32,6 +33,7 @@ public class Player extends MoveableEntity {
     private CollisionChecker collisionChecker;
 
     private BufferedImage playerImage;
+    private Animations animation;
 
     private int win = 0; // needs 3 to wins
 
@@ -75,7 +77,8 @@ public class Player extends MoveableEntity {
      */
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(), gameSettings.getTileSize(), 72,
+        g2.drawImage(animations[playerAction][animationIndex], position.getX(), position.getY(),
+                gameSettings.getTileSize(), 72,
                 null);
     }
 
