@@ -156,8 +156,4 @@ public class Game implements Runnable {
     public GamePanel getGamePanel() {
         return gamePanel;
     }
-    
-    public GameSettings getGameSettings() {
-        return gameSettings;
-    }
 }
