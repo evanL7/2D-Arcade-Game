@@ -5,27 +5,27 @@ public class GameSettings {
     private final int FPS_SET = 120;
     private final int UPS_SET = 200; // Updates per second to prevent the game from running too fast
 
-    public String mapFilePath = "/maps/map1.txt";
-    public String gameTitle = "Grade Quest";
+    private String mapFilePath = "/maps/map1.txt";
+    private String gameTitle = "Grade Quest";
 
     // Tile settings
     private final int originalTileSize = 16;
     private final int scale = 3;
-    public final int tileSize = originalTileSize * scale;
+    private final int tileSize = originalTileSize * scale;
 
     // Grid size
     private final int maxScreenCol = 16;
     private final int maxScreenRow = 12;
 
     // Scaled screen size
-    public final int screenWidth = tileSize * maxScreenCol;
-    public final int screenHeight = tileSize * maxScreenRow;
+    private final int screenWidth = tileSize * maxScreenCol;
+    private final int screenHeight = tileSize * maxScreenRow;
 
     // World size
-    public final int maxWorldCol = 25;
-    public final int maxWorldRow = 25;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
+    private final int maxWorldCol = 25;
+    private final int maxWorldRow = 25;
+    private final int worldWidth = tileSize * maxWorldCol;
+    private final int worldHeight = tileSize * maxWorldRow;
 
     public int getFPS_SET() {
         return FPS_SET;
