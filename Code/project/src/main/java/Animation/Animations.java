@@ -8,7 +8,9 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-// adds animations for enities
+/**
+ * Manages animations for entities.
+ */
 public class Animations {
     // ATTRIBUTES
     private BufferedImage spriteImage;
@@ -23,32 +25,34 @@ public class Animations {
     private int animationTick, animationIndex, animationSpeed = 35;
 
     // CONSTRUCTOR
-    // param:
-    // imageName: the image file path of the sprite
-    // width: the width of the sprite
-    // height: the height of the sprite
-    // animationArrayWidth: the number of elements in the width of the 2d array
-    // animationArrayHeight: the number of elements in the height of the 2d array
+
+    /**
+     * Constructs an Animations object.
+     * 
+     * @param imageName The image file path of the sprite.
+     */
     public Animations(String imageName) {
         this.imageName = imageName;
-
     }
 
     /**
      * Renders the player on the screen.
      * 
-     * @param g The graphics context used for rendering.
+     * @param g          The graphics context used for rendering.
+     * @param action     The action representing the player's current movement.
+     * @param x          The x-coordinate to render the player.
+     * @param y          The y-coordinate to render the player.
+     * @param tileSize   The size of a tile.
+     * @param spriteSize The size of the sprite.
      */
     public void render(Graphics g, int action, int x, int y, int tileSize, int spriteSize) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(animations[action][animationIndex], x, y, tileSize, spriteSize, null);
     }
 
-    // creates the Image array for the movement animations
-    // param:
-    // imageName: the image file path name
-    // animationArrayWidth: the number of elements in the width of the 2d array
-    // animationArrayHeight: the number of elements in the height of the 2d array
+    /**
+     * Loads the animations from the image file.
+     */
     public void loadAnimations() {
         InputStream is = getClass().getResourceAsStream(imageName);
 
@@ -73,6 +77,9 @@ public class Animations {
         }
     }
 
+    /**
+     * Loads the sprite image.
+     */
     public void loadImage() {
         try {
             InputStream is = getClass().getResourceAsStream(imageName);
@@ -83,7 +90,9 @@ public class Animations {
         }
     }
 
-    // updates the animation array during the game loop thread
+    /**
+     * Updates the animation tick during the game loop thread.
+     */
     public void updateAnimationTick() {
 
         animationTick++;
@@ -98,39 +107,85 @@ public class Animations {
     }
 
     // SETTERS AND GETTERS
+    /**
+     * Sets the height of the animation array.
+     * 
+     * @param height The height of the animation array.
+     */
     public void setAnimationArrayHeight(int height) {
         animationArrayHeight = height;
     }
 
+    /**
+     * Sets the width of the animation array.
+     * 
+     * @param width The width of the animation array.
+     */
     public void setAnimationArrayWidth(int width) {
         animationArrayWidth = width;
     }
 
+    /**
+     * Sets the height of the sprite.
+     * 
+     * @param height The height of the sprite.
+     */
     public void setSpriteHeight(int height) {
         spriteHeight = height;
     }
 
+    /**
+     * Sets the width of the sprite.
+     * 
+     * @param width The width of the sprite.
+     */
     public void setSpriteWidth(int width) {
         spriteWidth = width;
     }
 
+    /**
+     * Sets the amount of animation frames.
+     * 
+     * @param amount The amount of animation frames.
+     */
     public void setAnimationAmount(int amount) {
         animationAmount = amount;
     }
 
+    /**
+     * Sets the speed of the animation.
+     * 
+     * @param speed The speed of the animation.
+     */
     public void setAnimationSpeed(int speed) {
         animationSpeed = speed;
     }
 
+    /**
+     * Gets the buffered images for the animations.
+     * 
+     * @return The buffered images for the animations.
+     */
     public BufferedImage[][] getBufferedImages() {
         return animations;
     }
 
+    /**
+     * Gets the current animation index.
+     * 
+     * @return The current animation index.
+     */
     public int getAnimationIndex() {
         return animationIndex;
     }
 
+    /**
+     * Gets the sprite image.
+     * 
+     * @return The sprite image.
+     */
     public BufferedImage getImage() {
         return spriteImage;
     }
+
 }
