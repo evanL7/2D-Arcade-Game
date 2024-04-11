@@ -3,11 +3,9 @@ package MoveableEntity;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
 import Animation.AnimationConstants.EnemyConstants;
+import Animation.Animations;
 
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -26,9 +24,9 @@ public class Enemy extends MoveableEntity {
 
     // private Vector<Position> pathToPlayer;
 
-    private BufferedImage[][] animations; // 2d image array of the images for player movements
+    private Animations animation;
+
     private int enemyAction = EnemyConstants.DOWN;
-    private int animationTick, animationIndex, animationSpeed = 60;
 
     private BufferedImage enemyImage;
 
@@ -41,9 +39,19 @@ public class Enemy extends MoveableEntity {
      */
     public Enemy(Position position, Playing playing) {
         super(position, playing);
+        animation = new Animations("/assets/raccoons.png");
+        animation.setAnimationAmount(4);
+        animation.setAnimationArrayHeight(4);
+        animation.setAnimationArrayWidth(4);
+        animation.setSpriteHeight(181);
+        animation.setSpriteWidth(181);
+        animation.setAnimationSpeed(60);
+
+        animation.loadAnimations();
+        animation.loadImage();
+
         animationAmount = 4;
-        loadAnimations();
-        loadEnemyImage();
+
         onPath = true;
         speed = 1;
         solidArea = new Rectangle(8, 16, (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
@@ -55,7 +63,7 @@ public class Enemy extends MoveableEntity {
      * @param player The player object in the game.
      */
     public void update(Player player) {
-        updateAnimationTick();
+        animation.updateAnimationTick();
         updateShortestPath(player);
 
         collisionOn = false;
@@ -113,60 +121,10 @@ public class Enemy extends MoveableEntity {
      */
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(animations[animationIndex][enemyAction], position.getX(), position.getY(), gameSettings.getTileSize() + 2, 60,
+        BufferedImage[][] enemyAnimations = animation.getBufferedImages();
+        g2.drawImage(enemyAnimations[animation.getAnimationIndex()][enemyAction], position.getX(), position.getY(),
+                gameSettings.getTileSize() + 2, 60,
                 null);
-    }
-
-    /**
-     * Loads the animations for the enemy movement and creates the Image array for
-     * the movement animations
-     */
-    private void loadAnimations() {
-        InputStream is = getClass().getResourceAsStream("/assets/raccoons.png");
-
-        try {
-            BufferedImage img = ImageIO.read(is);
-
-            animations = new BufferedImage[4][4];
-            for (int j = 0; j < animations.length; j++) {
-                for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(j * 181, i * 181, 181, 181);
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void loadEnemyImage() {
-        try {
-            InputStream is = getClass().getResourceAsStream("/assets/raccoons.png");
-            enemyImage = ImageIO.read(is);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Updates the animation tick during the game loop thread.
-     */
-    private void updateAnimationTick() {
-        animationTick++;
-        if (moving && animationTick >= animationSpeed) {
-            animationTick = 0;
-            animationIndex++;
-            if (animationIndex >= animationAmount) {
-                animationIndex = 0;
-            }
-        }
     }
 
     @Override
@@ -207,9 +165,9 @@ public class Enemy extends MoveableEntity {
             int enBottomY = (position.getY() + solidArea.y + solidArea.height);
 
             if (enTopY >= nextY && enLeftX >= nextX && enRightX < nextX + gameSettings.getTileSize()) {
-            enemyAction = EnemyConstants.UP;
+                enemyAction = EnemyConstants.UP;
             } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX) {
-            enemyAction = EnemyConstants.DOWN;
+                enemyAction = EnemyConstants.DOWN;
             } else if (enTopY >= nextY && enBottomY <= nextY + gameSettings.getTileSize()) {
                 // left or right
                 if (collisionOn == true) {
