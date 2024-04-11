@@ -1,6 +1,7 @@
 package Animation;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,15 +9,16 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 // adds animations for enities
-public abstract class Animations {
+public class Animations {
     // ATTRIBUTES
-    // private BufferedImage img;
+    private BufferedImage spriteImage;
     private BufferedImage[][] animations; // 2d image array of the images for player movements
     private int animationArrayHeight;
     private int animationArrayWidth;
     private int spriteHeight;
     private int spriteWidth;
     private int animationAmount;
+    private String imageName;
 
     private int animationTick, animationIndex, animationSpeed = 35;
 
@@ -28,8 +30,18 @@ public abstract class Animations {
     // animationArrayWidth: the number of elements in the width of the 2d array
     // animationArrayHeight: the number of elements in the height of the 2d array
     public Animations(String imageName) {
-        loadAnimations(imageName, animationArrayWidth, animationArrayHeight);
+        this.imageName = imageName;
 
+    }
+
+    /**
+     * Renders the player on the screen.
+     * 
+     * @param g The graphics context used for rendering.
+     */
+    public void render(Graphics g, int action, int x, int y, int tileSize, int spriteSize) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawImage(animations[action][animationIndex], x, y, tileSize, spriteSize, null);
     }
 
     // creates the Image array for the movement animations
@@ -37,7 +49,7 @@ public abstract class Animations {
     // imageName: the image file path name
     // animationArrayWidth: the number of elements in the width of the 2d array
     // animationArrayHeight: the number of elements in the height of the 2d array
-    private void loadAnimations(String imageName, int animationArrayWidth, int animationArrayHeight) {
+    public void loadAnimations() {
         InputStream is = getClass().getResourceAsStream(imageName);
 
         try {
@@ -58,6 +70,16 @@ public abstract class Animations {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void loadImage() {
+        try {
+            InputStream is = getClass().getResourceAsStream(imageName);
+            spriteImage = ImageIO.read(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -106,5 +128,9 @@ public abstract class Animations {
 
     public int getAnimationIndex() {
         return animationIndex;
+    }
+
+    public BufferedImage getImage() {
+        return spriteImage;
     }
 }
