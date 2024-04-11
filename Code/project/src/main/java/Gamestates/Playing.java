@@ -91,7 +91,7 @@ public class Playing extends State implements Statemethods {
 
         score = new Score();
 
-        player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this, score);
+        player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this);
         enemy = new Enemy(new Position(20 * Game.tileSize, 20 * Game.tileSize), this);
 
         staticEntities = new StaticEntity[25]; // Currently set to 25 static entities can be displayed, adjust as needed
@@ -145,8 +145,10 @@ public class Playing extends State implements Statemethods {
         }
 
         // Update the assetManager class only if there are 6 or less rewards on the map.
-        // Initially, 3 rewards are allocated to the grad caps and 3 rewards can be the bonus rewards.
-        // If the player collects all the grad caps, up to 6 bonus rewards can be spawned
+        // Initially, 3 rewards are allocated to the grad caps and 3 rewards can be the
+        // bonus rewards.
+        // If the player collects all the grad caps, up to 6 bonus rewards can be
+        // spawned
         if (StaticEntity.getAllRewards().size() <= 6) {
             assetManager.update();
         }

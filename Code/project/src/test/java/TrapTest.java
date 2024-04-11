@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 
 import Display.Game;
-import Display.Score;
 import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.Position;
@@ -17,7 +16,6 @@ public class TrapTest {
 
     private Player player;
     private static Game game;
-    private static Score scoreObject;
     private static Playing playing;
     private static TileManager tileManager;
     private static CollisionChecker collisionChecker;
@@ -28,13 +26,12 @@ public class TrapTest {
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
-        scoreObject = new Score();
         Gamestate.state = Gamestate.PLAYING;
     }
 
     @Test
     public void testDamage() {
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
         Trap trap = new Trap(new Position(2 * Game.tileSize, 3 * Game.tileSize));
 
         player.getScoreObj().setScore(2.0);
@@ -53,7 +50,7 @@ public class TrapTest {
 
     @Test
     public void testMultipleTrapPlayerCollisions() {
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
         Trap trap1 = new Trap(new Position(2 * Game.tileSize, 3 * Game.tileSize));
         Trap trap2 = new Trap(new Position(4 * Game.tileSize, 5 * Game.tileSize));
         Trap trap3 = new Trap(new Position(6 * Game.tileSize, 7 * Game.tileSize));

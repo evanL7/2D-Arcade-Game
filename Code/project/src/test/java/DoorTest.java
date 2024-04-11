@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import Display.Game;
-import Display.Score;
 import Gamestates.Gamestate;
 import Gamestates.Playing;
 import Helpers.CollisionChecker;
@@ -17,7 +16,6 @@ import StaticEntity.TileManager;
 public class DoorTest {
     private Player player;
     private static Game game;
-    private static Score scoreObject;
     private static Playing playing;
     private static TileManager tileManager;
     private static CollisionChecker collisionChecker;
@@ -35,8 +33,7 @@ public class DoorTest {
     @Test
     public void testDoorNoGrapCaps() {
         Door door = new Door(new Position(23 * Game.tileSize, 22 * Game.tileSize));
-        player = new Player(new Position(23 * Game.tileSize, 22 * Game.tileSize), collisionChecker, playing,
-                scoreObject);
+        player = new Player(new Position(23 * Game.tileSize, 22 * Game.tileSize), collisionChecker, playing);
         assertEquals(0, player.getWin());
         Boolean collideDoor = collisionChecker.checkPlayerDoorCollision(player);
 
@@ -51,8 +48,7 @@ public class DoorTest {
     public void testDoorOneGrapCap() {
         Door door = new Door(new Position(23 * Game.tileSize, 22 * Game.tileSize));
         Reward reward = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize));
-        player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing,
-                scoreObject);
+        player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing);
         assertEquals(0, player.getWin());
         boolean collideReward = collisionChecker.checkPlayerRewardCollision(player, reward);
         assertTrue(collideReward);
@@ -71,8 +67,7 @@ public class DoorTest {
         Door door = new Door(new Position(23 * Game.tileSize, 22 * Game.tileSize));
         Reward reward1 = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize));
         Reward reward2 = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize));
-        player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing,
-                scoreObject);
+        player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing);
         assertEquals(0, player.getWin());
         boolean collideReward1 = collisionChecker.checkPlayerRewardCollision(player, reward1);
         assertTrue(collideReward1);
@@ -95,8 +90,7 @@ public class DoorTest {
         Reward reward1 = new Reward(new Position(5 * Game.tileSize, 21 * Game.tileSize));
         Reward reward2 = new Reward(new Position(20 * Game.tileSize, 11 * Game.tileSize));
         Reward reward3 = new Reward(new Position(21 * Game.tileSize, 4 * Game.tileSize));
-        player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing,
-                scoreObject);
+        player = new Player(new Position(5 * Game.tileSize, 21 * Game.tileSize), collisionChecker, playing);
         assertEquals(0, player.getWin());
 
         boolean collideReward1 = collisionChecker.checkPlayerRewardCollision(player, reward1);

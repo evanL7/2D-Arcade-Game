@@ -37,17 +37,20 @@ public class GameStateTest {
 
     @Test
     public void testPlayingState() {
-        KeyEvent keyEvent = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        KeyEvent keyEvent = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
+                KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
         menu.keyPressed(keyEvent); // Start the game
         assertEquals(Gamestate.PLAYING, Gamestate.state);
     }
 
     @Test
     public void testGameOverState() {
-        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
+                KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
         menu.keyPressed(keyEvent1); // Start the game
 
-        KeyEvent keyEvent2 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_Q, KeyEvent.CHAR_UNDEFINED);
+        KeyEvent keyEvent2 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
+                KeyEvent.VK_Q, KeyEvent.CHAR_UNDEFINED);
         game.getPlaying().keyPressed(keyEvent2); // Trigger game over
 
         assertEquals(Gamestate.GAMEOVER, Gamestate.state);
@@ -55,18 +58,18 @@ public class GameStateTest {
 
     @Test
     public void testGameOverCollisionState() {
-        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
+                KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
         menu.keyPressed(keyEvent1); // Start the game
 
         Playing playing = game.getPlaying();
-        TileManager tileManager = new TileManager(playing);      
-        CollisionChecker collisionChecker = new CollisionChecker(tileManager); 
-        Score scoreObject = new Score(); 
+        TileManager tileManager = new TileManager(playing);
+        CollisionChecker collisionChecker = new CollisionChecker(tileManager);
+        Score scoreObject = new Score();
         scoreObject.setScore(0);
 
-        Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
         Trap trap = new Trap(new Position(2 * Game.tileSize, 3 * Game.tileSize));
-
 
         if (collisionChecker.checkPlayerTrapCollision(player, trap)) {
             scoreObject.decreaseScore(1);
@@ -74,34 +77,34 @@ public class GameStateTest {
                 Gamestate.state = Gamestate.GAMEOVER;
             }
         }
-        
+
         assertEquals(Gamestate.GAMEOVER, Gamestate.state);
     }
 
     @Test
     public void testWinCollisionState() {
-        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
+                KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
         menu.keyPressed(keyEvent1); // Start the game
 
         Playing playing = game.getPlaying();
-        TileManager tileManager = new TileManager(playing);      
-        CollisionChecker collisionChecker = new CollisionChecker(tileManager); 
-        Score scoreObject = new Score(); 
+        TileManager tileManager = new TileManager(playing);
+        CollisionChecker collisionChecker = new CollisionChecker(tileManager);
+        Score scoreObject = new Score();
         scoreObject.setScore(0);
 
-        Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        Player player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
         Reward reward = new Reward(new Position(2 * Game.tileSize, 3 * Game.tileSize));
         Door door = new Door(new Position(2 * Game.tileSize, 3 * Game.tileSize));
-        
-        if(collisionChecker.checkPlayerRewardCollision(player, reward) ){
+
+        if (collisionChecker.checkPlayerRewardCollision(player, reward)) {
             door.setOpen();
             if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player)) {
                 Gamestate.state = Gamestate.WIN;
-               }
+            }
         }
 
-        
-        //end
+        // end
         assertEquals(Gamestate.WIN, Gamestate.state);
     }
 }

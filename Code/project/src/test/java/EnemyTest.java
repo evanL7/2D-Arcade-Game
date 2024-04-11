@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 import Display.Game;
-import Display.Score;
 import Gamestates.Playing;
 import Helpers.Position;
 import Helpers.CollisionChecker;
@@ -24,7 +23,6 @@ public class EnemyTest {
     private Playing playing;
     private TileManager tileManager;
     private CollisionChecker collisionChecker;
-    private Score scoreObject;
 
     private Enemy enemy;
     private Player player;
@@ -35,13 +33,13 @@ public class EnemyTest {
         playing = new Playing(game);
         tileManager = new TileManager(playing);
         collisionChecker = new CollisionChecker(tileManager);
-        scoreObject = new Score();
+
     }
 
     @BeforeEach
     public void reset() {
         enemy = new Enemy(new Position(2 * Game.tileSize, 3 * Game.tileSize), playing);
-        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing, scoreObject);
+        player = new Player(new Position(2 * Game.tileSize, 3 * Game.tileSize), collisionChecker, playing);
     }
 
     @Test

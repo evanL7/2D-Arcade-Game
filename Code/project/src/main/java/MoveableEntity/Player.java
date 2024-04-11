@@ -34,7 +34,6 @@ public class Player extends MoveableEntity {
 
     private BufferedImage playerImage;
 
-    private Score scoreObject;
     private int win = 0; // needs 3 to wins
 
     // CONSTRUCTOR
@@ -50,11 +49,10 @@ public class Player extends MoveableEntity {
      * @param tileManager      The tile manager containing information about the
      *                         game map.
      */
-    public Player(Position position, CollisionChecker collisionChecker, Playing playing, Score scoreObject) {
+    public Player(Position position, CollisionChecker collisionChecker, Playing playing) {
         // need to determine the players start position and specific sprite
         super(position, playing);
         this.collisionChecker = collisionChecker;
-        this.scoreObject = scoreObject; // Assign the score object
         animationAmount = 3;
 
         loadAnimations();
