@@ -58,13 +58,21 @@ public class Trap extends StaticEntity {
         return damage;
     }
 
+    /**
+     * Retrieves the sprite image associated with the trap entity.
+     * 
+     * @return The sprite image associated with the trap entity.
+     */
     @Override
     public Image getSprite() {
-        // Return the sprite image associated with the trap entity
         return animation.getImage(); // Assuming you have a field named trapImage that holds the sprite image
     }
 
-    // ANIMATION METHODS FOR TRAP
+    /**
+     * Renders the trap entity on the graphics context.
+     * 
+     * @param g The graphics context used for rendering.
+     */
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(trapAnimations[animation.getAnimationIndex()][0], position.getX(), position.getY(),
@@ -73,6 +81,9 @@ public class Trap extends StaticEntity {
                 null);
     }
 
+    /**
+     * Updates the animation of the trap entity.
+     */
     public void update() {
         animation.updateAnimationTick();
     }
