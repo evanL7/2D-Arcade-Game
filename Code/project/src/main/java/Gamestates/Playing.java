@@ -64,7 +64,16 @@ public class Playing extends State implements Statemethods {
 
     private Player player;
     private Enemy enemy;
-    private Time time; // Time object
+    private Time time; 
+
+    // Define named constants for spawn points
+    private static final int SPAWN_POINT_COUNT = 3;
+
+    // Define named constants for the maximum number of rewards
+    private static final int MAX_REWARDS_DISPLAYED = 6;
+
+    // Define named constants for the number of static entities
+    private static final int STATIC_ENTITY_COUNT = 25;
 
     public Playing(Game game) {
         super(game);
@@ -79,7 +88,7 @@ public class Playing extends State implements Statemethods {
         collisionChecker = new CollisionChecker(tileManager);
         pathFinder = new PathFinder(this);
 
-        playerSpawnPositions = new Position[3]; // 3 spawn points for the player
+        playerSpawnPositions = new Position[SPAWN_POINT_COUNT]; // 3 spawn points for the player
         // Spawn point at the top left corner of the map
         playerSpawnPositions[0] = new Position(2 * gameSettings.getTileSize(), 3 * gameSettings.getTileSize());
         // Spawn point at the bottom left corner of the map
@@ -91,10 +100,10 @@ public class Playing extends State implements Statemethods {
 
         score = new Score();
 
-        player = new Player(playerSpawnPositions[rand.nextInt(3)], collisionChecker, this);
+        player = new Player(playerSpawnPositions[rand.nextInt(SPAWN_POINT_COUNT)], collisionChecker, this);
         enemy = new Enemy(new Position(20 * gameSettings.getTileSize(), 20 * gameSettings.getTileSize()), this);
 
-        staticEntities = new StaticEntity[25]; // Currently set to 25 static entities can be displayed, adjust as needed
+        staticEntities = new StaticEntity[STATIC_ENTITY_COUNT]; // Currently set to 25 static entities can be displayed, adjust as needed
         assetManager = new AssetManager(this);
         assetManager.setObjects();
 
@@ -148,7 +157,7 @@ public class Playing extends State implements Statemethods {
         // bonus rewards.
         // If the player collects all the grad caps, up to 6 bonus rewards can be
         // spawned.
-        if (StaticEntity.getAllRewards().size() <= 6) {
+        if (StaticEntity.getAllRewards().size() <= MAX_REWARDS_DISPLAYED) {
             assetManager.update();
         }
 
