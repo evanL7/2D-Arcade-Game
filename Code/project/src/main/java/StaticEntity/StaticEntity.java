@@ -46,7 +46,6 @@ public abstract class StaticEntity {
      *                     despawn. Use -1 for despawning only on collision.
      */
     public StaticEntity(Position position, int despawnTimer) {
-        // Constructor for StaticEntities that rely on time like bonus rewards
         this.position = position;
         this.despawnTimer = despawnTimer;
 
@@ -60,22 +59,26 @@ public abstract class StaticEntity {
      * @param sprite   The sprite representing the static entity.
      */
     public StaticEntity(Position position) {
-        // constructor for StaticEntities that don't despawn on a timer like traps and
-        // Regular Rewards
         this.position = position;
-
         // a value of -1 represents how the entity will only despawn if collided with
         despawnTimer = -1;
-
         staticEntities.add(this);
     }
 
-    // Method to get all static entities
+    /**
+     * Method to get all static entities.
+     * 
+     * @return The list containing all static entities.
+     */
     public static List<StaticEntity> getAllStaticEntities() {
         return staticEntities;
     }
 
-    // Method to get all rewards
+    /**
+     * Method to get all rewards.
+     * 
+     * @return The list containing all rewards.
+     */
     public static List<Reward> getAllRewards() {
         List<Reward> rewards = new ArrayList<>();
         for (StaticEntity entity : staticEntities) {
@@ -86,7 +89,11 @@ public abstract class StaticEntity {
         return rewards;
     }
 
-    // Method to get all traps
+    /**
+     * Method to get all traps.
+     * 
+     * @return The list containing all traps.
+     */
     public static List<Trap> getAllTraps() {
         List<Trap> traps = new ArrayList<>();
         for (StaticEntity entity : staticEntities) {
@@ -112,7 +119,9 @@ public abstract class StaticEntity {
         return door;
     }
 
-    // Method to clear all static entities
+    /**
+     * Discards all elements in the array so it is now empty.
+     */
     public static void clearAllStaticEntities() {
         staticEntities.clear();
     }
@@ -126,7 +135,11 @@ public abstract class StaticEntity {
         return new Rectangle(position.getX(), position.getY(), (int) (gameSettings.getTileSize() * 0.6), 15);
     }
 
-    // Method to get the height of the sprite
+    /**
+     * Gets the height of the static entity.
+     * 
+     * @return The height of the static entity.
+     */
     public int getHeight() {
         BufferedImage sprite = ImageUtils.convertToBufferedImage(getSprite());
         if (sprite != null) {
@@ -136,7 +149,11 @@ public abstract class StaticEntity {
         }
     }
 
-    // Method to get the width of the sprite
+    /**
+     * Gets the width of the static entity.
+     * 
+     * @return The width of the static entity.
+     */
     public int getWidth() {
         BufferedImage sprite = ImageUtils.convertToBufferedImage(getSprite());
         if (sprite != null) {
@@ -153,17 +170,32 @@ public abstract class StaticEntity {
      */
     public abstract Image getSprite();
 
-    // gets and returns the entities position
+    /**
+     * Gets the position of the static entity.
+     * 
+     * @return The position of the static entity.
+     */
     public Position getPosition() {
         return this.position;
     }
 
+    /**
+     * Renders the static entity on the graphics context.
+     * 
+     * @param g The graphics context used for rendering.
+     */
     public void render(Graphics g) {
     }
 
+    /**
+     * Updates the state of the static entity.
+     */
     public void update() {
     }
 
+    /**
+     * Removes a static entity from the list of all static entities.
+     */
     public void remove() {
         staticEntities.remove(this);
     }
