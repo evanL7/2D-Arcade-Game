@@ -109,10 +109,9 @@ public class CollisionChecker {
      */
     public boolean checkPlayerRewardCollision(Player player, Reward reward) {
 
-        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-        //     (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
         Rectangle playerBounds = player.getBoundingBox();
         Rectangle rewardBounds = reward.getBoundingBox();
+        
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(rewardBounds);
         if (result) {
@@ -138,10 +137,10 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerTrapCollision(Player player, Trap trap) {
-        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-        //         (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
+
         Rectangle playerBounds = player.getBoundingBox();
         Rectangle trapBounds = trap.getBoundingBox();
+        
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(trapBounds);
         if (result) {
@@ -161,10 +160,9 @@ public class CollisionChecker {
     public boolean checkPlayerDoorCollision(Player player) {
 
         Door door = StaticEntity.getDoor();
-        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-        //         (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
-        Rectangle playerBounds = player.getBoundingBox();
+        
         Rectangle doorBounds = door.getBoundingBox();
+        Rectangle playerBounds = player.getBoundingBox();
 
         // Check if the bounding boxes intersect
         boolean result = playerBounds.intersects(doorBounds);
@@ -181,11 +179,6 @@ public class CollisionChecker {
      * @return true if collision occurred, false otherwise.
      */
     public boolean checkPlayerEnemyCollision(Player player, Enemy enemy) {
-
-        // Rectangle playerBounds = new Rectangle(player.getPosition().getX(), player.getPosition().getY(),
-        //     (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
-        // Rectangle enemyBounds = new Rectangle(enemy.getPosition().getX(), enemy.getPosition().getY(),
-        //     (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
 
         Rectangle playerBounds = player.getBoundingBox();
         Rectangle enemyBounds = enemy.getBoundingBox();
