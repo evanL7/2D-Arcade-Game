@@ -130,15 +130,7 @@ public class Enemy extends MoveableEntity {
     @Override
     public Image getSprite() {
         // Return the sprite of the enemy
-        return enemyImage; // Assuming sprite is the attribute storing the sprite
-    }
-
-    @Override
-    public Rectangle getBoundingBox() {
-        // Return the bounding box of the player entity
-        // Implement this method based on how you define the bounding box for the player
-        // entity
-        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+        return enemyImage;
     }
 
     /**
