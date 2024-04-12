@@ -137,10 +137,7 @@ public abstract class MoveableEntity {
      * @return The bounding box.
      */
     public Rectangle getBoundingBox() {
-        // Return the bounding box of the player entity
-        // Implement this method based on how you define the bounding box for the player
-        // entity
-        return new Rectangle(position.getX(), position.getY(), getWidth(), getHeight());
+        return new Rectangle(position.getX(), position.getY(), (int) (gameSettings.getTileSize() * 0.75), gameSettings.getTileSize());
     }
 
     /**
