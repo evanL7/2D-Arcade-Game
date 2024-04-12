@@ -22,15 +22,13 @@ public class Score {
     }
 
     public void incrementScore(double incrementAmount) {
-        String soundFilePath = "sounds/bloop_x.wav";
-        SoundManager.playSound(soundFilePath, 0.5f);
+        SoundManager.playCollectSound();
         this.score += incrementAmount;
     }
 
     // Add method to decrease score
     public void decreaseScore(double decrementAmount) {
-        String soundFilePath = "sounds/mixkit-boxer-getting-hit-2055.wav";
-        SoundManager.playSound(soundFilePath, 0.5f);
+        SoundManager.playTrapSound();
         this.score -= decrementAmount;
     }
 

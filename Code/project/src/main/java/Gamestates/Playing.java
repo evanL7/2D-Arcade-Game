@@ -70,7 +70,7 @@ public class Playing extends State implements Statemethods {
         super(game);
         initClasses();
 
-        MusicManager.playMusic("music/Optimistic-background-music.mp3", 0.5f);
+        MusicManager.playMusic();
     }
 
     private void initClasses() {
@@ -139,8 +139,7 @@ public class Playing extends State implements Statemethods {
 
         Door door = StaticEntity.getDoor();
         if (door.getOpen() && collisionChecker.checkPlayerDoorCollision(player)) {
-            String soundFilePath = "sounds/mixkit-game-bonus-reached-2065.wav";
-            SoundManager.playSound(soundFilePath, 0.5f);
+            SoundManager.playWinSound();
             Gamestate.state = Gamestate.WIN;
         }
 

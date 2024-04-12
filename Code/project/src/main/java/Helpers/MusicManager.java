@@ -10,13 +10,15 @@ import java.io.InputStream;
 
 public class MusicManager {
     private static AdvancedPlayer player;
+    private static String filePath = "music/Optimistic-background-music.mp3";
+    private static float volume = 0.5f;
 
     /**
      * Plays background music from the given file path.
      * @param filePath The file path of the background music to be played.
      * @param volume The volume level (0.0f to 1.0f).
      */
-    public static void playMusic(String filePath, float volume) {
+    public static void playMusic() {
         try {
             InputStream inputStream = MusicManager.class.getClassLoader().getResourceAsStream(filePath);
             if (inputStream == null) {
