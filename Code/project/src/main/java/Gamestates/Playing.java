@@ -67,13 +67,13 @@ public class Playing extends State implements Statemethods {
     private Time time; 
 
     // Define named constants for spawn points
-    private static final int SPAWN_POINT_COUNT = 3;
+    private final int SPAWN_POINT_COUNT = 3;
 
     // Define named constants for the maximum number of rewards
-    private static final int MAX_REWARDS_DISPLAYED = 6;
+    private final int MAX_REWARDS_DISPLAYED = 6;
 
     // Define named constants for the number of static entities
-    private static final int STATIC_ENTITY_COUNT = 25;
+    private final int STATIC_ENTITY_COUNT = 25;
 
     public Playing(Game game) {
         super(game);
