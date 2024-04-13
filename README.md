@@ -16,7 +16,7 @@
 
 ## How to Test the Game
 
-1. Open the terminal and navigate to the project directory.
+1. Open the terminal and navigate to the Code/project directory.
 
 2. Run the tests using the following command:
     ```
