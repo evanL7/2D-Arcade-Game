@@ -1,5 +1,13 @@
 # Group 3 Project
 
+## Game Description
+
+For more information, please refer to the [Phase 4 Report](Documents/Phase4Report.pdf).
+
+## Prerequisites
+
+Make sure you have Maven installed on your system before running the commands in this guide. You can check if Maven is installed by running `mvn -version` in your terminal.
+
 ## How to Run the Game
 
 1. Open the terminal and navigate to the `Code/project` directory.
@@ -23,7 +31,8 @@
     mvn test
     ```
 
-## Creating a JAR File
+## Creating a JAR File of the Game
+
 1. Open the terminal and navigate to the `Code/project` directory.
 
 2. Create a JAR file of our game using the following command:
@@ -44,5 +53,3 @@ This will generate JavaDocs in the following directory: `target/site/apidocs`
     ```
     mvn javadoc:javadoc
     ```
-
-Note: Make sure you have Maven installed on your system before running the above commands.
