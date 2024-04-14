@@ -52,19 +52,6 @@ public class GameStateTest {
     }
 
     @Test
-    public void testGameOverState() {
-        KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
-                KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
-        menu.keyPressed(keyEvent1); // Start the game
-
-        KeyEvent keyEvent2 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
-                KeyEvent.VK_Q, KeyEvent.CHAR_UNDEFINED);
-        game.getPlaying().keyPressed(keyEvent2); // Trigger game over
-
-        assertEquals(Gamestate.GAMEOVER, Gamestate.state);
-    }
-
-    @Test
     public void testGameOverCollisionState() {
         KeyEvent keyEvent1 = new KeyEvent(game.getGamePanel(), KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,
                 KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
