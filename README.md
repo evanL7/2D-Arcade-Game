@@ -23,14 +23,22 @@
     mvn test
     ```
 
+## Creating a JAR File
+1. Open the terminal and navigate to the `Code/project` directory.
+
+2. Create a JAR file of our game using the following command:
+    ```
+    mvn clean compile assembly:single
+    ```
+    This command will clean the project, compile the source code, and create a JAR file with all the dependencies included.
+
+3. The JAR file will be generated in the `target` directory. You can find the JAR file with the name `Grade Quest-jar-with-dependencies.jar`.
+
 ## Generating JavaDocs
 
 This will generate JavaDocs in the following directory: `target/site/apidocs`
 
-1. Open your terminal and navigate to the project directory:
-    ```
-    cd Code/project
-    ```
+1. Open the terminal and navigate to the `Code/project` directory.
 
 2. Generate JavaDocs using the following command:
     ```

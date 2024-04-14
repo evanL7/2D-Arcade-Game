@@ -104,7 +104,6 @@
             </execution>
           </executions>
         </plugin>
-
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
           <configuration>
@@ -116,10 +115,9 @@
             <descriptorRefs>
               <descriptorRef>jar-with-dependencies</descriptorRef>
             </descriptorRefs>
-            <finalName>Grade Quest</finalName> <!-- Specify the desired name here -->
+            <finalName>Grade Quest</finalName>
           </configuration>
         </plugin>
-
       </plugins>
     </pluginManagement>
   </build>
